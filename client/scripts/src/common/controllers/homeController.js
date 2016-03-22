@@ -11,11 +11,9 @@ define(function () {
     //  commonService.pageLoadCalls();
     };
     
-    $scope.homeLinks = [];
-    
-    $scope.getHomeLinks = function(){
-    	console.log('IN getHomeLinks >>>>>>>>>> ');
-    	var req = {
+    $scope.fetchPlaces = function(){
+    	console.log('IN fetchPlaces >>>>>>>>>> ');
+    	/*var req = {
     			 method: 'GET',
     			 url: '/resources/homelinks.json',
     			 headers: {
@@ -28,7 +26,7 @@ define(function () {
 			//console.log(JSON.stringify($scope.homeLinks.data));    				
 		}, function(err){
 			console.log(err);
-		});
+		});*/
     };
 
   }
