@@ -1,5 +1,5 @@
 
-<div class="container" data-ng-init="fetchMyPlaces()">
+<div class="container" data-ng-init="initPlacesPage()">
 	<br />
 	<div data-ng-if="selectedPlace.id">
 		<div class="col-sm-8">
@@ -7,35 +7,97 @@
 		</div>
 		<div >
 			<div class="btn-group">
-			  <button type="button" class="btn btn-primary">Show Areas</button>
-			  <button type="button" class="btn btn-primary">Add Place Area</button>
+			  <button type="button" class="btn btn-primary" data-ng-if="!show.areas" data-ng-click="showPlaceAreasPanel();">Show Areas</button>
+			  <button type="button" class="btn btn-primary" data-ng-if="!show.addAreaPanel" data-ng-click="showAddAreaPanel();">Add Place Area</button>
 			</div>
 		</div>
 	</div>
 	
-	
 	<hr>
 	
-	<div class="row" >
+	<div class="panel panel-default" data-ng-if="show.addAreaPanel">
+			<div class="panel-heading">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" href="#areaPanel">Add/Update Place Area</a>
+		      </h4>
+		    </div>
+
+		    <div id="areaPanel" class="panel-collapse collapse in">
+			  	
+			  <div class="panel-body">
+			  	<form class="form-horizontal" role="form" method="post" >
+			  			  <div class="form-group">
+					   		<label for="name" class="col-lg-2 control-label">Type:</label>
+					   		<div class="col-lg-2">
+						    	<select class="form-control" data-ng-model="selectedPlaceArea.type">
+						    		<option data-ng-repeat="option in placeAreaTypes" value="{{option}}">{{option}}</option>
+							    </select>
+					   	  	</div>
+					   	  	
+					   	  	<label for="name" class="col-lg-1 control-label">Floor:</label>
+						    <div class="col-lg-1">
+						    	<select class="form-control" data-ng-model="selectedPlaceArea.floor">
+						    		<option data-ng-repeat="option in floors" value="{{option}}">{{option}}</option>
+							    </select>
+						    </div>
+					   	  	
+					   	  </div>
+						  <div class="form-group" >
+						    <label for="name" class="col-lg-2 control-label">Area Title:</label>
+						    <div class="col-lg-4">
+						    	<input type="text" class="form-control" data-ng-model="selectedPlaceArea.title">
+						    </div>
+						  </div>
+						  <div class="form-group">
+					   		<label for="name" class="col-lg-2 control-label">Description:</label>
+					   		<div class="col-lg-4">
+						    	<textarea class="form-control" data-ng-model="selectedPlaceArea.description" ></textarea>
+						    </div>
+					   	  </div>
+					   	  
+					   	  <div class="form-group"> 
+					   	  	<div class="col-lg-offset-2 col-lg-10">
+		         			  	<button type="submit" data-ng-click="savePlaceArea();" data-ng-if="!selectedPlaceArea._id">create</button>
+		         			  	<button type="submit" data-ng-click="savePlaceArea();" data-ng-if="selectedPlaceArea._id">update</button>
+		         			  	<button type="submit" data-ng-click="showPlaceAreasPanel();" >cancel</button>
+							</div>
+	         			  </div>
+					</form>
+			  	
+			  </div>
+			</div>
+		</div>
+	
+	
+	
+	
+	<div class="row" data-ng-if="show.areas">
 		<div class="card col-sm-3" data-ng-repeat="placeArea in selectedPlace.placeAreas">
 		  <div class="card-block" style="background-image: url('../assets/images/blurred2.jpg');">
+		  	<span class="fa-stack">
+		  		<a href="#" data-ng-click="showSettingsFor(placeArea);">
+		  			<i class="fa fa-circle fa-stack-2x icon-background"></i>
+		  			<i class="fa fa-gear fa-stack-1x icon-white" data-toggle="tooltip" data-placement="top" title="Modify"></i>
+		  		</a>
+		  	</span>
+		  	
 		  	<h4 class="card-title">{{placeArea.title}}</h4>
 		    <p>{{placeArea.description}}</p>
 		  </div>
 		  <ul class="nav nav-tabs nav-justified">
-		  	<li class="active">
-		  		<a href="#appliances_{{placeArea.id}}" data-toggle="tab">
-         			<i class="fa fa-lightbulb-o"></i>
+		  	<li class="active" >
+		  		<a href="#appliances_{{placeArea.id}}" data-toggle="tab" >
+         			<i class="fa fa-lightbulb-o" data-toggle="tooltip" data-placement="top" title="Appliances"></i>
       			</a>
       		</li>
 		  	<li>
-		  		<a href="#health_{{placeArea.id}}" data-toggle="tab">
-         			<i class="fa fa-heart"></i>
+		  		<a href="#health_{{placeArea.id}}" data-toggle="tab" >
+         			<i class="fa fa-heart" data-toggle="tooltip" data-placement="top" title="Health"></i>
       			</a>
 		  	</li>
-		  	<li>
-		  		<a href="#scheduler_{{placeArea.id}}" data-toggle="tab">
-         			<i class="fa fa-calendar"></i>
+		  	<li >
+		  		<a href="#scheduler_{{placeArea.id}}" data-toggle="tab" >
+         			<i class="fa fa-calendar" data-toggle="tooltip" data-placement="top" title="Scheduler"></i>
       			</a>
 		  	</li>
 		  </ul>

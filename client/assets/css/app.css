@@ -44,6 +44,15 @@ img {
     border-color: #F2DEDE;
 }
 
+.icon-background{
+	/* background-color: #bd362f; */
+	color: #bd362f
+}
+
+.icon-white{
+	color: #fff;
+}
+
 .chat-box-right img{
 	max-width: 400px;
 }

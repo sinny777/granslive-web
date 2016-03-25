@@ -61,9 +61,16 @@ define(function () {
 
       
     $rootScope.logout = function(){
-    	console.log("IN LOGOUT Call for: ", $rootScope.currentUser);  
+    	console.log("IN LOGOUT Call for: ", $rootScope.currentUser); 
+    	setTimeout(function () {
+            $scope.$apply(function () {
+            	$rootScope.currentUser = {};
+            });
+        }, 1000);
+    	
     	authService.logout();
     	$location.path("/#!/home");
+    	
       };
     
   }
