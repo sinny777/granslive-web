@@ -2,7 +2,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-  var factory = function (LoopBackAuth, User, CONFIG) {
+  var factory = function (LoopBackAuth, User, UserIdentity, CONFIG) {
 
 	  var authUriBase = "http://localhost:3000/api/";
 
@@ -35,10 +35,23 @@ define(['angular'], function (angular) {
 	      Auth.currentUser = null;
 	      return Auth.currentUser;
 	    }
+	    
 	    else {
 	      // Fetch the actual user data.
 	      Auth.currentUser = User.getCurrent(function(userData) {
 	        console.log("Current User Fetch Success:", userData);
+	        Auth.currentUser = userData;
+	        UserIdentity.user({id: userData.id}, function(userObj){
+    			console.log('USER OBJ: >>>>>> ', userObj);
+    			if(userObj){
+    				
+    				UserIdentity.find({id: userObj.id}).$promise.then(function(userIdentityObj){
+    					Auth.currentUser.profile = userIdentityObj[0].profile._json;
+	    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
+	    			});
+    			}
+    		});
+	        
 	      },
 	      function(err) {
 	        console.log("Current User Fetch Failed:", err);
@@ -91,7 +104,7 @@ define(['angular'], function (angular) {
 	
   }
 
-	factory.$inject = ['LoopBackAuth', 'User', 'CONFIG'];
+	factory.$inject = ['LoopBackAuth', 'User', 'UserIdentity', 'CONFIG'];
 	return factory;
 });
 

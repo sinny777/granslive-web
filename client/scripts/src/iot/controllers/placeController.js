@@ -4,12 +4,11 @@ define(function () {
   function ctrl($rootScope, $scope, $http, $cookies, authService, Place){
 	  
     $scope.fetchMyPlaces = function(){
-    	
+    	console.log('IN fetchMyPlaces >>>>>>>>>> ', $rootScope.currentUser);
     	if(!$rootScope.currentUser.id){
     		$rootScope.currentUser = authService.ensureCurrentUser();
     	}
     	
-    	console.log('IN fetchMyPlaces >>>>>>>>>> ', $rootScope.currentUser);
     	if(!$rootScope.currentUser){
     		return;
     	}
