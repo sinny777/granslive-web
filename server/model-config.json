@@ -50,5 +50,11 @@
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "placeArea": {
+    "dataSource": "cloudant",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }
