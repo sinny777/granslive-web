@@ -1,34 +1,43 @@
 define([
 	'angular',	
 	'angularRoute',
+	'angularResource',
     'angularAnimate',
     'angularLocalStorage',
     'angularToastr',
+    'angularCookies',
     'angularFilesystem',
     'bootstrap',
 //    'ui.bootstrap',
     'cryptojslib',
     'querystring',
 	'config',
+	'loopback/lb-services',
 	'common/commonModule',
+	'iot/iotModule',
 	'watson/watsonModule'
 ], function (angular, angularRoute) {
     'use strict';
 
     var myworkstyle =  angular.module('myworkstyle', [
         'ngRoute',
+        'ngResource',
         'ngAnimate',
 //        'ui.bootstrap',
         'LocalStorageModule',
         'toastr',
+        'ngCookies',
         'fileSystem',
         'app.config',
+        'lbServices',
         'commonModule',
+        'iotModule',
         'watsonModule'
     ]);
-
+    
     
     myworkstyle.config(function(toastrConfig) {
+    	
         angular.extend(toastrConfig, {
             allowHtml: false,
             closeButton: true,
@@ -60,8 +69,6 @@ define([
             toastClass: 'toast'
         });
     });
-    
-	
     
     myworkstyle.run(['$rootScope','$location',function($rootScope, $location) {
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {

@@ -6,22 +6,20 @@ define(function (require) {
 	ngRoute = require('angularRoute'),
 	ngStorage = require('angularLocalStorage'),
 //	uiBootstrap = require('ui.bootstrap'),
-    commonModule = angular.module('commonModule', ['ngRoute',
+    iotModule = angular.module('iotModule', ['ngRoute',
                                                    'ngAnimate',
                                                    'LocalStorageModule',
 //                                                   'ui.bootstrap',
                                                    'app.config']);
     
-    commonModule.factory('authService', require('common/services/authService'));
+    iotModule.factory('authService', require('common/services/authService'));
     
-    commonModule.controller('commonController', require('common/controllers/commonController'));
-    commonModule.controller('homeController', require('common/controllers/homeController'));
-    
+    iotModule.controller('placeController', require('iot/controllers/placeController'));
 
-    commonModule.directive('fileModel', require('common/directives/fileModelDirective'));
-    commonModule.directive('toggle', require('common/directives/toggleDirective'));
+    iotModule.directive('fileModel', require('common/directives/fileModelDirective'));
+    iotModule.directive('toggle', require('common/directives/toggleDirective'));
     
-    commonModule.filter('interpolate', ['version', function(version) {
+    iotModule.filter('interpolate', ['version', function(version) {
         return function(text) {
             return String(text).replace(/\%VERSION\%/mg, version);
           }
@@ -35,6 +33,6 @@ define(function (require) {
         ]);
     
 
-    return commonModule;
+    return iotModule;
 
 });

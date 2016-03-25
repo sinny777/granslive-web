@@ -1,16 +1,8 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, $http){
-
-    $rootScope.gotoTop = function (){
-      $('body,html').animate({scrollTop:0},400);
-    };
-
-    $rootScope.initNavBar = function(){
-    //  commonService.pageLoadCalls();
-    };
-    
+  function ctrl($rootScope, $scope, $http, $cookies, authService){
+	  
     $scope.fetchPlaces = function(){
     	console.log('IN fetchPlaces >>>>>>>>>> ');
     	/*var req = {
@@ -31,7 +23,7 @@ define(function () {
 
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', '$http'];
+  ctrl.$inject = ['$rootScope', '$scope', '$http', '$cookies', 'authService'];
   return ctrl;
 
 });

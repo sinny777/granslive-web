@@ -17,6 +17,11 @@
     },
     "default": {
       "type": "boolean"
+    },
+    "user": {
+      "type": "object",
+      "required": true,
+      "index": true
     }
   },
   "validations": [],

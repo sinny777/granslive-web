@@ -1,10 +1,11 @@
 {
   "_meta": {
     "sources": [
-      "loopback/common/models",
-      "loopback/server/models",
+      "./node_modules/loopback-component-passport/lib/models",
       "../common/models",
-      "./models"
+      "./models",
+      "granslive-web/common/models",
+      "granslive-web/server/models"
     ],
     "mixins": [
       "loopback/common/mixins",
@@ -15,6 +16,18 @@
   },
   "User": {
     "dataSource": "db"
+  },
+  "UserCredential": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UserIdentity": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ApplicationCredential": {
+    "dataSource": "db",
+    "public": true
   },
   "AccessToken": {
     "dataSource": "db",
