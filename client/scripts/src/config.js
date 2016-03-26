@@ -7,7 +7,7 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'DEV',
-			NODERED_BACKEND_URL: 'https://myworkstyle-backend.mybluemix.net'
+			API_URL: 'https://granslive-web.mybluemix.net/api'
 		});
     
 });

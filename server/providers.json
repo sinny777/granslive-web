@@ -45,8 +45,8 @@
     "callbackPath": "/auth/twitter/callback",
     "successRedirect": "/auth/account",
     "failureRedirect": "/login",
-    "consumerKey": "{twitter-consumer-key}",
-    "consumerSecret": "{twitter-consumer-secret}",
+    "consumerKey": "HgabJ73ut83WKomes4qb8A",
+    "consumerSecret": "GIRJVj0yS79uGj94xNK11dcoVFZlxnqTuBKffU4ptI",
     "failureFlash": true
   },
   "facebook-link": {

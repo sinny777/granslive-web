@@ -15,8 +15,6 @@ define(function (require) {
     commonModule.factory('authService', require('common/services/authService'));
     
     commonModule.controller('commonController', require('common/controllers/commonController'));
-    commonModule.controller('homeController', require('common/controllers/homeController'));
-    
 
     commonModule.directive('fileModel', require('common/directives/fileModelDirective'));
     commonModule.directive('toggle', require('common/directives/toggleDirective'));

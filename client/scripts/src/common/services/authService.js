@@ -2,9 +2,9 @@
 define(['angular'], function (angular) {
     "use strict";
 
-  var factory = function (LoopBackAuth, User, UserIdentity, CONFIG) {
+  var factory = function (LoopBackAuth, User, UserIdentity, CONFIG, $cookies) {
 
-	  var authUriBase = "http://localhost:3000/api/";
+	  var authUriBase = CONFIG.API_URL;
 
 	  // Inherit from LoopBackAuth so we don't need to keep modifying it.
 	  // Note that this method didn't work. I think because a new version of LoopBackAuth was used instead of the singleton.
@@ -41,16 +41,14 @@ define(['angular'], function (angular) {
 	      Auth.currentUser = User.getCurrent(function(userData) {
 	        console.log("Current User Fetch Success:", userData);
 	        Auth.currentUser = userData;
-	        UserIdentity.user({id: userData.id}, function(userObj){
-    			console.log('USER OBJ: >>>>>> ', userObj);
-    			if(userObj){
-    				
-    				UserIdentity.find({id: userObj.id}).$promise.then(function(userIdentityObj){
+    			console.log('USER OBJ: >>>>>> ', Auth.currentUser);
+    			if(Auth.currentUser){
+    				var findReq = {filter: {where: {"userId": userObj.id}}};
+    				UserIdentity.find(findReq).$promise.then(function(userIdentityObj){
     					Auth.currentUser.profile = userIdentityObj[0].profile._json;
 	    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
 	    			});
     			}
-    		});
 	        
 	      },
 	      function(err) {
@@ -79,8 +77,10 @@ define(['angular'], function (angular) {
 		    Auth.clearUser();
 		    Auth.clearStorage();
 		    Auth.save();
-	    // Delete the token from the API.
-//		    this.logout();
+		    $cookies.remove('access_token');
+		    $cookies.remove('userId');
+		    delete $cookies['access_token'];
+		    delete $cookies['userId'];
 	  };
 
 	  /**
@@ -104,7 +104,7 @@ define(['angular'], function (angular) {
 	
   }
 
-	factory.$inject = ['LoopBackAuth', 'User', 'UserIdentity', 'CONFIG'];
+	factory.$inject = ['LoopBackAuth', 'User', 'UserIdentity', 'CONFIG', '$cookies'];
 	return factory;
 });
 

@@ -2,6 +2,6 @@ applications:
 - services:
   - granslive-cloudantDB
   name: granslive-web
-  command: node server/server.js
+  command: node .
   path: .
   memory: 512M

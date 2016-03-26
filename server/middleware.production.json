@@ -1,9 +1,36 @@
 {
-  "final:after": {
-    "loopback#errorHandler": {
+  "initial:before": {
+    "loopback#favicon": {}
+  },
+  "initial": {
+    "compression": {},
+    "cors": {
       "params": {
-        "includeStack": false
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
       }
     }
+  },
+  "session": {},
+  "auth": {},
+  "parse": {},
+  "routes": {
+    "loopback#rest": {
+      "paths": [
+        "${restApiRoot}"
+      ]
+    }
+  },
+  "files": {
+    "loopback#static": {
+      "params": "$!../client"
+    }
+  },
+  "final": {
+    "loopback#urlNotFound": {}
+  },
+  "final:after": {
+    "loopback#errorHandler": {}
   }
 }

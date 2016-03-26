@@ -44,8 +44,8 @@ define(function () {
 		    		UserIdentity.user({id: userId}, function(userObj){
 		    			console.log('USER OBJ: >>>>>> ', userObj);
 		    			if(userObj){
-		    				
-		    				UserIdentity.find({id: userObj.id}).$promise.then(function(userIdentityObj){
+		    				var findReq = {filter: {where: {"userId": userObj.id}}};
+		    				UserIdentity.find(findReq).$promise.then(function(userIdentityObj){
 			    				$rootScope.currentUser = userObj;
 			    				$rootScope.currentUser.profile = userIdentityObj[0].profile._json;
 			    				console.log('$rootScope.currentUser: >>> ', $rootScope.currentUser);

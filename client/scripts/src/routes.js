@@ -3,8 +3,8 @@
 define(['app'], function (app) {
     'use strict';
 
-    app.config(['$routeProvider','$locationProvider', '$httpProvider', 'LoopBackResourceProvider',
-                    function($routeProvider, $locationProvider, $httpProvider, LoopBackResourceProvider) {
+    app.config(['$routeProvider','$locationProvider', '$httpProvider', 'LoopBackResourceProvider','CONFIG',
+                    function($routeProvider, $locationProvider, $httpProvider, LoopBackResourceProvider, CONFIG) {
 
                 	$locationProvider.html5Mode(false);
                     $locationProvider.hashPrefix('!');
@@ -13,7 +13,7 @@ define(['app'], function (app) {
                     LoopBackResourceProvider.setAuthHeader('X-Access-Token');
                  
                     // Change the URL where to access the LoopBack REST API server
-                    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
+                    LoopBackResourceProvider.setUrlBase(CONFIG.API_URL);
                     
                     $httpProvider.interceptors.push(function($q, $location, LoopBackAuth) {
                     	  return {
@@ -40,13 +40,13 @@ define(['app'], function (app) {
                         $routeProvider.
 	                        when('/login', {
 	        	                templateUrl: 'partials/common/login.html',
-	        	                controller: 'homeController',
+	        	                controller: 'commonController',
 	        	                controllerAs: 'vm',
 	        	                access: { requiredLogin: false }
 	        	            }).
             	            when('/home', {
             	                templateUrl: 'partials/home.html',
-            	                controller: 'homeController',
+            	                controller: 'commonController',
             	                controllerAs: 'vm',
             	                access: { requiredLogin: false }
             	            }).

@@ -29,12 +29,7 @@ define(function () {
     	if(!$rootScope.currentUser){
     		return;
     	}
-    	var findReq = {filter: {
-    						where: {
-    							"user.username": $rootScope.currentUser.username
-    						}
-    					}
-    				  };
+    	var findReq = {filter: {where: {"user.username": $rootScope.currentUser.username}}};
     	console.log(findReq);
     	$scope.show.areas = false;
     	$scope.places = Place.find(findReq,
@@ -56,12 +51,7 @@ define(function () {
     $scope.fetchPlaceAreas = function(){
     	if($scope.selectedPlace.id){
     		console.log('FETCH AREAS FOR PLACE: ', $scope.selectedPlace);
-    		var findReq = {filter: {
-				where: {
-					"placeId": $scope.selectedPlace.id
-				}
-			}
-		  };
+    		var findReq = {filter: {where: {placeId: $scope.selectedPlace.id}}};
     		$scope.selectedPlace.placeAreas = PlaceArea.find(findReq,
       			  function(list) { 
     				  $scope.selectedPlace.placeAreas = list;
