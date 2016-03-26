@@ -22,6 +22,17 @@
     },
     "type": {
       "type": "string"
+    },
+    "floor": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
     }
   },
   "validations": [],

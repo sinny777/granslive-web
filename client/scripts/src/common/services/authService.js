@@ -44,7 +44,7 @@ define(['angular'], function (angular) {
     			console.log('USER OBJ: >>>>>> ', Auth.currentUser);
     			if(Auth.currentUser){
     				var findReq = {filter: {where: {"userId": userObj.id}}};
-    				UserIdentity.find(findReq).$promise.then(function(userIdentityObj){
+    				UserIdentity.find(findReq).then(function(userIdentityObj){
     					Auth.currentUser.profile = userIdentityObj[0].profile._json;
 	    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
 	    			});

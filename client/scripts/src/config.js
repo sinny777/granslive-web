@@ -7,7 +7,7 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'DEV',
-			API_URL: 'https://granslive-web.mybluemix.net/api'
+			API_URL: 'http://localhost:3000/api'
 		});
     
 });
