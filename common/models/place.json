@@ -7,34 +7,31 @@
     "validateUpsert": true
   },
   "properties": {
+    "created": {
+      "type": "date"
+    },
     "description": {
       "type": "string"
     },
-    "default": {
-      "type": "boolean"
+    "floor": {
+      "type": "string"
+    },
+    "location": {
+      "type": "object",
+      "index": true
+    },
+    "modified": {
+      "type": "date"
     },
     "owner": {
       "type": "object",
       "required": true,
       "index": true
     },
-    "location": {
-      "type": "object",
-      "index": true
-    },
     "title": {
       "type": "string",
       "required": true,
       "index": true
-    },
-    "floor": {
-      "type": "string"
-    },
-    "created": {
-      "type": "date"
-    },
-    "modified": {
-      "type": "date"
     }
   },
   "validations": [],

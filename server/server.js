@@ -99,12 +99,9 @@ var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 //The ultimate error handler.
 app.use(loopback.errorHandler());
 
-//var loginEndpoint = require('../server/app/endpoints/loginEndpoint.js')(app);
-//require('../server/app/routes.js')(app, ensureLoggedIn, loginEndpoint); 
-
 app.start = function() {
   // start the web server
-  return app.listen(function() {
+  return app.listen(3000, 'localhost', function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     console.log('Web server listening at: %s', baseUrl);

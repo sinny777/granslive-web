@@ -29,7 +29,7 @@ define(function () {
     	if(!$rootScope.currentUser){
     		return;
     	}
-    	var findReq = {filter: {where: {"user.username": $rootScope.currentUser.username}}};
+    	var findReq = {filter: {where: {"owner.username": $rootScope.currentUser.username}}};
     	console.log(findReq);
     	$scope.show.areas = false;
     	$scope.places = Place.find(findReq,
