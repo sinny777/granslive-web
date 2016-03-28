@@ -1,5 +1,5 @@
 {
-  "name": "placeArea",
+  "name": "PlaceArea",
   "base": "PersistedModel",
   "strict": false,
   "idInjection": false,

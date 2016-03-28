@@ -101,7 +101,7 @@ app.use(loopback.errorHandler());
 
 app.start = function() {
   // start the web server
-  return app.listen(3000, 'localhost', function() {
+  return app.listen(3000, function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     console.log('Web server listening at: %s', baseUrl);

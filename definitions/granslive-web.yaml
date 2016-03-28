@@ -98,7 +98,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
     delete:
       tags:
@@ -138,7 +138,7 @@ paths:
           in: body
           required: false
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
         - name: id
           in: path
           description: User id
@@ -149,7 +149,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
   '/Users/{id}/identities/{fk}':
     get:
@@ -417,7 +417,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/place'
+              $ref: '#/definitions/Place'
       deprecated: false
     post:
       tags:
@@ -429,7 +429,7 @@ paths:
           in: body
           required: false
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
         - name: id
           in: path
           description: User id
@@ -440,7 +440,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
     delete:
       tags:
@@ -954,12 +954,7 @@ paths:
 
 
 
-
-
-
-
                 - `user` - `{User}` - Data of the currently logged in user.
-
               (`include=user`)
 
 
@@ -2810,48 +2805,48 @@ paths:
           schema:
             type: object
       deprecated: false
-  /places:
+  /Places:
     post:
       tags:
-        - place
+        - Place
       summary: Create a new instance of the model and persist it into the data source.
-      operationId: place.create
+      operationId: Place.create
       parameters:
         - name: data
           in: body
           description: Model instance data
           required: false
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
     put:
       tags:
-        - place
+        - Place
       summary: Update an existing model instance or insert a new one into the data source.
-      operationId: place.upsert
+      operationId: Place.upsert
       parameters:
         - name: data
           in: body
           description: Model instance data
           required: false
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
     get:
       tags:
-        - place
+        - Place
       summary: Find all instances of the model matched by filter from the data source.
-      operationId: place.find
+      operationId: Place.find
       parameters:
         - name: filter
           in: query
@@ -2865,14 +2860,14 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/place'
+              $ref: '#/definitions/Place'
       deprecated: false
-  '/places/{id}/exists':
+  '/Places/{id}/exists':
     get:
       tags:
-        - place
+        - Place
       summary: Check whether a model instance exists in the data source.
-      operationId: 'place.exists__get_places_{id}_exists'
+      operationId: 'Place.exists__get_Places_{id}_exists'
       parameters:
         - name: id
           in: path
@@ -2886,12 +2881,12 @@ paths:
           schema:
             type: object
       deprecated: false
-  '/places/{id}':
+  '/Places/{id}':
     head:
       tags:
-        - place
+        - Place
       summary: Check whether a model instance exists in the data source.
-      operationId: 'place.exists__head_places_{id}'
+      operationId: 'Place.exists__head_Places_{id}'
       parameters:
         - name: id
           in: path
@@ -2907,9 +2902,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - place
+        - Place
       summary: Find a model instance by id from the data source.
-      operationId: place.findById
+      operationId: Place.findById
       parameters:
         - name: id
           in: path
@@ -2927,13 +2922,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
     delete:
       tags:
-        - place
+        - Place
       summary: Delete a model instance by id from the data source.
-      operationId: place.deleteById
+      operationId: Place.deleteById
       parameters:
         - name: id
           in: path
@@ -2949,16 +2944,16 @@ paths:
       deprecated: false
     put:
       tags:
-        - place
+        - Place
       summary: Update attributes for a model instance and persist it into the data source.
-      operationId: place.prototype.updateAttributes
+      operationId: Place.prototype.updateAttributes
       parameters:
         - name: data
           in: body
           description: An object of model property name/value pairs
           required: false
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
         - name: id
           in: path
           description: PersistedModel id
@@ -2969,14 +2964,14 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
-  /places/findOne:
+  /Places/findOne:
     get:
       tags:
-        - place
+        - Place
       summary: Find first instance of the model matched by filter from the data source.
-      operationId: place.findOne
+      operationId: Place.findOne
       parameters:
         - name: filter
           in: query
@@ -2988,14 +2983,14 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       deprecated: false
-  /places/update:
+  /Places/update:
     post:
       tags:
-        - place
+        - Place
       summary: Update instances of the model matched by where from the data source.
-      operationId: place.updateAll
+      operationId: Place.updateAll
       parameters:
         - name: where
           in: query
@@ -3008,7 +3003,7 @@ paths:
           description: An object of model property name/value pairs
           required: false
           schema:
-            $ref: '#/definitions/place'
+            $ref: '#/definitions/Place'
       responses:
         '200':
           description: Request was successful
@@ -3016,12 +3011,12 @@ paths:
             description: The number of instances updated
             type: object
       deprecated: false
-  /places/count:
+  /Places/count:
     get:
       tags:
-        - place
+        - Place
       summary: Count instances of the model matched by where from the data source.
-      operationId: place.count
+      operationId: Place.count
       parameters:
         - name: where
           in: query
@@ -3035,12 +3030,12 @@ paths:
           schema:
             type: object
       deprecated: false
-  /places/change-stream:
+  /Places/change-stream:
     post:
       tags:
-        - place
+        - Place
       summary: Create a change stream.
-      operationId: place.createChangeStream__post_places_change-stream
+      operationId: Place.createChangeStream__post_Places_change-stream
       parameters:
         - name: options
           in: formData
@@ -3055,9 +3050,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - place
+        - Place
       summary: Create a change stream.
-      operationId: place.createChangeStream__get_places_change-stream
+      operationId: Place.createChangeStream__get_Places_change-stream
       parameters:
         - name: options
           in: query
@@ -3070,48 +3065,48 @@ paths:
           schema:
             type: object
       deprecated: false
-  /placeAreas:
+  /PlaceAreas:
     post:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Create a new instance of the model and persist it into the data source.
-      operationId: placeArea.create
+      operationId: PlaceArea.create
       parameters:
         - name: data
           in: body
           description: Model instance data
           required: false
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       deprecated: false
     put:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Update an existing model instance or insert a new one into the data source.
-      operationId: placeArea.upsert
+      operationId: PlaceArea.upsert
       parameters:
         - name: data
           in: body
           description: Model instance data
           required: false
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       deprecated: false
     get:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Find all instances of the model matched by filter from the data source.
-      operationId: placeArea.find
+      operationId: PlaceArea.find
       parameters:
         - name: filter
           in: query
@@ -3125,14 +3120,14 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/placeArea'
+              $ref: '#/definitions/PlaceArea'
       deprecated: false
-  '/placeAreas/{id}/exists':
+  '/PlaceAreas/{id}/exists':
     get:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Check whether a model instance exists in the data source.
-      operationId: 'placeArea.exists__get_placeAreas_{id}_exists'
+      operationId: 'PlaceArea.exists__get_PlaceAreas_{id}_exists'
       parameters:
         - name: id
           in: path
@@ -3146,12 +3141,12 @@ paths:
           schema:
             type: object
       deprecated: false
-  '/placeAreas/{id}':
+  '/PlaceAreas/{id}':
     head:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Check whether a model instance exists in the data source.
-      operationId: 'placeArea.exists__head_placeAreas_{id}'
+      operationId: 'PlaceArea.exists__head_PlaceAreas_{id}'
       parameters:
         - name: id
           in: path
@@ -3167,9 +3162,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Find a model instance by id from the data source.
-      operationId: placeArea.findById
+      operationId: PlaceArea.findById
       parameters:
         - name: id
           in: path
@@ -3187,13 +3182,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       deprecated: false
     delete:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Delete a model instance by id from the data source.
-      operationId: placeArea.deleteById
+      operationId: PlaceArea.deleteById
       parameters:
         - name: id
           in: path
@@ -3209,16 +3204,16 @@ paths:
       deprecated: false
     put:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Update attributes for a model instance and persist it into the data source.
-      operationId: placeArea.prototype.updateAttributes
+      operationId: PlaceArea.prototype.updateAttributes
       parameters:
         - name: data
           in: body
           description: An object of model property name/value pairs
           required: false
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
         - name: id
           in: path
           description: PersistedModel id
@@ -3229,14 +3224,14 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       deprecated: false
-  /placeAreas/findOne:
+  /PlaceAreas/findOne:
     get:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Find first instance of the model matched by filter from the data source.
-      operationId: placeArea.findOne
+      operationId: PlaceArea.findOne
       parameters:
         - name: filter
           in: query
@@ -3248,14 +3243,14 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       deprecated: false
-  /placeAreas/update:
+  /PlaceAreas/update:
     post:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Update instances of the model matched by where from the data source.
-      operationId: placeArea.updateAll
+      operationId: PlaceArea.updateAll
       parameters:
         - name: where
           in: query
@@ -3268,7 +3263,7 @@ paths:
           description: An object of model property name/value pairs
           required: false
           schema:
-            $ref: '#/definitions/placeArea'
+            $ref: '#/definitions/PlaceArea'
       responses:
         '200':
           description: Request was successful
@@ -3276,12 +3271,12 @@ paths:
             description: The number of instances updated
             type: object
       deprecated: false
-  /placeAreas/count:
+  /PlaceAreas/count:
     get:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Count instances of the model matched by where from the data source.
-      operationId: placeArea.count
+      operationId: PlaceArea.count
       parameters:
         - name: where
           in: query
@@ -3295,12 +3290,12 @@ paths:
           schema:
             type: object
       deprecated: false
-  /placeAreas/change-stream:
+  /PlaceAreas/change-stream:
     post:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Create a change stream.
-      operationId: placeArea.createChangeStream__post_placeAreas_change-stream
+      operationId: PlaceArea.createChangeStream__post_PlaceAreas_change-stream
       parameters:
         - name: options
           in: formData
@@ -3315,9 +3310,529 @@ paths:
       deprecated: false
     get:
       tags:
-        - placeArea
+        - PlaceArea
       summary: Create a change stream.
-      operationId: placeArea.createChangeStream__get_placeAreas_change-stream
+      operationId: PlaceArea.createChangeStream__get_PlaceAreas_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /Boards:
+    post:
+      tags:
+        - Board
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Board.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Board'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Board'
+      deprecated: false
+    put:
+      tags:
+        - Board
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: Board.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Board'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Board'
+      deprecated: false
+    get:
+      tags:
+        - Board
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Board.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Board'
+      deprecated: false
+  '/Boards/{id}/exists':
+    get:
+      tags:
+        - Board
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Board.exists__get_Boards_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/Boards/{id}':
+    head:
+      tags:
+        - Board
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Board.exists__head_Boards_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Board
+      summary: Find a model instance by id from the data source.
+      operationId: Board.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Board'
+      deprecated: false
+    delete:
+      tags:
+        - Board
+      summary: Delete a model instance by id from the data source.
+      operationId: Board.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Board
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: Board.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Board'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Board'
+      deprecated: false
+  /Boards/findOne:
+    get:
+      tags:
+        - Board
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Board.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Board'
+      deprecated: false
+  /Boards/update:
+    post:
+      tags:
+        - Board
+      summary: Update instances of the model matched by where from the data source.
+      operationId: Board.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Board'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /Boards/count:
+    get:
+      tags:
+        - Board
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Board.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /Boards/change-stream:
+    post:
+      tags:
+        - Board
+      summary: Create a change stream.
+      operationId: Board.createChangeStream__post_Boards_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Board
+      summary: Create a change stream.
+      operationId: Board.createChangeStream__get_Boards_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /Devices:
+    post:
+      tags:
+        - Device
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Device.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    put:
+      tags:
+        - Device
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: Device.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    get:
+      tags:
+        - Device
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Device.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Device'
+      deprecated: false
+  '/Devices/{id}/exists':
+    get:
+      tags:
+        - Device
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Device.exists__get_Devices_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/Devices/{id}':
+    head:
+      tags:
+        - Device
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Device.exists__head_Devices_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Device
+      summary: Find a model instance by id from the data source.
+      operationId: Device.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    delete:
+      tags:
+        - Device
+      summary: Delete a model instance by id from the data source.
+      operationId: Device.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Device
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: Device.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Device'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+  /Devices/findOne:
+    get:
+      tags:
+        - Device
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Device.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+  /Devices/update:
+    post:
+      tags:
+        - Device
+      summary: Update instances of the model matched by where from the data source.
+      operationId: Device.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /Devices/count:
+    get:
+      tags:
+        - Device
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Device.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /Devices/change-stream:
+    post:
+      tags:
+        - Device
+      summary: Create a change stream.
+      operationId: Device.createChangeStream__post_Devices_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Device
+      summary: Create a change stream.
+      operationId: Device.createChangeStream__get_Devices_change-stream
       parameters:
         - name: options
           in: query
@@ -3351,7 +3866,7 @@ definitions:
     required:
       - id
     additionalProperties: false
-  place:
+  Place:
     properties:
       created:
         type: string
@@ -3371,6 +3886,9 @@ definitions:
         type: string
       id:
         type: string
+      user.username:
+        type: number
+        format: double
     required:
       - owner
       - title
@@ -3526,7 +4044,7 @@ definitions:
         type: number
         format: double
     additionalProperties: false
-  placeArea:
+  PlaceArea:
     properties:
       title:
         type: string
@@ -3550,6 +4068,43 @@ definitions:
       - title
       - placeId
       - floor
+    additionalProperties: false
+  Board:
+    properties:
+      created:
+        type: string
+        format: date
+      description:
+        type: string
+      gatewayId:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+      uniqueIdentifier:
+        type: string
+      updated:
+        type: string
+        format: date
+      type:
+        type: string
+      id:
+        type: string
+    required:
+      - uniqueIdentifier
+    additionalProperties: false
+  Device:
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      status:
+        type: number
+        format: double
+      id:
+        type: string
     additionalProperties: false
 swagger: '2.0'
 info:

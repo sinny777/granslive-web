@@ -45,16 +45,24 @@
     "dataSource": "db",
     "public": true
   },
-  "place": {
+  "Place": {
     "dataSource": "cloudant",
     "public": true,
     "$promise": {},
     "$resolved": true
   },
-  "placeArea": {
+  "PlaceArea": {
     "dataSource": "cloudant",
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "Board": {
+    "dataSource": "cloudant",
+    "public": true
+  },
+  "Device": {
+    "dataSource": "cloudant",
+    "public": true
   }
 }
