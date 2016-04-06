@@ -43,7 +43,7 @@ var config = {};
 try {
   config = require('../server/providers.json');
 } catch (err) {
-  console.trace(err);
+  console.log(err);
   process.exit(1); // fatal
 }
 
@@ -63,7 +63,11 @@ app.middleware('session:before', loopback.cookieParser(app.get('cookieSecret')))
 app.middleware('session', loopback.session({
   secret: 'kitty',
   saveUninitialized: true,
-  resave: true
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  resave: true,
+  httpOnly: true,
+  ephemeral: true
 }));
 
 passportConfigurator.init();

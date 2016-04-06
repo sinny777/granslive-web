@@ -5,6 +5,7 @@ define(function () {
 	  
 	  $rootScope.footerLinks = [];
 	  $rootScope.currentUser = {};
+	  $rootScope.loginCredentials = {};
 	  
 	  $rootScope.gotoTop = function (){
 	      $('body,html').animate({scrollTop:0},400);
@@ -23,43 +24,19 @@ define(function () {
 	    	}
 	    	
 	    	if(!$rootScope.currentUser){
-	    		var cookies = $cookies.getAll();
-		    	var accessTokenId = cookies['access_token'];
-		    	if(accessTokenId){
-		    		accessTokenId = accessTokenId.split('.')[0];
-			    	accessTokenId = accessTokenId.split(':')[1];
-		    	}
-		    	console.log('accessTokenId: >>>> ' +accessTokenId);		    	
-		    	if(accessTokenId){
-		    		var userId = cookies['userId'];
-		    		if(userId){
-		    			userId = userId.split('.')[0];
-		    			userId = userId.split(':')[1];
-			    	}
-		    		console.log('userId: >>>> ' +userId);
-		    		authService.currentUserId = userId;
-		    		authService.accessTokenId = accessTokenId;
-		    		authService.rememberMe = true;
-		    		
-		    		UserIdentity.user({id: userId}, function(userObj){
-		    			console.log('USER OBJ: >>>>>> ', userObj);
-		    			if(userObj){
-		    				var findReq = {filter: {where: {"userId": userObj.id}}};
-		    				UserIdentity.find(findReq).$promise.then(function(userIdentityObj){
-			    				$rootScope.currentUser = userObj;
-			    				$rootScope.currentUser.profile = userIdentityObj[0].profile._json;
-			    				console.log('$rootScope.currentUser: >>> ', $rootScope.currentUser);
-			    				authService.setUser(accessTokenId, userId, $rootScope.currentUser);
-			    				authService.save();
-			    			});
-		    			}
-		    		});
-		        }
+	    		// redirect to login page
 	    	}
 	    	
 	    };
 
-      
+    $rootScope.login = function(){
+    	console.log("IN LOGIN Call for: ", $rootScope.loginCredentials); 
+    	authService.login($rootScope.loginCredentials, function(userObj){
+    		console.log('USER OBJ AFTER LOGIN: >>>>>> ', userObj);
+    		$rootScope.checkUser();
+    	});
+      };  
+	    
     $rootScope.logout = function(){
     	console.log("IN LOGOUT Call for: ", $rootScope.currentUser); 
     	setTimeout(function () {
@@ -75,7 +52,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'authService','User', 'UserIdentity'];
+  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'authService', 'User', 'UserIdentity'];
   return ctrl;
 
 });

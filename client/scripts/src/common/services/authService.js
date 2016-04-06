@@ -2,7 +2,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-  var factory = function (LoopBackAuth, User, UserIdentity, CONFIG, $cookies) {
+  var factory = function (LoopBackAuth, MyUser, UserIdentity, CONFIG, $cookies) {
 
 	  var authUriBase = CONFIG.API_URL;
 
@@ -33,20 +33,55 @@ define(['angular'], function (angular) {
 	    if(!Auth.isLoggedIn()) {
 	      console.log('User not logged in.');
 	      Auth.currentUser = null;
+	      
+	      var cookies = $cookies.getAll();
+	    	var accessTokenId = cookies['access_token'];
+	    	if(accessTokenId){
+	    		accessTokenId = accessTokenId.split('.')[0];
+		    	accessTokenId = accessTokenId.split(':')[1];
+	    	}
+	    	console.log('accessTokenId: >>>> ' +accessTokenId);
+	    	if(accessTokenId){
+	    		var userId = cookies['userId'];
+	    		if(userId){
+	    			userId = userId.split('.')[0];
+	    			userId = userId.split(':')[1];
+		    	}
+	    		console.log('userId: >>>> ' +userId);
+	    		Auth.currentUserId = userId;
+	    		Auth.accessTokenId = accessTokenId;
+	    		Auth.rememberMe = true;
+	    		var findUserReq = {filter: {where: {"_id": userId}}};
+	    		MyUser.findById({id:userId}).$promise.then(function(userObj){
+	    			console.log('userObj: >>>>>>>>>> ', userObj);
+    				var findReq = {filter: {where: {"userId": userObj.id}}};
+    				UserIdentity.find(findReq).$promise.then(function(UserIdentityObj){
+	    				Auth.currentUser = userObj;
+	    				Auth.currentUser.profile = UserIdentityObj[0].profile._json;
+	    				console.log('$rootScope.currentUser: >>> ', $rootScope.currentUser);
+	    				Auth.setUser(accessTokenId, userId, $rootScope.currentUser);
+	    				Auth.save();
+	    			});
+	    		});
+	        }
+	      
 	      return Auth.currentUser;
-	    }
-	    
-	    else {
+	    } else {
 	      // Fetch the actual user data.
-	      Auth.currentUser = User.getCurrent(function(userData) {
+	      Auth.currentUser = MyUser.getCurrent(function(userData) {
 	        console.log("Current User Fetch Success:", userData);
 	        Auth.currentUser = userData;
     			console.log('USER OBJ: >>>>>> ', Auth.currentUser);
     			if(Auth.currentUser){
     				var findReq = {filter: {where: {"userId": userData.id}}};
     				UserIdentity.find(findReq).$promise.then(function(userIdentityObj){
-    					Auth.currentUser.profile = userIdentityObj[0].profile._json;
-	    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
+    					console.log(userIdentityObj)
+    					if(userIdentityObj && userIdentityObj[0]){
+	    					Auth.currentUser.profile = userIdentityObj[0].profile._json;
+		    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
+    					}else{
+    						Auth.currentUser.profile = {"name": "Guest"};
+    					}
 	    			});
     			}
 	        
@@ -69,9 +104,13 @@ define(['angular'], function (angular) {
 	    }
 	    return false;
 	  };
+	  
+	  Auth.login = function(credentials) {
+		  MyUser.login(credentials);
+	  };
 
 	  Auth.logout = function() {
-		  User.logout();
+		  MyUser.logout();
 //		 Delete the user data cached locally.
 		    Auth.currentUser = null;
 		    Auth.clearUser();
@@ -104,7 +143,7 @@ define(['angular'], function (angular) {
 	
   }
 
-	factory.$inject = ['LoopBackAuth', 'User', 'UserIdentity', 'CONFIG', '$cookies'];
+	factory.$inject = ['LoopBackAuth', 'MyUser', 'UserIdentity', 'CONFIG', '$cookies'];
 	return factory;
 });
 

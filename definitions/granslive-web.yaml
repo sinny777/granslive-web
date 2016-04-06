@@ -151,158 +151,6 @@ paths:
           schema:
             $ref: '#/definitions/Place'
       deprecated: false
-  '/Users/{id}/identities/{fk}':
-    get:
-      tags:
-        - User
-      summary: Find a related item by id for identities.
-      operationId: User.prototype.__findById__identities
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for identities
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/UserIdentity'
-      deprecated: false
-    delete:
-      tags:
-        - User
-      summary: Delete a related item by id for identities.
-      operationId: User.prototype.__destroyById__identities
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for identities
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - User
-      summary: Update a related item by id for identities.
-      operationId: User.prototype.__updateById__identities
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for identities
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/UserIdentity'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/UserIdentity'
-      deprecated: false
-  '/Users/{id}/credentials/{fk}':
-    get:
-      tags:
-        - User
-      summary: Find a related item by id for credentials.
-      operationId: User.prototype.__findById__credentials
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for credentials
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/UserCredential'
-      deprecated: false
-    delete:
-      tags:
-        - User
-      summary: Delete a related item by id for credentials.
-      operationId: User.prototype.__destroyById__credentials
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for credentials
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - User
-      summary: Update a related item by id for credentials.
-      operationId: User.prototype.__updateById__credentials
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for credentials
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/UserCredential'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/UserCredential'
-      deprecated: false
   '/Users/{id}/accessTokens':
     get:
       tags:
@@ -464,186 +312,6 @@ paths:
         - User
       summary: Counts places of User.
       operationId: User.prototype.__count__places
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-  '/Users/{id}/identities':
-    get:
-      tags:
-        - User
-      summary: Queries identities of User.
-      operationId: User.prototype.__get__identities
-      parameters:
-        - name: filter
-          in: query
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserIdentity'
-      deprecated: false
-    post:
-      tags:
-        - User
-      summary: Creates a new instance in identities of this model.
-      operationId: User.prototype.__create__identities
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/UserIdentity'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/UserIdentity'
-      deprecated: false
-    delete:
-      tags:
-        - User
-      summary: Deletes all identities of this model.
-      operationId: User.prototype.__delete__identities
-      parameters:
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/Users/{id}/identities/count':
-    get:
-      tags:
-        - User
-      summary: Counts identities of User.
-      operationId: User.prototype.__count__identities
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-  '/Users/{id}/credentials':
-    get:
-      tags:
-        - User
-      summary: Queries credentials of User.
-      operationId: User.prototype.__get__credentials
-      parameters:
-        - name: filter
-          in: query
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserCredential'
-      deprecated: false
-    post:
-      tags:
-        - User
-      summary: Creates a new instance in credentials of this model.
-      operationId: User.prototype.__create__credentials
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/UserCredential'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/UserCredential'
-      deprecated: false
-    delete:
-      tags:
-        - User
-      summary: Deletes all credentials of this model.
-      operationId: User.prototype.__delete__credentials
-      parameters:
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/Users/{id}/credentials/count':
-    get:
-      tags:
-        - User
-      summary: Counts credentials of User.
-      operationId: User.prototype.__count__credentials
       parameters:
         - name: where
           in: query
@@ -3845,6 +3513,1919 @@ paths:
           schema:
             type: object
       deprecated: false
+  '/MyUsers/{id}/roles/{fk}':
+    get:
+      tags:
+        - MyUser
+      summary: Find a related item by id for roles.
+      operationId: MyUser.prototype.__findById__roles
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for roles
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Role'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Delete a related item by id for roles.
+      operationId: MyUser.prototype.__destroyById__roles
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for roles
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - MyUser
+      summary: Update a related item by id for roles.
+      operationId: MyUser.prototype.__updateById__roles
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for roles
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Role'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Role'
+      deprecated: false
+  '/MyUsers/{id}/roles/rel/{fk}':
+    put:
+      tags:
+        - MyUser
+      summary: Add a related item by id for roles.
+      operationId: MyUser.prototype.__link__roles
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for roles
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/RoleMapping'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RoleMapping'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Remove the roles relation to an item by id.
+      operationId: MyUser.prototype.__unlink__roles
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for roles
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    head:
+      tags:
+        - MyUser
+      summary: Check the existence of roles relation to an item by id.
+      operationId: MyUser.prototype.__exists__roles
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for roles
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: boolean
+      deprecated: false
+  '/MyUsers/{id}/identities/{fk}':
+    get:
+      tags:
+        - MyUser
+      summary: Find a related item by id for identities.
+      operationId: MyUser.prototype.__findById__identities
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for identities
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Delete a related item by id for identities.
+      operationId: MyUser.prototype.__destroyById__identities
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for identities
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - MyUser
+      summary: Update a related item by id for identities.
+      operationId: MyUser.prototype.__updateById__identities
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for identities
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/userIdentity'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+  '/MyUsers/{id}/accessTokens/{fk}':
+    get:
+      tags:
+        - MyUser
+      summary: Find a related item by id for accessTokens.
+      operationId: MyUser.prototype.__findById__accessTokens
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for accessTokens
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Delete a related item by id for accessTokens.
+      operationId: MyUser.prototype.__destroyById__accessTokens
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for accessTokens
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - MyUser
+      summary: Update a related item by id for accessTokens.
+      operationId: MyUser.prototype.__updateById__accessTokens
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for accessTokens
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/accessToken'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+  '/MyUsers/{id}/credentials/{fk}':
+    get:
+      tags:
+        - MyUser
+      summary: Find a related item by id for credentials.
+      operationId: MyUser.prototype.__findById__credentials
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for credentials
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Delete a related item by id for credentials.
+      operationId: MyUser.prototype.__destroyById__credentials
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for credentials
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - MyUser
+      summary: Update a related item by id for credentials.
+      operationId: MyUser.prototype.__updateById__credentials
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for credentials
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/userCredential'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+  '/MyUsers/{id}/roles':
+    get:
+      tags:
+        - MyUser
+      summary: Queries roles of MyUser.
+      operationId: MyUser.prototype.__get__roles
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Role'
+      deprecated: false
+    post:
+      tags:
+        - MyUser
+      summary: Creates a new instance in roles of this model.
+      operationId: MyUser.prototype.__create__roles
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Role'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Role'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Deletes all roles of this model.
+      operationId: MyUser.prototype.__delete__roles
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/MyUsers/{id}/roles/count':
+    get:
+      tags:
+        - MyUser
+      summary: Counts roles of MyUser.
+      operationId: MyUser.prototype.__count__roles
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/MyUsers/{id}/identities':
+    get:
+      tags:
+        - MyUser
+      summary: Queries identities of MyUser.
+      operationId: MyUser.prototype.__get__identities
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/userIdentity'
+      deprecated: false
+    post:
+      tags:
+        - MyUser
+      summary: Creates a new instance in identities of this model.
+      operationId: MyUser.prototype.__create__identities
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/userIdentity'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Deletes all identities of this model.
+      operationId: MyUser.prototype.__delete__identities
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/MyUsers/{id}/identities/count':
+    get:
+      tags:
+        - MyUser
+      summary: Counts identities of MyUser.
+      operationId: MyUser.prototype.__count__identities
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/MyUsers/{id}/accessTokens':
+    get:
+      tags:
+        - MyUser
+      summary: Queries accessTokens of MyUser.
+      operationId: MyUser.prototype.__get__accessTokens
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/accessToken'
+      deprecated: false
+    post:
+      tags:
+        - MyUser
+      summary: Creates a new instance in accessTokens of this model.
+      operationId: MyUser.prototype.__create__accessTokens
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/accessToken'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Deletes all accessTokens of this model.
+      operationId: MyUser.prototype.__delete__accessTokens
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/MyUsers/{id}/accessTokens/count':
+    get:
+      tags:
+        - MyUser
+      summary: Counts accessTokens of MyUser.
+      operationId: MyUser.prototype.__count__accessTokens
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/MyUsers/{id}/credentials':
+    get:
+      tags:
+        - MyUser
+      summary: Queries credentials of MyUser.
+      operationId: MyUser.prototype.__get__credentials
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/userCredential'
+      deprecated: false
+    post:
+      tags:
+        - MyUser
+      summary: Creates a new instance in credentials of this model.
+      operationId: MyUser.prototype.__create__credentials
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/userCredential'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Deletes all credentials of this model.
+      operationId: MyUser.prototype.__delete__credentials
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/MyUsers/{id}/credentials/count':
+    get:
+      tags:
+        - MyUser
+      summary: Counts credentials of MyUser.
+      operationId: MyUser.prototype.__count__credentials
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /MyUsers:
+    post:
+      tags:
+        - MyUser
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: MyUser.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/MyUser'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
+    put:
+      tags:
+        - MyUser
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: MyUser.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/MyUser'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
+    get:
+      tags:
+        - MyUser
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: MyUser.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MyUser'
+      deprecated: false
+  '/MyUsers/{id}/exists':
+    get:
+      tags:
+        - MyUser
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'MyUser.exists__get_MyUsers_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/MyUsers/{id}':
+    head:
+      tags:
+        - MyUser
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'MyUser.exists__head_MyUsers_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - MyUser
+      summary: Find a model instance by id from the data source.
+      operationId: MyUser.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
+    delete:
+      tags:
+        - MyUser
+      summary: Delete a model instance by id from the data source.
+      operationId: MyUser.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - MyUser
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: MyUser.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/MyUser'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
+  /MyUsers/findOne:
+    get:
+      tags:
+        - MyUser
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: MyUser.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
+  /MyUsers/update:
+    post:
+      tags:
+        - MyUser
+      summary: Update instances of the model matched by where from the data source.
+      operationId: MyUser.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/MyUser'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /MyUsers/count:
+    get:
+      tags:
+        - MyUser
+      summary: Count instances of the model matched by where from the data source.
+      operationId: MyUser.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /MyUsers/change-stream:
+    post:
+      tags:
+        - MyUser
+      summary: Create a change stream.
+      operationId: MyUser.createChangeStream__post_MyUsers_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - MyUser
+      summary: Create a change stream.
+      operationId: MyUser.createChangeStream__get_MyUsers_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /MyUsers/login:
+    post:
+      tags:
+        - MyUser
+      summary: Login a user with username/email and password.
+      operationId: MyUser.login
+      parameters:
+        - name: credentials
+          in: body
+          required: true
+          schema:
+            type: object
+        - name: include
+          in: query
+          description: Related objects to include in the response. See the description of return value for more details.
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: >+
+              The response body contains properties of the AccessToken created on
+              login.
+
+              Depending on the value of `include` parameter, the body may contain
+              additional properties:
+
+
+
+                - `user` - `{User}` - Data of the currently logged in user.
+              (`include=user`)
+
+
+            type: object
+      deprecated: false
+  /MyUsers/logout:
+    post:
+      tags:
+        - MyUser
+      summary: Logout a user with access token.
+      operationId: MyUser.logout
+      parameters: []
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  /MyUsers/confirm:
+    get:
+      tags:
+        - MyUser
+      summary: Confirm a user registration with email verification token.
+      operationId: MyUser.confirm
+      parameters:
+        - name: uid
+          in: query
+          required: true
+          type: string
+        - name: token
+          in: query
+          required: true
+          type: string
+        - name: redirect
+          in: query
+          required: false
+          type: string
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  /MyUsers/reset:
+    post:
+      tags:
+        - MyUser
+      summary: Reset password for a user with email.
+      operationId: MyUser.resetPassword
+      parameters:
+        - name: options
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/userIdentities/{id}/user':
+    get:
+      tags:
+        - userIdentity
+      summary: Fetches belongsTo relation user.
+      operationId: userIdentity.prototype.__get__user
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: UserIdentity id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
+  /userIdentities:
+    post:
+      tags:
+        - userIdentity
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: userIdentity.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/userIdentity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+    put:
+      tags:
+        - userIdentity
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: userIdentity.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/userIdentity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+    get:
+      tags:
+        - userIdentity
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: userIdentity.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/userIdentity'
+      deprecated: false
+  '/userIdentities/{id}/exists':
+    get:
+      tags:
+        - userIdentity
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'userIdentity.exists__get_userIdentities_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/userIdentities/{id}':
+    head:
+      tags:
+        - userIdentity
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'userIdentity.exists__head_userIdentities_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - userIdentity
+      summary: Find a model instance by id from the data source.
+      operationId: userIdentity.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+    delete:
+      tags:
+        - userIdentity
+      summary: Delete a model instance by id from the data source.
+      operationId: userIdentity.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - userIdentity
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: userIdentity.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/userIdentity'
+        - name: id
+          in: path
+          description: UserIdentity id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+  /userIdentities/findOne:
+    get:
+      tags:
+        - userIdentity
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: userIdentity.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
+  /userIdentities/update:
+    post:
+      tags:
+        - userIdentity
+      summary: Update instances of the model matched by where from the data source.
+      operationId: userIdentity.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/userIdentity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /userIdentities/count:
+    get:
+      tags:
+        - userIdentity
+      summary: Count instances of the model matched by where from the data source.
+      operationId: userIdentity.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /userIdentities/change-stream:
+    post:
+      tags:
+        - userIdentity
+      summary: Create a change stream.
+      operationId: userIdentity.createChangeStream__post_userIdentities_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - userIdentity
+      summary: Create a change stream.
+      operationId: userIdentity.createChangeStream__get_userIdentities_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /accessTokens:
+    post:
+      tags:
+        - accessToken
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: accessToken.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/accessToken'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+    put:
+      tags:
+        - accessToken
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: accessToken.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/accessToken'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+    get:
+      tags:
+        - accessToken
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: accessToken.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/accessToken'
+      deprecated: false
+  '/accessTokens/{id}/exists':
+    get:
+      tags:
+        - accessToken
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'accessToken.exists__get_accessTokens_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/accessTokens/{id}':
+    head:
+      tags:
+        - accessToken
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'accessToken.exists__head_accessTokens_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - accessToken
+      summary: Find a model instance by id from the data source.
+      operationId: accessToken.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+    delete:
+      tags:
+        - accessToken
+      summary: Delete a model instance by id from the data source.
+      operationId: accessToken.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - accessToken
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: accessToken.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/accessToken'
+        - name: id
+          in: path
+          description: AccessToken id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+  /accessTokens/findOne:
+    get:
+      tags:
+        - accessToken
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: accessToken.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/accessToken'
+      deprecated: false
+  /accessTokens/update:
+    post:
+      tags:
+        - accessToken
+      summary: Update instances of the model matched by where from the data source.
+      operationId: accessToken.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/accessToken'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /accessTokens/count:
+    get:
+      tags:
+        - accessToken
+      summary: Count instances of the model matched by where from the data source.
+      operationId: accessToken.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /accessTokens/change-stream:
+    post:
+      tags:
+        - accessToken
+      summary: Create a change stream.
+      operationId: accessToken.createChangeStream__post_accessTokens_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - accessToken
+      summary: Create a change stream.
+      operationId: accessToken.createChangeStream__get_accessTokens_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/userCredentials/{id}/user':
+    get:
+      tags:
+        - userCredential
+      summary: Fetches belongsTo relation user.
+      operationId: userCredential.prototype.__get__user
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: UserCredential id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
+  /userCredentials:
+    post:
+      tags:
+        - userCredential
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: userCredential.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/userCredential'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+    put:
+      tags:
+        - userCredential
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: userCredential.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/userCredential'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+    get:
+      tags:
+        - userCredential
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: userCredential.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/userCredential'
+      deprecated: false
+  '/userCredentials/{id}/exists':
+    get:
+      tags:
+        - userCredential
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'userCredential.exists__get_userCredentials_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/userCredentials/{id}':
+    head:
+      tags:
+        - userCredential
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'userCredential.exists__head_userCredentials_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - userCredential
+      summary: Find a model instance by id from the data source.
+      operationId: userCredential.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+    delete:
+      tags:
+        - userCredential
+      summary: Delete a model instance by id from the data source.
+      operationId: userCredential.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - userCredential
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: userCredential.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/userCredential'
+        - name: id
+          in: path
+          description: UserCredential id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+  /userCredentials/findOne:
+    get:
+      tags:
+        - userCredential
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: userCredential.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
+  /userCredentials/update:
+    post:
+      tags:
+        - userCredential
+      summary: Update instances of the model matched by where from the data source.
+      operationId: userCredential.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/userCredential'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /userCredentials/count:
+    get:
+      tags:
+        - userCredential
+      summary: Count instances of the model matched by where from the data source.
+      operationId: userCredential.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /userCredentials/change-stream:
+    post:
+      tags:
+        - userCredential
+      summary: Create a change stream.
+      operationId: userCredential.createChangeStream__post_userCredentials_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - userCredential
+      summary: Create a change stream.
+      operationId: userCredential.createChangeStream__get_userCredentials_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
 definitions:
   x-any:
     properties: {}
@@ -3893,56 +5474,6 @@ definitions:
       - owner
       - title
     additionalProperties: false
-  UserIdentity:
-    properties:
-      provider:
-        type: string
-      authScheme:
-        type: string
-      externalId:
-        type: string
-      profile:
-        type: object
-      credentials:
-        type: object
-      created:
-        type: string
-        format: date
-      modified:
-        type: string
-        format: date
-      id:
-        type: number
-        format: double
-      userId:
-        type: number
-        format: double
-    additionalProperties: false
-  UserCredential:
-    properties:
-      provider:
-        type: string
-      authScheme:
-        type: string
-      externalId:
-        type: string
-      profile:
-        type: object
-      credentials:
-        type: object
-      created:
-        type: string
-        format: date
-      modified:
-        type: string
-        format: date
-      id:
-        type: number
-        format: double
-      userId:
-        type: number
-        format: double
-    additionalProperties: false
   User:
     properties:
       realm:
@@ -3970,6 +5501,56 @@ definitions:
         format: double
     required:
       - email
+    additionalProperties: false
+  UserCredential:
+    properties:
+      provider:
+        type: string
+      authScheme:
+        type: string
+      externalId:
+        type: string
+      profile:
+        type: object
+      credentials:
+        type: object
+      created:
+        type: string
+        format: date
+      modified:
+        type: string
+        format: date
+      id:
+        type: number
+        format: double
+      userId:
+        type: number
+        format: double
+    additionalProperties: false
+  UserIdentity:
+    properties:
+      provider:
+        type: string
+      authScheme:
+        type: string
+      externalId:
+        type: string
+      profile:
+        type: object
+      credentials:
+        type: object
+      created:
+        type: string
+        format: date
+      modified:
+        type: string
+        format: date
+      id:
+        type: number
+        format: double
+      userId:
+        type: number
+        format: double
     additionalProperties: false
   ApplicationCredential:
     properties:
@@ -4106,14 +5687,109 @@ definitions:
       id:
         type: string
     additionalProperties: false
+  userIdentity:
+    properties:
+      provider:
+        type: string
+      authScheme:
+        type: string
+      externalId:
+        type: string
+      profile:
+        type: object
+      credentials:
+        type: object
+      created:
+        type: string
+        format: date
+      modified:
+        type: string
+        format: date
+      id:
+        type: number
+        format: double
+      userId:
+        type: string
+    additionalProperties: false
+  accessToken:
+    properties:
+      id:
+        type: string
+      ttl:
+        default: 1209600
+        description: time to live in seconds (2 weeks by default)
+        type: number
+        format: double
+      created:
+        type: string
+        format: date
+      userId:
+        type: string
+    required:
+      - id
+    additionalProperties: false
+  userCredential:
+    properties:
+      provider:
+        type: string
+      authScheme:
+        type: string
+      externalId:
+        type: string
+      profile:
+        type: object
+      credentials:
+        type: object
+      created:
+        type: string
+        format: date
+      modified:
+        type: string
+        format: date
+      id:
+        type: number
+        format: double
+      userId:
+        type: string
+    additionalProperties: false
+  MyUser:
+    properties:
+      realm:
+        type: string
+      username:
+        type: string
+      credentials:
+        type: object
+      challenges:
+        type: object
+      email:
+        type: string
+      emailVerified:
+        type: boolean
+      status:
+        type: string
+      created:
+        type: string
+        format: date
+      lastUpdated:
+        type: string
+        format: date
+      id:
+        type: string
+    required:
+      - email
+    additionalProperties: false
 swagger: '2.0'
 info:
   x-ibm-name: granslive-web
   version: 1.0.0
   title: granslive-web
+  contact:
+    name: Gurvinder Singh
+    email: sinny777@gmail.com
+    url: 'http://www.granslive.com'
 schemes:
   - http
-  - https
 host: $(catalog.host)
 basePath: /api
 consumes:

@@ -16,7 +16,8 @@
     "bootstrap": "*",
     "cryptojslib" : "*",
     "querystring":"*",
-    "requirejs" : "*"
+    "requirejs" : "*",
+    "debug" : "*"
   },
   "private": true,
   "ignore": [

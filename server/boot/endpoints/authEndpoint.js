@@ -1,13 +1,12 @@
 module.exports = function(app) {
 	
 	app.get('/auth/account', function(req, res, next) {
-		console.log('IN auth/account: >>> ', req.user);
+		console.log('IN auth/account: >>> ');
 		console.log(req.accessToken);
 		
-		var User = app.models.User;
+		var MyUser = app.models.MyUser;
 		var UserIdentity = app.models.UserIdentity;
-		
-		User.findById(req.user.id, function(err, userObj){
+		MyUser.findById(req.accessToken.userId, function(err, userObj){
 			if (err) {
 		    	  console.log("\n\nERROR IN User.findById:>>>>>>>>>> ", err);
 		    	  next();
@@ -18,6 +17,12 @@ module.exports = function(app) {
 			res.locals.currentUser = userObj;
 			var loopbackContext = app.loopback.getCurrentContext();
 		    if (loopbackContext) loopbackContext.set('currentUser', userObj);
+		    
+		    var findReq = {filter: {where: {"userId": userObj.id}}};
+			UserIdentity.find(findReq, function(userIdentityObj){
+				console.log('userIdentityObj: >>> ', userIdentityObj);
+			});
+		    
 		});
 		
 		res.redirect('/#!/home');
