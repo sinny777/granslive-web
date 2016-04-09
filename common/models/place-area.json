@@ -7,36 +7,43 @@
     "validateUpsert": true
   },
   "properties": {
-    "title": {
-      "type": "string",
-      "required": true,
-      "index": true
+    "created": {
+      "type": "date"
     },
     "description": {
-      "type": "string"
-    },
-    "placeId": {
-      "type": "string",
-      "required": true,
-      "index": true
-    },
-    "type": {
       "type": "string"
     },
     "floor": {
       "type": "string",
       "required": true,
-      "index": true
+      "index": false
     },
-    "created": {
-      "type": "date"
+    "placeId": {
+      "type": "string",
+      "required": true,
+      "index": false
     },
-    "modified": {
-      "type": "date"
+    "title": {
+      "type": "string",
+      "required": true,
+      "index": false
+    },
+    "type": {
+      "type": "string"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "audit": {
+      "type": "embedsOne",
+      "model": "Audit",
+      "property": "audit",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    }
+  },
   "acls": [
     {
       "principalType": "ROLE",

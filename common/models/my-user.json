@@ -6,26 +6,22 @@
   "options": {
     "validateUpsert": true
   },
-  "hidden": [
-    "password",
-    "verificationToken"
-  ],
   "properties": {},
   "validations": [],
   "relations": {
     "accessTokens": {
       "type": "hasMany",
-      "model": "AccessToken",
+      "model": "accessToken",
       "foreignKey": "userId"
     },
     "identities": {
-      "type": "hasMany",
-      "model": "UserIdentity",
+      "type": "hasOne",
+      "model": "userIdentity",
       "foreignKey": "userId"
     },
     "credentials": {
       "type": "hasMany",
-      "model": "UserCredential",
+      "model": "userCredential",
       "foreignKey": "userId"
     },
     "roles": {
@@ -33,8 +29,82 @@
       "model": "Role",
       "foreignKey": "principalId",
       "through": "RoleMapping"
-    }
+    },
+    "audit": {
+	    "type": "embedsOne",
+	    "model": "Audit",
+	    "property": "audit",
+	    "options": {
+	      "validate": true,
+	      "forceId": false
+	    }
+	},
+	"groups": {
+	    "type": "hasMany",
+	    "model": "Group",
+	    "foreignKey": "memberId"
+	   }
   },
-  "acls": [ ],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "upsert"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "login"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "logout"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__get__identities"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "confirm"
+    }
+  ],
   "methods": {}
 }

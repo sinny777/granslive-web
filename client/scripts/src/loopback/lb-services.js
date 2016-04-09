@@ -28,1563 +28,6 @@ var module = angular.module("lbServices", ['ngResource']);
 
 /**
  * @ngdoc object
- * @name lbServices.User
- * @header lbServices.User
- * @object
- *
- * @description
- *
- * A $resource object for interacting with the `User` model.
- *
- * ## Example
- *
- * See
- * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
- * for an example of using this object.
- *
- */
-module.factory(
-  "User",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/Users/:id",
-      { 'id': '@id' },
-      {
-
-        // INTERNAL. Use User.accessTokens.findById() instead.
-        "prototype$__findById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/accessTokens/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.accessTokens.destroyById() instead.
-        "prototype$__destroyById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/accessTokens/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.accessTokens.updateById() instead.
-        "prototype$__updateById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/accessTokens/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use User.places.findById() instead.
-        "prototype$__findById__places": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/places/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.places.destroyById() instead.
-        "prototype$__destroyById__places": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/places/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.places.updateById() instead.
-        "prototype$__updateById__places": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/places/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use User.accessTokens() instead.
-        "prototype$__get__accessTokens": {
-          isArray: true,
-          url: urlBase + "/Users/:id/accessTokens",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.accessTokens.create() instead.
-        "prototype$__create__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens",
-          method: "POST"
-        },
-
-        // INTERNAL. Use User.accessTokens.destroyAll() instead.
-        "prototype$__delete__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.accessTokens.count() instead.
-        "prototype$__count__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens/count",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.places() instead.
-        "prototype$__get__places": {
-          isArray: true,
-          url: urlBase + "/Users/:id/places",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.places.create() instead.
-        "prototype$__create__places": {
-          url: urlBase + "/Users/:id/places",
-          method: "POST"
-        },
-
-        // INTERNAL. Use User.places.destroyAll() instead.
-        "prototype$__delete__places": {
-          url: urlBase + "/Users/:id/places",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.places.count() instead.
-        "prototype$__count__places": {
-          url: urlBase + "/Users/:id/places/count",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#create
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "create": {
-          url: urlBase + "/Users",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#createMany
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "createMany": {
-          isArray: true,
-          url: urlBase + "/Users",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#upsert
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/Users",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#exists
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Check whether a model instance exists in the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `exists` – `{boolean=}` - 
-         */
-        "exists": {
-          url: urlBase + "/Users/:id/exists",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#findById
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Find a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         *  - `filter` – `{object=}` - Filter defining fields and include
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "findById": {
-          url: urlBase + "/Users/:id",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#find
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Find all instances of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "find": {
-          isArray: true,
-          url: urlBase + "/Users",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#findOne
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Find first instance of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "findOne": {
-          url: urlBase + "/Users/findOne",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#updateAll
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        "updateAll": {
-          url: urlBase + "/Users/update",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#deleteById
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "deleteById": {
-          url: urlBase + "/Users/:id",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#count
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Count instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        "count": {
-          url: urlBase + "/Users/count",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#prototype$updateAttributes
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Update attributes for a model instance and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        "prototype$updateAttributes": {
-          url: urlBase + "/Users/:id",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#createChangeStream
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Create a change stream.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `options` – `{object=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `changes` – `{ReadableStream=}` - 
-         */
-        "createChangeStream": {
-          url: urlBase + "/Users/change-stream",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#login
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Login a user with username/email and password.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
-         *   Default value: `user`.
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The response body contains properties of the AccessToken created on login.
-         * Depending on the value of `include` parameter, the body may contain additional properties:
-         * 
-         *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         * 
-         *
-         */
-        "login": {
-          params: {
-            include: "user"
-          },
-          interceptor: {
-            response: function(response) {
-              var accessToken = response.data;
-              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-              LoopBackAuth.save();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Users/login",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#logout
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Logout a user with access token.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "logout": {
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.clearUser();
-              LoopBackAuth.clearStorage();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Users/logout",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#confirm
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Confirm a user registration with email verification token.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `uid` – `{string}` - 
-         *
-         *  - `token` – `{string}` - 
-         *
-         *  - `redirect` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "confirm": {
-          url: urlBase + "/Users/confirm",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#resetPassword
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Reset password for a user with email.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "resetPassword": {
-          url: urlBase + "/Users/reset",
-          method: "POST"
-        },
-
-        // INTERNAL. Use UserCredential.user() instead.
-        "::get::UserCredential::user": {
-          url: urlBase + "/UserCredentials/:id/user",
-          method: "GET"
-        },
-
-        // INTERNAL. Use UserIdentity.user() instead.
-        "::get::UserIdentity::user": {
-          url: urlBase + "/UserIdentities/:id/user",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#getCurrent
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Get data of the currently logged user. Fail with HTTP result 401
-         * when there is no user logged in.
-         *
-         * @param {function(Object,Object)=} successCb
-         *    Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *    `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         */
-        "getCurrent": {
-           url: urlBase + "/Users" + "/:id",
-           method: "GET",
-           params: {
-             id: function() {
-              var id = LoopBackAuth.currentUserId;
-              if (id == null) id = '__anonymous__';
-              return id;
-            },
-          },
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.currentUserData = response.data;
-              return response.resource;
-            }
-          },
-          __isGetCurrentUser__ : true
-        }
-      }
-    );
-
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#updateOrCreate
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        R["updateOrCreate"] = R["upsert"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#update
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        R["update"] = R["updateAll"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#destroyById
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        R["destroyById"] = R["deleteById"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#removeById
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
-         * </em>
-         */
-        R["removeById"] = R["deleteById"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#getCachedCurrent
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Get data of the currently logged user that was returned by the last
-         * call to {@link lbServices.User#login} or
-         * {@link lbServices.User#getCurrent}. Return null when there
-         * is no user logged in or the data of the current user were not fetched
-         * yet.
-         *
-         * @returns {Object} A User instance.
-         */
-        R.getCachedCurrent = function() {
-          var data = LoopBackAuth.currentUserData;
-          return data ? new R(data) : null;
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#isAuthenticated
-         * @methodOf lbServices.User
-         *
-         * @returns {boolean} True if the current user is authenticated (logged in).
-         */
-        R.isAuthenticated = function() {
-          return this.getCurrentId() != null;
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#getCurrentId
-         * @methodOf lbServices.User
-         *
-         * @returns {Object} Id of the currently logged-in user or null.
-         */
-        R.getCurrentId = function() {
-          return LoopBackAuth.currentUserId;
-        };
-
-    /**
-    * @ngdoc property
-    * @name lbServices.User#modelName
-    * @propertyOf lbServices.User
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `User`.
-    */
-    R.modelName = "User";
-
-    /**
-     * @ngdoc object
-     * @name lbServices.User.accessTokens
-     * @header lbServices.User.accessTokens
-     * @object
-     * @description
-     *
-     * The object `User.accessTokens` groups methods
-     * manipulating `AccessToken` instances related to `User`.
-     *
-     * Call {@link lbServices.User#accessTokens User.accessTokens()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#accessTokens
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Queries accessTokens of User.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::get::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.accessTokens#count
-         * @methodOf lbServices.User.accessTokens
-         *
-         * @description
-         *
-         * Counts accessTokens of User.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        R.accessTokens.count = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::count::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.accessTokens#create
-         * @methodOf lbServices.User.accessTokens
-         *
-         * @description
-         *
-         * Creates a new instance in accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.create = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::create::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.accessTokens#createMany
-         * @methodOf lbServices.User.accessTokens
-         *
-         * @description
-         *
-         * Creates a new instance in accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.createMany = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::createMany::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.accessTokens#destroyAll
-         * @methodOf lbServices.User.accessTokens
-         *
-         * @description
-         *
-         * Deletes all accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.accessTokens.destroyAll = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::delete::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.accessTokens#destroyById
-         * @methodOf lbServices.User.accessTokens
-         *
-         * @description
-         *
-         * Delete a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.accessTokens.destroyById = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::destroyById::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.accessTokens#findById
-         * @methodOf lbServices.User.accessTokens
-         *
-         * @description
-         *
-         * Find a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.findById = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::findById::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.accessTokens#updateById
-         * @methodOf lbServices.User.accessTokens
-         *
-         * @description
-         *
-         * Update a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.updateById = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::updateById::User::accessTokens"];
-          return action.apply(R, arguments);
-        };
-    /**
-     * @ngdoc object
-     * @name lbServices.User.places
-     * @header lbServices.User.places
-     * @object
-     * @description
-     *
-     * The object `User.places` groups methods
-     * manipulating `Place` instances related to `User`.
-     *
-     * Call {@link lbServices.User#places User.places()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User#places
-         * @methodOf lbServices.User
-         *
-         * @description
-         *
-         * Queries places of User.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Place` object.)
-         * </em>
-         */
-        R.places = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::get::User::places"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.places#count
-         * @methodOf lbServices.User.places
-         *
-         * @description
-         *
-         * Counts places of User.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        R.places.count = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::count::User::places"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.places#create
-         * @methodOf lbServices.User.places
-         *
-         * @description
-         *
-         * Creates a new instance in places of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Place` object.)
-         * </em>
-         */
-        R.places.create = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::create::User::places"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.places#createMany
-         * @methodOf lbServices.User.places
-         *
-         * @description
-         *
-         * Creates a new instance in places of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Place` object.)
-         * </em>
-         */
-        R.places.createMany = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::createMany::User::places"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.places#destroyAll
-         * @methodOf lbServices.User.places
-         *
-         * @description
-         *
-         * Deletes all places of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.places.destroyAll = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::delete::User::places"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.places#destroyById
-         * @methodOf lbServices.User.places
-         *
-         * @description
-         *
-         * Delete a related item by id for places.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for places
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.places.destroyById = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::destroyById::User::places"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.places#findById
-         * @methodOf lbServices.User.places
-         *
-         * @description
-         *
-         * Find a related item by id for places.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for places
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Place` object.)
-         * </em>
-         */
-        R.places.findById = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::findById::User::places"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.User.places#updateById
-         * @methodOf lbServices.User.places
-         *
-         * @description
-         *
-         * Update a related item by id for places.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for places
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Place` object.)
-         * </em>
-         */
-        R.places.updateById = function() {
-          var TargetResource = $injector.get("Place");
-          var action = TargetResource["::updateById::User::places"];
-          return action.apply(R, arguments);
-        };
-
-    return R;
-  }]);
-
-/**
- * @ngdoc object
  * @name lbServices.UserCredential
  * @header lbServices.UserCredential
  * @object
@@ -1604,13 +47,13 @@ module.factory(
   "UserCredential",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/UserCredentials/:id",
+      urlBase + "/userCredentials/:id",
       { 'id': '@id' },
       {
 
         // INTERNAL. Use UserCredential.user() instead.
         "prototype$__get__user": {
-          url: urlBase + "/UserCredentials/:id/user",
+          url: urlBase + "/userCredentials/:id/user",
           method: "GET"
         },
 
@@ -1648,7 +91,7 @@ module.factory(
          * </em>
          */
         "create": {
-          url: urlBase + "/UserCredentials",
+          url: urlBase + "/userCredentials",
           method: "POST"
         },
 
@@ -1687,7 +130,7 @@ module.factory(
          */
         "createMany": {
           isArray: true,
-          url: urlBase + "/UserCredentials",
+          url: urlBase + "/userCredentials",
           method: "POST"
         },
 
@@ -1725,7 +168,7 @@ module.factory(
          * </em>
          */
         "upsert": {
-          url: urlBase + "/UserCredentials",
+          url: urlBase + "/userCredentials",
           method: "PUT"
         },
 
@@ -1757,7 +200,7 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/UserCredentials/:id/exists",
+          url: urlBase + "/userCredentials/:id/exists",
           method: "GET"
         },
 
@@ -1792,7 +235,7 @@ module.factory(
          * </em>
          */
         "findById": {
-          url: urlBase + "/UserCredentials/:id",
+          url: urlBase + "/userCredentials/:id",
           method: "GET"
         },
 
@@ -1826,7 +269,7 @@ module.factory(
          */
         "find": {
           isArray: true,
-          url: urlBase + "/UserCredentials",
+          url: urlBase + "/userCredentials",
           method: "GET"
         },
 
@@ -1859,7 +302,7 @@ module.factory(
          * </em>
          */
         "findOne": {
-          url: urlBase + "/UserCredentials/findOne",
+          url: urlBase + "/userCredentials/findOne",
           method: "GET"
         },
 
@@ -1893,7 +336,7 @@ module.factory(
          * The number of instances updated
          */
         "updateAll": {
-          url: urlBase + "/UserCredentials/update",
+          url: urlBase + "/userCredentials/update",
           method: "POST"
         },
 
@@ -1926,7 +369,7 @@ module.factory(
          * </em>
          */
         "deleteById": {
-          url: urlBase + "/UserCredentials/:id",
+          url: urlBase + "/userCredentials/:id",
           method: "DELETE"
         },
 
@@ -1958,7 +401,7 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/UserCredentials/count",
+          url: urlBase + "/userCredentials/count",
           method: "GET"
         },
 
@@ -1973,7 +416,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - PersistedModel id
+         *  - `id` – `{*}` - UserCredential id
          *
          * @param {Object} postData Request data.
          *
@@ -1995,7 +438,7 @@ module.factory(
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/UserCredentials/:id",
+          url: urlBase + "/userCredentials/:id",
           method: "PUT"
         },
 
@@ -2032,7 +475,7 @@ module.factory(
          *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
-          url: urlBase + "/UserCredentials/change-stream",
+          url: urlBase + "/userCredentials/change-stream",
           method: "POST"
         },
 
@@ -2248,7 +691,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - PersistedModel id
+         *  - `id` – `{*}` - UserCredential id
          *
          *  - `refresh` – `{boolean=}` - 
          *
@@ -2264,12 +707,12 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
+         * This usually means the response is a `MyUser` object.)
          * </em>
          */
         R.user = function() {
-          var TargetResource = $injector.get("User");
-          var action = TargetResource["::get::UserCredential::user"];
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::get::userCredential::user"];
           return action.apply(R, arguments);
         };
 
@@ -2297,13 +740,13 @@ module.factory(
   "UserIdentity",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/UserIdentities/:id",
+      urlBase + "/userIdentities/:id",
       { 'id': '@id' },
       {
 
         // INTERNAL. Use UserIdentity.user() instead.
         "prototype$__get__user": {
-          url: urlBase + "/UserIdentities/:id/user",
+          url: urlBase + "/userIdentities/:id/user",
           method: "GET"
         },
 
@@ -2341,7 +784,7 @@ module.factory(
          * </em>
          */
         "create": {
-          url: urlBase + "/UserIdentities",
+          url: urlBase + "/userIdentities",
           method: "POST"
         },
 
@@ -2380,7 +823,7 @@ module.factory(
          */
         "createMany": {
           isArray: true,
-          url: urlBase + "/UserIdentities",
+          url: urlBase + "/userIdentities",
           method: "POST"
         },
 
@@ -2418,7 +861,7 @@ module.factory(
          * </em>
          */
         "upsert": {
-          url: urlBase + "/UserIdentities",
+          url: urlBase + "/userIdentities",
           method: "PUT"
         },
 
@@ -2450,7 +893,7 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/UserIdentities/:id/exists",
+          url: urlBase + "/userIdentities/:id/exists",
           method: "GET"
         },
 
@@ -2485,7 +928,7 @@ module.factory(
          * </em>
          */
         "findById": {
-          url: urlBase + "/UserIdentities/:id",
+          url: urlBase + "/userIdentities/:id",
           method: "GET"
         },
 
@@ -2519,7 +962,7 @@ module.factory(
          */
         "find": {
           isArray: true,
-          url: urlBase + "/UserIdentities",
+          url: urlBase + "/userIdentities",
           method: "GET"
         },
 
@@ -2552,7 +995,7 @@ module.factory(
          * </em>
          */
         "findOne": {
-          url: urlBase + "/UserIdentities/findOne",
+          url: urlBase + "/userIdentities/findOne",
           method: "GET"
         },
 
@@ -2586,7 +1029,7 @@ module.factory(
          * The number of instances updated
          */
         "updateAll": {
-          url: urlBase + "/UserIdentities/update",
+          url: urlBase + "/userIdentities/update",
           method: "POST"
         },
 
@@ -2619,7 +1062,7 @@ module.factory(
          * </em>
          */
         "deleteById": {
-          url: urlBase + "/UserIdentities/:id",
+          url: urlBase + "/userIdentities/:id",
           method: "DELETE"
         },
 
@@ -2651,7 +1094,7 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/UserIdentities/count",
+          url: urlBase + "/userIdentities/count",
           method: "GET"
         },
 
@@ -2666,7 +1109,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - PersistedModel id
+         *  - `id` – `{*}` - UserIdentity id
          *
          * @param {Object} postData Request data.
          *
@@ -2688,7 +1131,7 @@ module.factory(
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/UserIdentities/:id",
+          url: urlBase + "/userIdentities/:id",
           method: "PUT"
         },
 
@@ -2725,40 +1168,12 @@ module.factory(
          *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
-          url: urlBase + "/UserIdentities/change-stream",
+          url: urlBase + "/userIdentities/change-stream",
           method: "POST"
-        },
-
-        // INTERNAL. Use MyUser.identities.findById() instead.
-        "::findById::MyUser::identities": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/identities/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.identities.destroyById() instead.
-        "::destroyById::MyUser::identities": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/identities/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.identities.updateById() instead.
-        "::updateById::MyUser::identities": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/identities/:fk",
-          method: "PUT"
         },
 
         // INTERNAL. Use MyUser.identities() instead.
         "::get::MyUser::identities": {
-          isArray: true,
           url: urlBase + "/MyUsers/:id/identities",
           method: "GET"
         },
@@ -2776,16 +1191,16 @@ module.factory(
           method: "POST"
         },
 
-        // INTERNAL. Use MyUser.identities.destroyAll() instead.
-        "::delete::MyUser::identities": {
+        // INTERNAL. Use MyUser.identities.update() instead.
+        "::update::MyUser::identities": {
           url: urlBase + "/MyUsers/:id/identities",
-          method: "DELETE"
+          method: "PUT"
         },
 
-        // INTERNAL. Use MyUser.identities.count() instead.
-        "::count::MyUser::identities": {
-          url: urlBase + "/MyUsers/:id/identities/count",
-          method: "GET"
+        // INTERNAL. Use MyUser.identities.destroy() instead.
+        "::destroy::MyUser::identities": {
+          url: urlBase + "/MyUsers/:id/identities",
+          method: "DELETE"
         },
       }
     );
@@ -2941,7 +1356,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - PersistedModel id
+         *  - `id` – `{*}` - UserIdentity id
          *
          *  - `refresh` – `{boolean=}` - 
          *
@@ -2957,12 +1372,12 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `User` object.)
+         * This usually means the response is a `MyUser` object.)
          * </em>
          */
         R.user = function() {
-          var TargetResource = $injector.get("User");
-          var action = TargetResource["::get::UserIdentity::user"];
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::get::userIdentity::user"];
           return action.apply(R, arguments);
         };
 
@@ -2971,13 +1386,13 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name lbServices.ApplicationCredential
- * @header lbServices.ApplicationCredential
+ * @name lbServices.AccessToken
+ * @header lbServices.AccessToken
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `ApplicationCredential` model.
+ * A $resource object for interacting with the `AccessToken` model.
  *
  * ## Example
  *
@@ -2987,17 +1402,23 @@ module.factory(
  *
  */
 module.factory(
-  "ApplicationCredential",
+  "AccessToken",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/ApplicationCredentials/:id",
+      urlBase + "/accessTokens/:id",
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use AccessToken.user() instead.
+        "prototype$__get__user": {
+          url: urlBase + "/accessTokens/:id/user",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#create
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#create
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3024,18 +1445,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "create": {
-          url: urlBase + "/ApplicationCredentials",
+          url: urlBase + "/accessTokens",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#createMany
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#createMany
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3062,19 +1483,19 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "createMany": {
           isArray: true,
-          url: urlBase + "/ApplicationCredentials",
+          url: urlBase + "/accessTokens",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#upsert
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#upsert
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3101,18 +1522,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "upsert": {
-          url: urlBase + "/ApplicationCredentials",
+          url: urlBase + "/accessTokens",
           method: "PUT"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#exists
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#exists
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3137,14 +1558,14 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/ApplicationCredentials/:id/exists",
+          url: urlBase + "/accessTokens/:id/exists",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#findById
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#findById
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3168,18 +1589,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "findById": {
-          url: urlBase + "/ApplicationCredentials/:id",
+          url: urlBase + "/accessTokens/:id",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#find
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#find
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3201,19 +1622,19 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "find": {
           isArray: true,
-          url: urlBase + "/ApplicationCredentials",
+          url: urlBase + "/accessTokens",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#findOne
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#findOne
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3235,18 +1656,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "findOne": {
-          url: urlBase + "/ApplicationCredentials/findOne",
+          url: urlBase + "/accessTokens/findOne",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#updateAll
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#updateAll
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3273,14 +1694,14 @@ module.factory(
          * The number of instances updated
          */
         "updateAll": {
-          url: urlBase + "/ApplicationCredentials/update",
+          url: urlBase + "/accessTokens/update",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#deleteById
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#deleteById
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3302,18 +1723,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "deleteById": {
-          url: urlBase + "/ApplicationCredentials/:id",
+          url: urlBase + "/accessTokens/:id",
           method: "DELETE"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#count
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#count
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3338,14 +1759,14 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/ApplicationCredentials/count",
+          url: urlBase + "/accessTokens/count",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#prototype$updateAttributes
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#prototype$updateAttributes
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3353,7 +1774,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - PersistedModel id
+         *  - `id` – `{*}` - AccessToken id
          *
          * @param {Object} postData Request data.
          *
@@ -3371,18 +1792,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/ApplicationCredentials/:id",
+          url: urlBase + "/accessTokens/:id",
           method: "PUT"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#createChangeStream
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#createChangeStream
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3412,8 +1833,67 @@ module.factory(
          *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
-          url: urlBase + "/ApplicationCredentials/change-stream",
+          url: urlBase + "/accessTokens/change-stream",
           method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.findById() instead.
+        "::findById::MyUser::accessTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.destroyById() instead.
+        "::destroyById::MyUser::accessTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.updateById() instead.
+        "::updateById::MyUser::accessTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens() instead.
+        "::get::MyUser::accessTokens": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/accessTokens",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.create() instead.
+        "::create::MyUser::accessTokens": {
+          url: urlBase + "/MyUsers/:id/accessTokens",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.createMany() instead.
+        "::createMany::MyUser::accessTokens": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/accessTokens",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.destroyAll() instead.
+        "::delete::MyUser::accessTokens": {
+          url: urlBase + "/MyUsers/:id/accessTokens",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.count() instead.
+        "::count::MyUser::accessTokens": {
+          url: urlBase + "/MyUsers/:id/accessTokens/count",
+          method: "GET"
         },
       }
     );
@@ -3422,8 +1902,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#updateOrCreate
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#updateOrCreate
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3450,15 +1930,15 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         R["updateOrCreate"] = R["upsert"];
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#update
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#update
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3488,8 +1968,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#destroyById
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#destroyById
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3511,15 +1991,15 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         R["destroyById"] = R["deleteById"];
 
         /**
          * @ngdoc method
-         * @name lbServices.ApplicationCredential#removeById
-         * @methodOf lbServices.ApplicationCredential
+         * @name lbServices.AccessToken#removeById
+         * @methodOf lbServices.AccessToken
          *
          * @description
          *
@@ -3541,7 +2021,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `ApplicationCredential` object.)
+         * This usually means the response is a `AccessToken` object.)
          * </em>
          */
         R["removeById"] = R["deleteById"];
@@ -3549,14 +2029,50 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name lbServices.ApplicationCredential#modelName
-    * @propertyOf lbServices.ApplicationCredential
+    * @name lbServices.AccessToken#modelName
+    * @propertyOf lbServices.AccessToken
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `ApplicationCredential`.
+    * i.e. `AccessToken`.
     */
-    R.modelName = "ApplicationCredential";
+    R.modelName = "AccessToken";
 
+
+        /**
+         * @ngdoc method
+         * @name lbServices.AccessToken#user
+         * @methodOf lbServices.AccessToken
+         *
+         * @description
+         *
+         * Fetches belongsTo relation user.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - AccessToken id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.user = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::get::accessToken::user"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -5889,6 +4405,2840 @@ module.factory(
 
 /**
  * @ngdoc object
+ * @name lbServices.MyUser
+ * @header lbServices.MyUser
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `MyUser` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "MyUser",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/MyUsers/:id",
+      { 'id': '@id' },
+      {
+
+        // INTERNAL. Use MyUser.accessTokens.findById() instead.
+        "prototype$__findById__accessTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.destroyById() instead.
+        "prototype$__destroyById__accessTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.updateById() instead.
+        "prototype$__updateById__accessTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use MyUser.identities() instead.
+        "prototype$__get__identities": {
+          url: urlBase + "/MyUsers/:id/identities",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.identities.create() instead.
+        "prototype$__create__identities": {
+          url: urlBase + "/MyUsers/:id/identities",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.identities.update() instead.
+        "prototype$__update__identities": {
+          url: urlBase + "/MyUsers/:id/identities",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use MyUser.identities.destroy() instead.
+        "prototype$__destroy__identities": {
+          url: urlBase + "/MyUsers/:id/identities",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.credentials.findById() instead.
+        "prototype$__findById__credentials": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/credentials/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.credentials.destroyById() instead.
+        "prototype$__destroyById__credentials": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/credentials/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.credentials.updateById() instead.
+        "prototype$__updateById__credentials": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/credentials/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use MyUser.roles.findById() instead.
+        "prototype$__findById__roles": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/roles/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.roles.destroyById() instead.
+        "prototype$__destroyById__roles": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/roles/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.roles.updateById() instead.
+        "prototype$__updateById__roles": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/roles/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use MyUser.roles.link() instead.
+        "prototype$__link__roles": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/roles/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use MyUser.roles.unlink() instead.
+        "prototype$__unlink__roles": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/roles/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.roles.exists() instead.
+        "prototype$__exists__roles": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/roles/rel/:fk",
+          method: "HEAD"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#prototype$__get__audit
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Fetches hasOne relation audit.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "prototype$__get__audit": {
+          url: urlBase + "/MyUsers/:id/audit",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#prototype$__create__audit
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Creates a new instance in audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "prototype$__create__audit": {
+          url: urlBase + "/MyUsers/:id/audit",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#prototype$__update__audit
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Update audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "prototype$__update__audit": {
+          url: urlBase + "/MyUsers/:id/audit",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#prototype$__destroy__audit
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Deletes audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__destroy__audit": {
+          url: urlBase + "/MyUsers/:id/audit",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.groups.findById() instead.
+        "prototype$__findById__groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/groups/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.groups.destroyById() instead.
+        "prototype$__destroyById__groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/groups/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.groups.updateById() instead.
+        "prototype$__updateById__groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/groups/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens() instead.
+        "prototype$__get__accessTokens": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/accessTokens",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.create() instead.
+        "prototype$__create__accessTokens": {
+          url: urlBase + "/MyUsers/:id/accessTokens",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.destroyAll() instead.
+        "prototype$__delete__accessTokens": {
+          url: urlBase + "/MyUsers/:id/accessTokens",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.accessTokens.count() instead.
+        "prototype$__count__accessTokens": {
+          url: urlBase + "/MyUsers/:id/accessTokens/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.credentials() instead.
+        "prototype$__get__credentials": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/credentials",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.credentials.create() instead.
+        "prototype$__create__credentials": {
+          url: urlBase + "/MyUsers/:id/credentials",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.credentials.destroyAll() instead.
+        "prototype$__delete__credentials": {
+          url: urlBase + "/MyUsers/:id/credentials",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.credentials.count() instead.
+        "prototype$__count__credentials": {
+          url: urlBase + "/MyUsers/:id/credentials/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.roles() instead.
+        "prototype$__get__roles": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/roles",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.roles.create() instead.
+        "prototype$__create__roles": {
+          url: urlBase + "/MyUsers/:id/roles",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.roles.destroyAll() instead.
+        "prototype$__delete__roles": {
+          url: urlBase + "/MyUsers/:id/roles",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.roles.count() instead.
+        "prototype$__count__roles": {
+          url: urlBase + "/MyUsers/:id/roles/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.groups() instead.
+        "prototype$__get__groups": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/groups",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.groups.create() instead.
+        "prototype$__create__groups": {
+          url: urlBase + "/MyUsers/:id/groups",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.groups.destroyAll() instead.
+        "prototype$__delete__groups": {
+          url: urlBase + "/MyUsers/:id/groups",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.groups.count() instead.
+        "prototype$__count__groups": {
+          url: urlBase + "/MyUsers/:id/groups/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#create
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "create": {
+          url: urlBase + "/MyUsers",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#createMany
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "createMany": {
+          isArray: true,
+          url: urlBase + "/MyUsers",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#upsert
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "upsert": {
+          url: urlBase + "/MyUsers",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#exists
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Check whether a model instance exists in the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `exists` – `{boolean=}` - 
+         */
+        "exists": {
+          url: urlBase + "/MyUsers/:id/exists",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#findById
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Find a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         *  - `filter` – `{object=}` - Filter defining fields and include
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "findById": {
+          url: urlBase + "/MyUsers/:id",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#find
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/MyUsers",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#findOne
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Find first instance of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "findOne": {
+          url: urlBase + "/MyUsers/findOne",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#updateAll
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The number of instances updated
+         */
+        "updateAll": {
+          url: urlBase + "/MyUsers/update",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#deleteById
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "deleteById": {
+          url: urlBase + "/MyUsers/:id",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#count
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Count instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "count": {
+          url: urlBase + "/MyUsers/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#prototype$updateAttributes
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Update attributes for a model instance and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        "prototype$updateAttributes": {
+          url: urlBase + "/MyUsers/:id",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#createChangeStream
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Create a change stream.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `changes` – `{ReadableStream=}` - 
+         */
+        "createChangeStream": {
+          url: urlBase + "/MyUsers/change-stream",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#login
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Login a user with username/email and password.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
+         *   Default value: `user`.
+         *
+         *  - `rememberMe` - `boolean` - Whether the authentication credentials
+         *     should be remembered in localStorage across app/browser restarts.
+         *     Default: `true`.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The response body contains properties of the AccessToken created on login.
+         * Depending on the value of `include` parameter, the body may contain additional properties:
+         * 
+         *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
+         * 
+         *
+         */
+        "login": {
+          params: {
+            include: "user"
+          },
+          interceptor: {
+            response: function(response) {
+              var accessToken = response.data;
+              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
+              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
+              LoopBackAuth.save();
+              return response.resource;
+            }
+          },
+          url: urlBase + "/MyUsers/login",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#logout
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Logout a user with access token.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "logout": {
+          interceptor: {
+            response: function(response) {
+              LoopBackAuth.clearUser();
+              LoopBackAuth.clearStorage();
+              return response.resource;
+            }
+          },
+          url: urlBase + "/MyUsers/logout",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#confirm
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Confirm a user registration with email verification token.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `uid` – `{string}` - 
+         *
+         *  - `token` – `{string}` - 
+         *
+         *  - `redirect` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "confirm": {
+          url: urlBase + "/MyUsers/confirm",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#resetPassword
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Reset password for a user with email.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "resetPassword": {
+          url: urlBase + "/MyUsers/reset",
+          method: "POST"
+        },
+
+        // INTERNAL. Use UserCredential.user() instead.
+        "::get::userCredential::user": {
+          url: urlBase + "/userCredentials/:id/user",
+          method: "GET"
+        },
+
+        // INTERNAL. Use UserIdentity.user() instead.
+        "::get::userIdentity::user": {
+          url: urlBase + "/userIdentities/:id/user",
+          method: "GET"
+        },
+
+        // INTERNAL. Use AccessToken.user() instead.
+        "::get::accessToken::user": {
+          url: urlBase + "/accessTokens/:id/user",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Place.owner() instead.
+        "::get::Place::owner": {
+          url: urlBase + "/Places/:id/owner",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.owner() instead.
+        "::get::Group::owner": {
+          url: urlBase + "/Groups/:id/owner",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.members.findById() instead.
+        "::findById::Group::members": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/members/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.members.destroyById() instead.
+        "::destroyById::Group::members": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/members/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.members.updateById() instead.
+        "::updateById::Group::members": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/members/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Group.members() instead.
+        "::get::Group::members": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/members",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.members.create() instead.
+        "::create::Group::members": {
+          url: urlBase + "/Groups/:id/members",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Group.members.createMany() instead.
+        "::createMany::Group::members": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/members",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Group.members.destroyAll() instead.
+        "::delete::Group::members": {
+          url: urlBase + "/Groups/:id/members",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.members.count() instead.
+        "::count::Group::members": {
+          url: urlBase + "/Groups/:id/members/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#getCurrent
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Get data of the currently logged user. Fail with HTTP result 401
+         * when there is no user logged in.
+         *
+         * @param {function(Object,Object)=} successCb
+         *    Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *    `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         */
+        "getCurrent": {
+           url: urlBase + "/MyUsers" + "/:id",
+           method: "GET",
+           params: {
+             id: function() {
+              var id = LoopBackAuth.currentUserId;
+              if (id == null) id = '__anonymous__';
+              return id;
+            },
+          },
+          interceptor: {
+            response: function(response) {
+              LoopBackAuth.currentUserData = response.data;
+              return response.resource;
+            }
+          },
+          __isGetCurrentUser__ : true
+        }
+      }
+    );
+
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#updateOrCreate
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R["updateOrCreate"] = R["upsert"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#update
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The number of instances updated
+         */
+        R["update"] = R["updateAll"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#destroyById
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R["destroyById"] = R["deleteById"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#removeById
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R["removeById"] = R["deleteById"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#getCachedCurrent
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Get data of the currently logged user that was returned by the last
+         * call to {@link lbServices.MyUser#login} or
+         * {@link lbServices.MyUser#getCurrent}. Return null when there
+         * is no user logged in or the data of the current user were not fetched
+         * yet.
+         *
+         * @returns {Object} A MyUser instance.
+         */
+        R.getCachedCurrent = function() {
+          var data = LoopBackAuth.currentUserData;
+          return data ? new R(data) : null;
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#isAuthenticated
+         * @methodOf lbServices.MyUser
+         *
+         * @returns {boolean} True if the current user is authenticated (logged in).
+         */
+        R.isAuthenticated = function() {
+          return this.getCurrentId() != null;
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#getCurrentId
+         * @methodOf lbServices.MyUser
+         *
+         * @returns {Object} Id of the currently logged-in user or null.
+         */
+        R.getCurrentId = function() {
+          return LoopBackAuth.currentUserId;
+        };
+
+    /**
+    * @ngdoc property
+    * @name lbServices.MyUser#modelName
+    * @propertyOf lbServices.MyUser
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `MyUser`.
+    */
+    R.modelName = "MyUser";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.MyUser.accessTokens
+     * @header lbServices.MyUser.accessTokens
+     * @object
+     * @description
+     *
+     * The object `MyUser.accessTokens` groups methods
+     * manipulating `AccessToken` instances related to `MyUser`.
+     *
+     * Call {@link lbServices.MyUser#accessTokens MyUser.accessTokens()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#accessTokens
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Queries accessTokens of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `AccessToken` object.)
+         * </em>
+         */
+        R.accessTokens = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::get::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.accessTokens#count
+         * @methodOf lbServices.MyUser.accessTokens
+         *
+         * @description
+         *
+         * Counts accessTokens of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.accessTokens.count = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::count::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.accessTokens#create
+         * @methodOf lbServices.MyUser.accessTokens
+         *
+         * @description
+         *
+         * Creates a new instance in accessTokens of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `AccessToken` object.)
+         * </em>
+         */
+        R.accessTokens.create = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::create::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.accessTokens#createMany
+         * @methodOf lbServices.MyUser.accessTokens
+         *
+         * @description
+         *
+         * Creates a new instance in accessTokens of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `AccessToken` object.)
+         * </em>
+         */
+        R.accessTokens.createMany = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::createMany::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.accessTokens#destroyAll
+         * @methodOf lbServices.MyUser.accessTokens
+         *
+         * @description
+         *
+         * Deletes all accessTokens of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.accessTokens.destroyAll = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::delete::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.accessTokens#destroyById
+         * @methodOf lbServices.MyUser.accessTokens
+         *
+         * @description
+         *
+         * Delete a related item by id for accessTokens.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for accessTokens
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.accessTokens.destroyById = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::destroyById::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.accessTokens#findById
+         * @methodOf lbServices.MyUser.accessTokens
+         *
+         * @description
+         *
+         * Find a related item by id for accessTokens.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for accessTokens
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `AccessToken` object.)
+         * </em>
+         */
+        R.accessTokens.findById = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::findById::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.accessTokens#updateById
+         * @methodOf lbServices.MyUser.accessTokens
+         *
+         * @description
+         *
+         * Update a related item by id for accessTokens.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for accessTokens
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `AccessToken` object.)
+         * </em>
+         */
+        R.accessTokens.updateById = function() {
+          var TargetResource = $injector.get("AccessToken");
+          var action = TargetResource["::updateById::MyUser::accessTokens"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.MyUser.identities
+     * @header lbServices.MyUser.identities
+     * @object
+     * @description
+     *
+     * The object `MyUser.identities` groups methods
+     * manipulating `UserIdentity` instances related to `MyUser`.
+     *
+     * Call {@link lbServices.MyUser#identities MyUser.identities()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#identities
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Fetches hasOne relation identities.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserIdentity` object.)
+         * </em>
+         */
+        R.identities = function() {
+          var TargetResource = $injector.get("UserIdentity");
+          var action = TargetResource["::get::MyUser::identities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.identities#create
+         * @methodOf lbServices.MyUser.identities
+         *
+         * @description
+         *
+         * Creates a new instance in identities of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserIdentity` object.)
+         * </em>
+         */
+        R.identities.create = function() {
+          var TargetResource = $injector.get("UserIdentity");
+          var action = TargetResource["::create::MyUser::identities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.identities#createMany
+         * @methodOf lbServices.MyUser.identities
+         *
+         * @description
+         *
+         * Creates a new instance in identities of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserIdentity` object.)
+         * </em>
+         */
+        R.identities.createMany = function() {
+          var TargetResource = $injector.get("UserIdentity");
+          var action = TargetResource["::createMany::MyUser::identities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.identities#destroy
+         * @methodOf lbServices.MyUser.identities
+         *
+         * @description
+         *
+         * Deletes identities of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.identities.destroy = function() {
+          var TargetResource = $injector.get("UserIdentity");
+          var action = TargetResource["::destroy::MyUser::identities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.identities#update
+         * @methodOf lbServices.MyUser.identities
+         *
+         * @description
+         *
+         * Update identities of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserIdentity` object.)
+         * </em>
+         */
+        R.identities.update = function() {
+          var TargetResource = $injector.get("UserIdentity");
+          var action = TargetResource["::update::MyUser::identities"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.MyUser.credentials
+     * @header lbServices.MyUser.credentials
+     * @object
+     * @description
+     *
+     * The object `MyUser.credentials` groups methods
+     * manipulating `UserCredential` instances related to `MyUser`.
+     *
+     * Call {@link lbServices.MyUser#credentials MyUser.credentials()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#credentials
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Queries credentials of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserCredential` object.)
+         * </em>
+         */
+        R.credentials = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::get::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.credentials#count
+         * @methodOf lbServices.MyUser.credentials
+         *
+         * @description
+         *
+         * Counts credentials of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.credentials.count = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::count::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.credentials#create
+         * @methodOf lbServices.MyUser.credentials
+         *
+         * @description
+         *
+         * Creates a new instance in credentials of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserCredential` object.)
+         * </em>
+         */
+        R.credentials.create = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::create::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.credentials#createMany
+         * @methodOf lbServices.MyUser.credentials
+         *
+         * @description
+         *
+         * Creates a new instance in credentials of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserCredential` object.)
+         * </em>
+         */
+        R.credentials.createMany = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::createMany::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.credentials#destroyAll
+         * @methodOf lbServices.MyUser.credentials
+         *
+         * @description
+         *
+         * Deletes all credentials of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.credentials.destroyAll = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::delete::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.credentials#destroyById
+         * @methodOf lbServices.MyUser.credentials
+         *
+         * @description
+         *
+         * Delete a related item by id for credentials.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for credentials
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.credentials.destroyById = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::destroyById::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.credentials#findById
+         * @methodOf lbServices.MyUser.credentials
+         *
+         * @description
+         *
+         * Find a related item by id for credentials.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for credentials
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserCredential` object.)
+         * </em>
+         */
+        R.credentials.findById = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::findById::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.credentials#updateById
+         * @methodOf lbServices.MyUser.credentials
+         *
+         * @description
+         *
+         * Update a related item by id for credentials.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for credentials
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `UserCredential` object.)
+         * </em>
+         */
+        R.credentials.updateById = function() {
+          var TargetResource = $injector.get("UserCredential");
+          var action = TargetResource["::updateById::MyUser::credentials"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.MyUser.roles
+     * @header lbServices.MyUser.roles
+     * @object
+     * @description
+     *
+     * The object `MyUser.roles` groups methods
+     * manipulating `Role` instances related to `MyUser`.
+     *
+     * Call {@link lbServices.MyUser#roles MyUser.roles()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#roles
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Queries roles of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Role` object.)
+         * </em>
+         */
+        R.roles = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::get::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#count
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Counts roles of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.roles.count = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::count::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#create
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Creates a new instance in roles of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Role` object.)
+         * </em>
+         */
+        R.roles.create = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::create::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#createMany
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Creates a new instance in roles of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Role` object.)
+         * </em>
+         */
+        R.roles.createMany = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::createMany::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#destroyAll
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Deletes all roles of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.roles.destroyAll = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::delete::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#destroyById
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Delete a related item by id for roles.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for roles
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.roles.destroyById = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::destroyById::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#exists
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Check the existence of roles relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for roles
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Role` object.)
+         * </em>
+         */
+        R.roles.exists = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::exists::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#findById
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Find a related item by id for roles.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for roles
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Role` object.)
+         * </em>
+         */
+        R.roles.findById = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::findById::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#link
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Add a related item by id for roles.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for roles
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Role` object.)
+         * </em>
+         */
+        R.roles.link = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::link::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#unlink
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Remove the roles relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for roles
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.roles.unlink = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::unlink::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.roles#updateById
+         * @methodOf lbServices.MyUser.roles
+         *
+         * @description
+         *
+         * Update a related item by id for roles.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for roles
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Role` object.)
+         * </em>
+         */
+        R.roles.updateById = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::updateById::MyUser::roles"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.MyUser.groups
+     * @header lbServices.MyUser.groups
+     * @object
+     * @description
+     *
+     * The object `MyUser.groups` groups methods
+     * manipulating `Group` instances related to `MyUser`.
+     *
+     * Call {@link lbServices.MyUser#groups MyUser.groups()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#groups
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * Queries groups of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::get::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.groups#count
+         * @methodOf lbServices.MyUser.groups
+         *
+         * @description
+         *
+         * Counts groups of MyUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.groups.count = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::count::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.groups#create
+         * @methodOf lbServices.MyUser.groups
+         *
+         * @description
+         *
+         * Creates a new instance in groups of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.create = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::create::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.groups#createMany
+         * @methodOf lbServices.MyUser.groups
+         *
+         * @description
+         *
+         * Creates a new instance in groups of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.createMany = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::createMany::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.groups#destroyAll
+         * @methodOf lbServices.MyUser.groups
+         *
+         * @description
+         *
+         * Deletes all groups of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.groups.destroyAll = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::delete::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.groups#destroyById
+         * @methodOf lbServices.MyUser.groups
+         *
+         * @description
+         *
+         * Delete a related item by id for groups.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for groups
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.groups.destroyById = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::destroyById::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.groups#findById
+         * @methodOf lbServices.MyUser.groups
+         *
+         * @description
+         *
+         * Find a related item by id for groups.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for groups
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.findById = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::findById::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser.groups#updateById
+         * @methodOf lbServices.MyUser.groups
+         *
+         * @description
+         *
+         * Update a related item by id for groups.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for groups
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.updateById = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::updateById::MyUser::groups"];
+          return action.apply(R, arguments);
+        };
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
  * @name lbServices.Place
  * @header lbServices.Place
  * @object
@@ -5911,6 +7261,203 @@ module.factory(
       urlBase + "/Places/:id",
       { 'id': '@id' },
       {
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place#prototype$__get__audit
+         * @methodOf lbServices.Place
+         *
+         * @description
+         *
+         * Fetches hasOne relation audit.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Place` object.)
+         * </em>
+         */
+        "prototype$__get__audit": {
+          url: urlBase + "/Places/:id/audit",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place#prototype$__create__audit
+         * @methodOf lbServices.Place
+         *
+         * @description
+         *
+         * Creates a new instance in audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Place` object.)
+         * </em>
+         */
+        "prototype$__create__audit": {
+          url: urlBase + "/Places/:id/audit",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place#prototype$__update__audit
+         * @methodOf lbServices.Place
+         *
+         * @description
+         *
+         * Update audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Place` object.)
+         * </em>
+         */
+        "prototype$__update__audit": {
+          url: urlBase + "/Places/:id/audit",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place#prototype$__destroy__audit
+         * @methodOf lbServices.Place
+         *
+         * @description
+         *
+         * Deletes audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__destroy__audit": {
+          url: urlBase + "/Places/:id/audit",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Place.owner() instead.
+        "prototype$__get__owner": {
+          url: urlBase + "/Places/:id/owner",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Place.groups.findById() instead.
+        "prototype$__findById__groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Places/:id/groups/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Place.groups.destroyById() instead.
+        "prototype$__destroyById__groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Places/:id/groups/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Place.groups.updateById() instead.
+        "prototype$__updateById__groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Places/:id/groups/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Place.groups() instead.
+        "prototype$__get__groups": {
+          isArray: true,
+          url: urlBase + "/Places/:id/groups",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Place.groups.create() instead.
+        "prototype$__create__groups": {
+          url: urlBase + "/Places/:id/groups",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Place.groups.destroyAll() instead.
+        "prototype$__delete__groups": {
+          url: urlBase + "/Places/:id/groups",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Place.groups.count() instead.
+        "prototype$__count__groups": {
+          url: urlBase + "/Places/:id/groups/count",
+          method: "GET"
+        },
 
         /**
          * @ngdoc method
@@ -6333,65 +7880,6 @@ module.factory(
           url: urlBase + "/Places/change-stream",
           method: "POST"
         },
-
-        // INTERNAL. Use User.places.findById() instead.
-        "::findById::User::places": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/places/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.places.destroyById() instead.
-        "::destroyById::User::places": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/places/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.places.updateById() instead.
-        "::updateById::User::places": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/places/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use User.places() instead.
-        "::get::User::places": {
-          isArray: true,
-          url: urlBase + "/Users/:id/places",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.places.create() instead.
-        "::create::User::places": {
-          url: urlBase + "/Users/:id/places",
-          method: "POST"
-        },
-
-        // INTERNAL. Use User.places.createMany() instead.
-        "::createMany::User::places": {
-          isArray: true,
-          url: urlBase + "/Users/:id/places",
-          method: "POST"
-        },
-
-        // INTERNAL. Use User.places.destroyAll() instead.
-        "::delete::User::places": {
-          url: urlBase + "/Users/:id/places",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.places.count() instead.
-        "::count::User::places": {
-          url: urlBase + "/Users/:id/places/count",
-          method: "GET"
-        },
       }
     );
 
@@ -6535,6 +8023,343 @@ module.factory(
     R.modelName = "Place";
 
 
+        /**
+         * @ngdoc method
+         * @name lbServices.Place#owner
+         * @methodOf lbServices.Place
+         *
+         * @description
+         *
+         * Fetches belongsTo relation owner.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.owner = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::get::Place::owner"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Place.groups
+     * @header lbServices.Place.groups
+     * @object
+     * @description
+     *
+     * The object `Place.groups` groups methods
+     * manipulating `Group` instances related to `Place`.
+     *
+     * Call {@link lbServices.Place#groups Place.groups()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place#groups
+         * @methodOf lbServices.Place
+         *
+         * @description
+         *
+         * Queries groups of Place.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::get::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place.groups#count
+         * @methodOf lbServices.Place.groups
+         *
+         * @description
+         *
+         * Counts groups of Place.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.groups.count = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::count::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place.groups#create
+         * @methodOf lbServices.Place.groups
+         *
+         * @description
+         *
+         * Creates a new instance in groups of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.create = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::create::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place.groups#createMany
+         * @methodOf lbServices.Place.groups
+         *
+         * @description
+         *
+         * Creates a new instance in groups of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.createMany = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::createMany::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place.groups#destroyAll
+         * @methodOf lbServices.Place.groups
+         *
+         * @description
+         *
+         * Deletes all groups of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.groups.destroyAll = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::delete::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place.groups#destroyById
+         * @methodOf lbServices.Place.groups
+         *
+         * @description
+         *
+         * Delete a related item by id for groups.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for groups
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.groups.destroyById = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::destroyById::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place.groups#findById
+         * @methodOf lbServices.Place.groups
+         *
+         * @description
+         *
+         * Find a related item by id for groups.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for groups
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.findById = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::findById::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Place.groups#updateById
+         * @methodOf lbServices.Place.groups
+         *
+         * @description
+         *
+         * Update a related item by id for groups.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for groups
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        R.groups.updateById = function() {
+          var TargetResource = $injector.get("Group");
+          var action = TargetResource["::updateById::Place::groups"];
+          return action.apply(R, arguments);
+        };
+
     return R;
   }]);
 
@@ -6562,6 +8387,145 @@ module.factory(
       urlBase + "/PlaceAreas/:id",
       { 'id': '@id' },
       {
+
+        /**
+         * @ngdoc method
+         * @name lbServices.PlaceArea#prototype$__get__audit
+         * @methodOf lbServices.PlaceArea
+         *
+         * @description
+         *
+         * Fetches hasOne relation audit.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PlaceArea` object.)
+         * </em>
+         */
+        "prototype$__get__audit": {
+          url: urlBase + "/PlaceAreas/:id/audit",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.PlaceArea#prototype$__create__audit
+         * @methodOf lbServices.PlaceArea
+         *
+         * @description
+         *
+         * Creates a new instance in audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PlaceArea` object.)
+         * </em>
+         */
+        "prototype$__create__audit": {
+          url: urlBase + "/PlaceAreas/:id/audit",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.PlaceArea#prototype$__update__audit
+         * @methodOf lbServices.PlaceArea
+         *
+         * @description
+         *
+         * Update audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PlaceArea` object.)
+         * </em>
+         */
+        "prototype$__update__audit": {
+          url: urlBase + "/PlaceAreas/:id/audit",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.PlaceArea#prototype$__destroy__audit
+         * @methodOf lbServices.PlaceArea
+         *
+         * @description
+         *
+         * Deletes audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__destroy__audit": {
+          url: urlBase + "/PlaceAreas/:id/audit",
+          method: "DELETE"
+        },
 
         /**
          * @ngdoc method
@@ -7157,6 +9121,145 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name lbServices.Board#prototype$__get__audit
+         * @methodOf lbServices.Board
+         *
+         * @description
+         *
+         * Fetches hasOne relation audit.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Board` object.)
+         * </em>
+         */
+        "prototype$__get__audit": {
+          url: urlBase + "/Boards/:id/audit",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Board#prototype$__create__audit
+         * @methodOf lbServices.Board
+         *
+         * @description
+         *
+         * Creates a new instance in audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Board` object.)
+         * </em>
+         */
+        "prototype$__create__audit": {
+          url: urlBase + "/Boards/:id/audit",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Board#prototype$__update__audit
+         * @methodOf lbServices.Board
+         *
+         * @description
+         *
+         * Update audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Board` object.)
+         * </em>
+         */
+        "prototype$__update__audit": {
+          url: urlBase + "/Boards/:id/audit",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Board#prototype$__destroy__audit
+         * @methodOf lbServices.Board
+         *
+         * @description
+         *
+         * Deletes audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__destroy__audit": {
+          url: urlBase + "/Boards/:id/audit",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
          * @name lbServices.Board#create
          * @methodOf lbServices.Board
          *
@@ -7749,6 +9852,145 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name lbServices.Device#prototype$__get__audit
+         * @methodOf lbServices.Device
+         *
+         * @description
+         *
+         * Fetches hasOne relation audit.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Device` object.)
+         * </em>
+         */
+        "prototype$__get__audit": {
+          url: urlBase + "/Devices/:id/audit",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Device#prototype$__create__audit
+         * @methodOf lbServices.Device
+         *
+         * @description
+         *
+         * Creates a new instance in audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Device` object.)
+         * </em>
+         */
+        "prototype$__create__audit": {
+          url: urlBase + "/Devices/:id/audit",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Device#prototype$__update__audit
+         * @methodOf lbServices.Device
+         *
+         * @description
+         *
+         * Update audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Device` object.)
+         * </em>
+         */
+        "prototype$__update__audit": {
+          url: urlBase + "/Devices/:id/audit",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Device#prototype$__destroy__audit
+         * @methodOf lbServices.Device
+         *
+         * @description
+         *
+         * Deletes audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__destroy__audit": {
+          url: urlBase + "/Devices/:id/audit",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
          * @name lbServices.Device#create
          * @methodOf lbServices.Device
          *
@@ -8316,13 +10558,13 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name lbServices.MyUser
- * @header lbServices.MyUser
+ * @name lbServices.Group
+ * @header lbServices.Group
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `MyUser` model.
+ * A $resource object for interacting with the `Group` model.
  *
  * ## Example
  *
@@ -8332,252 +10574,214 @@ module.factory(
  *
  */
 module.factory(
-  "MyUser",
+  "Group",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/MyUsers/:id",
+      urlBase + "/Groups/:id",
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use MyUser.roles.findById() instead.
-        "prototype$__findById__roles": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/roles/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.roles.destroyById() instead.
-        "prototype$__destroyById__roles": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/roles/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.roles.updateById() instead.
-        "prototype$__updateById__roles": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/roles/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use MyUser.roles.link() instead.
-        "prototype$__link__roles": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/roles/rel/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use MyUser.roles.unlink() instead.
-        "prototype$__unlink__roles": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/roles/rel/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.roles.exists() instead.
-        "prototype$__exists__roles": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/roles/rel/:fk",
-          method: "HEAD"
-        },
-
-        // INTERNAL. Use MyUser.identities.findById() instead.
-        "prototype$__findById__identities": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/identities/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.identities.destroyById() instead.
-        "prototype$__destroyById__identities": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/identities/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.identities.updateById() instead.
-        "prototype$__updateById__identities": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/identities/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.findById() instead.
-        "prototype$__findById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.destroyById() instead.
-        "prototype$__destroyById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.updateById() instead.
-        "prototype$__updateById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use MyUser.credentials.findById() instead.
-        "prototype$__findById__credentials": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/credentials/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.credentials.destroyById() instead.
-        "prototype$__destroyById__credentials": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/credentials/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.credentials.updateById() instead.
-        "prototype$__updateById__credentials": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/credentials/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use MyUser.roles() instead.
-        "prototype$__get__roles": {
-          isArray: true,
-          url: urlBase + "/MyUsers/:id/roles",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.roles.create() instead.
-        "prototype$__create__roles": {
-          url: urlBase + "/MyUsers/:id/roles",
-          method: "POST"
-        },
-
-        // INTERNAL. Use MyUser.roles.destroyAll() instead.
-        "prototype$__delete__roles": {
-          url: urlBase + "/MyUsers/:id/roles",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.roles.count() instead.
-        "prototype$__count__roles": {
-          url: urlBase + "/MyUsers/:id/roles/count",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.identities() instead.
-        "prototype$__get__identities": {
-          isArray: true,
-          url: urlBase + "/MyUsers/:id/identities",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.identities.create() instead.
-        "prototype$__create__identities": {
-          url: urlBase + "/MyUsers/:id/identities",
-          method: "POST"
-        },
-
-        // INTERNAL. Use MyUser.identities.destroyAll() instead.
-        "prototype$__delete__identities": {
-          url: urlBase + "/MyUsers/:id/identities",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.identities.count() instead.
-        "prototype$__count__identities": {
-          url: urlBase + "/MyUsers/:id/identities/count",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens() instead.
-        "prototype$__get__accessTokens": {
-          isArray: true,
-          url: urlBase + "/MyUsers/:id/accessTokens",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.create() instead.
-        "prototype$__create__accessTokens": {
-          url: urlBase + "/MyUsers/:id/accessTokens",
-          method: "POST"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.destroyAll() instead.
-        "prototype$__delete__accessTokens": {
-          url: urlBase + "/MyUsers/:id/accessTokens",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.count() instead.
-        "prototype$__count__accessTokens": {
-          url: urlBase + "/MyUsers/:id/accessTokens/count",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.credentials() instead.
-        "prototype$__get__credentials": {
-          isArray: true,
-          url: urlBase + "/MyUsers/:id/credentials",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.credentials.create() instead.
-        "prototype$__create__credentials": {
-          url: urlBase + "/MyUsers/:id/credentials",
-          method: "POST"
-        },
-
-        // INTERNAL. Use MyUser.credentials.destroyAll() instead.
-        "prototype$__delete__credentials": {
-          url: urlBase + "/MyUsers/:id/credentials",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.credentials.count() instead.
-        "prototype$__count__credentials": {
-          url: urlBase + "/MyUsers/:id/credentials/count",
+        /**
+         * @ngdoc method
+         * @name lbServices.Group#prototype$__get__audit
+         * @methodOf lbServices.Group
+         *
+         * @description
+         *
+         * Fetches hasOne relation audit.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$__get__audit": {
+          url: urlBase + "/Groups/:id/audit",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#create
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#prototype$__create__audit
+         * @methodOf lbServices.Group
+         *
+         * @description
+         *
+         * Creates a new instance in audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$__create__audit": {
+          url: urlBase + "/Groups/:id/audit",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group#prototype$__update__audit
+         * @methodOf lbServices.Group
+         *
+         * @description
+         *
+         * Update audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$__update__audit": {
+          url: urlBase + "/Groups/:id/audit",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group#prototype$__destroy__audit
+         * @methodOf lbServices.Group
+         *
+         * @description
+         *
+         * Deletes audit of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__destroy__audit": {
+          url: urlBase + "/Groups/:id/audit",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.owner() instead.
+        "prototype$__get__owner": {
+          url: urlBase + "/Groups/:id/owner",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.members.findById() instead.
+        "prototype$__findById__members": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/members/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.members.destroyById() instead.
+        "prototype$__destroyById__members": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/members/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.members.updateById() instead.
+        "prototype$__updateById__members": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Groups/:id/members/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Group.members() instead.
+        "prototype$__get__members": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/members",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Group.members.create() instead.
+        "prototype$__create__members": {
+          url: urlBase + "/Groups/:id/members",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Group.members.destroyAll() instead.
+        "prototype$__delete__members": {
+          url: urlBase + "/Groups/:id/members",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Group.members.count() instead.
+        "prototype$__count__members": {
+          url: urlBase + "/Groups/:id/members/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group#create
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8604,18 +10808,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "create": {
-          url: urlBase + "/MyUsers",
+          url: urlBase + "/Groups",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#createMany
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#createMany
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8642,19 +10846,19 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "createMany": {
           isArray: true,
-          url: urlBase + "/MyUsers",
+          url: urlBase + "/Groups",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#upsert
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#upsert
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8681,18 +10885,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "upsert": {
-          url: urlBase + "/MyUsers",
+          url: urlBase + "/Groups",
           method: "PUT"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#exists
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#exists
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8717,14 +10921,14 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/MyUsers/:id/exists",
+          url: urlBase + "/Groups/:id/exists",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#findById
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#findById
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8748,18 +10952,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "findById": {
-          url: urlBase + "/MyUsers/:id",
+          url: urlBase + "/Groups/:id",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#find
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#find
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8781,19 +10985,19 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "find": {
           isArray: true,
-          url: urlBase + "/MyUsers",
+          url: urlBase + "/Groups",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#findOne
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#findOne
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8815,18 +11019,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "findOne": {
-          url: urlBase + "/MyUsers/findOne",
+          url: urlBase + "/Groups/findOne",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#updateAll
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#updateAll
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8853,14 +11057,14 @@ module.factory(
          * The number of instances updated
          */
         "updateAll": {
-          url: urlBase + "/MyUsers/update",
+          url: urlBase + "/Groups/update",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#deleteById
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#deleteById
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8882,18 +11086,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "deleteById": {
-          url: urlBase + "/MyUsers/:id",
+          url: urlBase + "/Groups/:id",
           method: "DELETE"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#count
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#count
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8918,14 +11122,14 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/MyUsers/count",
+          url: urlBase + "/Groups/count",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#prototype$updateAttributes
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#prototype$updateAttributes
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8933,7 +11137,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - User id
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -8951,18 +11155,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/MyUsers/:id",
+          url: urlBase + "/Groups/:id",
           method: "PUT"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.MyUser#createChangeStream
-         * @methodOf lbServices.MyUser
+         * @name lbServices.Group#createChangeStream
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -8992,2184 +11196,126 @@ module.factory(
          *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
-          url: urlBase + "/MyUsers/change-stream",
+          url: urlBase + "/Groups/change-stream",
           method: "POST"
         },
 
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#login
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Login a user with username/email and password.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
-         *   Default value: `user`.
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The response body contains properties of the AccessToken created on login.
-         * Depending on the value of `include` parameter, the body may contain additional properties:
-         * 
-         *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         * 
-         *
-         */
-        "login": {
+        // INTERNAL. Use MyUser.groups.findById() instead.
+        "::findById::MyUser::groups": {
           params: {
-            include: "user"
+          'fk': '@fk'
           },
-          interceptor: {
-            response: function(response) {
-              var accessToken = response.data;
-              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-              LoopBackAuth.save();
-              return response.resource;
-            }
+          url: urlBase + "/MyUsers/:id/groups/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.groups.destroyById() instead.
+        "::destroyById::MyUser::groups": {
+          params: {
+          'fk': '@fk'
           },
-          url: urlBase + "/MyUsers/login",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#logout
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Logout a user with access token.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "logout": {
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.clearUser();
-              LoopBackAuth.clearStorage();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/MyUsers/logout",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#confirm
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Confirm a user registration with email verification token.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `uid` – `{string}` - 
-         *
-         *  - `token` – `{string}` - 
-         *
-         *  - `redirect` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "confirm": {
-          url: urlBase + "/MyUsers/confirm",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#resetPassword
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Reset password for a user with email.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "resetPassword": {
-          url: urlBase + "/MyUsers/reset",
-          method: "POST"
-        },
-
-        // INTERNAL. Use UserIdentity.user() instead.
-        "::get::userIdentity::user": {
-          url: urlBase + "/userIdentities/:id/user",
-          method: "GET"
-        },
-
-        // INTERNAL. Use AccessToken.user() instead.
-        "::get::accessToken::user": {
-          url: urlBase + "/accessTokens/:id/user",
-          method: "GET"
-        },
-
-        // INTERNAL. Use UserCredential.user() instead.
-        "::get::userCredential::user": {
-          url: urlBase + "/userCredentials/:id/user",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#getCurrent
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Get data of the currently logged user. Fail with HTTP result 401
-         * when there is no user logged in.
-         *
-         * @param {function(Object,Object)=} successCb
-         *    Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *    `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         */
-        "getCurrent": {
-           url: urlBase + "/MyUsers" + "/:id",
-           method: "GET",
-           params: {
-             id: function() {
-              var id = LoopBackAuth.currentUserId;
-              if (id == null) id = '__anonymous__';
-              return id;
-            },
-          },
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.currentUserData = response.data;
-              return response.resource;
-            }
-          },
-          __isGetCurrentUser__ : true
-        }
-      }
-    );
-
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#updateOrCreate
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
-         * </em>
-         */
-        R["updateOrCreate"] = R["upsert"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#update
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        R["update"] = R["updateAll"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#destroyById
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
-         * </em>
-         */
-        R["destroyById"] = R["deleteById"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#removeById
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
-         * </em>
-         */
-        R["removeById"] = R["deleteById"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#getCachedCurrent
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Get data of the currently logged user that was returned by the last
-         * call to {@link lbServices.MyUser#login} or
-         * {@link lbServices.MyUser#getCurrent}. Return null when there
-         * is no user logged in or the data of the current user were not fetched
-         * yet.
-         *
-         * @returns {Object} A MyUser instance.
-         */
-        R.getCachedCurrent = function() {
-          var data = LoopBackAuth.currentUserData;
-          return data ? new R(data) : null;
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#isAuthenticated
-         * @methodOf lbServices.MyUser
-         *
-         * @returns {boolean} True if the current user is authenticated (logged in).
-         */
-        R.isAuthenticated = function() {
-          return this.getCurrentId() != null;
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#getCurrentId
-         * @methodOf lbServices.MyUser
-         *
-         * @returns {Object} Id of the currently logged-in user or null.
-         */
-        R.getCurrentId = function() {
-          return LoopBackAuth.currentUserId;
-        };
-
-    /**
-    * @ngdoc property
-    * @name lbServices.MyUser#modelName
-    * @propertyOf lbServices.MyUser
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `MyUser`.
-    */
-    R.modelName = "MyUser";
-
-    /**
-     * @ngdoc object
-     * @name lbServices.MyUser.roles
-     * @header lbServices.MyUser.roles
-     * @object
-     * @description
-     *
-     * The object `MyUser.roles` groups methods
-     * manipulating `Role` instances related to `MyUser`.
-     *
-     * Call {@link lbServices.MyUser#roles MyUser.roles()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#roles
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Queries roles of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Role` object.)
-         * </em>
-         */
-        R.roles = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::get::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#count
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Counts roles of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        R.roles.count = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::count::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#create
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Creates a new instance in roles of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Role` object.)
-         * </em>
-         */
-        R.roles.create = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::create::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#createMany
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Creates a new instance in roles of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Role` object.)
-         * </em>
-         */
-        R.roles.createMany = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::createMany::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#destroyAll
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Deletes all roles of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.roles.destroyAll = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::delete::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#destroyById
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Delete a related item by id for roles.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for roles
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.roles.destroyById = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::destroyById::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#exists
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Check the existence of roles relation to an item by id.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for roles
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Role` object.)
-         * </em>
-         */
-        R.roles.exists = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::exists::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#findById
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Find a related item by id for roles.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for roles
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Role` object.)
-         * </em>
-         */
-        R.roles.findById = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::findById::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#link
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Add a related item by id for roles.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for roles
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Role` object.)
-         * </em>
-         */
-        R.roles.link = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::link::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#unlink
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Remove the roles relation to an item by id.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for roles
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.roles.unlink = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::unlink::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.roles#updateById
-         * @methodOf lbServices.MyUser.roles
-         *
-         * @description
-         *
-         * Update a related item by id for roles.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for roles
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Role` object.)
-         * </em>
-         */
-        R.roles.updateById = function() {
-          var TargetResource = $injector.get("Role");
-          var action = TargetResource["::updateById::MyUser::roles"];
-          return action.apply(R, arguments);
-        };
-    /**
-     * @ngdoc object
-     * @name lbServices.MyUser.identities
-     * @header lbServices.MyUser.identities
-     * @object
-     * @description
-     *
-     * The object `MyUser.identities` groups methods
-     * manipulating `UserIdentity` instances related to `MyUser`.
-     *
-     * Call {@link lbServices.MyUser#identities MyUser.identities()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#identities
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Queries identities of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        R.identities = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::get::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.identities#count
-         * @methodOf lbServices.MyUser.identities
-         *
-         * @description
-         *
-         * Counts identities of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        R.identities.count = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::count::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.identities#create
-         * @methodOf lbServices.MyUser.identities
-         *
-         * @description
-         *
-         * Creates a new instance in identities of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        R.identities.create = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::create::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.identities#createMany
-         * @methodOf lbServices.MyUser.identities
-         *
-         * @description
-         *
-         * Creates a new instance in identities of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        R.identities.createMany = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::createMany::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.identities#destroyAll
-         * @methodOf lbServices.MyUser.identities
-         *
-         * @description
-         *
-         * Deletes all identities of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.identities.destroyAll = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::delete::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.identities#destroyById
-         * @methodOf lbServices.MyUser.identities
-         *
-         * @description
-         *
-         * Delete a related item by id for identities.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for identities
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.identities.destroyById = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::destroyById::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.identities#findById
-         * @methodOf lbServices.MyUser.identities
-         *
-         * @description
-         *
-         * Find a related item by id for identities.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for identities
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        R.identities.findById = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::findById::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.identities#updateById
-         * @methodOf lbServices.MyUser.identities
-         *
-         * @description
-         *
-         * Update a related item by id for identities.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for identities
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        R.identities.updateById = function() {
-          var TargetResource = $injector.get("UserIdentity");
-          var action = TargetResource["::updateById::MyUser::identities"];
-          return action.apply(R, arguments);
-        };
-    /**
-     * @ngdoc object
-     * @name lbServices.MyUser.accessTokens
-     * @header lbServices.MyUser.accessTokens
-     * @object
-     * @description
-     *
-     * The object `MyUser.accessTokens` groups methods
-     * manipulating `AccessToken` instances related to `MyUser`.
-     *
-     * Call {@link lbServices.MyUser#accessTokens MyUser.accessTokens()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#accessTokens
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Queries accessTokens of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::get::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.accessTokens#count
-         * @methodOf lbServices.MyUser.accessTokens
-         *
-         * @description
-         *
-         * Counts accessTokens of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        R.accessTokens.count = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::count::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.accessTokens#create
-         * @methodOf lbServices.MyUser.accessTokens
-         *
-         * @description
-         *
-         * Creates a new instance in accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.create = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::create::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.accessTokens#createMany
-         * @methodOf lbServices.MyUser.accessTokens
-         *
-         * @description
-         *
-         * Creates a new instance in accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.createMany = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::createMany::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.accessTokens#destroyAll
-         * @methodOf lbServices.MyUser.accessTokens
-         *
-         * @description
-         *
-         * Deletes all accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.accessTokens.destroyAll = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::delete::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.accessTokens#destroyById
-         * @methodOf lbServices.MyUser.accessTokens
-         *
-         * @description
-         *
-         * Delete a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.accessTokens.destroyById = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::destroyById::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.accessTokens#findById
-         * @methodOf lbServices.MyUser.accessTokens
-         *
-         * @description
-         *
-         * Find a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.findById = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::findById::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.accessTokens#updateById
-         * @methodOf lbServices.MyUser.accessTokens
-         *
-         * @description
-         *
-         * Update a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R.accessTokens.updateById = function() {
-          var TargetResource = $injector.get("AccessToken");
-          var action = TargetResource["::updateById::MyUser::accessTokens"];
-          return action.apply(R, arguments);
-        };
-    /**
-     * @ngdoc object
-     * @name lbServices.MyUser.credentials
-     * @header lbServices.MyUser.credentials
-     * @object
-     * @description
-     *
-     * The object `MyUser.credentials` groups methods
-     * manipulating `UserCredential` instances related to `MyUser`.
-     *
-     * Call {@link lbServices.MyUser#credentials MyUser.credentials()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser#credentials
-         * @methodOf lbServices.MyUser
-         *
-         * @description
-         *
-         * Queries credentials of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R.credentials = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::get::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.credentials#count
-         * @methodOf lbServices.MyUser.credentials
-         *
-         * @description
-         *
-         * Counts credentials of MyUser.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        R.credentials.count = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::count::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.credentials#create
-         * @methodOf lbServices.MyUser.credentials
-         *
-         * @description
-         *
-         * Creates a new instance in credentials of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R.credentials.create = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::create::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.credentials#createMany
-         * @methodOf lbServices.MyUser.credentials
-         *
-         * @description
-         *
-         * Creates a new instance in credentials of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R.credentials.createMany = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::createMany::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.credentials#destroyAll
-         * @methodOf lbServices.MyUser.credentials
-         *
-         * @description
-         *
-         * Deletes all credentials of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.credentials.destroyAll = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::delete::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.credentials#destroyById
-         * @methodOf lbServices.MyUser.credentials
-         *
-         * @description
-         *
-         * Delete a related item by id for credentials.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for credentials
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.credentials.destroyById = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::destroyById::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.credentials#findById
-         * @methodOf lbServices.MyUser.credentials
-         *
-         * @description
-         *
-         * Find a related item by id for credentials.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for credentials
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R.credentials.findById = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::findById::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.MyUser.credentials#updateById
-         * @methodOf lbServices.MyUser.credentials
-         *
-         * @description
-         *
-         * Update a related item by id for credentials.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for credentials
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R.credentials.updateById = function() {
-          var TargetResource = $injector.get("UserCredential");
-          var action = TargetResource["::updateById::MyUser::credentials"];
-          return action.apply(R, arguments);
-        };
-
-    return R;
-  }]);
-
-/**
- * @ngdoc object
- * @name lbServices.UserIdentity
- * @header lbServices.UserIdentity
- * @object
- *
- * @description
- *
- * A $resource object for interacting with the `UserIdentity` model.
- *
- * ## Example
- *
- * See
- * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
- * for an example of using this object.
- *
- */
-module.factory(
-  "UserIdentity",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/userIdentities/:id",
-      { 'id': '@id' },
-      {
-
-        // INTERNAL. Use UserIdentity.user() instead.
-        "prototype$__get__user": {
-          url: urlBase + "/userIdentities/:id/user",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#create
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "create": {
-          url: urlBase + "/userIdentities",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#createMany
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "createMany": {
-          isArray: true,
-          url: urlBase + "/userIdentities",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#upsert
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/userIdentities",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#exists
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Check whether a model instance exists in the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `exists` – `{boolean=}` - 
-         */
-        "exists": {
-          url: urlBase + "/userIdentities/:id/exists",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#findById
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Find a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         *  - `filter` – `{object=}` - Filter defining fields and include
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "findById": {
-          url: urlBase + "/userIdentities/:id",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#find
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Find all instances of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "find": {
-          isArray: true,
-          url: urlBase + "/userIdentities",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#findOne
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Find first instance of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "findOne": {
-          url: urlBase + "/userIdentities/findOne",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#updateAll
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        "updateAll": {
-          url: urlBase + "/userIdentities/update",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#deleteById
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "deleteById": {
-          url: urlBase + "/userIdentities/:id",
+          url: urlBase + "/MyUsers/:id/groups/:fk",
           method: "DELETE"
         },
 
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#count
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Count instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        "count": {
-          url: urlBase + "/userIdentities/count",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#prototype$updateAttributes
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Update attributes for a model instance and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - UserIdentity id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
-         * </em>
-         */
-        "prototype$updateAttributes": {
-          url: urlBase + "/userIdentities/:id",
+        // INTERNAL. Use MyUser.groups.updateById() instead.
+        "::updateById::MyUser::groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/MyUsers/:id/groups/:fk",
           method: "PUT"
         },
 
-        /**
-         * @ngdoc method
-         * @name lbServices.UserIdentity#createChangeStream
-         * @methodOf lbServices.UserIdentity
-         *
-         * @description
-         *
-         * Create a change stream.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `options` – `{object=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `changes` – `{ReadableStream=}` - 
-         */
-        "createChangeStream": {
-          url: urlBase + "/userIdentities/change-stream",
+        // INTERNAL. Use MyUser.groups() instead.
+        "::get::MyUser::groups": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/groups",
+          method: "GET"
+        },
+
+        // INTERNAL. Use MyUser.groups.create() instead.
+        "::create::MyUser::groups": {
+          url: urlBase + "/MyUsers/:id/groups",
           method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.groups.createMany() instead.
+        "::createMany::MyUser::groups": {
+          isArray: true,
+          url: urlBase + "/MyUsers/:id/groups",
+          method: "POST"
+        },
+
+        // INTERNAL. Use MyUser.groups.destroyAll() instead.
+        "::delete::MyUser::groups": {
+          url: urlBase + "/MyUsers/:id/groups",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use MyUser.groups.count() instead.
+        "::count::MyUser::groups": {
+          url: urlBase + "/MyUsers/:id/groups/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Place.groups.findById() instead.
+        "::findById::Place::groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Places/:id/groups/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Place.groups.destroyById() instead.
+        "::destroyById::Place::groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Places/:id/groups/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Place.groups.updateById() instead.
+        "::updateById::Place::groups": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Places/:id/groups/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Place.groups() instead.
+        "::get::Place::groups": {
+          isArray: true,
+          url: urlBase + "/Places/:id/groups",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Place.groups.create() instead.
+        "::create::Place::groups": {
+          url: urlBase + "/Places/:id/groups",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Place.groups.createMany() instead.
+        "::createMany::Place::groups": {
+          isArray: true,
+          url: urlBase + "/Places/:id/groups",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Place.groups.destroyAll() instead.
+        "::delete::Place::groups": {
+          url: urlBase + "/Places/:id/groups",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Place.groups.count() instead.
+        "::count::Place::groups": {
+          url: urlBase + "/Places/:id/groups/count",
+          method: "GET"
         },
       }
     );
@@ -11178,8 +11324,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.UserIdentity#updateOrCreate
-         * @methodOf lbServices.UserIdentity
+         * @name lbServices.Group#updateOrCreate
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -11206,15 +11352,15 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         R["updateOrCreate"] = R["upsert"];
 
         /**
          * @ngdoc method
-         * @name lbServices.UserIdentity#update
-         * @methodOf lbServices.UserIdentity
+         * @name lbServices.Group#update
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -11244,8 +11390,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.UserIdentity#destroyById
-         * @methodOf lbServices.UserIdentity
+         * @name lbServices.Group#destroyById
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -11267,15 +11413,15 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         R["destroyById"] = R["deleteById"];
 
         /**
          * @ngdoc method
-         * @name lbServices.UserIdentity#removeById
-         * @methodOf lbServices.UserIdentity
+         * @name lbServices.Group#removeById
+         * @methodOf lbServices.Group
          *
          * @description
          *
@@ -11297,7 +11443,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserIdentity` object.)
+         * This usually means the response is a `Group` object.)
          * </em>
          */
         R["removeById"] = R["deleteById"];
@@ -11305,27 +11451,27 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name lbServices.UserIdentity#modelName
-    * @propertyOf lbServices.UserIdentity
+    * @name lbServices.Group#modelName
+    * @propertyOf lbServices.Group
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `UserIdentity`.
+    * i.e. `Group`.
     */
-    R.modelName = "UserIdentity";
+    R.modelName = "Group";
 
 
         /**
          * @ngdoc method
-         * @name lbServices.UserIdentity#user
-         * @methodOf lbServices.UserIdentity
+         * @name lbServices.Group#owner
+         * @methodOf lbServices.Group
          *
          * @description
          *
-         * Fetches belongsTo relation user.
+         * Fetches belongsTo relation owner.
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - UserIdentity id
+         *  - `id` – `{*}` - PersistedModel id
          *
          *  - `refresh` – `{boolean=}` - 
          *
@@ -11344,372 +11490,74 @@ module.factory(
          * This usually means the response is a `MyUser` object.)
          * </em>
          */
-        R.user = function() {
+        R.owner = function() {
           var TargetResource = $injector.get("MyUser");
-          var action = TargetResource["::get::userIdentity::user"];
+          var action = TargetResource["::get::Group::owner"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Group.members
+     * @header lbServices.Group.members
+     * @object
+     * @description
+     *
+     * The object `Group.members` groups methods
+     * manipulating `MyUser` instances related to `Group`.
+     *
+     * Call {@link lbServices.Group#members Group.members()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group#members
+         * @methodOf lbServices.Group
+         *
+         * @description
+         *
+         * Queries members of Group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.members = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::get::Group::members"];
           return action.apply(R, arguments);
         };
 
-    return R;
-  }]);
-
-/**
- * @ngdoc object
- * @name lbServices.AccessToken
- * @header lbServices.AccessToken
- * @object
- *
- * @description
- *
- * A $resource object for interacting with the `AccessToken` model.
- *
- * ## Example
- *
- * See
- * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
- * for an example of using this object.
- *
- */
-module.factory(
-  "AccessToken",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/accessTokens/:id",
-      { 'id': '@id' },
-      {
-
-        // INTERNAL. Use AccessToken.user() instead.
-        "prototype$__get__user": {
-          url: urlBase + "/accessTokens/:id/user",
-          method: "GET"
-        },
-
         /**
          * @ngdoc method
-         * @name lbServices.AccessToken#create
-         * @methodOf lbServices.AccessToken
+         * @name lbServices.Group.members#count
+         * @methodOf lbServices.Group.members
          *
          * @description
          *
-         * Create a new instance of the model and persist it into the data source.
+         * Counts members of Group.
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "create": {
-          url: urlBase + "/accessTokens",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#createMany
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "createMany": {
-          isArray: true,
-          url: urlBase + "/accessTokens",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#upsert
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/accessTokens",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#exists
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Check whether a model instance exists in the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `exists` – `{boolean=}` - 
-         */
-        "exists": {
-          url: urlBase + "/accessTokens/:id/exists",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#findById
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Find a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         *  - `filter` – `{object=}` - Filter defining fields and include
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "findById": {
-          url: urlBase + "/accessTokens/:id",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#find
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Find all instances of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "find": {
-          isArray: true,
-          url: urlBase + "/accessTokens",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#findOne
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Find first instance of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "findOne": {
-          url: urlBase + "/accessTokens/findOne",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#updateAll
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        "updateAll": {
-          url: urlBase + "/accessTokens/update",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#deleteById
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "deleteById": {
-          url: urlBase + "/accessTokens/:id",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#count
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Count instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
+         *  - `id` – `{*}` - PersistedModel id
          *
          *  - `where` – `{object=}` - Criteria to match model instances
          *
@@ -11727,993 +11575,28 @@ module.factory(
          *
          *  - `count` – `{number=}` - 
          */
-        "count": {
-          url: urlBase + "/accessTokens/count",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#prototype$updateAttributes
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Update attributes for a model instance and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - AccessToken id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        "prototype$updateAttributes": {
-          url: urlBase + "/accessTokens/:id",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#createChangeStream
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Create a change stream.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `options` – `{object=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `changes` – `{ReadableStream=}` - 
-         */
-        "createChangeStream": {
-          url: urlBase + "/accessTokens/change-stream",
-          method: "POST"
-        },
-
-        // INTERNAL. Use User.accessTokens.findById() instead.
-        "::findById::User::accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/accessTokens/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.accessTokens.destroyById() instead.
-        "::destroyById::User::accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/accessTokens/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.accessTokens.updateById() instead.
-        "::updateById::User::accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Users/:id/accessTokens/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use User.accessTokens() instead.
-        "::get::User::accessTokens": {
-          isArray: true,
-          url: urlBase + "/Users/:id/accessTokens",
-          method: "GET"
-        },
-
-        // INTERNAL. Use User.accessTokens.create() instead.
-        "::create::User::accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens",
-          method: "POST"
-        },
-
-        // INTERNAL. Use User.accessTokens.createMany() instead.
-        "::createMany::User::accessTokens": {
-          isArray: true,
-          url: urlBase + "/Users/:id/accessTokens",
-          method: "POST"
-        },
-
-        // INTERNAL. Use User.accessTokens.destroyAll() instead.
-        "::delete::User::accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use User.accessTokens.count() instead.
-        "::count::User::accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens/count",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.findById() instead.
-        "::findById::MyUser::accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.destroyById() instead.
-        "::destroyById::MyUser::accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.updateById() instead.
-        "::updateById::MyUser::accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/MyUsers/:id/accessTokens/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens() instead.
-        "::get::MyUser::accessTokens": {
-          isArray: true,
-          url: urlBase + "/MyUsers/:id/accessTokens",
-          method: "GET"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.create() instead.
-        "::create::MyUser::accessTokens": {
-          url: urlBase + "/MyUsers/:id/accessTokens",
-          method: "POST"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.createMany() instead.
-        "::createMany::MyUser::accessTokens": {
-          isArray: true,
-          url: urlBase + "/MyUsers/:id/accessTokens",
-          method: "POST"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.destroyAll() instead.
-        "::delete::MyUser::accessTokens": {
-          url: urlBase + "/MyUsers/:id/accessTokens",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use MyUser.accessTokens.count() instead.
-        "::count::MyUser::accessTokens": {
-          url: urlBase + "/MyUsers/:id/accessTokens/count",
-          method: "GET"
-        },
-      }
-    );
-
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#updateOrCreate
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R["updateOrCreate"] = R["upsert"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#update
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        R["update"] = R["updateAll"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#destroyById
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R["destroyById"] = R["deleteById"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#removeById
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AccessToken` object.)
-         * </em>
-         */
-        R["removeById"] = R["deleteById"];
-
-
-    /**
-    * @ngdoc property
-    * @name lbServices.AccessToken#modelName
-    * @propertyOf lbServices.AccessToken
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `AccessToken`.
-    */
-    R.modelName = "AccessToken";
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#user
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Fetches belongsTo relation user.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - AccessToken id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
-         * </em>
-         */
-        R.user = function() {
+        R.members.count = function() {
           var TargetResource = $injector.get("MyUser");
-          var action = TargetResource["::get::accessToken::user"];
+          var action = TargetResource["::count::Group::members"];
           return action.apply(R, arguments);
         };
 
-    return R;
-  }]);
-
-/**
- * @ngdoc object
- * @name lbServices.UserCredential
- * @header lbServices.UserCredential
- * @object
- *
- * @description
- *
- * A $resource object for interacting with the `UserCredential` model.
- *
- * ## Example
- *
- * See
- * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
- * for an example of using this object.
- *
- */
-module.factory(
-  "UserCredential",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/userCredentials/:id",
-      { 'id': '@id' },
-      {
-
-        // INTERNAL. Use UserCredential.user() instead.
-        "prototype$__get__user": {
-          url: urlBase + "/userCredentials/:id/user",
-          method: "GET"
-        },
-
         /**
          * @ngdoc method
-         * @name lbServices.UserCredential#create
-         * @methodOf lbServices.UserCredential
+         * @name lbServices.Group.members#create
+         * @methodOf lbServices.Group.members
          *
          * @description
          *
-         * Create a new instance of the model and persist it into the data source.
+         * Creates a new instance in members of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
          * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "create": {
-          url: urlBase + "/userCredentials",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#createMany
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "createMany": {
-          isArray: true,
-          url: urlBase + "/userCredentials",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#upsert
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/userCredentials",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#exists
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Check whether a model instance exists in the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `exists` – `{boolean=}` - 
-         */
-        "exists": {
-          url: urlBase + "/userCredentials/:id/exists",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#findById
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Find a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         *  - `filter` – `{object=}` - Filter defining fields and include
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "findById": {
-          url: urlBase + "/userCredentials/:id",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#find
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Find all instances of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "find": {
-          isArray: true,
-          url: urlBase + "/userCredentials",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#findOne
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Find first instance of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "findOne": {
-          url: urlBase + "/userCredentials/findOne",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#updateAll
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        "updateAll": {
-          url: urlBase + "/userCredentials/update",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#deleteById
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "deleteById": {
-          url: urlBase + "/userCredentials/:id",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#count
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Count instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        "count": {
-          url: urlBase + "/userCredentials/count",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#prototype$updateAttributes
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Update attributes for a model instance and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - UserCredential id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        "prototype$updateAttributes": {
-          url: urlBase + "/userCredentials/:id",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#createChangeStream
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Create a change stream.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `options` – `{object=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `changes` – `{ReadableStream=}` - 
-         */
-        "createChangeStream": {
-          url: urlBase + "/userCredentials/change-stream",
-          method: "POST"
-        },
-      }
-    );
-
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#updateOrCreate
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R["updateOrCreate"] = R["upsert"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#update
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Update instances of the model matched by where from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The number of instances updated
-         */
-        R["update"] = R["updateAll"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#destroyById
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R["destroyById"] = R["deleteById"];
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#removeById
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `UserCredential` object.)
-         * </em>
-         */
-        R["removeById"] = R["deleteById"];
-
-
-    /**
-    * @ngdoc property
-    * @name lbServices.UserCredential#modelName
-    * @propertyOf lbServices.UserCredential
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `UserCredential`.
-    */
-    R.modelName = "UserCredential";
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.UserCredential#user
-         * @methodOf lbServices.UserCredential
-         *
-         * @description
-         *
-         * Fetches belongsTo relation user.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - UserCredential id
-         *
-         *  - `refresh` – `{boolean=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -12730,9 +11613,187 @@ module.factory(
          * This usually means the response is a `MyUser` object.)
          * </em>
          */
-        R.user = function() {
+        R.members.create = function() {
           var TargetResource = $injector.get("MyUser");
-          var action = TargetResource["::get::userCredential::user"];
+          var action = TargetResource["::create::Group::members"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.members#createMany
+         * @methodOf lbServices.Group.members
+         *
+         * @description
+         *
+         * Creates a new instance in members of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.members.createMany = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::createMany::Group::members"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.members#destroyAll
+         * @methodOf lbServices.Group.members
+         *
+         * @description
+         *
+         * Deletes all members of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.members.destroyAll = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::delete::Group::members"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.members#destroyById
+         * @methodOf lbServices.Group.members
+         *
+         * @description
+         *
+         * Delete a related item by id for members.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for members
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.members.destroyById = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::destroyById::Group::members"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.members#findById
+         * @methodOf lbServices.Group.members
+         *
+         * @description
+         *
+         * Find a related item by id for members.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for members
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.members.findById = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::findById::Group::members"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Group.members#updateById
+         * @methodOf lbServices.Group.members
+         *
+         * @description
+         *
+         * Update a related item by id for members.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for members
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.members.updateById = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::updateById::Group::members"];
           return action.apply(R, arguments);
         };
 

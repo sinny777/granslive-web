@@ -3,7 +3,7 @@ module.exports = function(app) {
 	app.get('/auth/account', function(req, res, next) {
 		console.log('IN auth/account: >>> ');
 		console.log(req.accessToken);
-		
+		/*
 		var MyUser = app.models.MyUser;
 		var UserIdentity = app.models.UserIdentity;
 		MyUser.findById(req.accessToken.userId, function(err, userObj){
@@ -18,12 +18,9 @@ module.exports = function(app) {
 			var loopbackContext = app.loopback.getCurrentContext();
 		    if (loopbackContext) loopbackContext.set('currentUser', userObj);
 		    
-		    var findReq = {filter: {where: {"userId": userObj.id}}};
-			UserIdentity.find(findReq, function(userIdentityObj){
-				console.log('userIdentityObj: >>> ', userIdentityObj);
-			});
-		    
 		});
+		
+		*/
 		
 		res.redirect('/#!/home');
 		

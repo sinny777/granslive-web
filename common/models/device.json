@@ -6,11 +6,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "title": {
-      "type": "string",
-      "required": false,
-      "index": true
-    },
     "description": {
       "type": "string",
       "required": false
@@ -18,10 +13,25 @@
     "status": {
       "type": "number",
       "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "index": false
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "audit": {
+      "type": "embedsOne",
+      "model": "Audit",
+      "property": "audit",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }

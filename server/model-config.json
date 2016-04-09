@@ -1,11 +1,10 @@
 {
   "_meta": {
     "sources": [
-      "./node_modules/loopback-component-passport/lib/models",
+      "loopback/common/models",
+      "loopback-component-passport/lib/models",
       "../common/models",
-      "./models",
-      "granslive-web/common/models",
-      "granslive-web/server/models"
+      "./models"
     ],
     "mixins": [
       "loopback/common/mixins",
@@ -15,70 +14,67 @@
     ]
   },
   "User": {
-    "dataSource": "db"
-  },
-  "UserCredential": {
-    "dataSource": "db",
-    "public": true
-  },
-  "UserIdentity": {
-    "dataSource": "db",
-    "public": true
-  },
-  "ApplicationCredential": {
-    "dataSource": "db",
-    "public": true
-  },
-  "AccessToken": {
     "dataSource": "db",
     "public": false
   },
-  "ACL": {
+  "userCredential": {
     "dataSource": "db",
-    "public": true
-  },
-  "RoleMapping": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Role": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Place": {
-    "dataSource": "cloudant",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "PlaceArea": {
-    "dataSource": "cloudant",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Board": {
-    "dataSource": "cloudant",
-    "public": true
-  },
-  "Device": {
-    "dataSource": "cloudant",
-    "public": true
-  },
-  "MyUser": {
-    "dataSource": "cloudant",
     "public": true
   },
   "userIdentity": {
     "dataSource": "db",
     "public": true
   },
+  "ApplicationCredential": {
+    "dataSource": "db",
+    "public": false
+  },
   "accessToken": {
     "dataSource": "db",
     "public": true
   },
-  "userCredential": {
-    "dataSource": "db",
+  "ACL": {
+    "dataSource": "accounts",
+    "public": true
+  },
+  "RoleMapping": {
+    "dataSource": "accounts",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "accounts",
+    "public": true
+  },
+  "Audit": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "MyUser": {
+    "dataSource": "accounts",
+    "public": true
+  },
+  "Place": {
+    "dataSource": "smarthome",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "PlaceArea": {
+    "dataSource": "smarthome",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Board": {
+    "dataSource": "smarthome",
+    "public": true
+  },
+  "Device": {
+    "dataSource": "smarthome",
+    "public": true
+  },
+  "Group": {
+    "dataSource": "smarthome",
     "public": true
   }
 }

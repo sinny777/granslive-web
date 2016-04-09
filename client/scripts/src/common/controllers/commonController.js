@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, $cookies, $location, authService, User, UserIdentity){
+  function ctrl($rootScope, $scope, $cookies, $location, authService){
 	  
 	  $rootScope.footerLinks = [];
 	  $rootScope.currentUser = {};
@@ -20,7 +20,9 @@ define(function () {
 	    	console.log("IN checkUser: >>>>>>>> ", $rootScope.currentUser);
 	    	
 	    	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
-	    		$rootScope.currentUser = authService.ensureCurrentUser();
+	    		$rootScope.currentUser = authService.ensureCurrentUser(function(currentUser){
+	    			$rootScope.currentUser = currentUser;
+	    		});
 	    	}
 	    	
 	    	if(!$rootScope.currentUser){
@@ -52,7 +54,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'authService', 'User', 'UserIdentity'];
+  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'authService'];
   return ctrl;
 
 });

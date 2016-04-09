@@ -1,0 +1,45 @@
+{
+  "name": "Group",
+  "plural": "Groups",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": false,
+      "description": "Group Title"
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "description": "Group Description"
+    }
+  },
+  "relations": {
+	  "audit": {
+      "type": "embedsOne",
+      "model": "Audit",
+      "property": "audit",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    },
+    "owner": {
+        "type": "belongsTo",
+        "model": "MyUser",
+        "foreignKey": "ownerId"
+     },
+	 "members": {
+      "type": "hasMany",
+      "model": "MyUser",
+      "foreignKey": "groupId"
+     }
+  },
+  "validations": [],
+  "acls": [],
+  "methods": {}
+}

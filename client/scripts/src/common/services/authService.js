@@ -25,10 +25,12 @@ define(['angular'], function (angular) {
 	   *
 	   * @return {Object} user
 	   */
-	  Auth.ensureCurrentUser = function() {
+	  Auth.ensureCurrentUser = function(callback) {
 	    if (Auth.currentUser) {
 	      console.log('Using cached user');
-	      return Auth.currentUser;
+	      if(callback){
+	    	  callback(Auth.currentUser);
+	      }
 	    }
 	    if(!Auth.isLoggedIn()) {
 	      console.log('User not logged in.');
@@ -54,18 +56,45 @@ define(['angular'], function (angular) {
 	    		var findUserReq = {filter: {where: {"_id": userId}}};
 	    		MyUser.findById({id:userId}).$promise.then(function(userObj){
 	    			console.log('userObj: >>>>>>>>>> ', userObj);
-    				var findReq = {filter: {where: {"userId": userObj.id}}};
-    				UserIdentity.find(findReq).$promise.then(function(UserIdentityObj){
+	    			if(!userObj.profile){
+	    				var findReq = {filter: {where: {"userId": userObj.id}}};
+	    				MyUser.identities({id:userId}).$promise.then(function(userIdentityObj){
+	    					console.log('USERIDENTITY OBJ: >>>>>', userIdentityObj);
+	    					if(userIdentityObj && userIdentityObj[0]){
+	    						userObj.profile = userIdentityObj[0].profile._json;
+	    					}
+	    					
+	    					if(userIdentityObj && userIdentityObj.profile){
+	    						userObj.profile = userIdentityObj.profile._json;
+	    					}
+	    					/*
+	    					MyUser.upsert(userObj).$promise.then(function(userIdentityObj){
+	    						console.log('USER UPDATED SUCCESSFULLY >>>>>> ');
+	    					});
+	    					*/
+	    					Auth.currentUser = userObj;
+	    					Auth.setUser(accessTokenId, userId, Auth.currentUser);
+	        				Auth.save();
+	        				if(callback){
+	        			    	  callback(Auth.currentUser);
+	        			      }
+		    			},
+		    			function(err){
+		    				console.log('ERROR: >>>>> ', err);
+		    				if(callback){
+	        			    	  callback(Auth.currentUser);
+	        			      }
+		    			});
+	    			}else{
 	    				Auth.currentUser = userObj;
-	    				Auth.currentUser.profile = UserIdentityObj[0].profile._json;
-	    				console.log('$rootScope.currentUser: >>> ', $rootScope.currentUser);
-	    				Auth.setUser(accessTokenId, userId, $rootScope.currentUser);
+	    				Auth.setUser(accessTokenId, userId, Auth.currentUser);
 	    				Auth.save();
-	    			});
+	    				if(callback){
+	    			    	  callback(Auth.currentUser);
+	    			      }
+	    			}	    			
 	    		});
 	        }
-	      
-	      return Auth.currentUser;
 	    } else {
 	      // Fetch the actual user data.
 	      Auth.currentUser = MyUser.getCurrent(function(userData) {
@@ -74,14 +103,20 @@ define(['angular'], function (angular) {
     			console.log('USER OBJ: >>>>>> ', Auth.currentUser);
     			if(Auth.currentUser){
     				var findReq = {filter: {where: {"userId": userData.id}}};
-    				UserIdentity.find(findReq).$promise.then(function(userIdentityObj){
-    					console.log(userIdentityObj)
-    					if(userIdentityObj && userIdentityObj[0]){
-	    					Auth.currentUser.profile = userIdentityObj[0].profile._json;
-		    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
-    					}else{
-    						Auth.currentUser.profile = {"name": "Guest"};
-    					}
+    				MyUser.identities({id:userId}).$promise.then(function(userIdentityObj){
+	    				Auth.currentUser = userData;
+	    				console.log('userIdentityObj:>>>>> ' , userIdentityObj);
+	    				Auth.currentUser.profile = userIdentityObj[0].profile._json;
+	    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
+	    				if(callback){
+	    			    	  callback(Auth.currentUser);
+	    			      }
+	    			},
+	    			function(err){
+	    				console.log('ERROR: >>>>> ', err);
+	    				if(callback){
+        			    	  callback(Auth.currentUser);
+        			      }
 	    			});
     			}
 	        
@@ -90,7 +125,9 @@ define(['angular'], function (angular) {
 	        console.log("Current User Fetch Failed:", err);
 	      });
 	    }
-	    return Auth.currentUser;
+	    if(callback){
+	    	  callback(Auth.currentUser);
+	      }
 	  };
 
 	  /**
@@ -106,7 +143,7 @@ define(['angular'], function (angular) {
 	  };
 	  
 	  Auth.login = function(credentials) {
-		  MyUser.login(credentials);
+		 return MyUser.login(credentials);
 	  };
 
 	  Auth.logout = function() {

@@ -3,12 +3,25 @@
     "name": "db",
     "connector": "memory"
   },
-  "cloudant": {
+  "transient": {
+    "name": "transient",
+    "connector": "transient"
+  },
+  "smarthome": {
     "host": "8d35342f-1555-453b-a2ee-4131563909c2-bluemix.cloudant.com",
     "url": "https://8d35342f-1555-453b-a2ee-4131563909c2-bluemix:bf720e29827399db90841c37d5bcddc91e9e40c2c986126a8346427a417ab932@8d35342f-1555-453b-a2ee-4131563909c2-bluemix.cloudant.com",
     "database": "smarthome",
     "password": "bf720e29827399db90841c37d5bcddc91e9e40c2c986126a8346427a417ab932",
-    "name": "cloudant",
+    "name": "smarthome",
+    "user": "8d35342f-1555-453b-a2ee-4131563909c2-bluemix",
+    "connector": "cloudant"
+  },
+  "accounts": {
+    "host": "8d35342f-1555-453b-a2ee-4131563909c2-bluemix.cloudant.com",
+    "url": "https://8d35342f-1555-453b-a2ee-4131563909c2-bluemix:bf720e29827399db90841c37d5bcddc91e9e40c2c986126a8346427a417ab932@8d35342f-1555-453b-a2ee-4131563909c2-bluemix.cloudant.com",
+    "database": "accounts",
+    "password": "bf720e29827399db90841c37d5bcddc91e9e40c2c986126a8346427a417ab932",
+    "name": "accounts",
     "user": "8d35342f-1555-453b-a2ee-4131563909c2-bluemix",
     "connector": "cloudant"
   }

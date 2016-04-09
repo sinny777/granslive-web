@@ -15,7 +15,7 @@ module.exports = function(app) {
 
     log('Creating roles and users');
 
-    var User = app.models.User;
+    var MyUser = app.models.MyUser;
     var Role = app.models.Role;
     var RoleMapping = app.models.RoleMapping;
 
@@ -30,7 +30,7 @@ module.exports = function(app) {
         password: 'admin'
       }]
     }, {
-      name: 'users',
+      name: 'guest',
       users: [{
         firstName: 'Guest',
         lastName: 'User',
@@ -48,10 +48,16 @@ module.exports = function(app) {
           if (err) {
             console.error('error running findOrCreate('+role.name+')', err);
           }
-          (created) ? log('created role', createdRole.name)
-                    : log('found role', createdRole.name);
+          
+          console.log('created: >>>>> ', created);
+          console.log('createdRole: >>>>> ', createdRole)
+          if(createdRole){
+        	  (created) ? log('created role', createdRole.name)
+                      : log('found role', createdRole.name);
+          }
+         
           role.users.forEach(function(roleUser) {
-            User.findOrCreate(
+        	MyUser.findOrCreate(
               {where: {username: roleUser.username}}, // find
               roleUser, // create
               function(err, createdUser, created) {

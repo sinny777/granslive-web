@@ -6,10 +6,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "created": {
-      "type": "date",
-      "required": false
-    },
     "description": {
       "type": "string",
       "required": false
@@ -21,28 +17,34 @@
     "status": {
       "type": "string",
       "required": false,
-      "index": true
+      "index": false
     },
     "title": {
+      "type": "string",
+      "required": false
+    },
+    "type": {
       "type": "string",
       "required": false
     },
     "uniqueIdentifier": {
       "type": "string",
       "required": true,
-      "index": true
-    },
-    "updated": {
-      "type": "date",
-      "required": false
-    },
-    "type": {
-      "type": "string",
-      "required": false
+      "index": false
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "audit": {
+      "type": "embedsOne",
+      "model": "Audit",
+      "property": "audit",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    }
+  },
   "acls": [
     {
       "principalType": "ROLE",
