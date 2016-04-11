@@ -38,24 +38,6 @@ define(['app'], function (app) {
                     $httpProvider.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
                         $routeProvider.
-	                        when('/login', {
-	        	                templateUrl: 'partials/common/login.html',
-	        	                controller: 'commonController',
-	        	                controllerAs: 'vm',
-	        	                access: { requiredLogin: false }
-	        	            }).
-            	            when('/home', {
-            	                templateUrl: 'partials/home.html',
-            	                controller: 'commonController',
-            	                controllerAs: 'vm',
-            	                access: { requiredLogin: false }
-            	            }).
-            	            when('/places', {
-            	                templateUrl: 'partials/iot/places.html',
-            	                controller: 'placeController',
-            	                controllerAs: 'vm',
-            	                access: { requiredLogin: false }
-            	            }).
                             otherwise({
                                 redirectTo: '/home'
                             });

@@ -4,7 +4,6 @@ define(function () {
   function ctrl($rootScope, $scope, $cookies, $location, authService){
 	  
 	  $rootScope.footerLinks = [];
-	  $rootScope.currentUser = {};
 	  $rootScope.loginCredentials = {};
 	  
 	  $rootScope.gotoTop = function (){
@@ -16,39 +15,42 @@ define(function () {
     	
     };
 	  
-	    $rootScope.checkUser = function(){
-	    	console.log("IN checkUser: >>>>>>>> ", $rootScope.currentUser);
-	    	
-	    	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
-	    		$rootScope.currentUser = authService.ensureCurrentUser(function(currentUser){
-	    			$rootScope.currentUser = currentUser;
-	    		});
-	    	}
-	    	
-	    	if(!$rootScope.currentUser){
-	    		// redirect to login page
-	    	}
-	    	
-	    };
+    $rootScope.checkUser = function(callback){
+    	console.log("IN checkUser: >>>>>>>> ", $rootScope.currentUser);
+    	
+    	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
+    		$rootScope.currentUser = authService.ensureCurrentUser(function(currentUser){
+    			$rootScope.currentUser = currentUser;
+    			if(callback){
+    				callback($rootScope.currentUser);
+    			}
+    		});
+    	}else{
+    		callback($rootScope.currentUser);
+    	}
+    };
 
     $rootScope.login = function(){
     	console.log("IN LOGIN Call for: ", $rootScope.loginCredentials); 
     	authService.login($rootScope.loginCredentials, function(userObj){
     		console.log('USER OBJ AFTER LOGIN: >>>>>> ', userObj);
-    		$rootScope.checkUser();
+    		$rootScope.currentUser = userObj;
     	});
       };  
 	    
     $rootScope.logout = function(){
     	console.log("IN LOGOUT Call for: ", $rootScope.currentUser); 
+    	authService.logout(function(){
+    		$rootScope.currentUser = {};
+    		$location.path("/#!/home");
+    	});
+    	/*
     	setTimeout(function () {
             $scope.$apply(function () {
             	$rootScope.currentUser = {};
             });
         }, 1000);
-    	
-    	authService.logout();
-    	$location.path("/#!/home");
+        */
     	
       };
     

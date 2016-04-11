@@ -7,6 +7,15 @@
     "validateUpsert": true
   },
   "properties": {
+    "ownerId": {
+      "type": "string",
+      "required": true
+    },
+    "placeId": {
+      "type": "string",
+      "required": true,
+      "index": false
+    },
     "title": {
       "type": "string",
       "required": false,
@@ -16,30 +25,24 @@
       "type": "string",
       "required": false,
       "description": "Group Description"
+    },
+    "audit": {
+      "type": "object"
     }
   },
-  "relations": {
-	  "audit": {
-      "type": "embedsOne",
-      "model": "Audit",
-      "property": "audit",
-      "options": {
-        "validate": true,
-        "forceId": false
-      }
-    },
-    "owner": {
-        "type": "belongsTo",
-        "model": "MyUser",
-        "foreignKey": "ownerId"
-     },
-	 "members": {
-      "type": "hasMany",
-      "model": "MyUser",
-      "foreignKey": "groupId"
-     }
-  },
   "validations": [],
+  "relations": {
+    "owner": {
+      "type": "belongsTo",
+      "model": "MyUser",
+      "foreignKey": "ownerId"
+    },
+    "place": {
+      "type": "belongsTo",
+      "model": "Place",
+      "foreignKey": "placeId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

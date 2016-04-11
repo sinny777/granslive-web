@@ -75,6 +75,11 @@ define([
             console.log('IN routeChangeStart >>>>>>> ');
              $rootScope.footerLinks = [];
         });
+        
+        $rootScope.currentUser = {};
+        
+        $rootScope.loadingScreen = $('<div style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background-color:gray;background-color:rgba(70,70,70,0.2);"><img style="position:absolute;top:50%;left:50%;" alt="" src="/assets/images/loading.gif" /></div>')
+        .appendTo($('body')).hide();
 
     }]);
      

@@ -2206,167 +2206,6 @@ paths:
           schema:
             type: boolean
       deprecated: false
-  '/MyUsers/{id}/audit':
-    get:
-      tags:
-        - MyUser
-      summary: Fetches hasOne relation audit.
-      operationId: MyUser.prototype.__get__audit
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    post:
-      tags:
-        - MyUser
-      summary: Creates a new instance in audit of this model.
-      operationId: MyUser.prototype.__create__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    put:
-      tags:
-        - MyUser
-      summary: Update audit of this model.
-      operationId: MyUser.prototype.__update__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    delete:
-      tags:
-        - MyUser
-      summary: Deletes audit of this model.
-      operationId: MyUser.prototype.__destroy__audit
-      parameters:
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/MyUsers/{id}/groups/{fk}':
-    get:
-      tags:
-        - MyUser
-      summary: Find a related item by id for groups.
-      operationId: MyUser.prototype.__findById__groups
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for groups
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    delete:
-      tags:
-        - MyUser
-      summary: Delete a related item by id for groups.
-      operationId: MyUser.prototype.__destroyById__groups
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for groups
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - MyUser
-      summary: Update a related item by id for groups.
-      operationId: MyUser.prototype.__updateById__groups
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for groups
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Group'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
   '/MyUsers/{id}/accessTokens':
     get:
       tags:
@@ -2618,96 +2457,6 @@ paths:
         - MyUser
       summary: Counts roles of MyUser.
       operationId: MyUser.prototype.__count__roles
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-  '/MyUsers/{id}/groups':
-    get:
-      tags:
-        - MyUser
-      summary: Queries groups of MyUser.
-      operationId: MyUser.prototype.__get__groups
-      parameters:
-        - name: filter
-          in: query
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Group'
-      deprecated: false
-    post:
-      tags:
-        - MyUser
-      summary: Creates a new instance in groups of this model.
-      operationId: MyUser.prototype.__create__groups
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Group'
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    delete:
-      tags:
-        - MyUser
-      summary: Deletes all groups of this model.
-      operationId: MyUser.prototype.__delete__groups
-      parameters:
-        - name: id
-          in: path
-          description: User id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/MyUsers/{id}/groups/count':
-    get:
-      tags:
-        - MyUser
-      summary: Counts groups of MyUser.
-      operationId: MyUser.prototype.__count__groups
       parameters:
         - name: where
           in: query
@@ -3070,91 +2819,6 @@ paths:
           required: true
           schema:
             type: object
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/Places/{id}/audit':
-    get:
-      tags:
-        - Place
-      summary: Fetches hasOne relation audit.
-      operationId: Place.prototype.__get__audit
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    post:
-      tags:
-        - Place
-      summary: Creates a new instance in audit of this model.
-      operationId: Place.prototype.__create__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    put:
-      tags:
-        - Place
-      summary: Update audit of this model.
-      operationId: Place.prototype.__update__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    delete:
-      tags:
-        - Place
-      summary: Deletes audit of this model.
-      operationId: Place.prototype.__destroy__audit
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
       responses:
         '204':
           description: Request was successful
@@ -3608,91 +3272,6 @@ paths:
           schema:
             type: object
       deprecated: false
-  '/PlaceAreas/{id}/audit':
-    get:
-      tags:
-        - PlaceArea
-      summary: Fetches hasOne relation audit.
-      operationId: PlaceArea.prototype.__get__audit
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    post:
-      tags:
-        - PlaceArea
-      summary: Creates a new instance in audit of this model.
-      operationId: PlaceArea.prototype.__create__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    put:
-      tags:
-        - PlaceArea
-      summary: Update audit of this model.
-      operationId: PlaceArea.prototype.__update__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    delete:
-      tags:
-        - PlaceArea
-      summary: Deletes audit of this model.
-      operationId: PlaceArea.prototype.__destroy__audit
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
   /PlaceAreas:
     post:
       tags:
@@ -3952,91 +3531,6 @@ paths:
           description: Request was successful
           schema:
             type: object
-      deprecated: false
-  '/Boards/{id}/audit':
-    get:
-      tags:
-        - Board
-      summary: Fetches hasOne relation audit.
-      operationId: Board.prototype.__get__audit
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    post:
-      tags:
-        - Board
-      summary: Creates a new instance in audit of this model.
-      operationId: Board.prototype.__create__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    put:
-      tags:
-        - Board
-      summary: Update audit of this model.
-      operationId: Board.prototype.__update__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    delete:
-      tags:
-        - Board
-      summary: Deletes audit of this model.
-      operationId: Board.prototype.__destroy__audit
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
       deprecated: false
   /Boards:
     post:
@@ -4298,91 +3792,6 @@ paths:
           schema:
             type: object
       deprecated: false
-  '/Devices/{id}/audit':
-    get:
-      tags:
-        - Device
-      summary: Fetches hasOne relation audit.
-      operationId: Device.prototype.__get__audit
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    post:
-      tags:
-        - Device
-      summary: Creates a new instance in audit of this model.
-      operationId: Device.prototype.__create__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    put:
-      tags:
-        - Device
-      summary: Update audit of this model.
-      operationId: Device.prototype.__update__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    delete:
-      tags:
-        - Device
-      summary: Deletes audit of this model.
-      operationId: Device.prototype.__destroy__audit
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
   /Devices:
     post:
       tags:
@@ -4643,91 +4052,6 @@ paths:
           schema:
             type: object
       deprecated: false
-  '/Groups/{id}/audit':
-    get:
-      tags:
-        - Group
-      summary: Fetches hasOne relation audit.
-      operationId: Group.prototype.__get__audit
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    post:
-      tags:
-        - Group
-      summary: Creates a new instance in audit of this model.
-      operationId: Group.prototype.__create__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    put:
-      tags:
-        - Group
-      summary: Update audit of this model.
-      operationId: Group.prototype.__update__audit
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Audit'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Audit'
-      deprecated: false
-    delete:
-      tags:
-        - Group
-      summary: Deletes audit of this model.
-      operationId: Group.prototype.__destroy__audit
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
   '/Groups/{id}/owner':
     get:
       tags:
@@ -4751,94 +4075,17 @@ paths:
           schema:
             $ref: '#/definitions/MyUser'
       deprecated: false
-  '/Groups/{id}/members/{fk}':
+  '/Groups/{id}/place':
     get:
       tags:
         - Group
-      summary: Find a related item by id for members.
-      operationId: Group.prototype.__findById__members
+      summary: Fetches belongsTo relation place.
+      operationId: Group.prototype.__get__place
       parameters:
-        - name: fk
-          in: path
-          description: Foreign key for members
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/MyUser'
-      deprecated: false
-    delete:
-      tags:
-        - Group
-      summary: Delete a related item by id for members.
-      operationId: Group.prototype.__destroyById__members
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for members
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - Group
-      summary: Update a related item by id for members.
-      operationId: Group.prototype.__updateById__members
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for members
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/MyUser'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/MyUser'
-      deprecated: false
-  '/Groups/{id}/members':
-    get:
-      tags:
-        - Group
-      summary: Queries members of Group.
-      operationId: Group.prototype.__get__members
-      parameters:
-        - name: filter
+        - name: refresh
           in: query
           required: false
-          type: string
-          format: JSON
+          type: boolean
         - name: id
           in: path
           description: PersistedModel id
@@ -4849,73 +4096,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/MyUser'
-      deprecated: false
-    post:
-      tags:
-        - Group
-      summary: Creates a new instance in members of this model.
-      operationId: Group.prototype.__create__members
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/MyUser'
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/MyUser'
-      deprecated: false
-    delete:
-      tags:
-        - Group
-      summary: Deletes all members of this model.
-      operationId: Group.prototype.__delete__members
-      parameters:
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/Groups/{id}/members/count':
-    get:
-      tags:
-        - Group
-      summary: Counts members of Group.
-      operationId: Group.prototype.__count__members
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: PersistedModel id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
+            $ref: '#/definitions/Place'
       deprecated: false
   /Groups:
     post:
@@ -5177,11 +4358,277 @@ paths:
           schema:
             type: object
       deprecated: false
+  /Members:
+    post:
+      tags:
+        - Member
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Member.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Member'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Member'
+      deprecated: false
+    put:
+      tags:
+        - Member
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: Member.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Member'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Member'
+      deprecated: false
+    get:
+      tags:
+        - Member
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Member.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Member'
+      deprecated: false
+  '/Members/{id}/exists':
+    get:
+      tags:
+        - Member
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Member.exists__get_Members_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/Members/{id}':
+    head:
+      tags:
+        - Member
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Member.exists__head_Members_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Member
+      summary: Find a model instance by id from the data source.
+      operationId: Member.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Member'
+      deprecated: false
+    delete:
+      tags:
+        - Member
+      summary: Delete a model instance by id from the data source.
+      operationId: Member.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Member
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: Member.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Member'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Member'
+      deprecated: false
+  /Members/findOne:
+    get:
+      tags:
+        - Member
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Member.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Member'
+      deprecated: false
+  /Members/update:
+    post:
+      tags:
+        - Member
+      summary: Update instances of the model matched by where from the data source.
+      operationId: Member.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Member'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /Members/count:
+    get:
+      tags:
+        - Member
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Member.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /Members/change-stream:
+    post:
+      tags:
+        - Member
+      summary: Create a change stream.
+      operationId: Member.createChangeStream__post_Members_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Member
+      summary: Create a change stream.
+      operationId: Member.createChangeStream__get_Members_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
 definitions:
   x-any:
     properties: {}
   MyUser:
     properties:
+      provider:
+        type: string
+      profile:
+        type: object
+      audit:
+        type: object
       realm:
         type: string
       username:
@@ -5203,10 +4650,6 @@ definitions:
         type: string
         format: date
       id:
-        type: string
-      _audit:
-        $ref: '#/definitions/Audit'
-      groupId:
         type: string
     required:
       - email
@@ -5325,42 +4768,30 @@ definitions:
       roleId:
         type: string
     additionalProperties: false
-  Audit:
-    properties:
-      created:
-        type: string
-        format: date
-      modified:
-        type: string
-        format: date
-      createdBy:
-        type: string
-      modifiedBy:
-        type: string
-      id:
-        type: string
-    additionalProperties: false
   Group:
     properties:
+      ownerId:
+        type: string
+      placeId:
+        type: string
       title:
         description: Group Title
         type: string
       description:
         description: Group Description
         type: string
+      audit:
+        type: object
       id:
         type: string
-      _audit:
-        $ref: '#/definitions/Audit'
-      ownerId:
-        type: string
-      memberId:
-        type: string
-      placeId:
-        type: string
+    required:
+      - ownerId
+      - placeId
     additionalProperties: false
   Place:
     properties:
+      ownerId:
+        type: string
       description:
         type: string
       floor:
@@ -5369,11 +4800,9 @@ definitions:
         type: object
       title:
         type: string
+      audit:
+        type: object
       id:
-        type: string
-      _audit:
-        $ref: '#/definitions/Audit'
-      ownerId:
         type: string
       user.username:
         type: number
@@ -5396,10 +4825,10 @@ definitions:
         type: string
       type:
         type: string
+      audit:
+        type: object
       id:
         type: string
-      _audit:
-        $ref: '#/definitions/Audit'
     required:
       - floor
       - placeId
@@ -5419,10 +4848,10 @@ definitions:
         type: string
       uniqueIdentifier:
         type: string
+      audit:
+        type: object
       id:
         type: string
-      _audit:
-        $ref: '#/definitions/Audit'
     required:
       - uniqueIdentifier
     additionalProperties: false
@@ -5435,10 +4864,29 @@ definitions:
         format: double
       title:
         type: string
+      audit:
+        type: object
       id:
         type: string
-      _audit:
-        $ref: '#/definitions/Audit'
+    additionalProperties: false
+  Member:
+    properties:
+      groupId:
+        type: string
+      status:
+        type: string
+      username:
+        type: string
+      uniqueIdentifier:
+        type: string
+      placeId:
+        type: string
+      id:
+        type: string
+    required:
+      - groupId
+      - username
+      - placeId
     additionalProperties: false
 swagger: '2.0'
 info:

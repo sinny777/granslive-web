@@ -1,21 +1,94 @@
 
 <div class="container" data-ng-init="initPlacesPage()">
 	<br />
-	<div data-ng-if="selectedPlace.id">
-		<div class="col-sm-8">
-			<h3>{{selectedPlace.title}} </h3>
+	
+	<div >
+		<div class="col-sm-8" >
+			<h3 data-ng-if="places.length == 0"> There are no places mapped with your account </h3>
+			<h3 data-ng-if="selectedPlace.id"> {{selectedPlace.title}} </h3>
 		</div>
 		<div >
 			<div class="btn-group">
-			  <button type="button" class="btn btn-primary" data-ng-if="!show.areas" data-ng-click="showPlaceAreasPanel();">Show Areas</button>
-			  <button type="button" class="btn btn-primary" data-ng-if="!show.addAreaPanel" data-ng-click="showAddAreaPanel();">Add Place Area</button>
+			  <button type="button" class="btn btn-primary" data-ng-click="showAddNewPlacePanel();" data-toggle="tooltip" data-placement="bottom" title="Add New Place"><span class="fa fa-plus" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showUpdatePlacePanel();"data-toggle="tooltip" data-placement="bottom" title="Modify Place Data" ><span class="fa fa-edit" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showDashboard();"><span class="fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" title="Show Dashboard"></span></button>
+			  <!-- <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showAddAreaPanel();">Add Area</button> -->
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showGroups();" data-toggle="tooltip" data-placement="bottom" title="Show Groups"><span class="fa fa-group" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="deletePlace();" data-toggle="tooltip" data-placement="bottom" title="Delete Place"><span class="fa fa-remove" ></span></button>
 			</div>
 		</div>
 	</div>
 	
+	<div class="clear" ></div>
+	<br />
+	
+<div class="row" data-ng-if="display == 'places'">
+	<div class="card col-sm-3" data-ng-repeat="place in places">
+	  <div class="card-block" style="background-image: url('../assets/images/blurred1.jpg');">
+	  	<span class="fa-stack">
+	  		<a href="#" data-ng-click="showSettingsFor(place);">
+	  			<i class="fa fa-circle fa-stack-2x icon-background"></i>
+	  			<i class="fa fa-cogs fa-stack-1x icon-white" data-toggle="tooltip" data-placement="top" title="Settings"></i>
+	  		</a>
+	  	</span>
+	  	
+	  	<h4 class="card-title"><a href="" data-ng-click="showDashBoardForPlace(place);">{{place.title}}</a></h4>
+	    <p>{{place.description}}</p>
+	  </div>
+	  
+		<div style="clear:both;"></div>
+	</div>	
+</div>
+	
+<div class="panel panel-default" data-ng-if="display == 'savePlacePanel'">
+		<div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" href="#placePanel">Add/Update Place</a>
+	      </h4>
+	    </div>
+
+	    <div id="placePanel" class="panel-collapse collapse in">
+		  	
+		  <div class="panel-body">
+		  	<form class="form-horizontal" role="form" method="post" >
+		  		<div class="form-group" >
+			   	  <label for="name" class="col-lg-2 control-label">Floor:</label>
+				  <div class="col-lg-2">
+				    	<select class="form-control" data-ng-model="selectedPlace.floor">
+				    		<option data-ng-repeat="option in floors" value="{{option}}">{{option}}</option>
+					    </select>
+				  </div>
+			    </div>
+				<div class="form-group" >
+				    <label for="name" class="col-lg-2 control-label">Area Title:</label>
+				    <div class="col-lg-4">
+				    	<input type="text" class="form-control" data-ng-model="selectedPlace.title">
+				    </div>
+				</div>
+				<div class="form-group">
+			   		<label for="name" class="col-lg-2 control-label">Description:</label>
+			   		<div class="col-lg-4">
+				    	<textarea class="form-control" data-ng-model="selectedPlace.description" ></textarea>
+				    </div>
+			   	</div>
+				   	  
+			   	  <div class="form-group"> 
+			   	  	<div class="col-lg-offset-2 col-lg-10">
+	      			  	<button type="submit" data-ng-click="savePlace();" data-ng-if="!selectedPlace.id">create</button>
+	      			  	<button type="submit" data-ng-click="savePlace();" data-ng-if="selectedPlace.id">update</button>
+	      			  	<button type="submit" data-ng-click="showPlaces();" >cancel</button>
+					</div>
+			     </div>
+				</form>
+	 		</div>
+		</div>
+	</div>
+	
+	<div class="clearfix" ></div>
+	<div style="clear:both;"></div>
 	<hr>
 	
-	<div class="panel panel-default" data-ng-if="show.addAreaPanel">
+	<div class="panel panel-default" data-ng-if="display == 'savePlaceAreaPanel'">
 			<div class="panel-heading">
 		      <h4 class="panel-title">
 		        <a data-toggle="collapse" href="#areaPanel">Add/Update Place Area</a>
@@ -67,8 +140,13 @@
 			  </div>
 			</div>
 		</div>
+	<div data-ng-if="display == 'groups'">
 	
-	<div class="row" data-ng-if="show.areas">
+		<groups-directive widget-id="myPlaceGroups" selected-place="selectedPlace" current-user="currentUser" />
+		
+	</div>
+	
+	<div class="row" data-ng-if="display == 'dashboard'">
 		<div class="card col-sm-3" data-ng-repeat="placeArea in selectedPlace.placeAreas">
 		  <div class="card-block" style="background-image: url('../assets/images/blurred2.jpg');">
 		  	<span class="fa-stack">

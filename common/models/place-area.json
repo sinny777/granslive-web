@@ -30,20 +30,13 @@
     },
     "type": {
       "type": "string"
+    },
+    "audit": {
+      "type": "object"
     }
   },
   "validations": [],
-  "relations": {
-    "audit": {
-      "type": "embedsOne",
-      "model": "Audit",
-      "property": "audit",
-      "options": {
-        "validate": true,
-        "forceId": false
-      }
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "principalType": "ROLE",
@@ -68,6 +61,12 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "upsert"
     },
     {
       "principalType": "ROLE",

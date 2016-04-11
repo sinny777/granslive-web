@@ -11,6 +11,7 @@ define(function (require) {
                                                    'LocalStorageModule',
 //                                                   'ui.bootstrap',
                                                    'app.config']);
+//    config = require('common/config/config')(commonModule);
     
     commonModule.factory('authService', require('common/services/authService'));
     
@@ -31,6 +32,17 @@ define(function (require) {
             }
           }  
         ]);
+    
+    commonModule.config(['$routeProvider',
+                         function($routeProvider) {
+		$routeProvider.
+			when('/home', {
+				templateUrl: 'scripts/src/common/partials/home.html',
+				controller: 'commonController',
+				controllerAs: 'vm',
+				access: { requiredLogin: false }
+			});
+	}]);
     
 
     return commonModule;

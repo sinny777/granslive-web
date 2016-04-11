@@ -23,11 +23,11 @@ module.exports = function(app) {
     var roles = [{
       name: 'admin',
       users: [{
-        firstName: 'Admin',
-        lastName: 'User',
-        email: 'admin@granslive.com',
-        username: 'admin',
-        password: 'admin'
+        firstName: 'GransLive',
+        lastName: 'Admin',
+        email: 'contact@granslive.com',
+        username: 'granslive',
+        password: '1SatnamW'
       }]
     }, {
       name: 'guest',

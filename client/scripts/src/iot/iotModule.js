@@ -15,9 +15,11 @@ define(function (require) {
     iotModule.factory('authService', require('common/services/authService'));
     
     iotModule.controller('placeController', require('iot/controllers/placeController'));
-
+    iotModule.controller('groupsController', require('iot/controllers/groupsController'));
+    
     iotModule.directive('fileModel', require('common/directives/fileModelDirective'));
     iotModule.directive('toggle', require('common/directives/toggleDirective'));
+    iotModule.directive('groupsDirective', require('iot/directives/groupsDirective'));
     
     iotModule.filter('interpolate', ['version', function(version) {
         return function(text) {
@@ -31,6 +33,20 @@ define(function (require) {
             }
           }  
         ]);
+    
+    iotModule.config(['$routeProvider',
+                         function($routeProvider) {
+		$routeProvider.
+			when('/places', {
+	            templateUrl: 'scripts/src/iot/partials/places.html',
+	            controller: 'placeController',
+	            controllerAs: 'vm',
+	            access: { requiredLogin: false }
+	        }).
+	        otherwise({
+	            redirectTo: '/home'
+	        });
+	}]);
     
 
     return iotModule;

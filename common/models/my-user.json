@@ -6,7 +6,17 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "provider": {
+      "type": "string"
+    },
+    "profile": {
+      "type": "object"
+    },
+    "audit": {
+      "type": "object"
+    }
+  },
   "validations": [],
   "relations": {
     "accessTokens": {
@@ -29,21 +39,7 @@
       "model": "Role",
       "foreignKey": "principalId",
       "through": "RoleMapping"
-    },
-    "audit": {
-	    "type": "embedsOne",
-	    "model": "Audit",
-	    "property": "audit",
-	    "options": {
-	      "validate": true,
-	      "forceId": false
-	    }
-	},
-	"groups": {
-	    "type": "hasMany",
-	    "model": "Group",
-	    "foreignKey": "memberId"
-	   }
+    }
   },
   "acls": [
     {

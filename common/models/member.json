@@ -1,26 +1,30 @@
 {
-  "name": "Device",
+  "name": "Member",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "description": {
+    "groupId": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "status": {
-      "type": "number",
+      "type": "string",
       "required": false
     },
-    "title": {
+    "username": {
       "type": "string",
-      "required": false,
-      "index": false
+      "required": true
     },
-    "audit": {
-      "type": "object"
+    "uniqueIdentifier": {
+      "type": "string",
+      "required": false
+    },
+    "placeId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

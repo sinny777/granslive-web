@@ -31,20 +31,13 @@
       "type": "string",
       "required": true,
       "index": false
+    },
+    "audit": {
+      "type": "object"
     }
   },
   "validations": [],
-  "relations": {
-    "audit": {
-      "type": "embedsOne",
-      "model": "Audit",
-      "property": "audit",
-      "options": {
-        "validate": true,
-        "forceId": false
-      }
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "principalType": "ROLE",

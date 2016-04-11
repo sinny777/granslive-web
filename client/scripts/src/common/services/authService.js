@@ -56,79 +56,65 @@ define(['angular'], function (angular) {
 	    		var findUserReq = {filter: {where: {"_id": userId}}};
 	    		MyUser.findById({id:userId}).$promise.then(function(userObj){
 	    			console.log('userObj: >>>>>>>>>> ', userObj);
+	    			
+	    			Auth.currentUser = userObj;
+					Auth.setUser(accessTokenId, userId, Auth.currentUser);
+    				Auth.save();
+	    			
 	    			if(!userObj.profile){
-	    				var findReq = {filter: {where: {"userId": userObj.id}}};
-	    				MyUser.identities({id:userId}).$promise.then(function(userIdentityObj){
-	    					console.log('USERIDENTITY OBJ: >>>>>', userIdentityObj);
-	    					if(userIdentityObj && userIdentityObj[0]){
-	    						userObj.profile = userIdentityObj[0].profile._json;
-	    					}
-	    					
-	    					if(userIdentityObj && userIdentityObj.profile){
-	    						userObj.profile = userIdentityObj.profile._json;
-	    					}
-	    					/*
-	    					MyUser.upsert(userObj).$promise.then(function(userIdentityObj){
-	    						console.log('USER UPDATED SUCCESSFULLY >>>>>> ');
-	    					});
-	    					*/
-	    					Auth.currentUser = userObj;
-	    					Auth.setUser(accessTokenId, userId, Auth.currentUser);
-	        				Auth.save();
-	        				if(callback){
-	        			    	  callback(Auth.currentUser);
-	        			      }
-		    			},
-		    			function(err){
-		    				console.log('ERROR: >>>>> ', err);
-		    				if(callback){
-	        			    	  callback(Auth.currentUser);
-	        			      }
-		    			});
+	    				Auth.getUserProfileData(userObj, callback);
 	    			}else{
-	    				Auth.currentUser = userObj;
-	    				Auth.setUser(accessTokenId, userId, Auth.currentUser);
-	    				Auth.save();
 	    				if(callback){
 	    			    	  callback(Auth.currentUser);
 	    			      }
 	    			}	    			
 	    		});
+	        }else{
+	        	if(callback){
+			    	  callback(Auth.currentUser);
+			      }
 	        }
 	    } else {
 	      // Fetch the actual user data.
 	      Auth.currentUser = MyUser.getCurrent(function(userData) {
 	        console.log("Current User Fetch Success:", userData);
-	        Auth.currentUser = userData;
-    			console.log('USER OBJ: >>>>>> ', Auth.currentUser);
-    			if(Auth.currentUser){
-    				var findReq = {filter: {where: {"userId": userData.id}}};
-    				MyUser.identities({id:userId}).$promise.then(function(userIdentityObj){
-	    				Auth.currentUser = userData;
-	    				console.log('userIdentityObj:>>>>> ' , userIdentityObj);
-	    				Auth.currentUser.profile = userIdentityObj[0].profile._json;
-	    				console.log('Auth.currentUser: >>> ', Auth.currentUser);
-	    				if(callback){
-	    			    	  callback(Auth.currentUser);
-	    			      }
-	    			},
-	    			function(err){
-	    				console.log('ERROR: >>>>> ', err);
-	    				if(callback){
-        			    	  callback(Auth.currentUser);
-        			      }
-	    			});
-    			}
-	        
+	        Auth.getUserProfileData(userData, callback);	        
 	      },
 	      function(err) {
 	        console.log("Current User Fetch Failed:", err);
 	      });
 	    }
-	    if(callback){
-	    	  callback(Auth.currentUser);
-	      }
 	  };
+	  
+	  Auth.getUserProfileData = function(userObj, callback){
+		  if(userObj && !userObj.profile){
+			  Auth.currentUser = userObj;
+				var findReq = {filter: {where: {"userId": userObj.id}}};
+				MyUser.identities({id: userObj.id}).$promise.then(function(userIdentityObj){
+  				console.log('userIdentityObj:>>>>> ' , userIdentityObj);
+  				if(userIdentityObj && userIdentityObj[0]){
+  					userObj.provider = userIdentityObj[0].provider;
+					userObj.profile = userIdentityObj[0].profile._json;
+				}
+				
+				if(userIdentityObj && userIdentityObj.profile){
+					userObj.provider = userIdentityObj.provider;
+					userObj.profile = userIdentityObj.profile._json;
+				}
+				Auth.currentUser = userObj;
+  				console.log('Auth.currentUser: >>> ', Auth.currentUser);
+  				if(callback){
+  			    	  callback(userObj);
+  			      }
+	  			},
+	  			function(err){
+	  				console.log('ERROR: >>>>> ', err);
+	  				if(callback){
+	  			    	  callback(Auth.currentUser);
+	  			      }
+	  			});
+			}
+	  }
 
 	  /**
 	   * Check if a user is logged in
@@ -142,13 +128,22 @@ define(['angular'], function (angular) {
 	    return false;
 	  };
 	  
-	  Auth.login = function(credentials) {
-		 return MyUser.login(credentials);
+	  Auth.login = function(credentials, callback) {
+		  MyUser.login(credentials).$promise.then(function(userObj){
+			  userObj.provider = 'granslive';
+			  if(userObj.user){
+				  userObj.profile = userObj.user;
+				  userObj.user = null;
+			  }
+			  if(callback){
+				  callback(userObj);
+			  }
+			  return userObj;
+		 });
 	  };
 
-	  Auth.logout = function() {
-		  MyUser.logout();
-//		 Delete the user data cached locally.
+	  Auth.logout = function(callback) {
+		  MyUser.logout().$promise.then(function(resp) {
 		    Auth.currentUser = null;
 		    Auth.clearUser();
 		    Auth.clearStorage();
@@ -157,6 +152,26 @@ define(['angular'], function (angular) {
 		    $cookies.remove('userId');
 		    delete $cookies['access_token'];
 		    delete $cookies['userId'];
+		    console.log('User logged out successfully >>>>>>>> ');
+		    if(callback){
+		    	callback();
+		    }
+		    
+		  }).catch(function(){
+			 console.log('ERROR in Logout call >>>> '); 
+			 Auth.currentUser = null;
+			    Auth.clearUser();
+			    Auth.clearStorage();
+			    Auth.save();
+			    $cookies.remove('access_token');
+			    $cookies.remove('userId');
+			    delete $cookies['access_token'];
+			    delete $cookies['userId'];
+			    console.log('User cleared out successfully >>>>>>>> ');
+			    if(callback){
+			    	callback();
+			    }
+		  });
 	  };
 
 	  /**

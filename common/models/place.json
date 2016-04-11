@@ -8,6 +8,9 @@
     "validateUpsert": true
   },
   "properties": {
+    "ownerId": {
+      "type": "string"
+    },
     "description": {
       "type": "string"
     },
@@ -22,29 +25,23 @@
       "type": "string",
       "required": true,
       "index": false
+    },
+    "audit": {
+      "type": "object"
     }
   },
   "validations": [],
   "relations": {
-    "audit": {
-      "type": "embedsOne",
-      "model": "Audit",
-      "property": "audit",
-      "options": {
-        "validate": true,
-        "forceId": false
-      }
-    },
     "owner": {
-        "type": "belongsTo",
-        "model": "MyUser",
-        "foreignKey": "ownerId"
-     },
-	 "groups": {
+      "type": "belongsTo",
+      "model": "MyUser",
+      "foreignKey": "ownerId"
+    },
+    "groups": {
       "type": "hasMany",
       "model": "Group",
       "foreignKey": "placeId"
-     }
+    }
   },
   "acls": [
     {
@@ -73,7 +70,19 @@
     },
     {
       "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "upsert"
+    },
+    {
+      "principalType": "ROLE",
       "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "deleteById"
     }

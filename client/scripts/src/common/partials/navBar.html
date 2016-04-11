@@ -72,8 +72,8 @@
 					</ul>
 		        </li>
 		        <li class="dropdown" data-ng-if="currentUser.id">
-		          <a data-ng-if="currentUser.profile" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.profile.name}}</b> <span class="caret"></span></a>
-		          <a data-ng-if="!currentUser.profile" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.username}}</b> <span class="caret"></span></a>
+		          <a data-ng-if="currentUser.provider == 'granslive'" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.profile.username}}</b> <span class="caret"></span></a>
+		          <a data-ng-if="currentUser.provider != 'granslive'" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.profile.name}}</b> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 			            <li><a href="#!/account">Account Settings</a></li>
 						<li><a href="#!/places">My Places</a></li>
@@ -88,3 +88,4 @@
     </nav>
     <!-- .navbar -->
 </div>
+<div class="clearfix" />
