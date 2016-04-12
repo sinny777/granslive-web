@@ -88,6 +88,11 @@ img {
     color: #333;
 }
 
+.small-font{
+    font-size: 11px;
+    padding: 5px 5px
+}
+
 .card-title {
     color: #fff;
 }

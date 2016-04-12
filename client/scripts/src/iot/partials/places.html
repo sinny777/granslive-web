@@ -9,12 +9,12 @@
 		</div>
 		<div >
 			<div class="btn-group">
-			  <button type="button" class="btn btn-primary" data-ng-click="showAddNewPlacePanel();" data-toggle="tooltip" data-placement="bottom" title="Add New Place"><span class="fa fa-plus" ></span></button>
+			  <button type="button" class="btn btn-primary {{display == 'savePlacePanel' ? 'active': ''}}" data-ng-click="showAddNewPlacePanel();" data-toggle="tooltip" data-placement="bottom" title="Add New Place"><span class="fa fa-plus" ></span></button>
 			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showUpdatePlacePanel();"data-toggle="tooltip" data-placement="bottom" title="Modify Place Data" ><span class="fa fa-edit" ></span></button>
-			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showDashboard();"><span class="fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" title="Show Dashboard"></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary {{display == 'dashboard' ? 'active': ''}}" data-ng-click="showDashboard();"><span class="fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" title="Show Dashboard"></span></button>
 			  <!-- <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showAddAreaPanel();">Add Area</button> -->
-			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showGroups();" data-toggle="tooltip" data-placement="bottom" title="Show Groups"><span class="fa fa-group" ></span></button>
-			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="deletePlace();" data-toggle="tooltip" data-placement="bottom" title="Delete Place"><span class="fa fa-remove" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary {{display == 'groups' ? 'active': ''}}" data-ng-click="showGroups();" data-toggle="tooltip" data-placement="bottom" title="Show Groups"><span class="fa fa-group" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="deletePlace();" data-toggle="tooltip" data-placement="bottom" title="Delete Place"><span class="fa fa-trash-o" ></span></button>
 			</div>
 		</div>
 	</div>

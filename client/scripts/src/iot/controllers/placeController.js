@@ -84,17 +84,6 @@ define(function () {
 		  $scope.display = "groups";
 	  };
 	  
-	  $scope.showAddNewGroupPanel = function(){
-		  console.log('IN showAddNewGroupPanel: ');
-		  $scope.selectedGroup = {};
-		  $scope.display = "saveGroupPanel";
-	  };
-	  
-	  $scope.showUpdateGroupPanel = function(){
-		  console.log('IN showUpdateGroupPanel: ');
-		  $scope.display = "saveGroupPanel";
-	  };
-	  
     $scope.fetchMyPlaces = function(){
     	console.log('IN fetchMyPlaces for User >>>>>>>>>> ', $rootScope.currentUser);
     	
