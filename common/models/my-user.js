@@ -1,4 +1,6 @@
 module.exports = function(MyUser) {
+	
+	var loopback = require('loopback');
 
 	MyUser.observe('before save', function updateTimestamp(ctx, next) {
 		console.log('\n\nInside MyUser.js before save: ');
@@ -19,5 +21,16 @@ module.exports = function(MyUser) {
 		  }
 		  next();
 		});
+	
+	MyUser.afterRemote('login', function(context, remoteMethodOutput, next) {
+	    console.log('\n\nIN MyUser.js, afterRemote login method, remoteMethodOutput >>>>>>>', remoteMethodOutput);
+	    
+	    if(loopback){
+	    	loopback.getCurrentContext().set('currentUser', remoteMethodOutput);
+	    	console.log('CurrentUser set in loopbackContext successfully >>>>>> ', loopback.getCurrentContext().get('currentUser'));
+	    }
+    	
+	    next();
+	  });
 	
 };

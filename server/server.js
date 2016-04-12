@@ -72,6 +72,7 @@ app.middleware('session', loopback.session({
 
 passportConfigurator.init();
 
+app.use(loopback.context());
 //The access token is only available after boot
 app.use(loopback.token({
   model: app.models.accessToken

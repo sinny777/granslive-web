@@ -5,7 +5,6 @@ module.exports = function(app) {
 		console.log(req.accessToken);
 		/*
 		var MyUser = app.models.MyUser;
-		var UserIdentity = app.models.UserIdentity;
 		MyUser.findById(req.accessToken.userId, function(err, userObj){
 			if (err) {
 		    	  console.log("\n\nERROR IN User.findById:>>>>>>>>>> ", err);
@@ -19,7 +18,6 @@ module.exports = function(app) {
 		    if (loopbackContext) loopbackContext.set('currentUser', userObj);
 		    
 		});
-		
 		*/
 		
 		res.redirect('/#!/home');

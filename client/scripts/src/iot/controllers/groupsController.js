@@ -114,17 +114,17 @@ define(function () {
     $scope.inviteNewMember = function(){
     	console.log('Member to invite: >>>', $scope.member);
     	
-    	$scope.selectedGroup = Member.create($scope.member,
+    	Member.create($scope.member,
     			  function(member) { 
     	    		$rootScope.loadingScreen.hide();
     	    		$scope.member = member;
     				console.log('MEMBER INVITED: >>>> ', member);
-    				$scope.showGroups();
+    				$scope.fetchAndShowGroups();
     			  },
     			  function(errorResponse) {
     				  $rootScope.loadingScreen.hide();
     				  console.log(errorResponse);
-    				  $scope.showGroups();
+    				  $scope.fetchAndShowGroups();
     			  });
     };
     
@@ -132,6 +132,21 @@ define(function () {
     	console.log('In cancelAddMember: >>>');
     	$scope.selectedGroup = {};
     	$scope.showAddMember = '';
+    };
+    
+    $scope.deleteMember = function(member){
+    	$rootScope.loadingScreen.show();
+    	Member.deleteById({id: member.id},
+		  function(resp) { 
+			console.log('MEMBER DELETED: >>>> ', resp);
+			$rootScope.loadingScreen.hide();
+			$scope.fetchAndShowGroups();
+		  },
+		  function(errorResponse) { 
+			  $rootScope.loadingScreen.hide();
+			  console.log(errorResponse);
+			  $scope.fetchAndShowGroups();
+		  });
     };
     
   }

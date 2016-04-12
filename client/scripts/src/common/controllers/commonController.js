@@ -19,7 +19,7 @@ define(function () {
     	console.log("IN checkUser: >>>>>>>> ", $rootScope.currentUser);
     	$rootScope.loadingScreen.show();
     	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
-    		$rootScope.currentUser = authService.ensureCurrentUser(function(currentUser){
+    		authService.ensureCurrentUser(function(currentUser){
     			$rootScope.loadingScreen.hide();
     			$rootScope.currentUser = currentUser;
     			if(callback){
@@ -33,7 +33,6 @@ define(function () {
     };
 
     $rootScope.login = function(){
-    	console.log("IN LOGIN Call for: ", $rootScope.loginCredentials); 
     	authService.login($rootScope.loginCredentials, function(userObj){
     		console.log('USER OBJ AFTER LOGIN: >>>>>> ', userObj);
     		$rootScope.currentUser = userObj;

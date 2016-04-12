@@ -1,8 +1,9 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, authService, Place, PlaceArea, Group){
+  function ctrl($rootScope, $scope, authService, Place, PlaceArea, Member){
 	  
+	  $scope.memberships = [];
 	  $scope.places = [];
 	  $scope.selectedPlace = {floor: 'Ground'};
 	  $scope.display = 'places';
@@ -29,7 +30,7 @@ define(function () {
 				  $scope.floors.push(''+i);
 			  }
 			  if($scope.places.length == 0){
-				  $scope.fetchMyPlaces();
+				  $scope.fetchMyMembership();
 			  }
 		  });
 	  }
@@ -48,7 +49,7 @@ define(function () {
 	  $scope.showPlaces = function(){
 		  console.log('IN showPlaces: ');
 		  if($scope.places.length == 0){
-			  $scope.fetchMyPlaces();
+			  $scope.fetchMyMembership();
 		  }if($scope.places.length == 1){
 			  $scope.selectedPlace = $scope.places[0];
 			  $scope.showDashboard();
@@ -84,10 +85,45 @@ define(function () {
 		  $scope.display = "groups";
 	  };
 	  
+	  $scope.fetchMyMembership = function(){
+	    	console.log('IN fetchMyMembership for User >>>>>>>>>> ', $rootScope.currentUser);
+	    	
+	    	var username = $rootScope.currentUser.profile && $rootScope.currentUser.profile.username;
+	    	if(!username){
+	    		username = $rootScope.currentUser.username;
+	    	}
+	    	var email = $rootScope.currentUser.profile && $rootScope.currentUser.profile.email;
+	    	if(!email){
+	    		email = $rootScope.currentUser.email;
+	    	}
+	    	
+	    	var findReq = {"filter": {"where": {"or": [{"username":username}, {"username":email}]}}};
+	    	console.log(findReq);
+	    	$rootScope.loadingScreen.show();
+	    	Member.find(findReq,
+			  function(list) { 
+				  $rootScope.loadingScreen.hide();
+				  $scope.memberships = list;
+				  $scope.fetchMyPlaces();
+			  },
+    		  function(errorResponse) { 
+				  $rootScope.loadingScreen.hide();
+				  console.log(errorResponse);
+				  $scope.fetchMyPlaces();
+			  });
+	    };
+	  
     $scope.fetchMyPlaces = function(){
     	console.log('IN fetchMyPlaces for User >>>>>>>>>> ', $rootScope.currentUser);
-    	
-    	var findReq = {filter: {where: {"ownerId": $scope.ownerId}}};
+    	console.log('MEMBERSHIPS: >>>> ', $scope.memberships);
+    	var findReq = {filter: {where: {or: [{ownerId: $scope.ownerId}]}}};
+    	var placeIds = [];
+		  angular.forEach($scope.memberships, function(membership) {
+			  placeIds.push(membership.placeId);
+			});
+		if(placeIds.length > 0){
+			findReq.filter.where.or.push({id: {inq: placeIds}});
+		} 
     	console.log(findReq);
     	$rootScope.loadingScreen.show();
     	$scope.places = Place.find(findReq,
@@ -194,7 +230,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', 'authService', 'Place', 'PlaceArea', 'Group'];
+  ctrl.$inject = ['$rootScope', '$scope', 'authService', 'Place', 'PlaceArea', 'Member'];
   return ctrl;
 
 });
