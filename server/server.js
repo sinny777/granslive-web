@@ -1,6 +1,10 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-var serveStatic = require('serve-static')
+var serveStatic = require('serve-static');
+
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+var store = new RedisStore({ host: '127.0.0.1' });
 
 var app = module.exports = loopback();
 
@@ -64,6 +68,7 @@ app.middleware('auth', loopback.token({
 
 app.middleware('session:before', loopback.cookieParser(app.get('cookieSecret')));
 app.middleware('session', loopback.session({
+  "store": store,
   secret: 'kitty',
   saveUninitialized: true,
   duration: 30 * 60 * 1000,
