@@ -32,12 +32,15 @@ module.exports = function(grunt) {
           // Need some work in Compile task.  Currently its not it use
             compile: {
                 options: {
+                	uglify2: {
+                        mangle: false
+                    },
                     baseUrl: 'client/scripts/src',
                     mainConfigFile: 'client/scripts/src/main.js',
                     preserveLicenseComments: false, //comment in production
                     out: 'client/scripts/webapp.min.js',
-                  //  optimize: 'uglify2',
-                    include: ['/main.js']
+                    optimize: 'uglify2',
+                    include: ['main.js']
         
                 }
             }
@@ -62,5 +65,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('start', ['nodemon']);
 
-    grunt.registerTask('default', ['init']);
+    grunt.registerTask('default', ['init', 'compile']);
 };
