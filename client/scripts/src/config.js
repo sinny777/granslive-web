@@ -1,5 +1,7 @@
 /*global define */
 
+//API_URL: 'https://granslive-web.mybluemix.net/api'
+
 define(['angular'], function (angular) {
 	'use strict';
   

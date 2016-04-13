@@ -76,8 +76,9 @@ define(['angular'], function (angular) {
 	        }
 	    } else {
 	      // Fetch the actual user data.
-	      MyUser.getCurrent().$promise.then(function(userData) {
-	        console.log("Current User Fetch Success:", userData);
+	      console.log('Auth.currentUserId: >> ', Auth.currentUserId);
+	      MyUser.getCurrent(function(userData) {
+	        console.log("Current User Fetch Success: >>> ", userData);
 	        Auth.currentUser = userData;
 	        if(callback){
 		    	  callback(userData);
@@ -85,7 +86,9 @@ define(['angular'], function (angular) {
 	      },
 	      function(err) {
 	        console.log("Current User Fetch Failed:", err);
+	        callback(null);
 	      });
+	      
 	    }
 	  };
 	  

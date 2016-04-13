@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, authService, Place, PlaceArea, Member){
+  function ctrl($rootScope, $scope, authService, Place, PlaceArea, Group){
 	  
 	  $scope.memberships = [];
 	  $scope.places = [];
@@ -11,6 +11,16 @@ define(function () {
 	  
 	  $scope.placeAreaTypes = ['LIVING_ROOM', 'BED_ROOM', 'BATHROOM', 'KITCHEN', 'STORE', 'GALLERY', 'PARKING', 'BALCONY', 'OTHER'];
 	  $scope.floors = ['Ground'];
+	  
+	  $scope.$watch(
+              "selectedPlace",
+              function handleFooChange(newValue, oldValue ) {
+                  console.log( "selectedPlace newValue:", newValue);
+                  if(newValue.id){
+                	  $scope.handlePermissions();
+                  }
+              }
+          );
 	  
 	  $scope.initPlacesPage = function(){
 		  console.log('IN initPlacesPage for User >>>>>>>>>> ', $rootScope.currentUser);
@@ -33,6 +43,17 @@ define(function () {
 				  $scope.fetchMyMembership();
 			  }
 		  });
+	  };
+	  
+	  $scope.handlePermissions = function(){
+		  
+		  if(!$rootScope.currentUser.permissions){
+			  $rootScope.currentUser.permissions = {};
+		  }
+		  
+		  if($scope.selectedPlace.id){
+			  $rootScope.currentUser.permissions.placeOwner = $scope.selectedPlace.ownerId == $scope.ownerId;
+		  }
 	  }
 	  
 	  $scope.showAddNewPlacePanel = function(){
@@ -88,29 +109,31 @@ define(function () {
 	  $scope.fetchMyMembership = function(){
 	    	console.log('IN fetchMyMembership for User >>>>>>>>>> ', $rootScope.currentUser);
 	    	
-	    	var username = $rootScope.currentUser.profile && $rootScope.currentUser.profile.username;
-	    	if(!username){
-	    		username = $rootScope.currentUser.username;
-	    	}
 	    	var email = $rootScope.currentUser.profile && $rootScope.currentUser.profile.email;
 	    	if(!email){
 	    		email = $rootScope.currentUser.email;
 	    	}
 	    	
-	    	var findReq = {"filter": {"where": {"or": [{"username":username}, {"username":email}]}}};
-	    	console.log(findReq);
-	    	$rootScope.loadingScreen.show();
-	    	Member.find(findReq,
-			  function(list) { 
-				  $rootScope.loadingScreen.hide();
-				  $scope.memberships = list;
-				  $scope.fetchMyPlaces();
-			  },
-    		  function(errorResponse) { 
-				  $rootScope.loadingScreen.hide();
-				  console.log(errorResponse);
-				  $scope.fetchMyPlaces();
-			  });
+	    	var findReq = {
+	    					filter:{
+			    			  		 where: {"or": [{"members": {"elemMatch": {"username": {"$eq": email}}}},
+			    			  		                {"ownerId":$scope.ownerId}]}
+	    				   		   }
+	    					};
+	    	console.log('findReq: >>> ', findReq);
+	    	Group.find(findReq,
+	  			  function(list) { 
+	    			  console.log('RESPONSE of GROUP.find: >>>>> ', list);
+	  				  $rootScope.loadingScreen.hide();
+	  				  $scope.memberships = list;
+	  				  $scope.fetchMyPlaces();
+	  			  },
+	      		  function(errorResponse) { 
+	  				  $rootScope.loadingScreen.hide();
+	  				  console.log(errorResponse);
+	  				  $scope.fetchMyPlaces();
+	  			  });
+	    	
 	    };
 	  
     $scope.fetchMyPlaces = function(){
@@ -230,7 +253,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', 'authService', 'Place', 'PlaceArea', 'Member'];
+  ctrl.$inject = ['$rootScope', '$scope', 'authService', 'Place', 'PlaceArea', 'Group'];
   return ctrl;
 
 });

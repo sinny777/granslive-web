@@ -7,6 +7,18 @@
     "validateUpsert": true
   },
   "properties": {
+    "audit": {
+      "type": "object"
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "description": "Group Description"
+    },
+    "members": {
+      "type": "object",
+      "required": false
+    },
     "ownerId": {
       "type": "string",
       "required": true
@@ -20,14 +32,6 @@
       "type": "string",
       "required": false,
       "description": "Group Title"
-    },
-    "description": {
-      "type": "string",
-      "required": false,
-      "description": "Group Description"
-    },
-    "audit": {
-      "type": "object"
     }
   },
   "validations": [],

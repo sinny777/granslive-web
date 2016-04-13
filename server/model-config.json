@@ -72,9 +72,5 @@
   "Group": {
     "dataSource": "smarthome",
     "public": true
-  },
-  "Member": {
-    "dataSource": "smarthome",
-    "public": true
   }
 }

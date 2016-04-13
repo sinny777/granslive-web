@@ -16,12 +16,13 @@ define(function () {
     };
 	  
     $rootScope.checkUser = function(callback){
-    	console.log("IN checkUser: >>>>>>>> ", $rootScope.currentUser);
+    	console.log("IN checkUser 1: >>>>>>>> ", $rootScope.currentUser);
     	$rootScope.loadingScreen.show();
     	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
     		authService.ensureCurrentUser(function(currentUser){
     			$rootScope.loadingScreen.hide();
     			$rootScope.currentUser = currentUser;
+    			console.log("IN checkUser 2: >>>>>>>> ", $rootScope.currentUser);
     			if(callback){
     				callback($rootScope.currentUser);
     			}
