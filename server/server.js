@@ -1,5 +1,6 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var serveStatic = require('serve-static')
 
 var app = module.exports = loopback();
 
@@ -7,6 +8,8 @@ var app = module.exports = loopback();
 var loopbackPassport = require('loopback-component-passport');
 var PassportConfigurator = loopbackPassport.PassportConfigurator;
 var passportConfigurator = new PassportConfigurator(app);
+
+app.use(serveStatic(__dirname + '/client'))
 
 //Bootstrap the application, configure models, datasources and middleware.
 //Sub-apps like REST API are mounted via boot scripts.

@@ -28,7 +28,9 @@ define(function () {
     		});
     	}else{
     		$rootScope.loadingScreen.hide();
-    		callback($rootScope.currentUser);
+    		if(callback){
+				callback($rootScope.currentUser);
+			}
     	}
     };
 

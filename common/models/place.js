@@ -32,8 +32,7 @@ module.exports = function(Place, Member) {
 	    var ownerId = context.query && context.query.where && context.query.where.ownerId;
 	    
 	    if(loopback){
-	    	var curren
-	    	tUser = loopback.getCurrentContext().get('currentUser');
+	    	var currentUser = loopback.getCurrentContext().get('currentUser');
 	    	console.log('currentUser 1: >>>>> ', currentUser);
 	    	if(currentUser){
 	    		findMembers(currentUser.id);
