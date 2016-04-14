@@ -24,12 +24,6 @@ module.exports = function(MyUser) {
 	
 	MyUser.afterRemote('login', function(context, remoteMethodOutput, next) {
 	    console.log('\n\nIN MyUser.js, afterRemote login method, remoteMethodOutput >>>>>>>', remoteMethodOutput);
-	    
-	    if(loopback){
-	    	loopback.getCurrentContext().set('currentUser', remoteMethodOutput);
-	    	console.log('CurrentUser set in loopbackContext successfully >>>>>> ', loopback.getCurrentContext().get('currentUser'));
-	    }
-    	
 	    next();
 	  });
 	

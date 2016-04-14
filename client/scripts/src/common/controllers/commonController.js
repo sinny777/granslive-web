@@ -16,7 +16,6 @@ define(function () {
     };
 	  
     $rootScope.checkUser = function(callback){
-    	console.log("IN checkUser 1: >>>>>>>> ", $rootScope.currentUser);
     	$rootScope.loadingScreen.show();
     	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
     		authService.ensureCurrentUser(function(currentUser){

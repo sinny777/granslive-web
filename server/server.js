@@ -2,12 +2,14 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 var serveStatic = require('serve-static');
 
+/*
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var store = new RedisStore({ host: '127.0.0.1' });
 if (require.main === module) {
    store.client.unref();
 }
+*/
 
 var app = module.exports = loopback();
 
@@ -16,7 +18,7 @@ var loopbackPassport = require('loopback-component-passport');
 var PassportConfigurator = loopbackPassport.PassportConfigurator;
 var passportConfigurator = new PassportConfigurator(app);
 
-app.use(serveStatic(__dirname + '/client'))
+app.use(serveStatic(__dirname + '/client'));
 
 //Bootstrap the application, configure models, datasources and middleware.
 //Sub-apps like REST API are mounted via boot scripts.
@@ -69,9 +71,9 @@ app.middleware('auth', loopback.token({
   model: app.models.accessToken
 }));
 
+
 app.middleware('session:before', loopback.cookieParser(app.get('cookieSecret')));
 app.middleware('session', loopback.session({
-  store: store,
   secret: 'kitty',
   saveUninitialized: true,
   duration: 30 * 60 * 1000,
@@ -88,6 +90,27 @@ app.use(loopback.context());
 app.use(loopback.token({
   model: app.models.accessToken
 }));
+
+app.use(function setCurrentUser(req, res, next) {
+    if (!req.accessToken || loopback.getCurrentContext().get('currentUser')) {
+        return next();
+    }
+    app.models.MyUser.findById(req.accessToken.userId, function(err, user) {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          return next(new Error('No user with this access token was found.'));
+        }
+
+        var loopbackContext = loopback.getCurrentContext();
+        if (loopbackContext) {
+              loopbackContext.set('currentUser', user);
+              console.log('CurrentUser set in loopbackContext successfully >>>>>> ', user);
+        }
+        next();
+     });
+});
 
 //We need flash messages to see passport errors
 app.use(flash());

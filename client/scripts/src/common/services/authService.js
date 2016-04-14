@@ -139,7 +139,7 @@ define(['angular'], function (angular) {
 			  userObj.provider = 'granslive';
 			  if(userObj.user){
 				  userObj.profile = userObj.user;
-				  userObj.user = null;
+				  delete userObj.user;
 			  }
 			  if(callback){
 				  callback(userObj);

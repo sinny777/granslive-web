@@ -81,6 +81,7 @@ define(function () {
 	  
 	  $scope.showDashboard = function(){
 		  console.log('IN showDashboard: ');
+		  $scope.selectedPlaceArea = {};
 		  $scope.display = "dashboard";
 	  };
 	  
@@ -90,8 +91,9 @@ define(function () {
 		  $scope.display = "savePlaceAreaPanel";
 	  };
 	  
-	  $scope.showUpdatePlaceAreaPanel = function(){
+	  $scope.showUpdatePlaceAreaPanel = function(placeArea){
 		  console.log('IN showUpdatePlaceAreaPanel: ');
+		  $scope.selectedPlaceArea = placeArea;
 		  $scope.display = "savePlaceAreaPanel";
 	  };
 	  
@@ -121,11 +123,12 @@ define(function () {
 	    				   		   }
 	    					};
 	    	console.log('findReq: >>> ', findReq);
+	    	$rootScope.loadingScreen.show();
 	    	Group.find(findReq,
 	  			  function(list) { 
 	    			  console.log('RESPONSE of GROUP.find: >>>>> ', list);
-	  				  $rootScope.loadingScreen.hide();
 	  				  $scope.memberships = list;
+	  				  $rootScope.loadingScreen.hide();
 	  				  $scope.fetchMyPlaces();
 	  			  },
 	      		  function(errorResponse) { 
@@ -220,11 +223,26 @@ define(function () {
     	}
     	
     	$rootScope.loadingScreen.show();
-    	$scope.selectedPlaceArea = PlaceArea.create($scope.selectedPlaceArea,
+    	PlaceArea.upsert($scope.selectedPlaceArea,
 		  function(placeArea) {
-    		  $rootScope.loadingScreen.hide();
+    		  if(!$scope.selectedPlace.placeAreas){
+    			  $scope.selectedPlace.placeAreas = [];
+    			  $scope.selectedPlace.placeAreas.push(placeArea);
+    		  }else{
+    			  var updated = false;
+    			  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
+					  if(area.id == placeArea.id){
+						  area = placeArea;
+						  updated = true;
+					  }
+					});
+    			  if(!updated){
+    				  $scope.selectedPlace.placeAreas.push(placeArea); 
+    			  }
+    		  }
 			  $scope.selectedPlaceArea = placeArea;
 			  console.log('PLACE AREA SAVED: >>>> ', placeArea);
+			  $rootScope.loadingScreen.hide();
 			  $scope.showDashboard();
 		  },
 		  function(errorResponse) { 
@@ -239,10 +257,10 @@ define(function () {
     		console.log('FETCH AREAS FOR PLACE: ', $scope.selectedPlace);
     		var findReq = {filter: {where: {placeId: $scope.selectedPlace.id}}};
     		$rootScope.loadingScreen.show();
-    		$scope.selectedPlace.placeAreas = PlaceArea.find(findReq,
+    		PlaceArea.find(findReq,
       			  function(list) { 
-    				  $rootScope.loadingScreen.hide();
     				  $scope.selectedPlace.placeAreas = list;
+    				  $rootScope.loadingScreen.hide();
       			  },
   	    		  function(errorResponse) { 
       				  $rootScope.loadingScreen.hide();

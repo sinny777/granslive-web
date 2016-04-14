@@ -24,15 +24,12 @@ module.exports = function(Place, Member) {
 	
 	// remote method before hook
 	  Place.beforeRemote('find', function(context, unused, next) {
-	    console.log('IN Place.js, beforeRemote find method >>>>>>>');
 	    var accessToken = context.req && context.req.accessToken;
 		var userId = accessToken && accessToken.userId;
-	    console.log('userId: >>> ', userId);
 	    var ownerId = context.query && context.query.where && context.query.where.ownerId;
-	    
 	    if(loopback){
-	    	var currentUser = loopback.getCurrentContext().get('currentUser');
-	    	console.log('currentUser 1: >>>>> ', currentUser);
+	    	var currentUser = loopback.getCurrentContext().get("currentUser");
+	    	console.log("IN place.js current userId: ", userId, ", query: ", context.filter+", currentUser: ", currentUser);
 	    	if(currentUser){
 	    		findMembers(currentUser.id);
 	    	}
@@ -41,9 +38,9 @@ module.exports = function(Place, Member) {
 	    next();
 	  });
 	  
-	  findMembers = function(ctx, memberId){
+	  findMembers = function(memberId){
+		  console.log('IN place.js, findMembers for memberId: ', memberId);
 		  var loopback = require('loopback');
-		  console.log('IN Place.js, findMembers for memberId: >>> ');
 		  var findReq = {filter: {where: {"username": "sinny777@gmail.com"}}};
 	  }
 	
