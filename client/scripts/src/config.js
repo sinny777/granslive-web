@@ -9,7 +9,11 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'DEV',
-			API_URL: 'http://localhost:3000/api'
+			API_URL: 'http://localhost:3000/api',
+			MQTT: {
+				broker: '52.76.33.2',
+				port: 9001
+			}
 		});
     
 });

@@ -16,7 +16,8 @@ require.config({
         'ui.bootstrap':'../vendor/angular-bootstrap/ui-bootstrap.min',
         'cryptojslib' : '../vendor/cryptojslib/rollups/pbkdf2',
         'querystring': '../vendor/querystring/querystring.min',
-        'text': '../vendor/text'
+        'text': '../vendor/text',
+        'mqtt':'../vendor/paho-mqtt/src/mqttws31'
     },
     shim: {
         'angular': {

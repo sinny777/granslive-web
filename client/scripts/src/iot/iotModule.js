@@ -13,6 +13,8 @@ define(function (require) {
                                                    'app.config']);
     
     iotModule.factory('authService', require('common/services/authService'));
+    iotModule.factory('dataService', require('common/services/dataService'));
+    iotModule.factory('mqttService', require('common/services/mqttService'));
     
     iotModule.controller('placeController', require('iot/controllers/placeController'));
     iotModule.controller('groupsController', require('iot/controllers/groupsController'));

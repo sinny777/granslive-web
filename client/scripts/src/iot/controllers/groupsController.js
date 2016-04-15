@@ -4,7 +4,6 @@ define(function () {
   function ctrl($rootScope, $scope, Group){
 	  
 	  $scope.display = 'groups';
-	  $scope.groups = [];
 	  $scope.selectedGroup = {};
 	  $scope.member = {};
 	  $scope.showAddMember = '';
@@ -14,9 +13,9 @@ define(function () {
 	  }
 	  
 	  $scope.fetchAndShowGroups = function(){
-		  console.log('IN fetchAndShowGroups: ', $scope.groups.length);
+		  console.log('IN fetchAndShowGroups: ', $scope.selectedPlace.groups);
 		  $scope.selectedGroup = {};
-		  if($scope.groups.length == 0){
+		  if(!$scope.selectedPlace.groups || $scope.selectedPlace.groups.length == 0){
 			  $scope.fetchGroups();
 		  }else{
 			  $scope.display = "groups";
@@ -62,14 +61,11 @@ define(function () {
 				};
     	console.log('findReq: >>> ', findReq);
     	
-    	$scope.groups = Group.find(findReq,
+    	Group.find(findReq,
     			  function(list) { 
     				  $rootScope.loadingScreen.hide();
-    				  $scope.groups = list;
+    				  $scope.selectedPlace.groups = list;
     				  $scope.display = 'groups';
-    				  if($scope.groups && $scope.groups.length == 1){
-						  $scope.selectedGroup = $scope.groups[0];
-					  } 
     			  },
 	    		  function(errorResponse) { 
     				  console.log(errorResponse);

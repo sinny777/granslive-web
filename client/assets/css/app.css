@@ -144,6 +144,9 @@ img {
     position: absolute;
 }
 
+i.active { color: #5cb85c}
+i.inactive {color: #d9534f}
+
 .copyrights {
 	margin-top: 13px;
 	margin-right: 13px;

@@ -17,7 +17,8 @@
     "cryptojslib" : "latest",
     "querystring":"latest",
     "requirejs" : "latest",
-    "debug" : "latest"
+    "debug" : "latest",
+    "paho-mqtt": "latest"
   },
   "private": true,
   "ignore": [

@@ -65,7 +65,7 @@
 	<div style="clear: both;"></div>
 
 	<div class="row" data-ng-if="display == 'groups'">
-		<div class="card col-sm-3" data-ng-repeat="group in groups">
+		<div class="card col-sm-3" data-ng-repeat="group in selectedPlace.groups">
 			<div class="card-block" data-ng-if="showAddMember != group.id"
 				style="background-image: url('../assets/images/blurred3.jpg');">
 				<span class="fa-stack"> <a href=""

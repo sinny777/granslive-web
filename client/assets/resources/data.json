@@ -1,0 +1,71 @@
+{  
+   "placeArea1":{  
+      "devices":[  
+         {  
+            "title":"Fan",
+            "status":2,
+            "deviceIndex":1,
+            "type":"FAN"
+         },
+         {  
+            "title":"Led",
+            "status":1,
+            "deviceIndex":2,
+            "type":"LED"
+         },
+         {  
+            "title":"Bulb",
+            "status":3,
+            "deviceIndex":3,
+            "type":"BULB"
+         },
+         {  
+            "title":"Tube Light",
+            "status":0,
+            "deviceIndex":4,
+            "type":"TUBE"
+         },
+         {  
+            "title":"AC Voltas",
+            "status":1,
+            "deviceIndex":5,
+            "type":"AC"
+         },
+         {  
+            "title":"TeleVesion",
+            "status":0,
+            "deviceIndex":6,
+            "type":"TV"
+         },
+         {  
+            "title":"Socket 1",
+            "status":0,
+            "deviceIndex":7,
+            "type":"SOCKET"
+         },
+         {  
+            "title":"Mosquito Repellent",
+            "status":1,
+            "deviceIndex":8,
+            "type":"SOCKET"
+         },
+         {  
+            "title":"Speakers",
+            "status":7,
+            "deviceIndex":9,
+            "type":"MUSIC"
+         },
+         {  
+            "title":"CFL Bulb",
+            "status":0,
+            "deviceIndex":10,
+            "type":"CFL"
+         }
+      ]
+   },
+   "config":{  
+      "deviceTypeMapping":{  
+         "FAN":"/"
+      }
+   }
+}

@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, authService, Place, PlaceArea, Group){
+  function ctrl($rootScope, $scope, authService, pushService, dataService, Place, PlaceArea, Group){
 	  
 	  $scope.memberships = [];
 	  $scope.places = [];
@@ -261,6 +261,9 @@ define(function () {
       			  function(list) { 
     				  $scope.selectedPlace.placeAreas = list;
     				  $rootScope.loadingScreen.hide();
+    				  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
+    					  $scope.fetchDevices(area);
+    					});
       			  },
   	    		  function(errorResponse) { 
       				  $rootScope.loadingScreen.hide();
@@ -269,9 +272,28 @@ define(function () {
     	}    	
     };
     
+    $scope.fetchDevices = function(placeArea){
+    	if(placeArea && placeArea.id){
+    		console.log('FETCH DEVICES FOR PLACEAREA: ', placeArea);
+    		dataService.getValue('placeArea1.devices', function(data){
+    			console.log('RESP OF GET DATA:>>>  ', data);
+    			placeArea.devices = data.placeArea1.devices;
+    		});
+    	}    	
+    };
+    
+    $scope.toggleDevice = function(placeArea, device){
+    	console.log('IN toggleDevice, device: >> ', device);
+    	if(device.status > 0){
+    		device.status = 0;
+    	}else{
+    		device.status = 1;
+    	}    	
+    }
+    
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', 'authService', 'Place', 'PlaceArea', 'Group'];
+  ctrl.$inject = ['$rootScope', '$scope', 'authService', 'pushService', 'dataService', 'Place', 'PlaceArea', 'Group'];
   return ctrl;
 
 });

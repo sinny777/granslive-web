@@ -180,14 +180,30 @@
 		  
 			  <div class="tab-content">
 			   <div class="row tab-pane fade in active" id="appliances_{{placeArea.id}}">
-			   		<ul class="list-group list-group-flush">
-					    <li class="list-group-item">Cras justo odio</li>
-					    <li class="list-group-item">Dapibus ac facilisis in</li>
-					    <li class="list-group-item">Vestibulum at eros</li>
-					 </ul>
-					 <div class="card-footer">
-					    <a href="#" class="card-link">Add Switch Board</a>
-					  </div>
+			   		<ul class="list-group list-group-flush small-font">
+						<li class="list-group-item"
+							data-ng-repeat="device in placeArea.devices">{{device.title}}
+							<div class="pull-right">
+								<a style="text-decoration: none;" href="javascript:void(0);"
+									data-ng-click="showUpdateMember(member);"
+									data-toggle="tooltip" data-placement="left" title="Update">
+									<span class="fa fa-edit"></span>
+								</a> &nbsp;									
+									  <i class="fa fa-toggle-on active"
+								         data-ng-if="device.status > 0" 
+								         data-ng-click="toggleDevice(placeArea, device);"
+								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
+								      </i>
+								      <i class="fa fa-toggle-on fa-rotate-180 inactive"
+								         data-ng-if="device.status < 1"
+								         data-ng-click="toggleDevice(placeArea, device);"
+								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
+								      </i>
+
+								</a>
+							</div>
+						</li>
+					</ul>
 			   </div>
 			   <div class="row tab-pane fade in" id="health_{{placeArea.id}}">
 			   		<i class="wi wi-thermometer positive"></i></i> 24 &deg;C
@@ -215,7 +231,7 @@
 	
 	<div style="clear:both;"></div>
 	<div style="clearfix"></div>
-	<br /><br />
+	<br /><br /><br /><br /><br /><br /><br /><br />
 	
 
 </div>
