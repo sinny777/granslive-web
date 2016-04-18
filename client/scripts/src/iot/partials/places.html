@@ -163,7 +163,7 @@
 			  <ul class="nav nav-tabs nav-justified">
 			  	<li class="active" >
 			  		<a href="#appliances_{{placeArea.id}}" data-toggle="tab" >
-	         			<i class="fa fa-lightbulb-o" data-toggle="tooltip" data-placement="top" title="Appliances"></i>
+	         			<i class="flaticon-device" data-toggle="tooltip" data-placement="top" title="Appliances"></i>
 	      			</a>
 	      		</li>
 			  	<li>
@@ -179,22 +179,22 @@
 			  </ul>
 		  
 			  <div class="tab-content">
-			   <div class="row tab-pane fade in active" id="appliances_{{placeArea.id}}">
+			   <div class="row appliances-tab tab-pane fade in active" id="appliances_{{placeArea.id}}">
 			   		<ul class="list-group list-group-flush small-font">
 						<li class="list-group-item"
-							data-ng-repeat="device in placeArea.devices"><span><i class="{{device.type +'_' +device.status}}" ></i>&nbsp; {{device.title}}</span>
+							data-ng-repeat="device in placeArea.devices"><span ><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; {{device.title}}</span>
 							<div class="pull-right">
 								<a style="text-decoration: none;" href="javascript:void(0);"
 									data-ng-click="showUpdateMember(member);"
 									data-toggle="tooltip" data-placement="left" title="Update">
 									<span class="fa fa-edit"></span>
 								</a> &nbsp;									
-									  <i class="fa fa-toggle-on active"
+									  <i class="fa fa-toggle-on device{{device.status}}"
 								         data-ng-if="device.status == 'ON'" 
 								         data-ng-click="toggleDevice(placeArea, device);"
 								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
 								      </i>
-								      <i class="fa fa-toggle-on fa-rotate-180 inactive"
+								      <i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"
 								         data-ng-if="device.status == 'OFF'"
 								         data-ng-click="toggleDevice(placeArea, device);"
 								         data-toggle="tooltip" data-placement="left" title="Toggle Device">

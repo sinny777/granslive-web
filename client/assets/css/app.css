@@ -144,167 +144,22 @@ img {
     position: absolute;
 }
 
+.appliances-tab{
+	margin-right: -9px;
+    margin-left: -9px;
+}
+
 i.active { color: #5cb85c}
 i.inactive {color: #000000}
 i.locked {color: #d9534f}
 
+i.deviceON { color: #5cb85c}
+i.deviceOFF {color: #000000}
+i.deviceLOCKED {color: #d9534f}
+
 .list-group-item span{
 	display: inline-block;
     vertical-align: middle;
-}
-
-.FAN_ON:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/on/fan.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.FAN_OFF:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/off/fan.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.LED_ON:before, .BULB_ON:before, .TUBE_ON:before, .CFL_ON:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/on/led.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.LED_OFF:before, .BULB_OFF:before, .TUBE_OFF:before, .CFL_OFF:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/off/led.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.AC_ON:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/on/ac.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.AC_OFF:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/off/ac.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.TV_ON:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/on/tv.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.TV_OFF:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/off/tv.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.SOCKET_ON:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/on/socket.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.SOCKET_OFF:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/off/socket.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.COOLER_ON:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/on/cooler.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.COOLER_OFF:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/off/cooler.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.MUSIC_ON:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/on/speakers.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
-}
-
-.MUSIC_OFF:before{
-	width: 14px;
-	background-image: url(/assets/images/devices/off/speakers.png);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 14px; 
-    height: 14px;
-    content:"";
 }
 
 .copyrights {

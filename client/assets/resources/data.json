@@ -2,93 +2,93 @@
    "placeArea1":{  
       "devices":[  
          {  
-        	"parentId": "", 
+        	"parentId": "36149", 
             "title":"Fan",
             "status":"ON",
             "value":3,
             "deviceIndex":1,
-            "type":"FAN",
+            "type":"cieling-fan",
             "analog":true
          },
          {  
-        	"parentId": "", 
+        	"parentId": "36149", 
             "title":"Led",
             "status":"ON",
             "value":1,
             "deviceIndex":2,
-            "type":"LED",
+            "type":"bulb",
             "analog":true
          },
          {  
-        	"parentId": "", 
-        	"title":"Bulb",
+        	"parentId": "36149", 
+        	"title":"Table Lamp",
             "status":"ON",
             "value":1,
             "deviceIndex":3,
-            "type":"BULB",
+            "type":"table-lamp",
             "analog":false
          },
          {  
-        	"parentId": "", 
-            "title":"Tube Light",
+        	"parentId": "36149", 
+            "title":"Camera",
             "status":"OFF",
             "value":0,
             "deviceIndex":4,
-            "type":"TUBE",
+            "type":"camera",
             "analog":false
          },
          { 
-        	"parentId": "", 
+        	"parentId": "36149", 
             "title":"AC Voltas",
-            "status":"ON",
+            "status":"LOCKED",
             "value":1,
             "deviceIndex":5,
-            "type":"AC",
+            "type":"ac",
             "analog":false
          },
          {  
-        	"parentId": "",  
+        	"parentId": "36149",  
             "title":"TeleVesion",
             "status":"OFF",
             "value":0,
             "deviceIndex":6,
-            "type":"TV",
+            "type":"tv",
             "analog":false
          },
          {  
-        	"parentId": "", 
-            "title":"Socket 1",
+        	"parentId": "36149", 
+            "title":"Mosquito Repellent",
             "status":"OFF",
             "value":0,
             "deviceIndex":7,
-            "type":"SOCKET",
+            "type":"socket",
             "analog":false
          },
          {  
-        	"parentId": "", 
-            "title":"Mosquito Repellent",
+        	"parentId": "36149", 
+            "title":"Hanging Lamp",
             "status":"ON",
             "value":1,
             "deviceIndex":8,
-            "type":"SOCKET",
+            "type":"hanging-lamp",
             "analog":false
          },
          {  
-        	"parentId": "", 
+        	"parentId": "36149", 
             "title":"Speakers",
             "status":"ON",
             "value":7,
             "deviceIndex":9,
-            "type":"MUSIC",
+            "type":"music",
             "analog":false
          },
          {  
-        	"parentId": "", 
+        	"parentId": "36149", 
             "title":"CFL Bulb",
             "status":"OFF",
             "value":0,
             "deviceIndex":10,
-            "type":"CFL",
+            "type":"cfl",
             "analog":false
          }
       ]

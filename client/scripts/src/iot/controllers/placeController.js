@@ -314,9 +314,15 @@ define(function () {
     	console.log('IN toggleDevice, device: >> ', device);
     	if(device.status == 'ON'){
     		device.status = 'OFF';
+    		device.value = 0;
     	}else{
     		device.status = 'ON';
-    	}    	
+    		device.value = 1;
+    	}
+    	
+    	var msg = '#'+device.parentId+'#'+device.deviceIndex+'#'+device.value;
+    	
+    	mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+device.parentId+'/gateway', msg, $scope.onMqttMessageArrived);
     };
     
     $scope.getDeviceIconClass = function(device){

@@ -56,7 +56,7 @@ define(['angular'], function (angular) {
           message.destinationName = publishToTopic;
           if(!mqttClient.host){
               try{
-                  mqttClient = new Paho.MQTT.Client(MQTT_BROKER, Number(80), '/ws', 'gl_' + parseInt(Math.random() * 100, 10));
+                  mqttClient = new Paho.MQTT.Client(CONFIG.MQTT.MQTT_BROKER, Number(80), '/ws', 'gl_' + parseInt(Math.random() * 100, 10));
                   mqttClient.onConnectionLost = this.onConnectionLost;
                   mqttClient.onMessageArrived = onMqttMessageArrived;
 
@@ -64,7 +64,7 @@ define(['angular'], function (angular) {
                       //timeout: 3,
                       onSuccess: function(){
                           mqttClient.send(message);
-                          subscribeToMqtt('granslive/iot/+/board');
+                          subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+'+/cloud');
                       },
                       onFailure: function (message) {
                           alert("Connection failed: " + message.errorMessage);
@@ -77,10 +77,10 @@ define(['angular'], function (angular) {
               }
           }else{
               try{
-                  console.log('Going to publish message 2: >>> ' +message);
+                  console.log('Going to publish message: >>> ' +message);
                   mqttClient.send(message);
               }catch(err){
-                  console.log('Error: >>> ' +JSON.stringify(err));
+                  console.log('Error: >>> ', err);
               }
 
           }
@@ -89,12 +89,12 @@ define(['angular'], function (angular) {
       mqttClient.subscribeAfterConnect =  function() {
           // Once a connection has been made, make a subscription and send a message.
           console.log("Connected to MQTT server ");
-          mqttClient.subscribe("granslive/iot/+/board");
+          mqttClient.subscribe(CONFIG.MQTT.TOPIC_PREFIX+"+/board");
       };
 
       mqttClient.publishAfterConnect =  function(message) {
           // Once a connection has been made, make a subscription and send a message.
-          console.log('Going to publish message 2: >>> ' +message);
+          console.log('Going to publish message: >>> ', message);
           mqttClient.send(message);
       };
 
@@ -103,7 +103,7 @@ define(['angular'], function (angular) {
               throw "No Connection with MQTT";
           }else{
               try{
-                  console.log('Going to subscribe topic: >>> ' +subscribeToTopic);
+                  console.log('Going to subscribe topic: >>> ', subscribeToTopic);
                   mqttClient.subscribe(subscribeToTopic);
               }catch(err){
                   console.log('Error: >>> ' +JSON.stringify(err));
