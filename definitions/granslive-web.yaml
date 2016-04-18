@@ -4551,9 +4551,8 @@ definitions:
     additionalProperties: false
   PlaceArea:
     properties:
-      created:
-        type: string
-        format: date
+      audit:
+        type: object
       description:
         type: string
       floor:
@@ -4564,8 +4563,6 @@ definitions:
         type: string
       type:
         type: string
-      audit:
-        type: object
       id:
         type: string
     required:
@@ -4575,9 +4572,11 @@ definitions:
     additionalProperties: false
   Board:
     properties:
+      audit:
+        type: object
       description:
         type: string
-      gatewayId:
+      placeAreaId:
         type: string
       status:
         type: string
@@ -4587,8 +4586,6 @@ definitions:
         type: string
       uniqueIdentifier:
         type: string
-      audit:
-        type: object
       id:
         type: string
     required:

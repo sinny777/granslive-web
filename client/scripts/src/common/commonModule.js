@@ -14,6 +14,7 @@ define(function (require) {
 //    config = require('common/config/config')(commonModule);
     
     commonModule.factory('authService', require('common/services/authService'));
+    commonModule.factory('mqttService', require('common/services/mqttService'));
     
     commonModule.controller('commonController', require('common/controllers/commonController'));
 

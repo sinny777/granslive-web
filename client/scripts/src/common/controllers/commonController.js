@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, $cookies, $location, authService){
+  function ctrl($rootScope, $scope, $cookies, $location, CONFIG, authService, mqttService){
 	  
 	  $rootScope.footerLinks = [];
 	  $rootScope.loginCredentials = {};
@@ -12,10 +12,10 @@ define(function () {
 
     $rootScope.initNavBar = function(){
     //  commonService.pageLoadCalls();
-    	
     };
 	  
     $rootScope.checkUser = function(callback){
+    	$rootScope.initializeMQTT();
     	$rootScope.loadingScreen.show();
     	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
     		authService.ensureCurrentUser(function(currentUser){
@@ -56,10 +56,41 @@ define(function () {
         */
     	
       };
+      
+      $rootScope.mqttConnectSuccess = function(){
+      	   console.log('MQTT Connection SUCCESS >>>>>>>>>>');
+   	   	try{
+   	   		mqttService.subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+'36149'+'/cloud');
+   		   }catch(err){
+   			   console.log('Error: >>> ', err);
+   		   }
+         };
+   	  
+         $rootScope.onMqttMessageArrived = function(message) {
+      	   console.log('onMqttMessageArrived >>>>>>>>>>' +message.payloadString);
+             try{
+          	   // Refresh Devices
+             }catch(err){
+                 console.log(err);
+             }
+         };
+         
+         $rootScope.onMqttConnectionLost = function(responseObject) {
+      	   console.log('MQTT Connection LOST >>>>>>>>>>');
+             if (responseObject.errorCode !== 0){
+                 console.log("onConnectionLost:" + responseObject.errorMessage);
+                 mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
+//                 this.connectToMqtt();
+             }
+         };
+      
+      $rootScope.initializeMQTT = function(){
+    	  mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
+      };
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'authService'];
+  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'CONFIG', 'authService', 'mqttService'];
   return ctrl;
 
 });

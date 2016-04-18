@@ -182,7 +182,7 @@
 			   <div class="row tab-pane fade in active" id="appliances_{{placeArea.id}}">
 			   		<ul class="list-group list-group-flush small-font">
 						<li class="list-group-item"
-							data-ng-repeat="device in placeArea.devices">{{device.title}}
+							data-ng-repeat="device in placeArea.devices"><span><i class="{{device.type +'_' +device.status}}" ></i>&nbsp; {{device.title}}</span>
 							<div class="pull-right">
 								<a style="text-decoration: none;" href="javascript:void(0);"
 									data-ng-click="showUpdateMember(member);"
@@ -190,12 +190,12 @@
 									<span class="fa fa-edit"></span>
 								</a> &nbsp;									
 									  <i class="fa fa-toggle-on active"
-								         data-ng-if="device.status > 0" 
+								         data-ng-if="device.status == 'ON'" 
 								         data-ng-click="toggleDevice(placeArea, device);"
 								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
 								      </i>
 								      <i class="fa fa-toggle-on fa-rotate-180 inactive"
-								         data-ng-if="device.status < 1"
+								         data-ng-if="device.status == 'OFF'"
 								         data-ng-click="toggleDevice(placeArea, device);"
 								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
 								      </i>

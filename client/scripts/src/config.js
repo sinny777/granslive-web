@@ -9,10 +9,11 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'DEV',
-			API_URL: 'https://granslive-web.mybluemix.net/api',
+			API_URL: 'http://localhost:3000/api',
 			MQTT: {
-				broker: '52.76.33.2',
-				port: 9001
+				MQTT_BROKER: '52.76.33.2',
+				PORT: 9001,
+				TOPIC_PREFIX: 'granslive/iot/'
 			}
 		});
     

@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, authService, pushService, dataService, Place, PlaceArea, Group){
+  function ctrl($rootScope, $scope, CONFIG, authService, mqttService, dataService, Place, PlaceArea, Group){
 	  
 	  $scope.memberships = [];
 	  $scope.places = [];
@@ -18,6 +18,7 @@ define(function () {
                   console.log( "selectedPlace newValue:", newValue);
                   if(newValue.id){
                 	  $scope.handlePermissions();
+                	  mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
                   }
               }
           );
@@ -54,7 +55,34 @@ define(function () {
 		  if($scope.selectedPlace.id){
 			  $rootScope.currentUser.permissions.placeOwner = $scope.selectedPlace.ownerId == $scope.ownerId;
 		  }
-	  }
+	  };
+	  
+	  $scope.mqttConnectSuccess = function(){
+   	   console.log('MQTT Connection SUCCESS >>>>>>>>>>');
+	   	try{
+			   mqttService.subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+$scope.selectedPlace.uniqueIdentifier+'/cloud');
+		   }catch(err){
+			   console.log('Error: >>> ', err);
+		   }
+      };
+	  
+	  $scope.onMqttMessageArrived = function(message) {
+   	   console.log('onMqttMessageArrived >>>>>>>>>>' +message.payloadString);
+          try{
+       	   // Refresh Devices
+          }catch(err){
+              console.log(err);
+          }
+      };
+      
+      $scope.onMqttConnectionLost = function(responseObject) {
+   	   console.log('MQTT Connection LOST >>>>>>>>>>');
+          if (responseObject.errorCode !== 0){
+              console.log("onConnectionLost:" + responseObject.errorMessage);
+              pushService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
+//              this.connectToMqtt();
+          }
+      };
 	  
 	  $scope.showAddNewPlacePanel = function(){
 		  console.log('IN showAddNewPlacePanel: ');
@@ -284,16 +312,28 @@ define(function () {
     
     $scope.toggleDevice = function(placeArea, device){
     	console.log('IN toggleDevice, device: >> ', device);
-    	if(device.status > 0){
-    		device.status = 0;
+    	if(device.status == 'ON'){
+    		device.status = 'OFF';
     	}else{
-    		device.status = 1;
+    		device.status = 'ON';
     	}    	
-    }
+    };
+    
+    $scope.getDeviceIconClass = function(device){
+    	console.log('IN getDeviceIconClass:>>>> ', device);
+    	var cssClass = '';
+    	if(device.status > 0){
+    		cssClass = device.type + '_ON';
+    	}
+    	if(device.status < 1){
+    		cssClass = device.type + '_OFF';
+    	}
+    	return cssClass;    	
+    };
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', 'authService', 'pushService', 'dataService', 'Place', 'PlaceArea', 'Group'];
+  ctrl.$inject = ['$rootScope', '$scope', 'CONFIG', 'authService', 'mqttService', 'dataService', 'Place', 'PlaceArea', 'Group'];
   return ctrl;
 
 });

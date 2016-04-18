@@ -99,7 +99,7 @@ img {
 }
 
 .small-font{
-    font-size: 11px;
+    font-size: 12px;
     padding: 5px 5px
 }
 
@@ -145,7 +145,167 @@ img {
 }
 
 i.active { color: #5cb85c}
-i.inactive {color: #d9534f}
+i.inactive {color: #000000}
+i.locked {color: #d9534f}
+
+.list-group-item span{
+	display: inline-block;
+    vertical-align: middle;
+}
+
+.FAN_ON:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/on/fan.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.FAN_OFF:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/off/fan.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.LED_ON:before, .BULB_ON:before, .TUBE_ON:before, .CFL_ON:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/on/led.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.LED_OFF:before, .BULB_OFF:before, .TUBE_OFF:before, .CFL_OFF:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/off/led.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.AC_ON:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/on/ac.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.AC_OFF:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/off/ac.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.TV_ON:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/on/tv.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.TV_OFF:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/off/tv.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.SOCKET_ON:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/on/socket.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.SOCKET_OFF:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/off/socket.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.COOLER_ON:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/on/cooler.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.COOLER_OFF:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/off/cooler.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.MUSIC_ON:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/on/speakers.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
+
+.MUSIC_OFF:before{
+	width: 14px;
+	background-image: url(/assets/images/devices/off/speakers.png);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px; 
+    height: 14px;
+    content:"";
+}
 
 .copyrights {
 	margin-top: 13px;
@@ -165,10 +325,6 @@ i.inactive {color: #d9534f}
     background-color: rgba(255,255,255,.8);
 }
 
-/*======================================
-    CHAT BOX STYLES FOR WATSON DIALOG DEMO PAGE
-======================================= */
-
 .no-padding {
   padding: 0px;
   margin: 0px
@@ -176,30 +332,6 @@ i.inactive {color: #d9534f}
 
 .hr-clas {
 	border-top: 1px solid #3F76D7;
-}
-
-.chat-box-main {
-	max-height: 500px;
-	overflow: auto;
-}
-
-.chat-box-div {
-	border: 2px solid #3F76D7;
-	border-bottom: 2px solid #3F76D7;
-}
-
-.chat-box-div pre{
-    display: block;
-    padding: 1px;
-    /* margin: 0 0 10px; */
-    font-size: 10px; 
-    line-height: 1.42857143;
-    color: #333;
-    word-break: break-all;
-    word-wrap: break-word;
-    /* background-color: #f5f5f5; */
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 p{
@@ -215,89 +347,6 @@ p{
    background-color: #f5f5f5;
    border: 1px solid #ccc;
    border-radius: 4px;*/
-}
-
-.chat-box-head {
-	padding: 10px 15px;
-	border-bottom: 2px solid #3F76D7;
-	background-color: #4A94DD;
-	color: #fff;
-	text-align: center;
-}
-
-.chat-box-left {
-	width: 100%;
-	height: auto;
-	padding: 2px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	position: relative;
-	border: 1px solid #C5C5C5;
-	font-size: 12px;
-}
-
-.chat-box-left:after {
-	top: 100%;
-	left: 10%;
-	border: solid transparent;
-	content: " ";
-	position: absolute;
-	border-top-color: #C5C5C5;
-	border-width: 15px;
-	margin-left: -15px;
-}
-
-.chat-box-name-left {
-	margin-top: 10px;
-	margin-left: 10px;
-	text-align: left;
-	color: #049E64;
-}
-
-.chat-box-name-left img {
-	max-width: 40px;
-	border: 2px solid #049E64;
-}
-
-.chat-box-right {
-	width: 100%;
-	height: auto;
-	padding: 2px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	position: relative;
- 	border: 1px solid #C5C5C5;
-	font-size: 12px;
-}
-
-.chat-box-right:after {
-	top: 100%;
-	right: 10%;
-	border: solid transparent;
-	content: " ";
-	position: absolute;
-	border-top-color: #C5C5C5;
-	border-width: 15px;
-	margin-left: -15px;
-}
-
-.chat-box-name-right {
-	color: #354EA0;
-	margin-top: 10px;
-	margin-right: 60px;
-	text-align: right;
-}
-
-.chat-box-name-right img {
-	max-width: 40px;
-	border: 2px solid #354EA0;
-}
-
-.chat-box-footer {
-	background-color: #D8D8D8;
-	padding: 10px;
 }
 
 .panel-body {
