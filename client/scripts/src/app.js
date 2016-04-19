@@ -20,7 +20,7 @@ define([
 ], function (angular, angularRoute) {
     'use strict';
 
-    var myworkstyle =  angular.module('myworkstyle', [
+    var granslive =  angular.module('granslive', [
         'ngRoute',
         'ngResource',
         'ngAnimate',
@@ -37,7 +37,7 @@ define([
     ]);
     
     
-    myworkstyle.config(function(toastrConfig) {
+    granslive.config(function(toastrConfig) {
     	
         angular.extend(toastrConfig, {
             allowHtml: false,
@@ -71,7 +71,7 @@ define([
         });
     });
     
-    myworkstyle.run(['$rootScope','$location',function($rootScope, $location) {
+    granslive.run(['$rootScope','$location',function($rootScope, $location) {
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
             console.log('IN routeChangeStart >>>>>>> ');
              $rootScope.footerLinks = [];
@@ -85,7 +85,7 @@ define([
     }]);
      
     
-    return myworkstyle;
+    return granslive;
 
 
 });
