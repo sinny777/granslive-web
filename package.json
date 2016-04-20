@@ -2,6 +2,10 @@
   "name": "granslive-web",
   "version": "1.0.0",
   "main": "server/server.js",
+  "engines": {
+	    "node": "4.2.2"
+	  },
+  "private": true,
   "scripts": {
     "start": "node .",
     "pretest": "jshint ."
