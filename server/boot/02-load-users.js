@@ -9,7 +9,7 @@ module.exports = function(app) {
     return;
   }
 
-  createDefaultUsers();
+ // createDefaultUsers();
 
   function createDefaultUsers() {
 
