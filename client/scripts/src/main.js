@@ -17,7 +17,7 @@ require.config({
         'cryptojslib' : '../vendor/cryptojslib/rollups/pbkdf2',
         'querystring': '../vendor/querystring/querystring.min',
         'text': '../vendor/text',
-        'paho-mqtt':'../vendor/paho-mqtt/src/mqttws31'
+        'mqtt':'../vendor/paho-mqtt/src/mqttws31'
     },
     shim: {
         'angular': {
@@ -50,8 +50,8 @@ require.config({
         'querystring' : {
             exports : 'querystring'
         },
-        'paho-mqtt' : {
-            exports : 'paho-mqtt'
+        'mqtt' : {
+            exports : 'mqtt'
         },
         'jquery':{
         	 exports : 'jquery'

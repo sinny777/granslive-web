@@ -11,7 +11,7 @@ define([
 //    'ui.bootstrap',
     'cryptojslib',
     'querystring',
-    'paho-mqtt',
+    'mqtt',
 	'config',
 	'loopback/lb-services',
 	'common/commonModule',
