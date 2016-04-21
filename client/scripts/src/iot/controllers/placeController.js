@@ -9,7 +9,7 @@ define(function () {
 	  $scope.display = 'places';
 	  $scope.selectedPlaceArea = {};
 	  
-	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bathroom', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
+	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bath-room', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
 	  $scope.floors = ['Ground'];
 	  
 	  $scope.$watch(
