@@ -1,13 +1,14 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, CONFIG, authService, mqttService, dataService, Place, PlaceArea, Group){
+  function ctrl($rootScope, $scope, CONFIG, authService, mqttService, dataService, Place, PlaceArea, Board, Group){
 	  
 	  $scope.memberships = [];
 	  $scope.places = [];
 	  $scope.selectedPlace = {floor: 'Ground'};
 	  $scope.display = 'places';
 	  $scope.selectedPlaceArea = {};
+	  $scope.boards = [];
 	  $scope.newboard = {};
 	  
 	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bath-room', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
@@ -95,8 +96,8 @@ define(function () {
    		   var boardId = commandArr[1];
        	   var deviceIndex = commandArr[2];
        	   var deviceValue = commandArr[3];
-       	   angular.forEach($scope.selectedPlace.placeAreas, function(area, key) {
-       		   	angular.forEach(area.devices, function(device, key) {
+       	   angular.forEach($scope.boards, function(board, key) {
+       		   	angular.forEach(board.devices, function(device, key) {
            		   if(device.parentId == boardId && device.deviceIndex == deviceIndex){
            		        $scope.$apply(function () {
            		        	device.value = deviceValue;
@@ -319,11 +320,15 @@ define(function () {
       			  function(list) { 
     				  $scope.selectedPlace.placeAreas = list;
     				  $rootScope.loadingScreen.hide();
+    				  
+    				  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
+    					  $scope.fetchBoardsAndDevices(area);
+    					});
       			  },
   	    		  function(errorResponse) { 
       				  $rootScope.loadingScreen.hide();
       				  console.log(errorResponse);
-      			  });
+      		});
     	}    	
     };
     
@@ -341,20 +346,12 @@ define(function () {
     		alert("Please provide unique identifier !");
     		return;
     	}
-    	var payload = {uniqueIdentifier: $scope.newboard.uniqueIdentifier, "placeArea": $scope.selectedPlaceArea};
+    	var payload = {uniqueIdentifier: $scope.newboard.uniqueIdentifier, "placeAreaId": $scope.selectedPlaceArea.id};
     	$rootScope.loadingScreen.show();
     	PlaceArea.addBoard(payload,
   			  function(response) { 
   				  $rootScope.loadingScreen.hide();
-		          $scope.selectedPlaceArea = response.placeArea;
-				  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
-					  if(area.id == $scope.selectedPlaceArea.id){
-						  area.devices = $scope.selectedPlaceArea.devices;
-						  console.log("BOARD ADDED TO PLACEAREA: >>> ", area);
-					  }
-					});
-				  
-				  
+		          $scope.boards.push(response.board);
   			  },
 	    		  function(errorResponse) { 
   				  console.log(errorResponse);
@@ -370,17 +367,22 @@ define(function () {
     	$scope.showAddBoard = '';
     };
     
-    $scope.fetchDevices = function(placeArea){
+    $scope.fetchBoardsAndDevices = function(placeArea){
     	if(placeArea && placeArea.id){
-    		console.log('FETCH DEVICES FOR PLACEAREA: ', placeArea);
-    		dataService.getValue('placeArea1.devices', function(data){
-    			console.log('RESP OF GET DATA:>>>  ', data);
-    			placeArea.devices = data.placeArea1.devices;
-    		});
+    		console.log('FETCH BOARDS AND DEVICES FOR PLACEAREA: ', placeArea);
+    		var findReq = {filter: {where: {placeAreaId: placeArea.id}}};
+    		Board.find(findReq,
+      			  function(boards) { 
+    				  $scope.boards = boards;
+    				  console.log("BOARDS FETCHED: >>> ", boards);
+      			  },
+  	    		  function(errorResponse) { 
+      				  console.log(errorResponse);
+      		});
     	}    	
     };
     
-    $scope.toggleDevice = function(placeArea, device){
+    $scope.toggleDevice = function(board, device){
     	console.log('IN toggleDevice, device: >> ', device);
     	if(device.status == 'ON'){
     		device.status = 'OFF';
@@ -390,7 +392,7 @@ define(function () {
     		device.value = 1;
     	}
     	
-    	var msg = '#'+device.parentId+'#'+device.deviceIndex+'#'+device.value;
+    	var msg = '#'+board.uniqueIdentifier+'#'+device.deviceIndex+'#'+device.value;
     	angular.forEach($scope.selectedPlace.gateways, function(gateway, key) {
 	 		  mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+gateway.uniqueIdentifier+'/cloud', msg, $scope.onMqttMessageArrived);
 		});
@@ -410,7 +412,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', 'CONFIG', 'authService', 'mqttService', 'dataService', 'Place', 'PlaceArea', 'Group'];
+  ctrl.$inject = ['$rootScope', '$scope', 'CONFIG', 'authService', 'mqttService', 'dataService', 'Place', 'PlaceArea', 'Board', 'Group'];
   return ctrl;
 
 });

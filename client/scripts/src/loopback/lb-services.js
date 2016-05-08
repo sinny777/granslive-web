@@ -8169,7 +8169,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `placeArea` – `{function ModelConstructor(data, options) {
+         *  - `board` – `{function ModelConstructor(data, options) {
       if (!(this instanceof ModelConstructor)) {
         return new ModelConstructor(data, options);
       }

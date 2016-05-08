@@ -9,7 +9,7 @@ module.exports = function(PlaceArea) {
 		            } 
 		          }],	
 		         http: {path: '/addboard', verb: 'post'},
-		         returns: {arg: 'placeArea', type: PlaceArea}
+		         returns: {arg: 'board', type: PlaceArea}
 		    }
 	);
 	
@@ -42,20 +42,20 @@ module.exports = function(PlaceArea) {
 			  if (err) {
 				  cb(err, null);
               }
-			  var devices = boards[0].devices;
-			  payload.placeArea.devices = [];
-			  for(var i = 1; i<= devices.length; i++){
-				  var device = devices[i];
+			  var board = boards[0];
+			  board.placeAreaId = payload.placeAreaId;
+			  board.status = "active";
+			  for(var i = 1; i<= board.devices.length; i++){
+				  var device = board.devices[i];
 				  device.status = "OFF";
 				  device.deviceIndex = i;
-				  payload.placeArea.devices.push(device);
 			  }
 			  
-			  PlaceArea.upsert(payload.placeArea, function(err, placeArea) { 
+			  Board.upsert(board, function(err, board) { 
 				  if (err) {
 					  cb(err, null);
 	              }
-				  cb(null, placeArea);
+				  cb(null, board);
 			  });
 		  });
 	};

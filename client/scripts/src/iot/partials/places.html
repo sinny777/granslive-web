@@ -239,9 +239,9 @@
 		  
 			  <div class="tab-content">
 			   <div class="row appliances-tab tab-pane fade in active" id="appliances_{{placeArea.id}}">
-			   		<ul class="list-group list-group-flush small-font">
+			   		<ul class="list-group list-group-flush small-font" data-ng-repeat="board in boards">
 						<li class="list-group-item"
-							data-ng-repeat="device in placeArea.devices"><span ><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; {{device.title}}</span>
+							data-ng-repeat="device in board.devices"><span ><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; {{device.title}}</span>
 							<div class="pull-right">
 								<a style="text-decoration: none;" href="javascript:void(0);"
 									data-ng-click="showUpdateDevice(device);"
@@ -250,12 +250,12 @@
 								</a> &nbsp;									
 									  <i class="fa fa-toggle-on device{{device.status}}"
 								         data-ng-if="device.status == 'ON'" 
-								         data-ng-click="toggleDevice(placeArea, device);"
+								         data-ng-click="toggleDevice(board, device);"
 								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
 								      </i>
 								      <i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"
 								         data-ng-if="device.status == 'OFF'"
-								         data-ng-click="toggleDevice(placeArea, device);"
+								         data-ng-click="toggleDevice(board, device);"
 								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
 								      </i>
 
