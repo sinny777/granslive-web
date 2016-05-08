@@ -13,9 +13,10 @@ define(function () {
 	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bath-room', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
 	  $scope.floors = ['Ground'];
 	  
+	  /*
 	  $scope.$watch(
               "selectedPlace",
-              function handleFooChange(newValue, oldValue ) {
+              function handlePlaceChanged(newValue, oldValue ) {
                   console.log( "selectedPlace newValue:", newValue);
                   if(newValue.id){
                 	  $scope.handlePermissions();
@@ -23,6 +24,7 @@ define(function () {
                   }
               }
           );
+	  */
 	  
 	  $scope.initPlacesPage = function(){
 		  console.log('IN initPlacesPage for User >>>>>>>>>> ', $rootScope.currentUser);
@@ -61,7 +63,9 @@ define(function () {
 	  $scope.mqttConnectSuccess = function(){
    	   console.log('MQTT Connection SUCCESS >>>>>>>>>>');
 	   	try{
-			   mqttService.subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+$scope.selectedPlace.uniqueIdentifier+'/cloud');
+   			angular.forEach($scope.selectedPlace.gateways, function(gateway, key) {
+	 		   mqttService.subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+gateway.uniqueIdentifier+'/cloud');
+	 		 });
 		   }catch(err){
 			   console.log('Error: >>> ', err);
 		   }
@@ -70,7 +74,7 @@ define(function () {
 	  $scope.onMqttMessageArrived = function(message) {
    	   console.log('onMqttMessageArrived >>>>>>>>>>' +message.payloadString);
           try{
-       	   // Refresh Devices
+        	  $scope.refreshSelectedPlace(message);
           }catch(err){
               console.log(err);
           }
@@ -80,9 +84,33 @@ define(function () {
    	   console.log('MQTT Connection LOST >>>>>>>>>>');
           if (responseObject.errorCode !== 0){
               console.log("onConnectionLost:" + responseObject.errorMessage);
-              pushService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
-//              this.connectToMqtt();
+              mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
           }
+      };
+      
+      $scope.refreshSelectedPlace = function(mqttMsg){
+   	   var commandArr = mqttMsg.payloadString.split("#");
+   	   console.log("commandArr: >> ", commandArr);
+   	   if(commandArr.length >= 3){
+   		   var boardId = commandArr[1];
+       	   var deviceIndex = commandArr[2];
+       	   var deviceValue = commandArr[3];
+       	   angular.forEach($scope.selectedPlace.placeAreas, function(area, key) {
+       		   	angular.forEach(area.devices, function(device, key) {
+           		   if(device.parentId == boardId && device.deviceIndex == deviceIndex){
+           		        $scope.$apply(function () {
+           		        	device.value = deviceValue;
+                			   if(device.value == 0){
+                				   device.status = "OFF";
+                			   }else{
+                				   device.status = "ON";
+                			   }
+                			 console.log("DEVICE UPDATED>> ", device);
+           		        });
+           		   }
+           		 });
+       		 });
+   	   }
       };
 	  
 	  $scope.showAddNewPlacePanel = function(){
@@ -283,6 +311,7 @@ define(function () {
     
     $scope.fetchPlaceAreas = function(){
     	if($scope.selectedPlace.id){
+    		mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
     		console.log('FETCH AREAS FOR PLACE: ', $scope.selectedPlace);
     		var findReq = {filter: {where: {placeId: $scope.selectedPlace.id}}};
     		$rootScope.loadingScreen.show();
@@ -290,11 +319,6 @@ define(function () {
       			  function(list) { 
     				  $scope.selectedPlace.placeAreas = list;
     				  $rootScope.loadingScreen.hide();
-    				  /*
-    				  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
-    					  $scope.fetchDevices(area);
-    					});
-    					*/
       			  },
   	    		  function(errorResponse) { 
       				  $rootScope.loadingScreen.hide();
@@ -367,8 +391,9 @@ define(function () {
     	}
     	
     	var msg = '#'+device.parentId+'#'+device.deviceIndex+'#'+device.value;
-    	
-    	mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+device.parentId+'/gateway', msg, $scope.onMqttMessageArrived);
+    	angular.forEach($scope.selectedPlace.gateways, function(gateway, key) {
+	 		  mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+gateway.uniqueIdentifier+'/cloud', msg, $scope.onMqttMessageArrived);
+		});
     };
     
     $scope.getDeviceIconClass = function(device){

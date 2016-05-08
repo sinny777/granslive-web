@@ -28,6 +28,10 @@
       "type": "string",
       "required": true,
       "index": false
+    },
+    "gateways": {
+      "type": "object",
+      "required": false
     }
   },
   "validations": [],

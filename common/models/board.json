@@ -42,6 +42,10 @@
       "type": "string",
       "required": true,
       "index": false
+    },
+    "mfgDate": {
+      "type": "date",
+      "required": false
     }
   },
   "validations": [],

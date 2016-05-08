@@ -70,10 +70,10 @@
       "property": "upsert"
     },
     {
-        "principalType": "ROLE",
-        "principalId": "$authenticated",
-        "permission": "ALLOW",
-        "property": "addBoard"
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "addBoard"
     },
     {
       "principalType": "ROLE",

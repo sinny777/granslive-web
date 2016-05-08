@@ -4370,6 +4370,266 @@ paths:
           schema:
             type: object
       deprecated: false
+  /Gateways:
+    post:
+      tags:
+        - Gateway
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Gateway.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Gateway'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Gateway'
+      deprecated: false
+    put:
+      tags:
+        - Gateway
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: Gateway.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Gateway'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Gateway'
+      deprecated: false
+    get:
+      tags:
+        - Gateway
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Gateway.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Gateway'
+      deprecated: false
+  '/Gateways/{id}/exists':
+    get:
+      tags:
+        - Gateway
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Gateway.exists__get_Gateways_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/Gateways/{id}':
+    head:
+      tags:
+        - Gateway
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Gateway.exists__head_Gateways_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Gateway
+      summary: Find a model instance by id from the data source.
+      operationId: Gateway.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Gateway'
+      deprecated: false
+    delete:
+      tags:
+        - Gateway
+      summary: Delete a model instance by id from the data source.
+      operationId: Gateway.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Gateway
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: Gateway.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Gateway'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Gateway'
+      deprecated: false
+  /Gateways/findOne:
+    get:
+      tags:
+        - Gateway
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Gateway.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Gateway'
+      deprecated: false
+  /Gateways/update:
+    post:
+      tags:
+        - Gateway
+      summary: Update instances of the model matched by where from the data source.
+      operationId: Gateway.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Gateway'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /Gateways/count:
+    get:
+      tags:
+        - Gateway
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Gateway.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /Gateways/change-stream:
+    post:
+      tags:
+        - Gateway
+      summary: Create a change stream.
+      operationId: Gateway.createChangeStream__post_Gateways_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - Gateway
+      summary: Create a change stream.
+      operationId: Gateway.createChangeStream__get_Gateways_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
 definitions:
   x-any:
     properties: {}
@@ -4556,6 +4816,8 @@ definitions:
         type: string
       title:
         type: string
+      gateways:
+        type: object
       id:
         type: string
     required:
@@ -4604,6 +4866,9 @@ definitions:
         type: string
       uniqueIdentifier:
         type: string
+      mfgDate:
+        type: string
+        format: date
       id:
         type: string
     required:
@@ -4625,6 +4890,20 @@ definitions:
         type: number
         format: double
       placeAreaId:
+        type: string
+      id:
+        type: string
+    additionalProperties: false
+  Gateway:
+    properties:
+      description:
+        type: string
+      mfgDate:
+        type: string
+        format: date
+      title:
+        type: string
+      uniqueIdentifier:
         type: string
       id:
         type: string
