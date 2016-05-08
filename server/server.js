@@ -27,9 +27,13 @@ bootOptions = { "appRootDir": __dirname,
 boot(app, bootOptions, function(err) {
 	if (err) throw err;
 
-	//start the server if `$ node server.js`
-	if (require.main === module)
-	app.start();
+	try{
+		//start the server if `$ node server.js`
+		if (require.main === module)
+		app.start();
+	}catch(err){
+		console.log("ERROR: >>> ", err);
+	}
 });
 
 /*

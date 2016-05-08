@@ -18,6 +18,7 @@ define(function (require) {
     
     iotModule.controller('placeController', require('iot/controllers/placeController'));
     iotModule.controller('groupsController', require('iot/controllers/groupsController'));
+    iotModule.controller('productsController', require('iot/controllers/productsController'));
     
     iotModule.directive('fileModel', require('common/directives/fileModelDirective'));
     iotModule.directive('toggle', require('common/directives/toggleDirective'));
@@ -42,6 +43,12 @@ define(function (require) {
 			when('/places', {
 	            templateUrl: 'scripts/src/iot/partials/places.html',
 	            controller: 'placeController',
+	            controllerAs: 'vm',
+	            access: { requiredLogin: false }
+	        }).
+	        when('/admin/products', {
+	            templateUrl: 'scripts/src/iot/partials/admin/products.html',
+	            controller: 'productsController',
 	            controllerAs: 'vm',
 	            access: { requiredLogin: false }
 	        }).

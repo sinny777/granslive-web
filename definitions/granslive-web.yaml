@@ -2767,12 +2767,7 @@ paths:
 
 
 
-
-
-
-
                 - `user` - `{User}` - Data of the currently logged in user.
-
               (`include=user`)
 
 
@@ -3531,6 +3526,18 @@ paths:
           required: false
           type: string
           format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /PlaceAreas/addboard:
+    post:
+      tags:
+        - PlaceArea
+      operationId: PlaceArea.addBoard
+      parameters: []
       responses:
         '200':
           description: Request was successful
@@ -4537,18 +4544,18 @@ definitions:
     additionalProperties: false
   Place:
     properties:
-      ownerId:
-        type: string
+      audit:
+        type: object
       description:
         type: string
       floor:
         type: string
       location:
         type: object
+      ownerId:
+        type: string
       title:
         type: string
-      audit:
-        type: object
       id:
         type: string
     required:
@@ -4568,6 +4575,8 @@ definitions:
         type: string
       type:
         type: string
+      devices:
+        type: object
       id:
         type: string
     required:
@@ -4581,6 +4590,10 @@ definitions:
         type: object
       description:
         type: string
+      devices:
+        type: object
+      owner:
+        type: object
       placeAreaId:
         type: string
       status:
@@ -4602,6 +4615,8 @@ definitions:
         type: object
       description:
         type: string
+      parentId:
+        type: string
       status:
         type: string
       title:
@@ -4609,7 +4624,7 @@ definitions:
       value:
         type: number
         format: double
-      parentId:
+      placeAreaId:
         type: string
       id:
         type: string

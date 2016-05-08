@@ -50,27 +50,27 @@
     "public": true
   },
   "Place": {
-    "dataSource": "smarthome",
+    "dataSource": "places",
     "public": true,
     "$promise": {},
     "$resolved": true
   },
   "PlaceArea": {
-    "dataSource": "smarthome",
+    "dataSource": "placeareas",
     "public": true,
     "$promise": {},
     "$resolved": true
   },
   "Board": {
-    "dataSource": "smarthome",
+    "dataSource": "products",
     "public": true
   },
   "Device": {
-    "dataSource": "smarthome",
+    "dataSource": "devices",
     "public": true
   },
   "Group": {
-    "dataSource": "smarthome",
+    "dataSource": "groups",
     "public": true
   }
 }

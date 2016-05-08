@@ -38,8 +38,6 @@ define(function () {
     $scope.fetchGroups = function(){
     	console.log('IN fetchGroups for Place >>>>>>>>>> ', $scope.selectedPlace);
     	$scope.showAddMember = '';
-    	var findReq = {filter: {where: {"placeId": $scope.selectedPlace.id}}};
-    	console.log(findReq);
     	$rootScope.loadingScreen.show();
     	var ownerId = $rootScope.currentUser.id;
     	if($rootScope.currentUser.userId){
@@ -52,12 +50,10 @@ define(function () {
     	}
     	
     	var findReq = {
-				filter:{
     			  		 where: {"or": [{"members": {"elemMatch": {"username": {"$eq": email}}}},
     			  		                {"ownerId":ownerId}]
     			  		 		},
     			  		 		"and":[{"placeId": $scope.selectedPlace.id}]
-			   		   }
 				};
     	console.log('findReq: >>> ', findReq);
     	

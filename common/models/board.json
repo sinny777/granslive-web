@@ -13,6 +13,14 @@
       "type": "string",
       "required": false
     },
+    "devices": {
+      "type": "object",
+      "required": false
+    },
+    "owner": {
+      "type": "object",
+      "required": false
+    },
     "placeAreaId": {
       "type": "string",
       "required": false
@@ -59,9 +67,15 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "upsert"
     },
     {
       "principalType": "ROLE",

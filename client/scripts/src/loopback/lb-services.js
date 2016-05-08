@@ -8136,6 +8136,53 @@ module.factory(
           url: urlBase + "/PlaceAreas/change-stream",
           method: "POST"
         },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.PlaceArea#addBoard
+         * @methodOf lbServices.PlaceArea
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `placeArea` – `{function ModelConstructor(data, options) {
+      if (!(this instanceof ModelConstructor)) {
+        return new ModelConstructor(data, options);
+      }
+      if (ModelClass.settings.unresolved) {
+        throw new Error('Model ' + ModelClass.modelName + ' is not defined.');
+      }
+      ModelBaseClass.apply(this, arguments);
+    }=}` - 
+         */
+        "addBoard": {
+          url: urlBase + "/PlaceAreas/addboard",
+          method: "POST"
+        },
       }
     );
 

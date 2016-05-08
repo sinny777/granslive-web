@@ -8,8 +8,8 @@
     "validateUpsert": true
   },
   "properties": {
-    "ownerId": {
-      "type": "string"
+    "audit": {
+      "type": "object"
     },
     "description": {
       "type": "string"
@@ -21,13 +21,13 @@
       "type": "object",
       "index": false
     },
+    "ownerId": {
+      "type": "string"
+    },
     "title": {
       "type": "string",
       "required": true,
       "index": false
-    },
-    "audit": {
-      "type": "object"
     }
   },
   "validations": [],

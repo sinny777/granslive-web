@@ -1,5 +1,18 @@
 module.exports = function(PlaceArea) {
 	
+	PlaceArea.remoteMethod(
+		    'addBoard',
+		    {
+		    	accepts: [
+		            { arg: 'req', type: 'object', http: function(ctx) {
+		              return ctx.req;
+		            } 
+		          }],	
+		         http: {path: '/addboard', verb: 'post'},
+		         returns: {arg: 'placeArea', type: PlaceArea}
+		    }
+	);
+	
 	PlaceArea.observe('before save', function updateTimestamp(ctx, next) {
 		console.log('\n\nInside PlaceArea.js before save: ');
 		  if (ctx.instance) {
@@ -18,6 +31,33 @@ module.exports = function(PlaceArea) {
 			  
 		  }
 		  next();
-		});
-
+	});
+	
+	PlaceArea.addBoard = function(req, cb) {
+		var payload = req.body;
+		var Board = PlaceArea.app.models.Board;
+		var findReq = {filter: {where: {"uniqueIdentifier": payload.uniqueIdentifier}}};
+		console.log("In PlaceArea.addBoard, findReq : >>>> ", findReq);
+		Board.find(findReq, function(err, boards) { 
+			  if (err) {
+				  cb(err, null);
+              }
+			  var devices = boards[0].devices;
+			  payload.placeArea.devices = [];
+			  for(var i = 1; i<= devices.length; i++){
+				  var device = devices[i];
+				  device.status = "OFF";
+				  device.deviceIndex = i;
+				  payload.placeArea.devices.push(device);
+			  }
+			  
+			  PlaceArea.upsert(payload.placeArea, function(err, placeArea) { 
+				  if (err) {
+					  cb(err, null);
+	              }
+				  cb(null, placeArea);
+			  });
+		  });
+	};
+	
 };

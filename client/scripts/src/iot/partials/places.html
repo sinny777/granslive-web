@@ -148,17 +148,76 @@
 	
 	<div class="row" data-ng-if="display == 'dashboard'">
 		<div class="card col-sm-3" data-ng-repeat="placeArea in selectedPlace.placeAreas">
-		  <div class="card-block" style="background-image: url('../assets/images/blurred2.jpg');">
+		  <div class="card-block" style="background-image: url('../assets/images/blurred2.jpg');" data-ng-if="showAddBoard != placeArea.id">
 		  	<span class="fa-stack">
 		  		<a href="javascript:void(0);" data-ng-click="showUpdatePlaceAreaPanel(placeArea);">
 		  			<i class="fa fa-circle fa-stack-2x icon-background"></i>
 		  			<i class="fa fa-edit fa-stack-1x icon-white" data-toggle="tooltip" data-placement="top" title="Settings"></i>
 		  		</a>
 		  	</span>
+		  	<span class="fa-stack"> <a href=""
+				data-ng-click="showAddBoardPanel(placeArea);"> <i
+					class="fa fa-circle fa-stack-2x icon-background"></i> <i
+					class="fa flaticon-device fa-stack-1x icon-white"
+					data-toggle="tooltip" data-placement="top" title="Add Board"></i>
+			</a>
+			</span>
 		  	
 		  	<h4 class="card-title">{{placeArea.title}}</h4>
 		    <p>{{placeArea.description}}</p>
 		  </div>
+		  
+		  <div class="card-block" data-ng-if="showAddBoard == placeArea.id">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="javascirpt:void(0);"
+						data-target="#addBoardTab" data-toggle="tab">Add</a></li>
+					<li><a href="javascirpt:void(0);"
+						data-target="#allBoardsTab" data-toggle="tab">Boards</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="row tab-pane fade in active" id="addBoardTab">
+						<form class="form-horizontal" role="form" method="post">
+							<div class="input-group margin-bottom-md">
+								<span class="input-group-addon"><i
+									class="fa fa-envelope-o fa-fw"></i></span> 
+									<input type="text"
+									class="form-control" data-ng-model="newboard.uniqueIdentifier"
+									placeholder="Unique Identifier">
+							</div>
+							<div class="form-group">
+								<div class="col-lg-10">
+									<button type="submit" class="btn btn-danger"
+										data-ng-click="addNewBoard();">Add</button>
+									<button type="submit" class="btn btn-danger"
+										data-ng-click="cancelAddBoard();">Cancel</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="row tab-pane fade in" id="allBoardsTab">
+						<form class="form-horizontal" role="form" method="post">
+							<div class="form-group">
+								<div class="col-lg-10">
+									<input type="text" class="form-control"
+										data-ng-model="member.username" placeholder="Email/Username">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-10">
+									<button type="submit" class="btn btn-danger"
+										data-ng-click="inviteNewMember();">Invite</button>
+									<button type="submit" class="btn btn-danger"
+										data-ng-click="cancelAddMember();">Cancel</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		  
+		  
 		  <div class="card-bottom" data-ng-if="showAddMember == group.id">
 			  <ul class="nav nav-tabs nav-justified">
 			  	<li class="active" >

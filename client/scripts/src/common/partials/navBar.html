@@ -86,6 +86,15 @@
 						</ul>
 			        </li>
 			        <li class="dropdown" data-ng-if="currentUser.id">
+			          <a data-ng-if="currentUser.provider == 'granslive' && currentUser.profile" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Admin</b> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+				            <li><a href="#!/admin/analytics"><i class="fa fa-cogs" ></i>&nbsp; Analytics</a></li>
+				            <li><a href="#!/admin/products"><i class="fa fa-cogs" ></i>&nbsp;Products</a></li>
+				            <li class="divider"></li>
+				            <li><a href="#" data-ng-click="logout()"><i class="fa fa-power-off" ></i>&nbsp; Logout</a></li>
+						</ul>
+					</li>
+			        <li class="dropdown" data-ng-if="currentUser.id">
 			          <a data-ng-if="currentUser.provider == 'granslive' && currentUser.profile" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.profile.username}}</b> <span class="caret"></span></a>
 			          <a data-ng-if="currentUser.provider != 'granslive' && currentUser.profile" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.profile.name}}</b> <span class="caret"></span></a>
 			          <a data-ng-if="currentUser.username && !currentUser.profile" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.username}}</b> <span class="caret"></span></a>

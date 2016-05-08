@@ -8,6 +8,7 @@ define(function () {
 	  $scope.selectedPlace = {floor: 'Ground'};
 	  $scope.display = 'places';
 	  $scope.selectedPlaceArea = {};
+	  $scope.newboard = {};
 	  
 	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bath-room', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
 	  $scope.floors = ['Ground'];
@@ -289,15 +290,60 @@ define(function () {
       			  function(list) { 
     				  $scope.selectedPlace.placeAreas = list;
     				  $rootScope.loadingScreen.hide();
+    				  /*
     				  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
     					  $scope.fetchDevices(area);
     					});
+    					*/
       			  },
   	    		  function(errorResponse) { 
       				  $rootScope.loadingScreen.hide();
       				  console.log(errorResponse);
       			  });
     	}    	
+    };
+    
+    $scope.showAddBoardPanel = function(placeArea){
+    	$scope.newboard = {};
+    	$scope.selectedPlaceArea = placeArea;
+    	$scope.showAddBoard = placeArea.id;
+    	console.log('IN showAddBoardPanel: ', $scope.showAddBoard);
+    };
+    
+    $scope.addNewBoard = function(){
+    	console.log('IN addNewBoard: >>>', $scope.newboard);
+    	
+    	if(!$scope.newboard || !$scope.newboard.uniqueIdentifier){
+    		alert("Please provide unique identifier !");
+    		return;
+    	}
+    	var payload = {uniqueIdentifier: $scope.newboard.uniqueIdentifier, "placeArea": $scope.selectedPlaceArea};
+    	$rootScope.loadingScreen.show();
+    	PlaceArea.addBoard(payload,
+  			  function(response) { 
+  				  $rootScope.loadingScreen.hide();
+		          $scope.selectedPlaceArea = response.placeArea;
+				  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
+					  if(area.id == $scope.selectedPlaceArea.id){
+						  area.devices = $scope.selectedPlaceArea.devices;
+						  console.log("BOARD ADDED TO PLACEAREA: >>> ", area);
+					  }
+					});
+				  
+				  
+  			  },
+	    		  function(errorResponse) { 
+  				  console.log(errorResponse);
+  				  $rootScope.loadingScreen.hide();
+  			  });
+    	
+    };
+    
+    $scope.cancelAddBoard = function(){
+    	console.log('In cancelAddBoard: >>>');
+    	$scope.newboard = {};
+    	$scope.selectedPlaceArea = {};
+    	$scope.showAddBoard = '';
     };
     
     $scope.fetchDevices = function(placeArea){
