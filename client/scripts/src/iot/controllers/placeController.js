@@ -312,6 +312,7 @@ define(function () {
     
     $scope.fetchPlaceAreas = function(){
     	if($scope.selectedPlace.id){
+    		$scope.handlePermissions();
     		mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
     		console.log('FETCH AREAS FOR PLACE: ', $scope.selectedPlace);
     		var findReq = {filter: {where: {placeId: $scope.selectedPlace.id}}};
