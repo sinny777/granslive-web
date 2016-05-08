@@ -29,7 +29,6 @@ module.exports = function(grunt) {
         	}
         },
         requirejs: {
-          // Need some work in Compile task.  Currently its not it use
             compile: {
                 options: {
                 	uglify2: {
@@ -40,8 +39,7 @@ module.exports = function(grunt) {
                     preserveLicenseComments: false, //comment in production
                     out: 'client/scripts/webapp.min.js',
                     optimize: 'uglify2',
-                    include: ['main.js']
-        
+                    include: ['main']
                 }
             }
         },

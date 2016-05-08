@@ -2767,7 +2767,12 @@ paths:
 
 
 
+
+
+
+
                 - `user` - `{User}` - Data of the currently logged in user.
+
               (`include=user`)
 
 
@@ -4593,15 +4598,19 @@ definitions:
     additionalProperties: false
   Device:
     properties:
+      audit:
+        type: object
       description:
         type: string
       status:
-        type: number
-        format: double
+        type: string
       title:
         type: string
-      audit:
-        type: object
+      value:
+        type: number
+        format: double
+      parentId:
+        type: string
       id:
         type: string
     additionalProperties: false
@@ -4639,7 +4648,7 @@ x-ibm-configuration:
   enforced: false
   cors:
     enabled: true
-  gateway: micro-gateway
+  gateway: datapower-gateway
   catalogs:
     apic-dev:
       properties:
