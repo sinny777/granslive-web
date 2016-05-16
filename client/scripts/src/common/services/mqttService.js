@@ -129,7 +129,7 @@ define(['angular'], function (angular) {
 	
   }
 
-	factory.$inject = ['CONFIG', '$http'];
+	factory.$inject = ['CONFIG'];
 	return factory;
 });
 

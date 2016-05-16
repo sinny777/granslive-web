@@ -20,6 +20,16 @@ var passportConfigurator = new PassportConfigurator(app);
 
 app.use(serveStatic(__dirname + '/client'));
 
+var bodyParser = require('body-parser');
+
+app.middleware('parse', bodyParser.json({limit: '100mb', type:'application/json'}));
+app.middleware('parse', bodyParser.urlencoded({
+	limit: '100mb',
+	extended: true,
+	parameterLimit:50000,
+	type:'application/x-www-form-urlencoding'
+}));
+
 //Bootstrap the application, configure models, datasources and middleware.
 //Sub-apps like REST API are mounted via boot scripts.
 bootOptions = { "appRootDir": __dirname, 
@@ -36,22 +46,6 @@ boot(app, bootOptions, function(err) {
 	}
 });
 
-/*
- * body-parser is a piece of express middleware that
- *   reads a form's input and stores it as a javascript
- *   object accessible through `req.body`
- *
- */
-var bodyParser = require('body-parser');
-
-/**
- * Flash messages for passport
- *
- * Setting the failureFlash option to true instructs Passport to flash an
- * error message using the message given by the strategy's verify callback,
- * if any. This is often the best approach, because the verify callback
- * can make the most accurate determination of why authentication failed.
- */
 var flash      = require('express-flash');
 
 //attempt to build the providers/passport config
@@ -62,13 +56,6 @@ try {
   console.log(err);
   process.exit(1); // fatal
 }
-
-//to support JSON-encoded bodies
-app.middleware('parse', bodyParser.json());
-// to support URL-encoded bodies
-app.middleware('parse', bodyParser.urlencoded({
-  extended: true
-}));
 
 //The access token is only available after boot
 app.middleware('auth', loopback.token({
@@ -96,6 +83,10 @@ app.use(loopback.token({
 }));
 
 app.use(function setCurrentUser(req, res, next) {
+	
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	
     if (!req.accessToken || loopback.getCurrentContext().get('currentUser')) {
         return next();
     }

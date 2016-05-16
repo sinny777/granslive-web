@@ -4913,12 +4913,9 @@ info:
   x-ibm-name: granslive-web
   version: 1.0.0
   title: granslive-web
-  contact:
-    name: Gurvinder Singh
-    email: sinny777@gmail.com
-    url: 'http://www.granslive.com'
 schemes:
   - http
+  - https
 host: $(catalog.host)
 basePath: /api
 consumes:
@@ -4949,10 +4946,7 @@ x-ibm-configuration:
         runtime-url: $(TARGET_URL)
     sb:
       properties:
-        runtime-url: 'http://localhost:3000'
-    $(catalog.host):
-      properties:
-        $(catalog.host): 'localhost:3000'
+        runtime-url: 'http://localhost:4001'
   assembly:
     execute:
       - invoke:
