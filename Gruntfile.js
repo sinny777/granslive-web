@@ -61,7 +61,7 @@ module.exports = function(grunt) {
     grunt.registerTask('init', ['bower:install', 'copy:main']);
     grunt.registerTask('compile', ['requirejs:compile']);
 
-    grunt.registerTask('start', ['nodemon']);
+    grunt.registerTask('start', ['init','compile','nodemon']);
 
     grunt.registerTask('default', ['init', 'compile']);
 };
