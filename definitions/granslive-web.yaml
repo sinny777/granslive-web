@@ -4914,7 +4914,6 @@ info:
   version: 1.0.0
   title: granslive-web
 schemes:
-  - http
   - https
 host: $(catalog.host)
 basePath: /api
@@ -4936,7 +4935,7 @@ security:
     clientSecretHeader: []
 x-ibm-configuration:
   testable: true
-  enforced: false
+  enforced: true
   cors:
     enabled: true
   gateway: datapower-gateway
