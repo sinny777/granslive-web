@@ -395,7 +395,7 @@ define(function () {
     	
     	var msg = '#'+board.uniqueIdentifier+'#'+device.deviceIndex+'#'+device.value;
     	angular.forEach($scope.selectedPlace.gateways, function(gateway, key) {
-	 		  mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+gateway.uniqueIdentifier+'/cloud', msg, $scope.onMqttMessageArrived);
+	 		  mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+gateway.uniqueIdentifier+'/gateway', msg, $scope.onMqttMessageArrived);
 		});
     };
     
