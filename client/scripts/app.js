@@ -13,10 +13,10 @@ define([
     'querystring',
     'mqtt',
 	'config',
-	'loopback/lb-services',
-	'common/commonModule',
-	'iot/iotModule',
-	'watson/watsonModule'
+	'../modules/loopback/lb-services',
+	'../modules/common/commonModule',
+	'../modules/iot/iotModule',
+	'../modules/watson/watsonModule'
 ], function (angular, angularRoute) {
     'use strict';
 

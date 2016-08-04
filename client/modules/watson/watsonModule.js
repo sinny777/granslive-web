@@ -12,10 +12,10 @@ define(function (require) {
 //                                                   'ui.bootstrap',
                                                    'app.config']);
 
-    watsonModule.factory('languageService', require('watson/services/languageService'));
-    watsonModule.factory('speechService', require('watson/services/speechService'));
+    watsonModule.factory('languageService', require('../watson/services/languageService'));
+    watsonModule.factory('speechService', require('../watson/services/speechService'));
     
-    watsonModule.controller('dialogController', require('watson/controllers/dialogController'));
+    watsonModule.controller('dialogController', require('../watson/controllers/dialogController'));
     
 
     return watsonModule;

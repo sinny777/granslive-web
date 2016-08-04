@@ -5,41 +5,38 @@ module.exports = function(grunt) {
       pkg: grunt.file.readJSON('package.json'),
 
         bower: {
-            install: {
-            	/*
-              options: {
-            	targetDir: "public/scripts/lib",
-                layout: 'byType',
-                copy: true,
-                install: true,
-                verbose: false,
-                cleanTargetDir: false,
-                cleanBowerDir: false,
-                bowerOptions: {}
-              }*/
-
-            }
+            install: { }
         },
-        copy: {
-        	main: {
-        	expand: true,
-        	cwd: 'bower_components',
-        	src: '**',
-        	dest: 'client/scripts/vendor'
+    	copy: {
+        	manifestprod: {
+	        	src: 'environments/production/manifest.yml',
+	        	dest: 'manifest.yml'
+        	},
+        	configlocal: {
+	        	src: 'environments/local/config.js',
+	        	dest: 'client/scripts/config.js'
+        	},
+        	configprod: {
+	        	src: 'environments/production/config.js',
+	        	dest: 'client/scripts/config.js'
         	}
-        },
+    	},
         requirejs: {
             compile: {
                 options: {
-                	uglify2: {
+                    uglify2: {
                         mangle: false
                     },
-                    baseUrl: 'client/scripts/src',
-                    mainConfigFile: 'client/scripts/src/main.js',
-                    preserveLicenseComments: false, //comment in production
+                    baseUrl: "client/scripts",
                     out: 'client/scripts/webapp.min.js',
                     optimize: 'uglify2',
-                    include: ['main']
+                    mainConfigFile:'client/scripts/main.js',
+                    logLevel: 0,
+                    findNestedDependencies: true,
+//                    fileExclusionRegExp: /^\./,
+//                    inlineText: true,
+                    include: ['main'],
+                    exclude: ['config']
                 }
             }
         },
@@ -51,17 +48,17 @@ module.exports = function(grunt) {
 
     });
 
-//    grunt.loadNpmTasks('grunt-npm-install');
     grunt.loadNpmTasks('grunt-bower-installer');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
-
     grunt.loadNpmTasks('grunt-nodemon');
 
-    grunt.registerTask('init', ['bower:install', 'copy:main']);
     grunt.registerTask('compile', ['requirejs:compile']);
 
-    grunt.registerTask('start', ['init','compile','nodemon']);
+    grunt.registerTask('local', ['bower:install', 'copy:manifestprod',  'copy:configlocal']);
+    grunt.registerTask('prod', ['bower:install', 'copy:manifestprod', 'copy:configprod']);
 
-    grunt.registerTask('default', ['init', 'compile']);
+    grunt.registerTask('start', ['compile', 'nodemon']);
+
+    grunt.registerTask('default', ['compile', 'local']);
 };

@@ -12,17 +12,17 @@ define(function (require) {
 //                                                   'ui.bootstrap',
                                                    'app.config']);
     
-    iotModule.factory('authService', require('common/services/authService'));
-    iotModule.factory('dataService', require('common/services/dataService'));
-    iotModule.factory('mqttService', require('common/services/mqttService'));
+    iotModule.factory('authService', require('../common/services/authService'));
+    iotModule.factory('dataService', require('../common/services/dataService'));
+    iotModule.factory('mqttService', require('../common/services/mqttService'));
     
-    iotModule.controller('placeController', require('iot/controllers/placeController'));
-    iotModule.controller('groupsController', require('iot/controllers/groupsController'));
-    iotModule.controller('productsController', require('iot/controllers/productsController'));
+    iotModule.controller('placeController', require('../iot/controllers/placeController'));
+    iotModule.controller('groupsController', require('../iot/controllers/groupsController'));
+    iotModule.controller('productsController', require('../iot/controllers/productsController'));
     
-    iotModule.directive('fileModel', require('common/directives/fileModelDirective'));
-    iotModule.directive('toggle', require('common/directives/toggleDirective'));
-    iotModule.directive('groupsDirective', require('iot/directives/groupsDirective'));
+    iotModule.directive('fileModel', require('../common/directives/fileModelDirective'));
+    iotModule.directive('toggle', require('../common/directives/toggleDirective'));
+    iotModule.directive('groupsDirective', require('../iot/directives/groupsDirective'));
     
     iotModule.filter('interpolate', ['version', function(version) {
         return function(text) {
@@ -41,13 +41,13 @@ define(function (require) {
                          function($routeProvider) {
 		$routeProvider.
 			when('/places', {
-	            templateUrl: 'scripts/src/iot/partials/places.html',
+	            templateUrl: 'modules/iot/partials/places.html',
 	            controller: 'placeController',
 	            controllerAs: 'vm',
 	            access: { requiredLogin: false }
 	        }).
 	        when('/admin/products', {
-	            templateUrl: 'scripts/src/iot/partials/admin/products.html',
+	            templateUrl: 'modules/iot/partials/admin/products.html',
 	            controller: 'productsController',
 	            controllerAs: 'vm',
 	            access: { requiredLogin: false }
@@ -56,7 +56,6 @@ define(function (require) {
 	            redirectTo: '/home'
 	        });
 	}]);
-    
 
     return iotModule;
 

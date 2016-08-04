@@ -1,5 +1,3 @@
-/*global define, require, console, cordova, navigator */
-
 define(['require','angular','app', 'routes'], function (reqiure, angular, app, routes) {
     'use strict';
 

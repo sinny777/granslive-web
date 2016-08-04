@@ -9,8 +9,8 @@ define(['angular'], function (angular) {
 	return angular.module('app.config', [])
 		.constant('CONFIG', {
 			VERSION: '0.1',
-			ENVIRONMENT: 'DEV',
-			API_URL: 'https://granslive-web.mybluemix.net/api',
+			ENVIRONMENT: 'PRODUCTION',
+			API_URL: '//granslive-web.mybluemix.net/api',
 			MQTT: {
 				MQTT_BROKER: '52.76.33.2',
 				PORT: 9001,

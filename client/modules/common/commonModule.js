@@ -13,13 +13,13 @@ define(function (require) {
                                                    'app.config']);
 //    config = require('common/config/config')(commonModule);
     
-    commonModule.factory('authService', require('common/services/authService'));
-    commonModule.factory('mqttService', require('common/services/mqttService'));
+    commonModule.factory('authService', require('../common/services/authService'));
+    commonModule.factory('mqttService', require('../common/services/mqttService'));
     
-    commonModule.controller('commonController', require('common/controllers/commonController'));
+    commonModule.controller('commonController', require('../common/controllers/commonController'));
 
-    commonModule.directive('fileModel', require('common/directives/fileModelDirective'));
-    commonModule.directive('toggle', require('common/directives/toggleDirective'));
+    commonModule.directive('fileModel', require('../common/directives/fileModelDirective'));
+    commonModule.directive('toggle', require('../common/directives/toggleDirective'));
     
     commonModule.filter('interpolate', ['version', function(version) {
         return function(text) {
@@ -38,7 +38,7 @@ define(function (require) {
                          function($routeProvider) {
 		$routeProvider.
 			when('/home', {
-				templateUrl: 'scripts/src/common/partials/home.html',
+				templateUrl: 'modules/common/partials/home.html',
 				controller: 'commonController',
 				controllerAs: 'vm',
 				access: { requiredLogin: false }

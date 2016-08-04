@@ -298,9 +298,9 @@ SpeechRecognizer.prototype._init = function() {
     return;
   }
 
-  console.log('SpeechRecognizer._init():', this.ws);
   var self = this;
   this.socket = self.io.connect(this.ws);
+  console.log('SpeechRecognizer._init(): >> ', this.socket);
   
   this.socket.on('connect', function() {
     console.log('socket.onconnect()');

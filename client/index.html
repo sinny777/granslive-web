@@ -29,15 +29,15 @@
 </head>
 <body data-ng-controller="commonController">
 
-    <div data-ng-include="'scripts/src/common/partials/topHeader.html'" ></div>
+    <div data-ng-include="'modules/common/partials/topHeader.html'" ></div>
 
     <div id="app-container" ng-view></div>
 
     <footer>
-        <div data-ng-include src="'scripts/src/common/partials/footer.html'"></div>
+        <div data-ng-include src="'modules/common/partials/footer.html'"></div>
     </footer>
 
-    <!-- <script data-main="scripts/src/main.js" src="scripts/vendor/requirejs/require.js"></script> --> 
+     <!-- <script data-main="scripts/main.js" src="scripts/vendor/requirejs/require.js"></script> -->
     
      <script type="text/javascript" data-main="scripts/webapp.min.js" src="scripts/vendor/requirejs/require.js" ></script>
 
