@@ -23,7 +23,7 @@ module.exports = function(Board) {
 			  ctx.data.audit.modified = new Date();
 			  
 		  }
-		  next();
+		 return next();
 		});
 	
 	function generateUUID() {

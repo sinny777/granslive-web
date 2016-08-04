@@ -17,7 +17,7 @@ module.exports = function(Device) {
 			  ctx.data.audit.modified = new Date();
 			  
 		  }
-		  next();
+		return next();
 		});
 	
 };

@@ -2,6 +2,7 @@
 console.log('\n\n<<<<<<<<< INSIDE main.js >>>>>>>>>');
 
 require.config({
+	waitSeconds: 200,
     paths :{
     	'jquery' : '../vendor/jquery/dist/jquery.min',
         'angular' :'../vendor/angular/angular.min',

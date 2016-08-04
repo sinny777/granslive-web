@@ -29,20 +29,20 @@
     "dataSource": "db",
     "public": false
   },
-  "accessToken": {
+  "AccessToken": {
     "dataSource": "db",
     "public": true
   },
   "ACL": {
-    "dataSource": "accounts",
+    "dataSource": "access",
     "public": true
   },
   "RoleMapping": {
-    "dataSource": "accounts",
+    "dataSource": "roles",
     "public": true
   },
   "Role": {
-    "dataSource": "accounts",
+    "dataSource": "roles",
     "public": true
   },
   "MyUser": {

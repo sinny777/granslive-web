@@ -1416,13 +1416,42 @@ module.factory(
   "AccessToken",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/accessTokens/:id",
+      urlBase + "/AccessTokens/:id",
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use AccessToken.user() instead.
+        /**
+         * @ngdoc method
+         * @name lbServices.AccessToken#prototype$__get__user
+         * @methodOf lbServices.AccessToken
+         *
+         * @description
+         *
+         * Fetches belongsTo relation user.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `AccessToken` object.)
+         * </em>
+         */
         "prototype$__get__user": {
-          url: urlBase + "/accessTokens/:id/user",
+          url: urlBase + "/AccessTokens/:id/user",
           method: "GET"
         },
 
@@ -1460,7 +1489,7 @@ module.factory(
          * </em>
          */
         "create": {
-          url: urlBase + "/accessTokens",
+          url: urlBase + "/AccessTokens",
           method: "POST"
         },
 
@@ -1499,7 +1528,7 @@ module.factory(
          */
         "createMany": {
           isArray: true,
-          url: urlBase + "/accessTokens",
+          url: urlBase + "/AccessTokens",
           method: "POST"
         },
 
@@ -1537,7 +1566,7 @@ module.factory(
          * </em>
          */
         "upsert": {
-          url: urlBase + "/accessTokens",
+          url: urlBase + "/AccessTokens",
           method: "PUT"
         },
 
@@ -1569,7 +1598,7 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/accessTokens/:id/exists",
+          url: urlBase + "/AccessTokens/:id/exists",
           method: "GET"
         },
 
@@ -1604,7 +1633,7 @@ module.factory(
          * </em>
          */
         "findById": {
-          url: urlBase + "/accessTokens/:id",
+          url: urlBase + "/AccessTokens/:id",
           method: "GET"
         },
 
@@ -1638,7 +1667,7 @@ module.factory(
          */
         "find": {
           isArray: true,
-          url: urlBase + "/accessTokens",
+          url: urlBase + "/AccessTokens",
           method: "GET"
         },
 
@@ -1671,7 +1700,7 @@ module.factory(
          * </em>
          */
         "findOne": {
-          url: urlBase + "/accessTokens/findOne",
+          url: urlBase + "/AccessTokens/findOne",
           method: "GET"
         },
 
@@ -1705,7 +1734,7 @@ module.factory(
          * The number of instances updated
          */
         "updateAll": {
-          url: urlBase + "/accessTokens/update",
+          url: urlBase + "/AccessTokens/update",
           method: "POST"
         },
 
@@ -1738,7 +1767,7 @@ module.factory(
          * </em>
          */
         "deleteById": {
-          url: urlBase + "/accessTokens/:id",
+          url: urlBase + "/AccessTokens/:id",
           method: "DELETE"
         },
 
@@ -1770,7 +1799,7 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/accessTokens/count",
+          url: urlBase + "/AccessTokens/count",
           method: "GET"
         },
 
@@ -1785,7 +1814,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `id` – `{*}` - AccessToken id
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -1807,7 +1836,7 @@ module.factory(
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/accessTokens/:id",
+          url: urlBase + "/AccessTokens/:id",
           method: "PUT"
         },
 
@@ -1844,7 +1873,7 @@ module.factory(
          *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
-          url: urlBase + "/accessTokens/change-stream",
+          url: urlBase + "/AccessTokens/change-stream",
           method: "POST"
         },
 
@@ -2048,42 +2077,6 @@ module.factory(
     */
     R.modelName = "AccessToken";
 
-
-        /**
-         * @ngdoc method
-         * @name lbServices.AccessToken#user
-         * @methodOf lbServices.AccessToken
-         *
-         * @description
-         *
-         * Fetches belongsTo relation user.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - AccessToken id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `MyUser` object.)
-         * </em>
-         */
-        R.user = function() {
-          var TargetResource = $injector.get("MyUser");
-          var action = TargetResource["::get::accessToken::user"];
-          return action.apply(R, arguments);
-        };
 
     return R;
   }]);
@@ -5235,6 +5228,48 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#authenticate
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `user` – `{function ModelConstructor(data, options) {
+      if (!(this instanceof ModelConstructor)) {
+        return new ModelConstructor(data, options);
+      }
+      if (ModelClass.settings.unresolved) {
+        throw new Error('Model ' + ModelClass.modelName + ' is not defined.');
+      }
+      ModelBaseClass.apply(this, arguments);
+    }=}` - 
+         */
+        "authenticate": {
+          url: urlBase + "/MyUsers/authenticate",
+          method: "GET"
+        },
+
         // INTERNAL. Use UserCredential.user() instead.
         "::get::userCredential::user": {
           url: urlBase + "/userCredentials/:id/user",
@@ -5244,12 +5279,6 @@ module.factory(
         // INTERNAL. Use UserIdentity.user() instead.
         "::get::userIdentity::user": {
           url: urlBase + "/userIdentities/:id/user",
-          method: "GET"
-        },
-
-        // INTERNAL. Use AccessToken.user() instead.
-        "::get::accessToken::user": {
-          url: urlBase + "/accessTokens/:id/user",
           method: "GET"
         },
 

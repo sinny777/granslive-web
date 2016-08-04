@@ -1,0 +1,4 @@
+catalog: 'apic-catalog://us.apiconnect.ibmcloud.com/orgs/gurvsin3inibmcom-learn/catalogs/smarthome'
+us.apiconnect.ibmcloud.com.meta:
+  formFactor: BLUEMIX_PUBLIC
+  serverCapabilities: {}

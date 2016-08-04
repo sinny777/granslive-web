@@ -21,7 +21,7 @@
   "relations": {
     "accessTokens": {
       "type": "hasMany",
-      "model": "accessToken",
+      "model": "AccessToken",
       "foreignKey": "userId"
     },
     "identities": {
@@ -42,10 +42,16 @@
     }
   },
   "acls": [
+	{
+	    "principalType": "ROLE",
+	    "principalId": "$everyone",
+	    "permission": "DENY"
+	},
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW",
+      "property": "authenticate"
     },
     {
       "principalType": "ROLE",

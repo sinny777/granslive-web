@@ -19,23 +19,34 @@ module.exports = function(Place, Member) {
 			  ctx.data.audit.modified = new Date();
 			  
 		  }
-		  next();
+		 return next();
 		});
 	
 	// remote method before hook
 	  Place.beforeRemote('find', function(context, unused, next) {
+		  console.log('\n\nIN Place.js find method >>>>>> ');
 	    var accessToken = context.req && context.req.accessToken;
 		var userId = accessToken && accessToken.userId;
 	    var ownerId = context.query && context.query.where && context.query.where.ownerId;
+	    
+		console.log('accessToken: >> ', accessToken);
+	    
 	    if(loopback){
-	    	var currentUser = loopback.getCurrentContext().get("currentUser");
+	    	var loopbackContext = loopback.getCurrentContext();
+	    	var currentUser = Place.app.currentUser;
+	    	console.log('currentUser 3: ' , currentUser);
+		    
+		    if(!currentUser){
+		    	currentUser = context.req.user;
+		    }
+	    	
 	    	console.log("IN place.js current userId: ", userId, ", query: ", context.filter+", currentUser: ", currentUser);
 	    	if(currentUser){
 	    		findMembers(currentUser.id);
 	    	}
 	    }
     	
-	    next();
+	   return next();
 	  });
 	  
 	  findMembers = function(memberId){

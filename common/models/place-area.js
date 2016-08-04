@@ -30,7 +30,7 @@ module.exports = function(PlaceArea) {
 			  ctx.data.audit.modified = new Date();
 			  
 		  }
-		  next();
+		 return next();
 	});
 	
 	PlaceArea.addBoard = function(req, cb) {
@@ -47,8 +47,10 @@ module.exports = function(PlaceArea) {
 			  board.status = "active";
 			  for(var i = 1; i<= board.devices.length; i++){
 				  var device = board.devices[i];
-				  device.status = "OFF";
-				  device.deviceIndex = i;
+				  if(device){
+					  device.status = "OFF";
+					  device.deviceIndex = i;
+				  }
 			  }
 			  
 			  Board.upsert(board, function(err, board) { 

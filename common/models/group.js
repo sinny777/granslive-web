@@ -17,6 +17,6 @@ module.exports = function(Group) {
 			  ctx.data.audit.modified = new Date();
 			  
 		  }
-		  next();
+		 return next();
 		});
 };
