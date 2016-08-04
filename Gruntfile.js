@@ -35,8 +35,8 @@ module.exports = function(grunt) {
                     findNestedDependencies: true,
 //                    fileExclusionRegExp: /^\./,
 //                    inlineText: true,
-                    include: ['main'],
-                    exclude: ['config']
+                    include: ['main']
+//                    exclude: ['config']
                 }
             }
         },
@@ -55,10 +55,10 @@ module.exports = function(grunt) {
 
     grunt.registerTask('compile', ['requirejs:compile']);
 
-    grunt.registerTask('local', ['bower:install', 'copy:manifestprod',  'copy:configlocal']);
-    grunt.registerTask('prod', ['bower:install', 'copy:manifestprod', 'copy:configprod']);
+    grunt.registerTask('local', ['bower:install', 'copy:manifestprod',  'copy:configlocal', 'compile']);
+    grunt.registerTask('production', ['bower:install', 'copy:manifestprod', 'copy:configprod', 'compile']);
 
-    grunt.registerTask('start', ['compile', 'nodemon']);
+    grunt.registerTask('start', ['nodemon']);
 
-    grunt.registerTask('default', ['compile', 'local']);
+    grunt.registerTask('default', ['local']);
 };
