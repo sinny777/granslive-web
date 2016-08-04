@@ -2,7 +2,7 @@
   "_meta": {
     "sources": [
       "loopback/common/models",
-      "loopback/server/models",
+      "loopback-component-passport/lib/models",
       "../common/models",
       "./models"
     ],
@@ -14,28 +14,67 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
+  },
+  "userCredential": {
+    "dataSource": "db",
+    "public": true
+  },
+  "userIdentity": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ApplicationCredential": {
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "ACL": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "access",
+    "public": true
   },
   "RoleMapping": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "roles",
+    "public": true
   },
   "Role": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "roles",
+    "public": true
   },
-  "place": {
-    "dataSource": "cloudant",
+  "MyUser": {
+    "dataSource": "accounts",
+    "public": true
+  },
+  "Place": {
+    "dataSource": "places",
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "PlaceArea": {
+    "dataSource": "placeareas",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Board": {
+    "dataSource": "products",
+    "public": true
+  },
+  "Device": {
+    "dataSource": "devices",
+    "public": true
+  },
+  "Group": {
+    "dataSource": "groups",
+    "public": true
+  },
+  "Gateway": {
+    "dataSource": "gateways",
+    "public": true
   }
 }

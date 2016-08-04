@@ -1,5 +1,6 @@
 {
-  "name": "place",
+  "name": "Place",
+  "plural": "Places",
   "base": "PersistedModel",
   "strict": false,
   "idInjection": false,
@@ -7,20 +8,88 @@
     "validateUpsert": true
   },
   "properties": {
-    "title": {
-      "type": "string",
-      "required": true,
-      "index": true
+    "audit": {
+      "type": "object"
     },
     "description": {
       "type": "string"
     },
-    "default": {
-      "type": "boolean"
+    "floor": {
+      "type": "string"
+    },
+    "location": {
+      "type": "object",
+      "index": false
+    },
+    "ownerId": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "index": false
+    },
+    "gateways": {
+      "type": "object",
+      "required": false
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "owner": {
+      "type": "belongsTo",
+      "model": "MyUser",
+      "foreignKey": "ownerId"
+    },
+    "groups": {
+      "type": "hasMany",
+      "model": "Group",
+      "foreignKey": "placeId"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "upsert"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    }
+  ],
   "methods": {}
 }

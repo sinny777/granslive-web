@@ -1,0 +1,30 @@
+{
+  "name": "Gateway",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "description": {
+      "type": "string",
+      "required": false
+    },
+    "mfgDate": {
+      "type": "date",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "uniqueIdentifier": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

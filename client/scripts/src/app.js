@@ -1,34 +1,44 @@
 define([
 	'angular',	
 	'angularRoute',
+	'angularResource',
     'angularAnimate',
     'angularLocalStorage',
     'angularToastr',
+    'angularCookies',
     'angularFilesystem',
     'bootstrap',
 //    'ui.bootstrap',
     'cryptojslib',
     'querystring',
+    'mqtt',
 	'config',
+	'loopback/lb-services',
 	'common/commonModule',
+	'iot/iotModule',
 	'watson/watsonModule'
 ], function (angular, angularRoute) {
     'use strict';
 
-    var myworkstyle =  angular.module('myworkstyle', [
+    var granslive =  angular.module('granslive', [
         'ngRoute',
+        'ngResource',
         'ngAnimate',
 //        'ui.bootstrap',
         'LocalStorageModule',
         'toastr',
+        'ngCookies',
         'fileSystem',
         'app.config',
+        'lbServices',
         'commonModule',
+        'iotModule',
         'watsonModule'
     ]);
-
     
-    myworkstyle.config(function(toastrConfig) {
+    
+    granslive.config(function(toastrConfig) {
+    	
         angular.extend(toastrConfig, {
             allowHtml: false,
             closeButton: true,
@@ -61,18 +71,21 @@ define([
         });
     });
     
-	
-    
-    myworkstyle.run(['$rootScope','$location',function($rootScope, $location) {
+    granslive.run(['$rootScope','$location',function($rootScope, $location) {
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
             console.log('IN routeChangeStart >>>>>>> ');
              $rootScope.footerLinks = [];
         });
+        
+        $rootScope.currentUser = {permissions: {}};
+        
+        $rootScope.loadingScreen = $('<div style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background-color:gray;background-color:rgba(70,70,70,0.2);"><img style="position:absolute;top:50%;left:50%;" alt="" src="/assets/images/loading.gif" /></div>')
+        .appendTo($('body')).hide();
 
     }]);
      
     
-    return myworkstyle;
+    return granslive;
 
 
 });

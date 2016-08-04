@@ -8,33 +8,38 @@
 	<meta name="fragment" content="!" />
   <base href="/">
 
-    <title data-ng-bind="viewTitle ? viewTitle + ' | Bluemix' : 'IBM Bluemix Demos'">IBM - Bluemix Demos</title>
+    <title data-ng-bind="viewTitle ? viewTitle + ' | GransLive' : 'GransLive - Live LIVE With GransLive'">GransLive - Live LIVE With GransLive</title>
 
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <LINK REV="made" href="mailto:gurvsin3@in.ibm.com">
-	<META NAME="keywords"  	CONTENT="IBM, Bluemix, Demos, Nodejs, Watson APIs">
+	<META NAME="keywords"  	CONTENT="IGransLive, Home Automation, Live Streaming, IoT">
 	<META NAME="description"
- 	 CONTENT="IBM Bluemix Demos and Services information">
+ 	 CONTENT="GransLive - Live LIVE With GransLive. We are learning on Home Automation, Internet of Things and Live Streaming ">
 	<META NAME="author" CONTENT="Gurvinder Singh">
 	<META NAME="ROBOTS" CONTENT="ALL">
 
 	<link rel="stylesheet" type="text/css" href="scripts/vendor/angular-toastr/dist/angular-toastr.css" />
-  <link rel="stylesheet" href="scripts/vendor/bootstrap/dist/css/bootstrap.css">
-   <link rel="stylesheet" href="assets/css/font-awesome.css">
-  <link rel="stylesheet" href="assets/css/app.css">
-
+  <link rel="stylesheet" type="text/css" href="scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/weather-icons.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-social.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
+  
 </head>
-<body data-ng-controller="CommonController">
+<body data-ng-controller="commonController">
 
-    <div data-ng-include="'partials/common/topHeader.html'" ></div>
+    <div data-ng-include="'scripts/src/common/partials/topHeader.html'" ></div>
 
     <div id="app-container" ng-view></div>
 
     <footer>
-        <div data-ng-include src="'partials/common/footer.html'"></div>
+        <div data-ng-include src="'scripts/src/common/partials/footer.html'"></div>
     </footer>
 
-    <script data-main="scripts/src/main.js" src="scripts/vendor/requirejs/require.js"></script>
+    <!-- <script data-main="scripts/src/main.js" src="scripts/vendor/requirejs/require.js"></script> --> 
+    
+     <script type="text/javascript" data-main="scripts/webapp.min.js" src="scripts/vendor/requirejs/require.js" ></script>
 
 </body>
 </html>
