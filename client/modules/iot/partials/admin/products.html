@@ -1,8 +1,8 @@
 
-<div data-ng-init="initProducts();">
+<div class="container" data-ng-init="initProducts();">
 
 	<div>
-		<div class="col-sm-8">
+		<div class="col-sm-10">
 			<h3 data-ng-if="boards.length == 0">There are no boards found</h3>
 			<h3 data-ng-if="boards.length > 0">Boards in Production</h3>
 		</div>
@@ -31,6 +31,13 @@
 
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" method="post">
+					<div class="form-group">
+						<label for="name" class="col-lg-2 control-label">Unique Identifier:</label>
+						<div class="col-lg-4">
+							<input type="text" class="form-control"
+								data-ng-model="selectedBoard.uniqueIdentifier">
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="name" class="col-lg-2 control-label">Title:</label>
 						<div class="col-lg-4">
@@ -63,13 +70,29 @@
 	<div class="clearfix"></div>
 	<div style="clear: both;"></div>
 
-	<div class="container" class="row" data-ng-if="display == 'boards'" >
-		<div data-ng-repeat="board in boards">
-			{{board.uniqueIdentifier}} - {{board.title}} - ({{board.type}})
-			<div class="clearfix"></div>
-			<div style="clear: both;"></div>
-			<br />
-		</div>
+	<div class="row" data-ng-if="display == 'boards'" >
+		
+		<div class="row appliances-tab tab-pane fade in active" id="boards">
+	   		<ul class="list-group list-group-flush small-font">
+				<li class="list-group-item"
+					data-ng-repeat="board in boards"><span >&nbsp;<i class="{{board.status}}"> {{board.uniqueIdentifier}} - {{board.title}}</i> </span>
+					<div class="pull-right">
+						<a style="text-decoration: none;" href="javascript:void(0);"
+							data-ng-click="showUpdateBoard(board);"
+							data-toggle="tooltip" data-placement="left" title="Update">
+							<span class="fa fa-edit"></span>
+						</a> &nbsp;	
+						  <i class="fa fa-times"
+					         data-ng-click="deleteBoard(board);"
+					         data-toggle="tooltip" data-placement="left" title="Delete Board">
+					      </i>
+					</div>
+				</li>
+			</ul>
+	   </div>
+		
+		
+		
 
 	</div>
 

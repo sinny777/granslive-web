@@ -39,36 +39,13 @@ module.exports.getServiceCreds = function(name) {
         }
     }else{
     	// THIS ELSE BLOCK IS TO RUN THE APPLICATION LOCALLY
-    	if(name == 'language-translation'){
+    	if(name == 'cloudantNoSQLDB'){
     		return {
-    			 "url": "https://gateway.watsonplatform.net/language-translation/api",
-    	            "username": "34afdcc3-504f-4f61-a999-1fdcfd0d5565",
-    	            "password": "X9LmZphvDbSC",
-    	             version: 'v2'
-    		}
-    	}
-    	if(name == 'dialog'){
-    		return {
-    			"url": "https://gateway.watsonplatform.net/dialog/api",
-                "username": "69b6ecc1-c777-4709-9e3c-89c84a05d659",
-                "password": "68k7zhwODohx",
-        	     version: 'v1'
-    		}
-    	}
-    	if(name == 'natural_language_classifier'){
-    		return {
-    			"url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
-                "username": "751f3775-06e8-47ab-934b-0cb68749362a",
-                "password": "hoh3IC1Xegv7",
-        	     version: 'v1'
-    		}
-    	}
-    	if(name == 'retrieve_and_rank'){
-    		return {
-    			 "url": "https://gateway.watsonplatform.net/retrieve-and-rank/api",
-    	            "username": "08ce9763-62fb-46e8-9166-47ff05383960",
-    	            "password": "a8GaXsOF75Z3",
-    	             version: 'v1'
+    			"username": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix",
+    	        "password": "5bfe2ecae5c815202c4d78db2600812ef5099f337a6deb6dba96ce0b7a5b0e13",
+    	        "host": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix.cloudant.com",
+    	        "port": 443,
+    	        "url": "https://acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix:5bfe2ecae5c815202c4d78db2600812ef5099f337a6deb6dba96ce0b7a5b0e13@acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix.cloudant.com"
     		}
     	}
     	if(name == 'speech_to_text'){

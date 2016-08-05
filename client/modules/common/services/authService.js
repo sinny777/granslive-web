@@ -68,6 +68,11 @@ define(['angular'], function (angular) {
 	    			    	  callback(Auth.currentUser);
 	    			      }
 	    			}	    			
+	    		}).catch(function(e) {
+	    			  console.log("ERROR: >>> ", e);
+	    			  if(callback){
+    			    	  callback(Auth.currentUser);
+    			      }
 	    		});
 	        }else{
 	        	if(callback){

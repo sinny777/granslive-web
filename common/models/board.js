@@ -2,8 +2,9 @@ module.exports = function(Board) {
 	
 	Board.observe('before save', function updateTimestamp(ctx, next) {
 		console.log('\n\nInside Board.js before save: ');
+		  var board = {};
 		  if (ctx.instance) {
-			  var board = ctx.instance;
+			  board = ctx.instance;
 			  if(!board.audit){
 				  board.audit = {};
 			  }
@@ -12,17 +13,19 @@ module.exports = function(Board) {
 				  board.status = "inactive";
 			  }
 			  board.audit.modified = new Date();
-			  if(!board.uniqueIdentifier){
-				  board.uniqueIdentifier = generateUUID();
-			  }
-			  
 		  } else {
-			  if(!ctx.data.audit){
-				  ctx.data.audit = {};
+			  board = ctx.data;
+			  if(!board.audit){
+				  board.audit = {};
 			  }
-			  ctx.data.audit.modified = new Date();
-			  
+			  board.audit.modified = new Date();
 		  }
+		  
+		  if(!board.uniqueIdentifier){
+			  //TODO: Board should always have a UniquiId set before it is sent for saving
+			  board.uniqueIdentifier = generateUUID();
+		  }
+		  
 		 return next();
 		});
 	

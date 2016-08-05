@@ -44,13 +44,13 @@ define(function (require) {
 	            templateUrl: 'modules/iot/partials/places.html',
 	            controller: 'placeController',
 	            controllerAs: 'vm',
-	            access: { requiredLogin: false }
+	            access: { requiredLogin: true }
 	        }).
 	        when('/admin/products', {
 	            templateUrl: 'modules/iot/partials/admin/products.html',
 	            controller: 'productsController',
 	            controllerAs: 'vm',
-	            access: { requiredLogin: false }
+	            access: { requiredLogin: true }
 	        }).
 	        otherwise({
 	            redirectTo: '/home'

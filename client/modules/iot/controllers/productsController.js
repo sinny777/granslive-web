@@ -8,8 +8,8 @@ define(function () {
 	  $scope.boards = [];
 	  $scope.boardTypes = [{label:"2 Digital Switches", type:"SB_D2"}, 
 	                       {label:"6 Digital Switches", type:"SB_D6"},
-	                       {label:"4 Analog Switches", type:"SB_A4"},
-	                       {label:"6 Digital 4 Analog Switches", type:"SB_D6_A4"}];
+	                       {label:"3 Analog Switches", type:"SB_A3"},
+	                       {label:"6 Digital 3 Analog Switches", type:"SB_D6_A3"}];
 	  
 	  $scope.initProducts = function(){
 		  $scope.fetchAndShowBoards();
@@ -34,12 +34,11 @@ define(function () {
 		  $scope.display = "saveBoardPanel";
 	  };
 	  
-	  
     $scope.fetchBoards = function(){
     	console.log('IN fetchBoards >>>>>>>>>> ');
     	$scope.showAddMember = '';
-    	var findReq = {filter: {where: {"status": "inactive"}}};
-//    	var findReq = {};
+//    	var findReq = {filter: {where: {"status": "inactive"}}};
+    	var findReq = {};
     	$rootScope.loadingScreen.show();
     	var ownerId = $rootScope.currentUser.id;
     	if($rootScope.currentUser.userId){
@@ -65,6 +64,12 @@ define(function () {
     			  });
     };
     
+    $scope.showUpdateBoard = function(board){
+    	console.log('IN showUpdateBoard: >>> ', board);
+    	$scope.selectedBoard = board;
+    	$scope.display = 'saveBoardPanel';
+    };
+    
     $scope.saveBoard = function(){
     	console.log('$rootScope.currentUser: >> ', $rootScope.currentUser);
     	var ownerId = $rootScope.currentUser.id;
@@ -87,7 +92,7 @@ define(function () {
     	}
     	
     	if(!$scope.selectedBoard.type){
-    		$scope.selectedBoard.type = 'SB_D6_A4';
+    		$scope.selectedBoard.type = 'SB_D6_A3';
     	}
     	
     	$scope.addDevicesBasedOnType($scope.selectedBoard);
