@@ -16,7 +16,7 @@ define(['angular'], function (angular) {
     	      
     	    },
     	    controller: 'groupsController',
-            templateUrl: '/scripts/src/iot/partials/groups.html',
+            templateUrl: '/modules/iot/partials/groups.html',
     	  }
     }
     
