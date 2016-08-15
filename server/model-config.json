@@ -76,5 +76,9 @@
   "Gateway": {
     "dataSource": "gateways",
     "public": true
+  },
+  "Configuration": {
+    "dataSource": "db",
+    "public": true
   }
 }
