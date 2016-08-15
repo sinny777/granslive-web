@@ -15,7 +15,7 @@ define(function () {
     };
 	  
     $rootScope.checkUser = function(callback){
-    	$rootScope.initializeMQTT();
+//    	$rootScope.initializeMQTT();
     	$rootScope.loadingScreen.show();
     	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
     		authService.ensureCurrentUser(function(currentUser){
@@ -57,6 +57,7 @@ define(function () {
     	
       };
       
+      /*
       $rootScope.mqttConnectSuccess = function(){
       	   console.log('MQTT Connection SUCCESS >>>>>>>>>>');
    	   	try{
@@ -87,6 +88,8 @@ define(function () {
       $rootScope.initializeMQTT = function(){
     	  mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
       };
+      
+      */
     
   }
   

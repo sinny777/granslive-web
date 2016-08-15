@@ -10,6 +10,12 @@ define(function () {
 	  $scope.selectedPlaceArea = {};
 	  $scope.boards = [];
 	  $scope.newboard = {};
+	  $scope.isMqttConnected = false;
+	  $scope.mqttOptions = {api_key: CONFIG.IOT_CONFIG.auth_key, 
+			  				auth_token: CONFIG.IOT_CONFIG.auth_token,
+			  				orgId: CONFIG.IOT_CONFIG.org,
+			  				clientId: "a:"+CONFIG.IOT_CONFIG.org+":" +Date.now(),
+			  				hostname: CONFIG.IOT_CONFIG.org+".messaging.internetofthings.ibmcloud.com"};
 	  
 	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bath-room', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
 	  $scope.floors = ['Ground'];
@@ -64,7 +70,19 @@ define(function () {
 	  $scope.mqttConnectSuccess = function(){
    	   console.log('MQTT Connection SUCCESS >>>>>>>>>>');
 	   	try{
-	 		  mqttService.subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+$scope.selectedPlace.gatewayId+'/cloud');
+	   		  $scope.isMqttConnected = true;
+					var subscribeTopic = "iot-2/type/GransLiveGateway/id/" +$scope.selectedPlace.gatewayId + "/evt/+/fmt/json";
+			    	var subscribeOptions = {
+						qos : 0,
+						onSuccess : function() {
+							console.log("subscribed to " + subscribeTopic+", gatewayId: "+$scope.selectedPlace.gatewayId);
+						},
+						onFailure : function(){
+							console.log("Failed to subscribe to " + subscribeTopic);
+						}
+			    	};
+			    	console.log('SUBSCRIBE TO TOPIC: >>> ', subscribeTopic);
+			    	mqttService.subscribe(subscribeTopic, subscribeOptions);
 		   }catch(err){
 			   console.log('Error: >>> ', err);
 		   }
@@ -73,45 +91,32 @@ define(function () {
 	  $scope.onMqttMessageArrived = function(message) {
    	   console.log('onMqttMessageArrived >>>>>>>>>>' +message.payloadString);
           try{
-        	  $scope.refreshSelectedPlace(message);
+        	  var msg = JSON.parse(message.payloadString);
+        	  $scope.refreshSelectedPlace(msg);
           }catch(err){
               console.log(err);
           }
       };
       
-      $scope.onMqttConnectionLost = function(responseObject) {
-   	   console.log('MQTT Connection LOST >>>>>>>>>>');
-          if (responseObject.errorCode !== 0){
-              console.log("onConnectionLost:" + responseObject.errorMessage);
-              mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
-          }
-      };
-      
       $scope.refreshSelectedPlace = function(mqttMsg){
-   	   var commandArr = mqttMsg.payloadString.split("#");
-   	   console.log("commandArr: >> ", commandArr);
-   	   if(commandArr.length >= 3){
-   		   var boardId = commandArr[1];
-       	   var deviceIndex = commandArr[2];
-       	   var deviceValue = commandArr[3];
-       	   angular.forEach($scope.boards, function(board, key) {
-       		   	angular.forEach(board.devices, function(device, key) {
-           		   if(device.parentId == boardId && device.deviceIndex == deviceIndex){
-           		        $scope.$apply(function () {
-           		        	device.value = deviceValue;
-                			   if(device.value == 0){
-                				   device.status = "OFF";
-                			   }else{
-                				   device.status = "ON";
-                			   }
-                			 console.log("DEVICE UPDATED>> ", device);
-           		        });
-           		   }
-           		 });
-       		 });
-   	   }
-      };
-	  
+    	  console.log('IN refreshSelectedPlace, mqttMsg: ', mqttMsg);
+          	   angular.forEach($scope.boards, function(board, key) {
+          		   	angular.forEach(board.devices, function(device, key) {
+              		   if(device.parentId == mqttMsg.d.boardId && device.deviceIndex == mqttMsg.d.deviceIndex){
+              		        $scope.$apply(function () {
+              		        	device.value = mqttMsg.d.deviceValue;
+                   			   if(device.value == 0){
+                   				   device.status = "OFF";
+                   			   }else{
+                   				   device.status = "ON";
+                   			   }
+                   			 console.log("DEVICE UPDATED>> ", device);
+              		        });
+              		   }
+              		 });
+          		 });
+         };
+      
 	  $scope.showAddNewPlacePanel = function(){
 		  console.log('IN showAddNewPlacePanel: ');
 		  $scope.selectedPlace = {floor: 'Ground'};
@@ -311,7 +316,17 @@ define(function () {
     $scope.fetchPlaceAreas = function(){
     	if($scope.selectedPlace.id){
     		$scope.handlePermissions();
-    		mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
+//    		mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
+    		
+    		if($scope.isMqttConnected){
+        		$scope.subscribeForChanges();
+        	}else{
+        		$scope.mqttOptions.mqttConnectSuccess = $scope.mqttConnectSuccess;
+        		$scope.mqttOptions.onMqttMessageArrived = $scope.onMqttMessageArrived;
+            	mqttService.connectMQTT($scope.mqttOptions);
+        	}
+    		
+    		
     		console.log('FETCH AREAS FOR PLACE: ', $scope.selectedPlace);
     		var findReq = {filter: {where: {placeId: $scope.selectedPlace.id}}};
     		$rootScope.loadingScreen.show();
@@ -391,9 +406,17 @@ define(function () {
     		device.value = 1;
     	}
     	
-    	var msg = '#'+board.uniqueIdentifier+'#'+device.deviceIndex+'#'+device.value;
+//    	var msg = '#'+board.uniqueIdentifier+'#'+device.deviceIndex+'#'+device.value;
+    	var msg = {d:
+    				{
+						boardId: board.uniqueIdentifier,
+						deviceIndex: device.deviceIndex,
+						deviceValue: device.value
+					}
+    			  };
     	console.log('$scope.selectedPlace.gatewayId: >>' , $scope.selectedPlace.gatewayId);
-    	mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+$scope.selectedPlace.gatewayId+'/gateway', msg, $scope.onMqttMessageArrived);
+    	var topic = "iot-2/type/GransLiveGateway/id/"+$scope.selectedPlace.gatewayId+"/evt/gateway/fmt/json";
+    	mqttService.publishToMqtt(topic, msg);
     };
     
     $scope.getDeviceIconClass = function(device){

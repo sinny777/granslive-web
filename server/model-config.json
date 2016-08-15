@@ -78,7 +78,7 @@
     "public": true
   },
   "Configuration": {
-    "dataSource": "db",
+    "dataSource": "configurations",
     "public": true
   }
 }
