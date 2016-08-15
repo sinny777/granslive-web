@@ -2,7 +2,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-  var factory = function ($http, $q, CONFIG) {
+  var factory = function (CONFIG) {
     	
 	var subscribeTopic = "";
 	var mqttClient;
@@ -71,9 +71,8 @@ define(['angular'], function (angular) {
 		
 		return mqttService;
   }
-  
 
-	factory.$inject = ['$http', '$q', 'CONFIG'];
+	factory.$inject = ['CONFIG'];
 	return factory;
 });
 

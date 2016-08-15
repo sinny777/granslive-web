@@ -103,7 +103,7 @@ define(function () {
           	   angular.forEach($scope.boards, function(board, key) {
           		   	angular.forEach(board.devices, function(device, key) {
               		   if(device.parentId == mqttMsg.d.boardId && device.deviceIndex == mqttMsg.d.deviceIndex){
-              		        $scope.$apply(function () {
+              		        $scope.$apply(function() {
               		        	device.value = mqttMsg.d.deviceValue;
                    			   if(device.value == 0){
                    				   device.status = "OFF";
@@ -316,16 +316,14 @@ define(function () {
     $scope.fetchPlaceAreas = function(){
     	if($scope.selectedPlace.id){
     		$scope.handlePermissions();
-//    		mqttService.connectToMqtt($scope.onMqttMessageArrived, $scope.onMqttConnectionLost, $scope.mqttConnectSuccess);
     		
     		if($scope.isMqttConnected){
-        		$scope.subscribeForChanges();
+        		$scope.mqttConnectSuccess();
         	}else{
         		$scope.mqttOptions.mqttConnectSuccess = $scope.mqttConnectSuccess;
         		$scope.mqttOptions.onMqttMessageArrived = $scope.onMqttMessageArrived;
             	mqttService.connectMQTT($scope.mqttOptions);
         	}
-    		
     		
     		console.log('FETCH AREAS FOR PLACE: ', $scope.selectedPlace);
     		var findReq = {filter: {where: {placeId: $scope.selectedPlace.id}}};
@@ -406,7 +404,6 @@ define(function () {
     		device.value = 1;
     	}
     	
-//    	var msg = '#'+board.uniqueIdentifier+'#'+device.deviceIndex+'#'+device.value;
     	var msg = {d:
     				{
 						boardId: board.uniqueIdentifier,
