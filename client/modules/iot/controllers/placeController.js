@@ -64,9 +64,7 @@ define(function () {
 	  $scope.mqttConnectSuccess = function(){
    	   console.log('MQTT Connection SUCCESS >>>>>>>>>>');
 	   	try{
-   			angular.forEach($scope.selectedPlace.gateways, function(gateway, key) {
-	 		   mqttService.subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+gateway.uniqueIdentifier+'/cloud');
-	 		 });
+	 		  mqttService.subscribeToMqtt(CONFIG.MQTT.TOPIC_PREFIX+$scope.selectedPlace.gatewayId+'/cloud');
 		   }catch(err){
 			   console.log('Error: >>> ', err);
 		   }
@@ -394,9 +392,8 @@ define(function () {
     	}
     	
     	var msg = '#'+board.uniqueIdentifier+'#'+device.deviceIndex+'#'+device.value;
-    	angular.forEach($scope.selectedPlace.gateways, function(gateway, key) {
-	 		  mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+gateway.uniqueIdentifier+'/gateway', msg, $scope.onMqttMessageArrived);
-		});
+    	console.log('$scope.selectedPlace.gatewayId: >>' , $scope.selectedPlace.gatewayId);
+    	mqttService.publishToMqtt(CONFIG.MQTT.TOPIC_PREFIX+$scope.selectedPlace.gatewayId+'/gateway', msg, $scope.onMqttMessageArrived);
     };
     
     $scope.getDeviceIconClass = function(device){

@@ -4556,14 +4556,14 @@ definitions:
         type: string
       floor:
         type: string
+      gatewayId:
+        type: string
       location:
         type: object
       ownerId:
         type: string
       title:
         type: string
-      gateways:
-        type: object
       id:
         type: string
     required:
@@ -4600,6 +4600,9 @@ definitions:
         type: string
       devices:
         type: object
+      mfgDate:
+        type: string
+        format: date
       owner:
         type: object
       placeAreaId:
@@ -4612,9 +4615,8 @@ definitions:
         type: string
       uniqueIdentifier:
         type: string
-      mfgDate:
+      gatewayId:
         type: string
-        format: date
       id:
         type: string
     required:

@@ -125,23 +125,23 @@ define(function () {
 	};
     
     $scope.addDevicesBasedOnType = function(board){
-    	if(board.type == 'SB_D6_A4'){
-    		$scope.addDigitalDevices(board, 6);
-    		$scope.addAnalogDevices(board, 4);
+    	if(board.type == 'SB_D6_A3'){
+    		$scope.addDigitalDevices(board, 1, 6);
+    		$scope.addAnalogDevices(board, 7, 9);
     	}
     	if(board.type == 'SB_D6'){
-    		$scope.addDigitalDevices(board, 6);
+    		$scope.addDigitalDevices(board, 1, 6);
     	}
-    	if(board.type == 'SB_A4'){
-    		$scope.addAnalogDevices(board, 4);
+    	if(board.type == 'SB_A3'){
+    		$scope.addAnalogDevices(board, 1, 3);
     	}
     };
     
-    $scope.addDigitalDevices = function(board, count){
+    $scope.addDigitalDevices = function(board, startIndex, endIndex){
     	if(!board.devices){
     		board.devices = [];
     	}
-    	for(var i = 1; i <= count; i++){
+    	for(var i = startIndex; i <= endIndex; i++){
     		board.devices.push({
     			"parentId": board.uniqueIdentifier,
     			"title": "DS"+i,
@@ -149,16 +149,17 @@ define(function () {
     			"status": "inactive",
     			"value": 0,
     			"type": "bulb",
-    			"analog": false
+    			"analog": false,
+    			"deviceIndex": i
     		});
     	}
     };
     
-    $scope.addAnalogDevices = function(board, count){
+    $scope.addAnalogDevices = function(board, startIndex, endIndex){
     	if(!board.devices){
     		board.devices = [];
     	}
-    	for(var i = 1; i <= count; i++){
+    	for(var i = startIndex; i <= endIndex; i++){
     		board.devices.push({
     			"parentId": board.uniqueIdentifier,
     			"title": "AS"+i,
@@ -166,7 +167,8 @@ define(function () {
     			"status": "inactive",
     			"value": 0,
     			"type": "bulb",
-    			"analog": true
+    			"analog": true,
+    			"deviceIndex": i
     		});
     	}
     };

@@ -42,11 +42,11 @@
     }
   },
   "acls": [
-	{
-	    "principalType": "ROLE",
-	    "principalId": "$everyone",
-	    "permission": "DENY"
-	},
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
     {
       "principalType": "ROLE",
       "principalId": "$everyone",

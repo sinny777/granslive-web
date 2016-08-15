@@ -52,6 +52,7 @@ define(['angular'], function (angular) {
       };
 
       mqttClient.publishToMqtt =  function(publishToTopic, msgToPublish, onMqttMessageArrived){
+    	  console.log('IN mqttClient.publishToMqtt, publishToTopic: ', publishToTopic, ', msgToPublish: ', msgToPublish);
           var message = new Paho.MQTT.Message(msgToPublish);
           message.destinationName = publishToTopic;
           if(!mqttClient.host){

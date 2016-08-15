@@ -62,7 +62,7 @@
     "$resolved": true
   },
   "Board": {
-    "dataSource": "products",
+    "dataSource": "boards",
     "public": true
   },
   "Device": {

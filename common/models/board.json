@@ -17,6 +17,10 @@
       "type": "object",
       "required": false
     },
+    "mfgDate": {
+      "type": "date",
+      "required": false
+    },
     "owner": {
       "type": "object",
       "required": false
@@ -43,8 +47,8 @@
       "required": true,
       "index": false
     },
-    "mfgDate": {
-      "type": "date",
+    "gatewayId": {
+      "type": "string",
       "required": false
     }
   },
