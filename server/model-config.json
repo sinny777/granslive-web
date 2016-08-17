@@ -80,5 +80,13 @@
   "Configuration": {
     "dataSource": "configurations",
     "public": true
+  },
+  "Scene": {
+    "dataSource": "scenes",
+    "public": true
+  },
+  "UserSetting": {
+    "dataSource": "usersettings",
+    "public": true
   }
 }

@@ -4583,6 +4583,476 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  /Scenes:
+    post:
+      tags:
+        - Scene
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Scene.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Scene'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Scene'
+      deprecated: false
+    put:
+      tags:
+        - Scene
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: Scene.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Scene'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Scene'
+      deprecated: false
+    get:
+      tags:
+        - Scene
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Scene.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Scene'
+      deprecated: false
+  '/Scenes/{id}/exists':
+    get:
+      tags:
+        - Scene
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Scene.exists__get_Scenes_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/Scenes/{id}':
+    head:
+      tags:
+        - Scene
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Scene.exists__head_Scenes_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - Scene
+      summary: Find a model instance by id from the data source.
+      operationId: Scene.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Scene'
+      deprecated: false
+    delete:
+      tags:
+        - Scene
+      summary: Delete a model instance by id from the data source.
+      operationId: Scene.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Scene
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: Scene.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Scene'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Scene'
+      deprecated: false
+  /Scenes/findOne:
+    get:
+      tags:
+        - Scene
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Scene.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Scene'
+      deprecated: false
+  /Scenes/update:
+    post:
+      tags:
+        - Scene
+      summary: Update instances of the model matched by where from the data source.
+      operationId: Scene.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Scene'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /Scenes/count:
+    get:
+      tags:
+        - Scene
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Scene.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /UserSettings:
+    post:
+      tags:
+        - UserSetting
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: UserSetting.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/UserSetting'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/UserSetting'
+      deprecated: false
+    put:
+      tags:
+        - UserSetting
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: UserSetting.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/UserSetting'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/UserSetting'
+      deprecated: false
+    get:
+      tags:
+        - UserSetting
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: UserSetting.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSetting'
+      deprecated: false
+  '/UserSettings/{id}/exists':
+    get:
+      tags:
+        - UserSetting
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'UserSetting.exists__get_UserSettings_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/UserSettings/{id}':
+    head:
+      tags:
+        - UserSetting
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'UserSetting.exists__head_UserSettings_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - UserSetting
+      summary: Find a model instance by id from the data source.
+      operationId: UserSetting.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/UserSetting'
+      deprecated: false
+    delete:
+      tags:
+        - UserSetting
+      summary: Delete a model instance by id from the data source.
+      operationId: UserSetting.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - UserSetting
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: UserSetting.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/UserSetting'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/UserSetting'
+      deprecated: false
+  /UserSettings/findOne:
+    get:
+      tags:
+        - UserSetting
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: UserSetting.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/UserSetting'
+      deprecated: false
+  /UserSettings/update:
+    post:
+      tags:
+        - UserSetting
+      summary: Update instances of the model matched by where from the data source.
+      operationId: UserSetting.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/UserSetting'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /UserSettings/count:
+    get:
+      tags:
+        - UserSetting
+      summary: Count instances of the model matched by where from the data source.
+      operationId: UserSetting.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
 definitions:
   x-any:
     properties: {}
@@ -4859,20 +5329,14 @@ definitions:
     additionalProperties: false
   Device:
     properties:
-      audit:
+      moreInfo:
         type: object
-      description:
+      registrationId:
         type: string
-      parentId:
+      timestamp:
         type: string
-      status:
-        type: string
-      title:
-        type: string
-      value:
-        type: number
-        format: double
-      placeAreaId:
+        format: date
+      userId:
         type: string
       id:
         type: string
@@ -4898,8 +5362,41 @@ definitions:
       configuration:
         type: object
       id:
-        type: number
-        format: double
+        type: string
+    additionalProperties: false
+  Scene:
+    properties:
+      audit:
+        type: object
+      description:
+        type: string
+      tasks:
+        $ref: '#/definitions/x-any'
+      title:
+        type: string
+      placeId:
+        type: string
+      id:
+        type: string
+    required:
+      - title
+      - placeId
+    additionalProperties: false
+  UserSetting:
+    properties:
+      notify:
+        type: string
+      userId:
+        type: string
+      registrationId:
+        type: string
+      placeId:
+        type: string
+      timestamp:
+        type: string
+        format: date
+      id:
+        type: string
     additionalProperties: false
 swagger: '2.0'
 info:

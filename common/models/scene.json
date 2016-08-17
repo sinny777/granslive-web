@@ -1,26 +1,30 @@
 {
-  "name": "Device",
+  "name": "Scene",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "moreInfo": {
+    "audit": {
       "type": "object",
       "required": false
     },
-    "registrationId": {
+    "description": {
       "type": "string",
       "required": false
     },
-    "timestamp": {
-      "type": "date",
+    "tasks": {
+      "type": "any",
       "required": false
     },
-    "userId": {
+    "title": {
       "type": "string",
-      "required": false
+      "required": true
+    },
+    "placeId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

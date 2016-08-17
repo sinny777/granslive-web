@@ -1,25 +1,29 @@
 {
-  "name": "Device",
+  "name": "UserSetting",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "moreInfo": {
-      "type": "object",
+    "notify": {
+      "type": "string",
+      "required": false
+    },
+    "userId": {
+      "type": "string",
       "required": false
     },
     "registrationId": {
       "type": "string",
       "required": false
     },
-    "timestamp": {
-      "type": "date",
+    "placeId": {
+      "type": "string",
       "required": false
     },
-    "userId": {
-      "type": "string",
+    "timestamp": {
+      "type": "date",
       "required": false
     }
   },
