@@ -1,7 +1,5 @@
 module.exports = function(Board) {
 	
-	var deviceHandler = require('../../server/handlers/deviceHandler')(Board.app);
-	
 	Board.remoteMethod(
 		    'deviceChangeTrigger',
 		    {
@@ -45,6 +43,7 @@ module.exports = function(Board) {
 		});
 	
 	Board.deviceChangeTrigger = function(req, cb){
+		var deviceHandler = require('../../server/handlers/deviceHandler')(Board.app);
 		deviceHandler.deviceChangeTrigger(req.body);
 		cb(null, "SUCCESS");
 	};
