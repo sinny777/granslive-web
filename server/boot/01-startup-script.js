@@ -15,7 +15,7 @@ module.exports = function(app) {
 	var appConfig = require('../../common/config/config').get();
 	var deviceHandler = require('../../server/handlers/deviceHandler')(app);
 
-	initStartupLogic();
+//	initStartupLogic();
 
 	function initStartupLogic() {
 		

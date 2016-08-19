@@ -3597,6 +3597,16 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  /Boards/devicechange:
+    post:
+      tags:
+        - Board
+      operationId: Board.deviceChangeTrigger
+      parameters: []
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
   /Devices:
     post:
       tags:

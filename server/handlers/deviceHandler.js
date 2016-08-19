@@ -25,6 +25,7 @@ var methods = {};
 		if(payload && payload.message){
 			try{
 				msg = JSON.parse(payload.message);
+				methods.handleDevicePayload(msg);
 			}catch(err){
 				console.log('ERROR in Parsing Payload Message: >> ', err );
 				msg = payload.message;

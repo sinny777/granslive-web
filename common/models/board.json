@@ -90,7 +90,13 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "deleteById"
-    }
+    },
+    {
+	  "principalType": "ROLE",
+	  "principalId": "$everyone",
+	  "permission": "ALLOW",
+	  "property": "deviceChangeTrigger"
+	}
   ],
   "methods": {}
 }

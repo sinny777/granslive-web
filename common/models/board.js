@@ -45,7 +45,8 @@ module.exports = function(Board) {
 		});
 	
 	Board.deviceChangeTrigger = function(req, cb){
-		console.log("IN deviceChangeTrigger: >>> ", req.body);
+		deviceHandler.deviceChangeTrigger(req.body);
+		cb(null, "SUCCESS");
 	};
 	
 	function generateUUID() {
