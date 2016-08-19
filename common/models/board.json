@@ -92,11 +92,11 @@
       "property": "deleteById"
     },
     {
-	  "principalType": "ROLE",
-	  "principalId": "$everyone",
-	  "permission": "ALLOW",
-	  "property": "deviceChangeTrigger"
-	}
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "deviceChangeTrigger"
+    }
   ],
   "methods": {}
 }

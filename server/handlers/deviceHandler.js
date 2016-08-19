@@ -1,7 +1,10 @@
 
+/**
+ * Make sure app is provided while instantiating this class and calling any method
+ */
 module.exports = function(app) {
 	
-	var notificationHandler = require('../../server/handlers/notificationHandler')();
+	var notificationHandler = require('../../server/handlers/notificationHandler')(app);
 	var Device;
 	var Board;
 	var PlaceArea;

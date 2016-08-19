@@ -5063,6 +5063,241 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  /Notifications:
+    post:
+      tags:
+        - Notification
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Notification.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Notification'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Notification'
+      deprecated: false
+    put:
+      tags:
+        - Notification
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: Notification.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/Notification'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Notification'
+      deprecated: false
+    get:
+      tags:
+        - Notification
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Notification.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Notification'
+      deprecated: false
+  '/Notifications/{id}/exists':
+    get:
+      tags:
+        - Notification
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Notification.exists__get_Notifications_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/Notifications/{id}':
+    head:
+      tags:
+        - Notification
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Notification.exists__head_Notifications_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - Notification
+      summary: Find a model instance by id from the data source.
+      operationId: Notification.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Notification'
+      deprecated: false
+    delete:
+      tags:
+        - Notification
+      summary: Delete a model instance by id from the data source.
+      operationId: Notification.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Notification
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: Notification.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Notification'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Notification'
+      deprecated: false
+  /Notifications/findOne:
+    get:
+      tags:
+        - Notification
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Notification.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Notification'
+      deprecated: false
+  /Notifications/update:
+    post:
+      tags:
+        - Notification
+      summary: Update instances of the model matched by where from the data source.
+      operationId: Notification.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/Notification'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /Notifications/count:
+    get:
+      tags:
+        - Notification
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Notification.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
 definitions:
   x-any:
     properties: {}
@@ -5405,6 +5640,32 @@ definitions:
       timestamp:
         type: string
         format: date
+      id:
+        type: string
+    additionalProperties: false
+  Notification:
+    properties:
+      email:
+        description: 'To, CC, BCC etc'
+        type: object
+      group:
+        description: Notify all members of Group
+        type: object
+      push:
+        type: boolean
+      sms:
+        type: object
+      type:
+        description: 'DEVICE, BOARD, PLACE'
+        type: string
+      typeId:
+        type: string
+      typeParentId:
+        type: string
+      typeValue:
+        $ref: '#/definitions/x-any'
+      userId:
+        type: string
       id:
         type: string
     additionalProperties: false

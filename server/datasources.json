@@ -52,6 +52,15 @@
     "user": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix",
     "connector": "cloudant"
   },
+  "notifications": {
+    "host": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix.cloudant.com",
+    "url": "https://acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix:5bfe2ecae5c815202c4d78db2600812ef5099f337a6deb6dba96ce0b7a5b0e13@acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix.cloudant.com",
+    "database": "notifications",
+    "password": "5bfe2ecae5c815202c4d78db2600812ef5099f337a6deb6dba96ce0b7a5b0e13",
+    "name": "notifications",
+    "user": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix",
+    "connector": "cloudant"
+  },
   "configurations": {
     "host": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix.cloudant.com",
     "url": "https://acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix:5bfe2ecae5c815202c4d78db2600812ef5099f337a6deb6dba96ce0b7a5b0e13@acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix.cloudant.com",

@@ -1,12 +1,60 @@
+
+/**
+ * Make sure app is provided while instantiating this class and calling any method
+ */
 module.exports = function(app) {
 
 	var commonHandler = require('../../server/handlers/commonHandler')();
 	var emailHandler = require('../../server/handlers/emailHandler')();
 	var gcm = require('node-gcm');
+	var Notification;
+	var UserSetting;
 
 	var methods = {};
 
 	methods.sendNotification = function(payload, board, placeArea, device) {
+		console.log('IN notificationHandler.sendNotification: >> ', device);
+		var registrationIds = [];
+		if(!Notification){
+			Notification = app.models.Notification;
+		}
+		var findReq = {
+    			  		 where: {"or": [{"and":[{"type": "DEVICE"}, {"typeId": device.deviceIndex}, {"typeValue": device.value}, {"typeParentId": device.parentId}]},
+    			  		                {"and":[{"type": "PLACEAREA"}, {"typeValue": placeArea.id}]}]
+    			  		 }
+						};
+		Notification.find(findReq, function(err, notifications) { 
+			if(err){
+				console.log("ERROR IN FINDING NOTIFICATIONS: >>> ", err);
+				return;
+			}
+			var pushCount = 0;
+			for (i = 0; i < notifications.length; i++) {
+				var notification = notifications[i];
+				if(notification.push){
+					pushCount++;
+					if(!UserSetting){
+						UserSetting = app.models.UserSetting;
+					}
+					var count = 0;
+					UserSetting.find({where:{"userId": notification.userId}}, function(err, userSettings) {
+						count++;
+						if(err){
+							console.log("ERROR WHILE FETCHING USER SETTINGS: ", err);
+						}else{
+							registrationIds.push(userSettings[0].registrationId);
+							if(pushCount == count){
+								methods.handlePushNotification(payload, board, placeArea, device, registrationIds);
+							}
+						}
+					});
+				}
+			}
+		});
+		
+	};
+	
+	methods.handlePushNotification = function(payload, board, placeArea, device, registrationIds){
 		var pushMsg = placeArea.title +"'s " + device.title + " status is changed to " + device.status +" at " +new Date();
 		var pushData = {
 				boardId : payload.d.boardId,
@@ -15,8 +63,7 @@ module.exports = function(app) {
 				style : "picture",
 				picture : "http://wallpapercave.com/wp/3Ma6LaY.jpg"
 			};
-		//TODO get RegistrationIds for sending Notification
-		var registrationIds = ["lToS_pqhEgI:APA91bFZ7dzViDni82vZvI0wob9ur1Ug1mCCWH3EE1x17jUIMZZQ53wtG_9zaWgRlGqQqbYXEOc-C72MGuFFVrCfD3PfF29wmqUHGF6Pksfo-gNcwgtam4R1X9sQrRsQCxaTHZyno1Xx"];
+		
 		methods.sendPushNotification(pushData, pushMsg, registrationIds);
 	};
 

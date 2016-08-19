@@ -88,5 +88,9 @@
   "UserSetting": {
     "dataSource": "usersettings",
     "public": true
+  },
+  "Notification": {
+    "dataSource": "notifications",
+    "public": true
   }
 }
