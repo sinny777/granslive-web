@@ -1,5 +1,20 @@
 module.exports = function(Board) {
 	
+	var deviceHandler = require('../../server/handlers/deviceHandler')(Board.app);
+	
+	Board.remoteMethod(
+		    'deviceChangeTrigger',
+		    {
+		    	accepts: [
+		            { arg: 'req', type: 'object', http: function(ctx) {
+		              return ctx.req;
+		            } 
+		          }],	
+		         http: {path: '/devicechange', verb: 'post'},
+		         returns: null
+		    }
+	);
+	
 	Board.observe('before save', function updateTimestamp(ctx, next) {
 		console.log('\n\nInside Board.js before save: ');
 		  var board = {};
@@ -28,6 +43,10 @@ module.exports = function(Board) {
 		  
 		 return next();
 		});
+	
+	Board.deviceChangeTrigger = function(req, cb){
+		console.log("IN deviceChangeTrigger: >>> ", req.body);
+	};
 	
 	function generateUUID() {
 	    var d = new Date().getTime();

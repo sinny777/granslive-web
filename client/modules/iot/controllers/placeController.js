@@ -406,6 +406,7 @@ define(function () {
     	
     	var msg = {d:
     				{
+    		  			gatewayId: $scope.selectedPlace.gatewayId,
 						boardId: board.uniqueIdentifier,
 						deviceIndex: device.deviceIndex,
 						deviceValue: device.value

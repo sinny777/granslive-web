@@ -7,7 +7,8 @@ module.exports.get = function() {
 		      "org": "o6oosq",
 		      "id": "a-o6oosq-v9xbyockrk",
 		      "auth-key": "a-o6oosq-ugylh9r4ug",
-		      "auth-token": "Tun&)vjKlf6sJ_9BdK"
+		      "auth-token": "Tun&)vjKlf6sJ_9BdK",
+		      "type": "shared"
 		    },
 		    "SERVICES_CONFIG":{
 				"cloudantNOSQLDB":{
