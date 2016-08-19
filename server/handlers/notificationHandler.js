@@ -39,7 +39,8 @@ module.exports = function(app) {
 			title : "GransLive Notification",
 			icon : "ic_launcher",
 			body : pushMsg,
-			priority : 2
+			priority : 2,
+			sound : "default"
 		});
 
 		service.send(message, {
