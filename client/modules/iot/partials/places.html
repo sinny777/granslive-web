@@ -262,18 +262,20 @@
 						</li>
 					</ul>
 			   </div>
-			   <div class="row tab-pane fade in" id="health_{{placeArea.id}}">
-			   		<i class="wi wi-thermometer positive"></i></i> 24 &deg;C
-	                <i class="wi wi-humidity assertive"></i></i> 54%
+			   <div class="row health-tab tab-pane fade in" id="health_{{placeArea.id}}">
 	                <div class="pull-left">
 	                    <i class="fa fa-clock-0"></i> just now
+	                </div>
+	                <div class="pull-right">
+	                	<i class="wi wi-thermometer positive active"></i></i> 24 &deg;C
+	                	<i class="wi wi-humidity assertive active"></i></i> 54%
 	                </div>
 	                  <div class="card-footer">
 					    <a href="#" class="card-link">Add Sensor</a>
 					  </div>
 			   </div>
-			   <div class="row tab-pane fade in" id="scheduler_{{placeArea.id}}">
-			   		<i class="fa fa-dashboard"></i> Scheduler
+			   <div class="row scheduler-tab tab-pane fade in" id="scheduler_{{placeArea.id}}">
+			   		<i class="fa fa-dashboard active"></i> Scheduler
 			   		
 			   		<div class="card-footer">
 					    <a href="#" class="card-link">New Schedule</a>

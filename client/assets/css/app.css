@@ -149,6 +149,14 @@ img {
     margin-left: -9px;
 }
 
+.health-tab{
+	padding: 15px;
+}
+
+.scheduler-tab{
+	padding: 18px;
+}
+
 i.active { color: #5cb85c}
 i.inactive {color: #000000}
 i.locked {color: #d9534f}
