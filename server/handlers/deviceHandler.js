@@ -34,7 +34,21 @@ var methods = {};
 				msg = payload.message;
 			}
 		}
-	}
+	};
+	
+	methods.sensorDataTrigger = function(payload){
+		console.log("IN deviceHandler.sensorDataTrigger: >>> ", payload);
+		var msg = {};
+		if(payload && payload.message){
+			try{
+				msg = JSON.parse(payload.message);
+//				methods.handleDevicePayload(msg);
+			}catch(err){
+				console.log('ERROR in Parsing Payload Message: >> ', err );
+				msg = payload.message;
+			}
+		}
+	};
 	
 	methods.handleDevicePayload = function(payload){
 		console.log('IN deviceHandler.handleDevicePayload with payload: >>>> ', payload);

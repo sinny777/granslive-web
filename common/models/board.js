@@ -13,6 +13,19 @@ module.exports = function(Board) {
 		    }
 	);
 	
+	Board.remoteMethod(
+		    'sensorDataTrigger',
+		    {
+		    	accepts: [
+		            { arg: 'req', type: 'object', http: function(ctx) {
+		              return ctx.req;
+		            } 
+		          }],	
+		         http: {path: '/sensordata', verb: 'post'},
+		         returns: null
+		    }
+	);
+	
 	Board.observe('before save', function updateTimestamp(ctx, next) {
 		console.log('\n\nInside Board.js before save: ');
 		  var board = {};
@@ -45,6 +58,12 @@ module.exports = function(Board) {
 	Board.deviceChangeTrigger = function(req, cb){
 		var deviceHandler = require('../../server/handlers/deviceHandler')(Board.app);
 		deviceHandler.deviceChangeTrigger(req.body);
+		cb(null, "SUCCESS");
+	};
+	
+	Board.sensorDataTrigger = function(req, cb){
+		var deviceHandler = require('../../server/handlers/deviceHandler')(Board.app);
+		deviceHandler.sensorDataTrigger(req.body);
 		cb(null, "SUCCESS");
 	};
 	
