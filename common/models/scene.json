@@ -14,17 +14,30 @@
       "type": "string",
       "required": false
     },
-    "tasks": {
-      "type": "any",
-      "required": false
+    "placeId": {
+      "type": "string",
+      "required": true
     },
     "title": {
       "type": "string",
       "required": true
     },
-    "placeId": {
+    "repeat": {
+      "type": "boolean",
+      "required": false
+    },
+    "type": {
       "type": "string",
-      "required": true
+      "required": false,
+      "description": "TIME, TEMP, HUM, WATERLEVEL"
+    },
+    "settings": {
+      "type": "object",
+      "required": false
+    },
+    "devices": {
+      "type": "any",
+      "required": false
     }
   },
   "validations": [],

@@ -3607,6 +3607,16 @@ paths:
         '204':
           description: Request was successful
       deprecated: false
+  /Boards/sensordata:
+    post:
+      tags:
+        - Board
+      operationId: Board.sensorDataTrigger
+      parameters: []
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
   /Devices:
     post:
       tags:
@@ -5615,17 +5625,24 @@ definitions:
         type: object
       description:
         type: string
-      tasks:
-        $ref: '#/definitions/x-any'
-      title:
-        type: string
       placeId:
         type: string
+      title:
+        type: string
+      repeat:
+        type: boolean
+      type:
+        description: 'TIME, TEMP, HUM, WATERLEVEL'
+        type: string
+      settings:
+        type: object
+      devices:
+        $ref: '#/definitions/x-any'
       id:
         type: string
     required:
-      - title
       - placeId
+      - title
     additionalProperties: false
   UserSetting:
     properties:
