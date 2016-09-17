@@ -119,11 +119,17 @@ var methods = {};
 		    var device = board.devices[i];
 		    if(device.deviceIndex == payload.d.deviceIndex){
 		    	board.devices[i].value = payload.d.deviceValue;
+		    	
 		    	if(payload.d.deviceValue == 1){
 		    		board.devices[i].status = "ON";
 		    	}else{
 		    		board.devices[i].status = "OFF";
 		    	}
+		    	
+		    	if(payload.d.analogValue){
+		    		board.devices[i].analogValue = payload.d.analogValue;
+		    	}
+		    	
 		    	Board.upsert(board, function(err, updatedBoard){
 		    		if(err){
 		    			console.log("ERROR IN UPDATING BOARD: >> ", err);
