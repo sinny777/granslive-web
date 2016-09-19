@@ -3112,6 +3112,21 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  /Places/sensordata:
+    post:
+      tags:
+        - Place
+      operationId: Place.sensorData
+      parameters: []
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              sensordata:
+                type: object
+      deprecated: false
   /PlaceAreas:
     post:
       tags:
@@ -5535,6 +5550,8 @@ definitions:
         type: object
       description:
         type: string
+      devices:
+        type: object
       floor:
         type: string
       placeId:
@@ -5543,8 +5560,8 @@ definitions:
         type: string
       type:
         type: string
-      devices:
-        type: object
+      sensors:
+        $ref: '#/definitions/x-any'
       id:
         type: string
     required:
@@ -5560,14 +5577,16 @@ definitions:
         type: string
       devices:
         type: object
+      gatewayId:
+        type: string
       mfgDate:
         type: string
         format: date
       owner:
         type: object
-      placeAreaId:
-        type: string
       status:
+        type: string
+      subType:
         type: string
       title:
         type: string
@@ -5575,7 +5594,9 @@ definitions:
         type: string
       uniqueIdentifier:
         type: string
-      gatewayId:
+      connectedToType:
+        type: string
+      connectedToId:
         type: string
       id:
         type: string

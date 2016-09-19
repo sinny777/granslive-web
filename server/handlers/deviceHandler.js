@@ -8,6 +8,10 @@ module.exports = function(app) {
 	var Device;
 	var Board;
 	var PlaceArea;
+	
+	var bluemix = require('../../common/config/bluemix');
+	var dbCredentials = bluemix.getServiceCreds('cloudantNoSQLDB');
+	var cloudant = require('cloudant')(dbCredentials.url);
     
 var methods = {};
 
@@ -61,16 +65,7 @@ var methods = {};
 						if(boards && boards.length > 0){
 							var board = boards[0];
 							console.log("RESP FROM FIND BOARD: >>> ", board.title);
-							methods.findPlaceArea(board.placeAreaId, function(err, placeArea) { 
-								if(err){
-									console.log("ERROR IN finding PlaceArea with ID: ", board.placeAreaId, err);
-								}else{
-									console.log("RESP FROM FIND PLACEAREA: >>> ", placeArea.title);
-									if(placeArea){
-										methods.saveDeviceData(payload, board, placeArea);
-									}
-								}
-							});
+							methods.saveDeviceData(payload, board);
 						}else{
 							console.log("NO BOARDS FOUND FOR PAYLOAD: ", payload);
 						}						
@@ -114,7 +109,7 @@ var methods = {};
 		});
 	};
 	
-	methods.saveDeviceData = function(payload, board, placeArea){
+	methods.saveDeviceData = function(payload, board){
 		for (i = 0; i < board.devices.length; i++) {
 		    var device = board.devices[i];
 		    if(device.deviceIndex == payload.d.deviceIndex){
@@ -137,12 +132,66 @@ var methods = {};
 		    			console.log("<<<< BOARD DEVICE UPDATED SUCCESSFULLY >>>>>>> ", board.devices[i]);
 		    		}
 		    	});
-		    	notificationHandler.sendNotification(payload, board, placeArea, board.devices[i]);
+		    	
+		    	methods.findPlaceArea(board.placeAreaId, function(err, placeArea) { 
+					if(err){
+						console.log("ERROR IN finding PlaceArea with ID: ", board.placeAreaId, err);
+					}else{
+						console.log("RESP FROM FIND PLACEAREA: >>> ", placeArea.title);
+						if(placeArea){
+							notificationHandler.sendNotification(payload, board, placeArea, board.devices[i]);
+						}
+					}
+				});
+		    	
 		    	break;
 		    }
 		}
+	};
+	
+	methods.getLatestSensorData = function(params, cb){
+		var startKey = [];
+		startKey.push(params.gatewayId);
+		startKey.push(params.uniqueId);
+		startKey.push(params.type);
+		startKey.push({});
+		var reqParams = {
+			descending: params.descending,
+			startkey: startKey,
+			limit: params.limit
+		  };
+		console.log("reqParams: >>> ", reqParams);
+		var db = cloudant.use(methods.getLatestSensorDataBucket());
+		db.view('iotp', 'sensordata-view', reqParams, function(err, resp) {
+			  if (!err) {
+				var result = [];
+			    if(resp.rows && resp.rows.length > 0){
+			    	for(var index in resp.rows) { 
+						  var viewData = resp.rows[index];
+						  if(viewData.value && viewData.value.length > 0){
+							  var sensorData = {};
+							  sensorData = viewData.value[0].data.d;
+							  result.push(sensorData);
+						  }
+			    	}
+			    	cb(null, result);
+			    }else{
+			    	cb(null, result);
+			    }
+			  }else{
+				  console.log('ERROR IN CALLING getLatestSensorData: ', err);
+				  cb(err, null);
+			  }
+		});
 		
 	};
+	
+	methods.getLatestSensorDataBucket = function(){
+		var today = new Date();
+		var deviceDataBucket = "iotp_o6oosq_devicelogs_2016-0"+(today.getMonth() + 1);
+		return deviceDataBucket;
+	};
+	
 	
     return methods;
     

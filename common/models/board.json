@@ -17,6 +17,10 @@
       "type": "object",
       "required": false
     },
+    "gatewayId": {
+      "type": "string",
+      "required": false
+    },
     "mfgDate": {
       "type": "date",
       "required": false
@@ -25,14 +29,14 @@
       "type": "object",
       "required": false
     },
-    "placeAreaId": {
-      "type": "string",
-      "required": false
-    },
     "status": {
       "type": "string",
       "required": false,
       "index": false
+    },
+    "subType": {
+      "type": "string",
+      "required": false
     },
     "title": {
       "type": "string",
@@ -47,7 +51,11 @@
       "required": true,
       "index": false
     },
-    "gatewayId": {
+    "connectedToType": {
+      "type": "string",
+      "required": false
+    },
+    "connectedToId": {
       "type": "string",
       "required": false
     }

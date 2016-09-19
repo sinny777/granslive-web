@@ -2,6 +2,26 @@ var loopback = require('loopback');
 
 module.exports = function(Place, Member) {
 	
+	Place.remoteMethod(
+		    'sensorData',
+		    {
+		    	accepts: [
+		            { arg: 'req', type: 'object', http: function(ctx) {
+		              return ctx.req;
+		            } 
+		          }],	
+		         http: {path: '/sensordata', verb: 'post'},
+		         returns: {arg: 'sensordata', type: 'object'}
+		    }
+	);
+  
+   Place.sensorData = function(req, cb){
+		var deviceHandler = require('../../server/handlers/deviceHandler')(Place.app);
+		deviceHandler.getLatestSensorData(req.body, function(err, resp){
+			cb(err, resp);
+		});
+	};
+	
 	Place.observe('before save', function updateTimestamp(ctx, next) {
 		console.log('\n\nInside Place.js before save: ');
 		  if (ctx.instance) {

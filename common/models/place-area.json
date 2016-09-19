@@ -13,6 +13,10 @@
     "description": {
       "type": "string"
     },
+    "devices": {
+      "type": "object",
+      "required": false
+    },
     "floor": {
       "type": "string",
       "required": true,
@@ -31,8 +35,8 @@
     "type": {
       "type": "string"
     },
-    "devices": {
-      "type": "object",
+    "sensors": {
+      "type": "any",
       "required": false
     }
   },

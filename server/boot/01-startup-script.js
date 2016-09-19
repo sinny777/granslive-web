@@ -20,6 +20,8 @@ module.exports = function(app) {
 	
 //	saveAndExecuteScenes();
 	
+//	testPushNotification();
+	
 	function saveAndExecuteScenes(){
 		console.log("IN saveAndExecuteScenes: >>> ");
 		var Scene = app.models.Scene;
@@ -112,5 +114,50 @@ module.exports = function(app) {
 		deviceHandler.handleDeviceEvent(deviceType, deviceId, eventType,
 				format, payload);
 	};
+	
+	function testPushNotification(){
+		var gcm = require('node-gcm');
+		var pushMsg = "Just for tesing Push Notification at " +new Date();
+		var pushData = {
+				boardId : "ABCXYZ",
+				deviceIndex : 5,
+				deviceValue : 1,
+				style : "picture",
+				picture : "http://wallpapercave.com/wp/3Ma6LaY.jpg"
+			};
+		var registrationIds = [];
+		registrationIds.push("kCTgv2vUBa4:APA91bE4lyV0P_11s44ADQUpRncxULk5U0c7exv1J-20mTExEqqUYYOVk2YLe8cwSUyv5ntG2OXC61Ld4BfNkcFYA9IMJKQbKbm6AhllquT6GYt1T9aObxivavn6zLYANHXcF29A06-m");
+		
+		console.log('IN notificationHandler.sendPushNotification: >> ', pushMsg);
+		var apiKey = "AIzaSyD_dNyMIgJxxY82yjokjNPUdNCLVWQuzM8";
+		var service = new gcm.Sender(apiKey);
+		var message = new gcm.Message({
+			priority : "high",
+			sound : "default"
+		});
+		message.contentAvailable = true;
+		message.delayWhileIdle = true;
+		message.timeToLive = 3;
+		message.dryRun = true;
+
+		message.addData(pushData);
+
+		message.addNotification({
+			title : "GransLive Notification",
+			icon : "ic_launcher",
+			body : pushMsg,
+			priority : 2,
+			sound : "default"
+		});
+
+		service.send(message, {
+			registrationTokens : registrationIds
+		}, function(err, response) {
+			if (err)
+				console.error(err);
+			else
+				console.log(response);
+		});
+	}
 
 };

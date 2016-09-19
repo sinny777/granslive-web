@@ -220,7 +220,9 @@ define(function () {
     				  $scope.display = 'places';
     				  if($scope.places && $scope.places.length == 1){
 						  $scope.selectedPlace = $scope.places[0];
-						  $scope.display = 'dashboard';
+						  $scope.fetchPlaceSensorsData();
+						  $scope.fetchConnectedBoards();
+						  $scope.display = "dashboard";
 						  $scope.fetchPlaceAreas();
 					  }    				  
     				  
@@ -228,7 +230,7 @@ define(function () {
     					  console.log('PLACE FETCHED: >>>> ', place);
     					  if(place.isDefault){
     						  $scope.selectedPlace = place;
-    						  $scope.display = 'dashboard';
+    						  $scope.display = "dashboard";
     						  $scope.fetchPlaceAreas();
     					  }
     					});
@@ -237,6 +239,45 @@ define(function () {
     				  $rootScope.loadingScreen.hide();
     				  console.log(errorResponse);
     			  });
+    };
+    
+    $scope.fetchPlaceSensorsData = function(){
+    	if($scope.selectedPlace && $scope.selectedPlace.id){
+    		var sensorDataReq = {
+	    				"gatewayId": $scope.selectedPlace.gatewayId,
+	    				"descending": true,
+	    				limit: 1
+    				};
+    		
+    		var findReq = {
+					filter:{
+	    			  		 where: {"and": [{"connectedToId": $scope.selectedPlace.id},
+	    			  		                {"connectedToType": "Place"},
+	    			  		                {"type": "SENSOR_BOARD"}
+	    			  		 				]}
+									}
+    						};
+//    		var findReq = {filter: {where: {connectedToId: $scope.selectedPlace.id}}};
+    		Board.find(findReq,
+      			  function(sensors) { 
+    				  console.log("SENSOR BOARD FETCHED: >>> ", sensors);
+    				  angular.forEach(sensors, function(sensor) {
+    	    			  sensorDataReq.type = sensor.subType;
+    	    			  sensorDataReq.uniqueId = sensor.uniqueIdentifier;
+    	    			  
+    	    			  Place.sensorData(sensorDataReq,
+    	    	    			  function(resp) { 
+    	    	    				  console.log("RESPONSE OF Place.sensorData: >>> ", resp);
+    	    	    			  },
+    	    		    		  function(errorResponse) { 
+    	    	    				  console.log(errorResponse);
+    	    	    			  });
+    	    			});
+      			  },
+  	    		  function(errorResponse) { 
+      				  console.log(errorResponse);
+      		});
+    	}
     };
     
     $scope.savePlace = function(){
@@ -351,25 +392,52 @@ define(function () {
     	console.log('IN showAddBoardPanel: ', $scope.showAddBoard);
     };
     
-    $scope.addNewBoard = function(){
-    	console.log('IN addNewBoard: >>>', $scope.newboard);
-    	
-    	if(!$scope.newboard || !$scope.newboard.uniqueIdentifier){
-    		alert("Please provide unique identifier !");
-    		return;
+    $scope.fetchConnectedBoards = function(){
+    	if(!$scope.selectedPlace || !$scope.selectedPlace.id){
+    		return false;
     	}
-    	var payload = {uniqueIdentifier: $scope.newboard.uniqueIdentifier, "placeAreaId": $scope.selectedPlaceArea.id};
-    	$rootScope.loadingScreen.show();
-    	PlaceArea.addBoard(payload,
-  			  function(response) { 
-  				  $rootScope.loadingScreen.hide();
-		          $scope.boards.push(response.board);
+    	var findReq = {
+				filter:{
+    			  		 where: {"and": [{"gatewayId": $scope.selectedPlace.gatewayId},
+    			  		                {"status": "inactive"}
+    			  		 				]}
+								}
+						};
+		Board.find(findReq,
+  			  function(boards) { 
+				  $scope.connectedBoards = boards;
+				  console.log("CONNECTED BOARDS FETCHED: >>> ", $scope.connectedBoards);
   			  },
 	    		  function(errorResponse) { 
   				  console.log(errorResponse);
-  				  $rootScope.loadingScreen.hide();
-  			  });
+  		});
+    };
+    
+    $scope.activateBoardAtPlaceArea = function(connectedBoard){
+    	console.log("IN activateBoard: >> ", connectedBoard);
+    	if(!$scope.selectedPlaceArea && !$scope.selectedPlaceArea.id){
+    		return false;
+    	}
+    	connectedBoard.connectedToType = "PlaceArea";
+    	connectedBoard.connectedToId = $scope.selectedPlaceArea.id;
+    	connectedBoard.status = "active";
     	
+    	Board.upsert(connectedBoard,
+    			  function(activeBoard) {
+    				  console.log('BORAD ACTIVATED: >>>> ', activeBoard);
+    				  $scope.boards.push(activeBoard);
+    				  $rootScope.loadingScreen.hide();
+    				  angular.forEach($scope.connectedBoards, function(board) {
+    					  if(board.id == connectedBoard.id){
+    						  var index = $scope.connectedBoards.indexOf(board);
+    						  $scope.connectedBoards.splice(index, 1); 
+    					  }
+    				  });
+    			  },
+    			  function(errorResponse) { 
+    				  $rootScope.loadingScreen.hide();
+    				  console.log(errorResponse);
+    			  });
     };
     
     $scope.cancelAddBoard = function(){
@@ -382,7 +450,16 @@ define(function () {
     $scope.fetchBoardsAndDevices = function(placeArea){
     	if(placeArea && placeArea.id){
     		console.log('FETCH BOARDS AND DEVICES FOR PLACEAREA: ', placeArea);
-    		var findReq = {filter: {where: {placeAreaId: placeArea.id}}};
+//    		var findReq = {filter: {where: {connectedToId: placeArea.id}}};
+    		
+    		var findReq = {
+    				filter:{
+        			  		 where: {"and": [{"connectedToId": placeArea.id},
+        			  		                 {"status": "active"}
+        			  		 				]}
+    								}
+    						};
+    		console.log("findReq for fetching PlaceArea active boards: >> ", findReq);
     		Board.find(findReq,
       			  function(boards) { 
     				  $scope.boards = boards;

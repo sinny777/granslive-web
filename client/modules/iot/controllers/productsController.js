@@ -168,6 +168,7 @@ define(function () {
     			"value": 0,
     			"type": "bulb",
     			"analog": true,
+    			"analogValue": 10,
     			"deviceIndex": i
     		});
     	}

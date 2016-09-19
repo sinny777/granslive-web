@@ -89,6 +89,12 @@
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "deleteById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "sensorData"
     }
   ],
   "methods": {}
