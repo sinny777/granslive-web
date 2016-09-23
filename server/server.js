@@ -21,10 +21,9 @@ var passportConfigurator = new PassportConfigurator(app);
 app.use(serveStatic(__dirname + '/client'));
 
 var bodyParser = require('body-parser');
-
-app.middleware('parse', bodyParser.json({limit: '100mb', type:'application/json'}));
+app.middleware('parse', bodyParser.json({limit: 1024*1024*50, type:'application/json'}));
 app.middleware('parse', bodyParser.urlencoded({
-	limit: '100mb',
+	limit: 1024*1024*50,
 	extended: true,
 	parameterLimit:50000,
 	type:'application/x-www-form-urlencoding'

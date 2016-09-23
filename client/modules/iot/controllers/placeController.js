@@ -146,6 +146,11 @@ define(function () {
 		  $scope.display = "dashboard";
 	  };
 	  
+	  $scope.showScenes = function(){
+		  console.log('IN showScenes: ');
+		  $scope.display = "scenes";
+	  }
+	  
 	  $scope.showAddNewPlaceAreaPanel = function(){
 		  console.log('IN showAddNewPlaceAreaPanel: ');
 		  $scope.selectedPlaceArea = {};
@@ -282,12 +287,16 @@ define(function () {
     
     $scope.savePlace = function(){
     	$scope.selectedPlace.ownerId = $rootScope.currentUser.userId;
+    	
+    	var areas = $scope.selectedPlace.placeAreas;
+    	
     	$rootScope.loadingScreen.show();
-    	$scope.selectedPlace = Place.create($scope.selectedPlace,
+    	$scope.selectedPlace = Place.upsert($scope.selectedPlace,
 		  function(place) { 
     		$rootScope.loadingScreen.hide();
 			$scope.selectedPlace = place;
 			console.log('PLACE SAVED: >>>> ', place);
+			$scope.selectedPlace.placeAreas = areas;
 			$scope.showPlaces();
 		  },
 		  function(errorResponse) { 

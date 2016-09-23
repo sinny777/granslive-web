@@ -14,7 +14,7 @@
 			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary {{display == 'dashboard' ? 'active': ''}}" data-ng-click="showDashboard();"><span class="fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" title="Show Dashboard"></span></button>
 			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary {{display == 'groups' ? 'active': ''}}" data-ng-click="showGroups();" data-toggle="tooltip" data-placement="bottom" title="Show Groups"><span class="fa fa-group" ></span></button>
 			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary {{display == 'savePlaceAreaPanel' ? 'active': ''}}" data-ng-click="showAddNewPlaceAreaPanel();" data-toggle="tooltip" data-placement="bottom" title="Add Place Area"><span class="fa fa-map-marker" ></span></button>
-			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary" data-ng-click="deletePlace();" data-toggle="tooltip" data-placement="bottom" title="Delete Place"><span class="fa fa-trash-o" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showScenes();" data-toggle="tooltip" data-placement="bottom" title="Show Place Scenes"><span class="fa fa-calendar" ></span></button>
 			</div>
 		</div>
 	</div>
@@ -146,6 +146,12 @@
 		
 	</div>
 	
+	<div data-ng-if="display == 'scenes'">
+	
+		<scenes-directive widget-id="myPlaceScenes" selected-place="selectedPlace" current-user="currentUser" />
+		
+	</div>
+	
 	<div class="row" data-ng-if="display == 'dashboard'">
 		<div class="card col-sm-3" data-ng-repeat="placeArea in selectedPlace.placeAreas">
 		  <div class="card-block" style="background-image: url('../assets/images/blurred2.jpg');" data-ng-if="showAddBoard != placeArea.id">
@@ -240,11 +246,6 @@
 	         			<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="top" title="Health"></i>
 	      			</a>
 			  	</li>
-			  	<li >
-			  		<a href="#scheduler_{{placeArea.id}}" data-toggle="tab" >
-	         			<i class="fa fa-calendar" data-toggle="tooltip" data-placement="top" title="Scheduler"></i>
-	      			</a>
-			  	</li>
 			  </ul>
 		  
 			  <div class="tab-content">
@@ -282,13 +283,6 @@
 	                </div>
 	                  <div class="card-footer">
 					    <a href="#" class="card-link">Add Sensor</a>
-					  </div>
-			   </div>
-			   <div class="row scheduler-tab tab-pane fade in" id="scheduler_{{placeArea.id}}">
-			   		<i class="fa fa-dashboard active"></i> Scheduler
-			   		
-			   		<div class="card-footer">
-					    <a href="#" class="card-link">New Schedule</a>
 					  </div>
 			   </div>
 			</div>

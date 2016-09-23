@@ -65,16 +65,8 @@
     "dataSource": "boards",
     "public": true
   },
-  "Device": {
-    "dataSource": "devices",
-    "public": true
-  },
   "Group": {
     "dataSource": "groups",
-    "public": true
-  },
-  "Gateway": {
-    "dataSource": "gateways",
     "public": true
   },
   "Configuration": {

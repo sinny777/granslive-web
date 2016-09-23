@@ -18,11 +18,13 @@ define(function (require) {
     
     iotModule.controller('placeController', require('../iot/controllers/placeController'));
     iotModule.controller('groupsController', require('../iot/controllers/groupsController'));
+    iotModule.controller('scenesController', require('../iot/controllers/scenesController'));
     iotModule.controller('productsController', require('../iot/controllers/productsController'));
     
     iotModule.directive('fileModel', require('../common/directives/fileModelDirective'));
     iotModule.directive('toggle', require('../common/directives/toggleDirective'));
     iotModule.directive('groupsDirective', require('../iot/directives/groupsDirective'));
+    iotModule.directive('scenesDirective', require('../iot/directives/scenesDirective'));
     
     iotModule.filter('interpolate', ['version', function(version) {
         return function(text) {
