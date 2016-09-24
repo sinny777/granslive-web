@@ -10,11 +10,11 @@
 		<div >
 			<div class="btn-group">
 			  <button type="button" class="btn btn-primary {{display == 'savePlacePanel' ? 'active': ''}}" data-ng-click="showAddNewPlacePanel();" data-toggle="tooltip" data-placement="bottom" title="Add New Place"><span class="fa fa-plus" ></span></button>
-			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary" data-ng-click="showUpdatePlacePanel();"data-toggle="tooltip" data-placement="bottom" title="Modify Place Data" ><span class="fa fa-edit" ></span></button>
-			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary {{display == 'dashboard' ? 'active': ''}}" data-ng-click="showDashboard();"><span class="fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" title="Show Dashboard"></span></button>
+			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary" data-ng-click="showUpdatePlacePanel();" data-toggle="tooltip" data-placement="bottom" title="Modify Place Data" ><span class="fa fa-edit" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary {{display == 'dashboard' ? 'active': ''}}" data-ng-click="showDashboard();" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><span class="fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" title="Show Dashboard"></span></button>
 			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary {{display == 'groups' ? 'active': ''}}" data-ng-click="showGroups();" data-toggle="tooltip" data-placement="bottom" title="Show Groups"><span class="fa fa-group" ></span></button>
 			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary {{display == 'savePlaceAreaPanel' ? 'active': ''}}" data-ng-click="showAddNewPlaceAreaPanel();" data-toggle="tooltip" data-placement="bottom" title="Add Place Area"><span class="fa fa-map-marker" ></span></button>
-			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary" data-ng-click="showScenes();" data-toggle="tooltip" data-placement="bottom" title="Show Place Scenes"><span class="fa fa-calendar" ></span></button>
+			  <button data-ng-if="selectedPlace.id" type="button" class="btn btn-primary {{display == 'scenes' ? 'active': ''}}" data-ng-click="showScenes();" data-toggle="tooltip" data-placement="bottom" title="Show Place Scenes"><span class="fa fa-calendar" ></span></button>
 			</div>
 		</div>
 	</div>
@@ -250,25 +250,27 @@
 		  
 			  <div class="tab-content">
 			   <div class="row appliances-tab tab-pane fade in active" id="appliances_{{placeArea.id}}">
-			   		<ul class="list-group list-group-flush small-font" data-ng-repeat="board in boards">
+			   		<ul class="list-group list-group-flush small-font" data-ng-repeat="board in placeArea.boards">
 						<li class="list-group-item"
 							data-ng-repeat="device in board.devices"><span ><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; {{device.title}}</span>
 							<div class="pull-right">
 								<a style="text-decoration: none;" href="javascript:void(0);"
 									data-ng-click="showUpdateDevice(device);"
-									data-toggle="tooltip" data-placement="left" title="Update">
+									data-toggle="tooltip" data-placement="top" title="Update">
 									<span class="fa fa-edit"></span>
-								</a> &nbsp;									
-									  <i class="fa fa-toggle-on device{{device.status}}"
-								         data-ng-if="device.status == 'ON'" 
-								         data-ng-click="toggleDevice(board, device);"
-								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
-								      </i>
-								      <i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"
-								         data-ng-if="device.status == 'OFF'"
-								         data-ng-click="toggleDevice(board, device);"
-								         data-toggle="tooltip" data-placement="left" title="Toggle Device">
-								      </i>
+								</a> &nbsp;
+								<a style="text-decoration: none;" href="javascript:void(0);"
+									data-ng-if="device.status == 'ON'" 
+								    data-ng-click="toggleDevice(board, device);"
+									data-toggle="tooltip" data-placement="top" title="Toggle Device">
+									<i class="fa fa-toggle-on device{{device.status}}"></i>
+								</a> &nbsp;	
+								<a style="text-decoration: none;" href="javascript:void(0);"
+									data-ng-if="device.status == 'OFF'"
+								    data-ng-click="toggleDevice(board, device);"
+									data-toggle="tooltip" data-placement="top" title="Toggle Device">
+									<i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"></i>
+								</a> &nbsp;							
 							</div>
 						</li>
 					</ul>

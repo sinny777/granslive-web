@@ -8,7 +8,6 @@ define(function () {
 	  $scope.selectedPlace = {floor: 'Ground'};
 	  $scope.display = 'places';
 	  $scope.selectedPlaceArea = {};
-	  $scope.boards = [];
 	  $scope.newboard = {};
 	  $scope.isMqttConnected = false;
 	  $scope.mqttOptions = {api_key: CONFIG.IOT_CONFIG.auth_key, 
@@ -100,7 +99,42 @@ define(function () {
       
       $scope.refreshSelectedPlace = function(mqttMsg){
     	  console.log('IN refreshSelectedPlace, mqttMsg: ', mqttMsg);
-          	   angular.forEach($scope.boards, function(board, key) {
+    	  
+    	  if($scope.selectedPlace && $scope.selectedPlace.placeAreas){
+    		  for(var i = 0; i < $scope.selectedPlace.placeAreas.length; i++){
+        		  var placeArea = $scope.selectedPlace.placeAreas[i];
+        		  if(placeArea.boards){
+        			  for(var j = 0; j < placeArea.boards.length; j++){
+                		  var board = placeArea.boards[j];
+                		  if(board.devices){
+                			  for(var k = 0; k < board.devices.length; k++){
+                        		  var device = board.devices[k];
+                        		  if(device.parentId == mqttMsg.d.boardId && device.deviceIndex == mqttMsg.d.deviceIndex){
+                        		        $scope.$apply(function() {
+                        		           device.value = mqttMsg.d.deviceValue;
+                             			   if(device.value == 0){
+                             				   device.status = "OFF";
+                             			   }else{
+                             				   device.status = "ON";
+                             			   }
+                             			   
+                             			   if(mqttMsg.d.analogValue){
+                             				  device.analogValue = mqttMsg.d.analogValue;
+                             			   }
+                             			   console.log("DEVICE UPDATED>> ", device);
+                        		        });
+//                        		      break;
+                        		   }
+                			  }
+                		  }
+            		  } 
+        		  }
+    		  }  
+    	  }
+    	  
+    	  /*
+    	  angular.forEach($scope.selectedPlace.placeAreas, function(placeArea, key) {
+          	   angular.forEach(placeArea.boards, function(board, key) {
           		   	angular.forEach(board.devices, function(device, key) {
               		   if(device.parentId == mqttMsg.d.boardId && device.deviceIndex == mqttMsg.d.deviceIndex){
               		        $scope.$apply(function() {
@@ -112,10 +146,13 @@ define(function () {
                    			   }
                    			 console.log("DEVICE UPDATED>> ", device);
               		        });
+//              		      break;
               		   }
               		 });
           		 });
-         };
+    	  });
+    	  */
+      };
       
 	  $scope.showAddNewPlacePanel = function(){
 		  console.log('IN showAddNewPlacePanel: ');
@@ -289,6 +326,7 @@ define(function () {
     	$scope.selectedPlace.ownerId = $rootScope.currentUser.userId;
     	
     	var areas = $scope.selectedPlace.placeAreas;
+    	delete $scope.selectedPlace["placeAreas"];
     	
     	$rootScope.loadingScreen.show();
     	$scope.selectedPlace = Place.upsert($scope.selectedPlace,
@@ -302,6 +340,7 @@ define(function () {
 		  function(errorResponse) { 
 			  $rootScope.loadingScreen.hide();
 			  console.log(errorResponse);
+			  $scope.selectedPlace.placeAreas = areas;
 			  $scope.showPlaces();
 		  });
     };
@@ -333,9 +372,13 @@ define(function () {
     		return;
     	}
     	
+    	var boards = $scope.selectedPlaceArea.boards;
+    	delete $scope.selectedPlaceArea["boards"];
+    	
     	$rootScope.loadingScreen.show();
     	PlaceArea.upsert($scope.selectedPlaceArea,
 		  function(placeArea) {
+    		  placeArea.boards = boards;
     		  if(!$scope.selectedPlace.placeAreas){
     			  $scope.selectedPlace.placeAreas = [];
     			  $scope.selectedPlace.placeAreas.push(placeArea);
@@ -352,13 +395,14 @@ define(function () {
     			  }
     		  }
 			  $scope.selectedPlaceArea = placeArea;
-			  console.log('PLACE AREA SAVED: >>>> ', placeArea);
+			  console.log('PLACE AREA SAVED AND THEN BOARDS ADDED: >>>> ', placeArea);
 			  $rootScope.loadingScreen.hide();
 			  $scope.showDashboard();
 		  },
 		  function(errorResponse) { 
 			  $rootScope.loadingScreen.hide();
 			  console.log(errorResponse);
+			  $scope.selectedPlaceArea.boards = boards;
 			  $scope.showDashboard();
 		  });
     };
@@ -434,7 +478,7 @@ define(function () {
     	Board.upsert(connectedBoard,
     			  function(activeBoard) {
     				  console.log('BORAD ACTIVATED: >>>> ', activeBoard);
-    				  $scope.boards.push(activeBoard);
+    				  $scope.selectedPlaceArea.boards.push(activeBoard);
     				  $rootScope.loadingScreen.hide();
     				  angular.forEach($scope.connectedBoards, function(board) {
     					  if(board.id == connectedBoard.id){
@@ -459,8 +503,6 @@ define(function () {
     $scope.fetchBoardsAndDevices = function(placeArea){
     	if(placeArea && placeArea.id){
     		console.log('FETCH BOARDS AND DEVICES FOR PLACEAREA: ', placeArea);
-//    		var findReq = {filter: {where: {connectedToId: placeArea.id}}};
-    		
     		var findReq = {
     				filter:{
         			  		 where: {"and": [{"connectedToId": placeArea.id},
@@ -471,8 +513,8 @@ define(function () {
     		console.log("findReq for fetching PlaceArea active boards: >> ", findReq);
     		Board.find(findReq,
       			  function(boards) { 
-    				  $scope.boards = boards;
-    				  console.log("BOARDS FETCHED: >>> ", boards);
+    				  placeArea.boards = boards;
+    				  console.log("BOARDS FETCHED: >>> ", placeArea.boards);
       			  },
   	    		  function(errorResponse) { 
       				  console.log(errorResponse);

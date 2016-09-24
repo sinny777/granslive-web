@@ -59,20 +59,19 @@
 						    <input type="text" class="form-control"
 								data-ng-model="selectedScene.settings.startTime">
 					    </div>
-				   	  	
 				   	</div>
-				   	
+				   	<h6>All Devices in Scene: {{selectedScene.title}}</h6>
 				   	<ul class="list-group" data-ng-repeat="area in selectedScene.areas">
 					    <li class="list-group-item" data-ng-repeat="device in area.devices">
-					    	{{area.areaTitle}}: {{device.title}} - {{device.status}}
+					    	<span><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; <i class="device{{device.status}}">{{area.areaTitle}}: {{device.title}} - {{device.status}}</i></span>
 					    	
 					    	<div class="pull-right">								
-								  <i class="fa fa-toggle-on device{{device.status}}"
+								  <i class="fa fa-toggle-on device{{device.status}} disabled"
 							         data-ng-if="device.status == 'ON'" 
 							         data-ng-click="toggleDevice(device);"
 							         data-toggle="tooltip" data-placement="left" title="Toggle Device">
 							      </i>
-							      <i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"
+							      <i class="fa fa-toggle-on fa-rotate-180 device{{device.status}} disabled"
 							         data-ng-if="device.status == 'OFF'"
 							         data-ng-click="toggleDevice(device);"
 							         data-toggle="tooltip" data-placement="left" title="Toggle Device">
@@ -83,16 +82,87 @@
 
 					<div class="form-group">
 						<div class="col-lg-offset-2 col-lg-10">
-							<button type="submit" data-ng-click="saveScene();"
+							<a href="" role="button" class="btn btn-primary"
+								data-toggle="modal" data-target="#allDevices"
+								title="Add Devices" data-ng-click="showAddDevicesModal();" >
+								Add Devices
+							</a>
+							<button type="submit" class="btn btn-primary" data-ng-click="saveScene();"
 								data-ng-if="!selectedScene.id">Create</button>
-							<button type="submit" data-ng-click="saveScene();"
+							<button type="submit" class="btn btn-primary" data-ng-click="saveScene();"
 								data-ng-if="selectedScene.id">Update</button>
-							<button type="submit" data-ng-click="fetchAndShowScenes();">cancel</button>
+							<button type="submit" class="btn btn-primary" data-ng-click="fetchAndShowScenes();">cancel</button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
+		
+		
+		<!-- Modal -->
+		<div id="allDevices" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h5 class="modal-title">Scene: {{selectedScene.title}}</h5>
+		      </div>
+		      <div class="modal-body">
+		      
+		      	<ul class="list-group" data-ng-repeat="areaForScene in placeForScene.areas">
+		      		<li class="list-group-item">
+		      			<a href="" data-toggle="collapse" data-target="#{{areaForScene.areaId}}">{{areaForScene.areaTitle}}</a>
+		      			
+		      			<ul id="{{areaForScene.areaId}}" class="list-group collapse" data-ng-repeat="areaForScene in placeForScene.areas">
+						    <li class="list-group-item" data-ng-repeat="device in areaForScene.devices">
+						    	<span><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; <i class="{{device.added ? 'active': ''}}">{{device.title}}</i></span>
+						    	
+						    	<div class="pull-right">
+						    		<a style="text-decoration: none;" href="javascript:void(0);"
+										data-ng-if="device.status == 'ON'" 
+									    data-ng-click="toggleDevice(device);"
+										data-toggle="tooltip" data-placement="top" title="Toggle Device">
+										<i class="fa fa-toggle-on device{{device.status}}"></i>
+									</a> &nbsp;	
+									<a style="text-decoration: none;" href="javascript:void(0);"
+										data-ng-if="device.status == 'OFF'"
+									    data-ng-click="toggleDevice(device);"
+										data-toggle="tooltip" data-placement="top" title="Toggle Device">
+										<i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"></i>
+									</a> &nbsp;
+									
+									<a style="text-decoration: none;" href="javascript:void(0);"
+										data-ng-if="!device.added"
+								        data-ng-click="addDeviceToScene(areaForScene, device);"
+										data-toggle="tooltip" data-placement="top" title="Add Device">
+										<i class="fa fa-plus "></i>
+									</a>
+									<a style="text-decoration: none;" href="javascript:void(0);"
+										data-ng-if="device.added"
+										data-ng-click="removeDeviceFromScene(areaForScene, device);"
+										data-toggle="tooltip" data-placement="top" title="Remove Device">
+										<span class="fa fa-times danger"></span>
+									</a>
+						    	</div>	
+						    	
+						    </li>
+					    </ul>
+		      			
+		      		</li>
+		      	</ul>
+		      
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>
+		
+		
 	</div>
 
 	<div class="clearfix"></div>
@@ -109,10 +179,20 @@
 					     </span>
 					     
 					     <div class="pull-right">
+					     	<a style="text-decoration: none;" href="javascript:void(0);"
+								data-ng-click="executeScene(scene);"
+								data-toggle="tooltip" data-placement="top" title="Execute Scene">
+								<span class="fa fa-play-circle btn-sm btn-info"></span>
+							</a> &nbsp;
 							<a style="text-decoration: none;" href="javascript:void(0);"
 								data-ng-click="showUpdateScenePanel(scene);"
-								data-toggle="tooltip" data-placement="left" title="Update">
-								<span class="fa fa-edit"></span>
+								data-toggle="tooltip" data-placement="top" title="Update">
+								<span class="fa fa-edit btn-sm btn-info"></span>
+							</a>&nbsp;
+							<a style="text-decoration: none;" href="javascript:void(0);"
+								data-ng-click="deleteScene(scene);"
+								data-toggle="tooltip" data-placement="top" title="Delete">
+								<i class="fa fa-times btn-sm btn-primary"></i>
 							</a>
 						</div>
 				     
@@ -126,9 +206,11 @@
 					    	<strong>Repeat: </strong>{{scene.repeat}} 
 					    	<div data-ng-if="scene.repeat">(<span data-ng-if="scene.settings.Monday"> Monday | </span> <span data-ng-if="scene.settings.Tuesday">Tuesday | </span> <span data-ng-if="scene.settings.Wednesday">Wednesday | </span> <span data-ng-if="scene.settings.Thursday">Thursday | </span> <span data-ng-if="scene.settings.Friday">Friday | </span> <span data-ng-if="scene.settings.Saturday">Saturday | </span> <span data-ng-if="scene.settings.Sunday">Sunday </span> )</div> <br />
 					    </p>
+					    
+					    <h5>All Devices Status</h5>
 						  <ul class="list-group" data-ng-repeat="area in scene.areas">
 						    <li class="list-group-item" data-ng-repeat="device in area.devices">
-						    	{{area.areaTitle}}: {{device.title}} - {{device.status}}
+						    	<span><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; <i class="device{{device.status}}">{{area.areaTitle}}: {{device.title}} - {{device.status}}</i></span>
 						    	
 						    	<div class="pull-right">								
 									  <i class="fa fa-toggle-on device{{device.status}}"
