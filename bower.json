@@ -2,7 +2,7 @@
   "name": "bluemixnode",
   "version": "0.0.2",
   "dependencies": {
-    "angular": "latest",
+    "angular": "1.5.8",
     "angular-mocks": "latest",
     "angular-route": "latest",
     "angular-resource": "latest",
@@ -19,9 +19,8 @@
     "requirejs": "latest",
     "debug": "latest",
     "paho-mqtt": "latest",
-    "angular-xeditable": "^0.4.0",
-    "angular-moment": "^0.10.3",
-    "moment": "^2.15.1"
+    "angular-xeditable": "latest",
+    "angular-moment": "1.0.0-beta.6"
   },
   "private": true,
   "ignore": [

@@ -103,6 +103,11 @@ img {
     padding: 5px 5px
 }
 
+.very-small-font{
+    font-size: 9px;
+    padding: 3px 3px
+}
+
 .card-title {
     color: #fff;
 }
