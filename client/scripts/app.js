@@ -78,8 +78,13 @@ define([
              var currentUserId = LoopBackAuth.currentUserId;
              if (!LoopBackAuth.isLoggedIn() && !currentUserId) {
                console.log("USER IS NOT LOGGEDIN: >>> ", currentUserId);
-               $location.path("/#!/home");
-               event.preventDefault();
+//               $location.path("/#!/home");
+//               event.preventDefault();
+               if(!$rootScope.currentUser){
+          		 $rootScope.currentUser = {permissions: {}};
+	           }else{
+	          		 console.log("$rootScope.currentUser: >>> ", $rootScope.currentUser);
+	           }
              }else{
             	 console.log("USER IS LOGGEDIN: >>> ", currentUserId);
             	 if(!$rootScope.currentUser){
