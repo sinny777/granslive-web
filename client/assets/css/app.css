@@ -224,3 +224,9 @@ p{
 .editable-click, a.editable-click{
 	border-bottom: none !important;
 }
+
+.fa-toggle-on{
+	font-size: 18px !important;
+	margin-top: 10px;
+}
+

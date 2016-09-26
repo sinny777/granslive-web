@@ -287,8 +287,6 @@
 								{{ device.title || "device" }}
 							</span>
 							
-							<span data-ng-if="device.updatedAt" am-time-ago="device.updatedAt" class="very-small-font"></span>
-							
 							<div class="pull-right">
 								<a style="text-decoration: none;" href="javascript:void(0);"
 									data-ng-if="device.status == 'ON'" 
@@ -303,6 +301,12 @@
 									<i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"></i>
 								</a> &nbsp;							
 							</div>
+							<br />
+							<span data-ng-if="device.updatedAt" am-time-ago="device.updatedAt" class="very-small-font"></span>
+							<span data-ng-if="!device.updatedAt" am-time-ago="board.audit.modified" class="very-small-font"></span>
+							<input data-ng-if="device.analog" type="range" min="0" max="10" step="1" data-ng-model="device.analogValue"
+							data-ng-change="analogValueChanged(board, device);" />
+							
 						</li>
 					</ul>
 			   </div>

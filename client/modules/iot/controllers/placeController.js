@@ -128,6 +128,9 @@ define(function () {
                              			   if(mqttMsg.d.analogValue){
                              				  device.analogValue = mqttMsg.d.analogValue;
                              			   }
+                             			   
+                             			   device.updatedAt = new Date();
+                             			   
                              			   console.log("DEVICE UPDATED>> ", device);
                         		        });
 //                        		      break;
@@ -139,26 +142,6 @@ define(function () {
     		  }  
     	  }
     	  
-    	  /*
-    	  angular.forEach($scope.selectedPlace.placeAreas, function(placeArea, key) {
-          	   angular.forEach(placeArea.boards, function(board, key) {
-          		   	angular.forEach(board.devices, function(device, key) {
-              		   if(device.parentId == mqttMsg.d.boardId && device.deviceIndex == mqttMsg.d.deviceIndex){
-              		        $scope.$apply(function() {
-              		        	device.value = mqttMsg.d.deviceValue;
-                   			   if(device.value == 0){
-                   				   device.status = "OFF";
-                   			   }else{
-                   				   device.status = "ON";
-                   			   }
-                   			 console.log("DEVICE UPDATED>> ", device);
-              		        });
-//              		      break;
-              		   }
-              		 });
-          		 });
-    	  });
-    	  */
       };
       
 	  $scope.showAddNewPlacePanel = function(){
@@ -567,6 +550,24 @@ define(function () {
 					}
     			  };
     	console.log('$scope.selectedPlace.gatewayId: >>' , $scope.selectedPlace.gatewayId);
+    	var topic = "iot-2/type/GransLiveGateway/id/"+$scope.selectedPlace.gatewayId+"/evt/gateway/fmt/json";
+    	mqttService.publishToMqtt(topic, msg);
+    };
+    
+    $scope.analogValueChanged = function(board, device){
+    	console.log('IN analogValueChanged, device: >> ', device);
+    	if(device.value == 0){
+    		return false;
+    	}
+    	var msg = {d:
+    				{
+    		  			gatewayId: $scope.selectedPlace.gatewayId,
+						boardId: board.uniqueIdentifier,
+						deviceIndex: device.deviceIndex,
+						deviceValue: device.value,
+						analogValue: device.analogValue
+					}
+    			  };
     	var topic = "iot-2/type/GransLiveGateway/id/"+$scope.selectedPlace.gatewayId+"/evt/gateway/fmt/json";
     	mqttService.publishToMqtt(topic, msg);
     };
