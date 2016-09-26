@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, $cookies, $location, CONFIG, authService, mqttService){
+  function ctrl($rootScope, $scope, $cookies, $location, CONFIG, authService, mqttService, dataService){
 	  
 	  $rootScope.currentUser = {"permissions": {}};
 	  $rootScope.footerLinks = [];
@@ -57,8 +57,6 @@ define(function () {
       };
       
       $rootScope.isAdmin = function(){
-    	  console.log("IN isAdmin: >>> ", $rootScope.currentUser);
-    	  
     	  if($rootScope.currentUser.profile){
     		  if($rootScope.currentUser.profile.email == 'contact@granslive.com'){
     			  return true;
@@ -110,7 +108,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'CONFIG', 'authService', 'mqttService'];
+  ctrl.$inject = ['$rootScope', '$scope', '$cookies', '$location', 'CONFIG', 'authService', 'mqttService', 'dataService'];
   return ctrl;
 
 });

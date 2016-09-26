@@ -215,3 +215,7 @@ p{
 .panel-body {
 	font-size: 11px;
 } 
+
+.editable-click, a.editable-click{
+	border-bottom: none !important;
+}

@@ -13,6 +13,8 @@ require.config({
         'angularFilesystem': 'vendor/angular-filesystem/src/filesystem',
         'angularToastr': 'vendor/angular-toastr/dist/angular-toastr.tpls.min',
         'angularCookies' : 'vendor/angular-cookies/angular-cookies.min',
+        'xeditable' : 'vendor/angular-xeditable/dist/js/xeditable.min',
+        'angularMoment' : 'vendor/angular-moment/angular-moment.min',
         'bootstrap' : 'vendor/bootstrap/dist/js/bootstrap.min',
         'ui.bootstrap':'vendor/angular-bootstrap/ui-bootstrap.min',
         'cryptojslib' : 'vendor/cryptojslib/rollups/pbkdf2',
@@ -43,6 +45,12 @@ require.config({
             deps: ['angular']
         },
         'angularFilesystem' :{
+            deps: ['angular']
+        },
+        'xeditable' :{
+            deps: ['angular']
+        },
+        'angularMoment' :{
             deps: ['angular']
         },
         'cryptojslib' : {

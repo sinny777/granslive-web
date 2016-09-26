@@ -18,6 +18,7 @@ define(function () {
 	  
 	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bath-room', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
 	  $scope.floors = ['Ground'];
+	  $scope.deviceTypes = [];
 	  
 	  /*
 	  $scope.$watch(
@@ -53,6 +54,12 @@ define(function () {
 				  $scope.fetchMyMembership();
 			  }
 		  });
+		  
+		  $scope.deviceTypes = dataService.getValue("deviceTypes", function(data){
+			  $scope.deviceTypes = data;
+			  console.log("DeviceTypes: >>> ", $scope.deviceTypes);
+		  });
+		  
 	  };
 	  
 	  $scope.handlePermissions = function(){
@@ -363,7 +370,7 @@ define(function () {
     };
     
     $scope.savePlaceArea = function(){
-    	
+    	console.log("IN savePlaceArea: >>>> ", $scope.selectedPlaceArea);
     	if($scope.selectedPlace.id){
     		$scope.selectedPlaceArea.placeId = $scope.selectedPlace.id;
     	}else{
@@ -373,12 +380,14 @@ define(function () {
     	}
     	
     	var boards = $scope.selectedPlaceArea.boards;
+    	$scope.saveAllAreaBoards(boards);
     	delete $scope.selectedPlaceArea["boards"];
     	
     	$rootScope.loadingScreen.show();
     	PlaceArea.upsert($scope.selectedPlaceArea,
 		  function(placeArea) {
-    		  placeArea.boards = boards;
+			 placeArea.boards = boards;
+			 $scope.selectedPlaceArea.boards = boards;
     		  if(!$scope.selectedPlace.placeAreas){
     			  $scope.selectedPlace.placeAreas = [];
     			  $scope.selectedPlace.placeAreas.push(placeArea);
@@ -386,7 +395,9 @@ define(function () {
     			  var updated = false;
     			  angular.forEach($scope.selectedPlace.placeAreas, function(area) {
 					  if(area.id == placeArea.id){
-						  area = placeArea;
+						  var index = $scope.selectedPlace.placeAreas.indexOf(area);
+						  $scope.selectedPlace.placeAreas.splice(index, 1);
+						  $scope.selectedPlace.placeAreas.push(placeArea);
 						  updated = true;
 					  }
 					});
@@ -395,7 +406,6 @@ define(function () {
     			  }
     		  }
 			  $scope.selectedPlaceArea = placeArea;
-			  console.log('PLACE AREA SAVED AND THEN BOARDS ADDED: >>>> ', placeArea);
 			  $rootScope.loadingScreen.hide();
 			  $scope.showDashboard();
 		  },
@@ -491,6 +501,22 @@ define(function () {
     				  $rootScope.loadingScreen.hide();
     				  console.log(errorResponse);
     			  });
+    };
+    
+    $scope.saveAllAreaBoards = function(boards){
+    	angular.forEach(boards, function(board) {
+    			$scope.saveBoard(board);
+		  });
+    };
+    
+    $scope.saveBoard = function(board){
+    	Board.upsert(board,
+  			  function(board) {
+  				  console.log('BORAD UPDATED: >>>> ', board);
+  			  },
+  			  function(errorResponse) { 
+  				  console.log(errorResponse);
+  			  });
     };
     
     $scope.cancelAddBoard = function(){

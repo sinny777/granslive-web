@@ -125,6 +125,8 @@ var methods = {};
 		    		board.devices[i].analogValue = payload.d.analogValue;
 		    	}
 		    	
+		    	board.devices[i].updatedAt = new Date();
+		    	
 		    	Board.upsert(board, function(err, updatedBoard){
 		    		if(err){
 		    			console.log("ERROR IN UPDATING BOARD: >> ", err);
@@ -133,16 +135,20 @@ var methods = {};
 		    		}
 		    	});
 		    	
-		    	methods.findPlaceArea(board.placeAreaId, function(err, placeArea) { 
-					if(err){
-						console.log("ERROR IN finding PlaceArea with ID: ", board.placeAreaId, err);
-					}else{
-						console.log("RESP FROM FIND PLACEAREA: >>> ", placeArea.title);
-						if(placeArea){
-							notificationHandler.sendNotification(payload, board, placeArea, board.devices[i]);
+		    	if(board.connectedToType == "PlaceArea" && board.connectedToId){
+		    		methods.findPlaceArea(board.connectedToId, function(err, placeArea) { 
+						if(err){
+							console.log("ERROR IN finding PlaceArea with ID: ", board.placeAreaId, err);
+						}else{
+							console.log("RESP FROM FIND PLACEAREA: >>> ", placeArea.title);
+							if(placeArea){
+								notificationHandler.sendNotification(payload, board, placeArea, board.devices[i]);
+							}
 						}
-					}
-				});
+					});
+		    	}else{
+		    		console.log("In deviceHandler, BOARD CAN NOT BE SAVED: >>> ", board);
+		    	}
 		    	
 		    	break;
 		    }

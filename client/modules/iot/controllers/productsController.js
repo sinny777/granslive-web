@@ -6,13 +6,28 @@ define(function () {
 	  $scope.display = 'boards';
 	  $scope.selectedBoard = {};
 	  $scope.boards = [];
-	  $scope.boardTypes = [{label:"2 Digital Switches", type:"SB_D2"}, 
-	                       {label:"6 Digital Switches", type:"SB_D6"},
-	                       {label:"3 Analog Switches", type:"SB_A3"},
-	                       {label:"6 Digital 3 Analog Switches", type:"SB_D6_A3"}];
+	  $scope.boardTypes = ["SWITCH_BOARD", "SENSOR_BOARD"];
+	  $scope.switches = {"digital": [1, 2, 3, 4, 5, 6, 7, 8, 9], "analog": [1, 2, 3, 4, 5, 6, 7, 8, 9]};
+	  $scope.selectedSwitchCounts = {digital: 0, analog: 0};
 	  
 	  $scope.initProducts = function(){
-		  $scope.fetchAndShowBoards();
+//		  $scope.fetchAndShowBoards();
+		  console.log("IN initProducts: >>> ");
+		  $rootScope.checkUser(function(currentUser){
+			  $rootScope.currentUser = currentUser;
+			  if(!$rootScope.currentUser){
+		    		return;
+		    	}
+			  
+		    	$scope.ownerId = $rootScope.currentUser.id;
+		    	if($rootScope.currentUser.userId){
+		    		$scope.ownerId = $rootScope.currentUser.userId;
+		    	}
+			  
+			  if($rootScope.isAdmin()){
+				  $scope.fetchAndShowBoards();
+			  }
+		  });
 	  }
 	  
 	  $scope.fetchAndShowBoards = function(){
@@ -36,8 +51,12 @@ define(function () {
 	  
     $scope.fetchBoards = function(){
     	console.log('IN fetchBoards >>>>>>>>>> ');
+    	
+    	if($scope.boards && $scope.boards.length > 0){
+    		return false;
+    	}
+    	
     	$scope.showAddMember = '';
-//    	var findReq = {filter: {where: {"status": "inactive"}}};
     	var findReq = {};
     	$rootScope.loadingScreen.show();
     	var ownerId = $rootScope.currentUser.id;
@@ -92,10 +111,13 @@ define(function () {
     	}
     	
     	if(!$scope.selectedBoard.type){
-    		$scope.selectedBoard.type = 'SB_D6_A3';
+    		$scope.selectedBoard.type = $scope.boardTypes[0];
     	}
     	
-    	$scope.addDevicesBasedOnType($scope.selectedBoard);
+    	delete $scope.selectedBoard.devices;
+    	if($scope.selectedBoard.type == 'SWITCH_BOARD'){
+    		$scope.selectedBoard = $scope.addDevicesBasedOnType($scope.selectedBoard);
+    	}
     	
     	console.log("$scope.selectedBoard: >>> ", $scope.selectedBoard);
     	
@@ -125,53 +147,64 @@ define(function () {
 	};
     
     $scope.addDevicesBasedOnType = function(board){
-    	if(board.type == 'SB_D6_A3'){
-    		$scope.addDigitalDevices(board, 1, 6);
-    		$scope.addAnalogDevices(board, 7, 9);
+    	console.log("IN addDevicesBasedOnType, selectedSwitchCounts: ", $scope.selectedSwitchCounts, ", board: ", board);
+    	if($scope.selectedSwitchCounts.digital > 0){
+    		board = $scope.addDigitalDevices(board, 1, $scope.selectedSwitchCounts.digital);
     	}
-    	if(board.type == 'SB_D6'){
-    		$scope.addDigitalDevices(board, 1, 6);
+    	
+    	if($scope.selectedSwitchCounts.analog > 0){
+    		if($scope.selectedSwitchCounts.digital > 0){
+    			board = $scope.addAnalogDevices(board, (parseInt($scope.selectedSwitchCounts.digital)+1), (parseInt($scope.selectedSwitchCounts.digital) + parseInt($scope.selectedSwitchCounts.analog)));
+    		}else{
+    			board = $scope.addAnalogDevices(board, 1, (parseInt($scope.selectedSwitchCounts.digital) + parseInt($scope.selectedSwitchCounts.analog)));
+    		}
     	}
-    	if(board.type == 'SB_A3'){
-    		$scope.addAnalogDevices(board, 1, 3);
-    	}
+    	return board;
     };
     
     $scope.addDigitalDevices = function(board, startIndex, endIndex){
     	if(!board.devices){
     		board.devices = [];
     	}
-    	for(var i = startIndex; i <= endIndex; i++){
+    	var updatedAt = new Date();
+    	for(var i = parseInt(startIndex); i <= parseInt(endIndex); i++){
     		board.devices.push({
     			"parentId": board.uniqueIdentifier,
     			"title": "DS"+i,
     			"description": "Digital Switch",
-    			"status": "inactive",
+    			"status": "OFF",
     			"value": 0,
     			"type": "bulb",
     			"analog": false,
-    			"deviceIndex": i
+    			"deviceIndex": i,
+    			"updatedAt": updatedAt
     		});
     	}
+    	console.log("IN addDigitalDevices.END, board: >> ", board.devices);
+    	return board;
     };
     
     $scope.addAnalogDevices = function(board, startIndex, endIndex){
     	if(!board.devices){
     		board.devices = [];
     	}
+    	var updatedAt = new Date();
     	for(var i = startIndex; i <= endIndex; i++){
     		board.devices.push({
     			"parentId": board.uniqueIdentifier,
     			"title": "AS"+i,
     			"description": "Analog Switch",
-    			"status": "inactive",
+    			"status": "OFF",
     			"value": 0,
     			"type": "bulb",
     			"analog": true,
     			"analogValue": 10,
-    			"deviceIndex": i
+    			"deviceIndex": i,
+    			"updatedAt": updatedAt
     		});
     	}
+    	console.log("IN addAnalogDevices.END, board: >> ", board.devices);
+    	return board;
     };
     
   }

@@ -41,17 +41,36 @@
 					<div class="form-group">
 						<label for="name" class="col-lg-2 control-label">Type:</label>
 						<div class="col-lg-4">
-							<input type="text" class="form-control"
-								data-ng-model="selectedBoard.type">
+							<select class="form-control" data-ng-model="selectedBoard.type">
+					    		<option data-ng-repeat="option in boardTypes" value="{{option}}">{{option}}</option>
+						    </select>
+								
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" data-ng-if="selectedBoard.type == 'SENSOR_BOARD'">
 						<label for="name" class="col-lg-2 control-label">SubType:</label>
 						<div class="col-lg-4">
 							<input type="text" class="form-control"
 								data-ng-model="selectedBoard.subType">
 						</div>
 					</div>
+					<div class="form-group" data-ng-if="selectedBoard.type == 'SWITCH_BOARD'">
+				   		<label class="col-lg-2 control-label">Digital Switches:</label>
+				   		<div class="col-lg-1">
+					    	<select class="form-control" data-ng-model="selectedSwitchCounts.digital">
+					    		<option data-ng-repeat="option in switches.digital" value="{{option}}">{{option}}</option>
+						    </select>
+				   	  	</div>
+				   	  	
+				   	  	<label class="col-lg-2 control-label">Analog Switches:</label>
+				   		<div class="col-lg-1">
+					    	<select class="form-control" data-ng-model="selectedSwitchCounts.analog">
+					    		<option data-ng-repeat="option in switches.analog" value="{{option}}">{{option}}</option>
+						    </select>
+				   	  	</div>
+				   	</div>
+					
+					
 					<div class="form-group">
 						<label for="name" class="col-lg-2 control-label">Title:</label>
 						<div class="col-lg-4">

@@ -20,7 +20,7 @@ define(['angular'], function (angular) {
 
 			$http(req).then(function(jsonResp){
 				if(callback){
-					callback(jsonResp.data);
+					callback(jsonResp.data[key]);
 				}
 			}, function(err){
 				console.log(err);

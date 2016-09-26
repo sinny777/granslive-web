@@ -7,6 +7,8 @@ define([
     'angularToastr',
     'angularCookies',
     'angularFilesystem',
+    'xeditable',
+    'angularMoment',
     'bootstrap',
 //    'ui.bootstrap',
     'cryptojslib',
@@ -28,6 +30,8 @@ define([
         'LocalStorageModule',
         'toastr',
         'ngCookies',
+        'xeditable',
+        'angularMoment',
         'fileSystem',
         'app.config',
         'lbServices',
@@ -71,7 +75,7 @@ define([
         });
     });
     
-    granslive.run(['$rootScope','$location','LoopBackAuth', function($rootScope, $location, LoopBackAuth) {
+    granslive.run(['$rootScope','$location','LoopBackAuth', 'editableOptions', function($rootScope, $location, LoopBackAuth, editableOptions) {
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
             console.log('IN routeChangeStart >>>>>>> ');
              $rootScope.footerLinks = [];
@@ -93,6 +97,9 @@ define([
             		 console.log("$rootScope.currentUser: >>> ", $rootScope.currentUser);
             	 }
              }
+             
+             editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+
         });
         
         $rootScope.loadingScreen = $('<div style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background-color:gray;background-color:rgba(70,70,70,0.2);"><img style="position:absolute;top:50%;left:50%;" alt="" src="/assets/images/loading.gif" /></div>')

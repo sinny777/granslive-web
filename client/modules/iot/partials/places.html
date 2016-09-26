@@ -7,7 +7,7 @@
 			<h3 data-ng-if="places.length == 0"> There are no places mapped with your account </h3>
 			<h3 data-ng-if="selectedPlace.id"> {{selectedPlace.title}} </h3>
 		</div>
-		<div >
+		<div class="pull-right">
 			<div class="btn-group">
 			  <button type="button" class="btn btn-primary {{display == 'savePlacePanel' ? 'active': ''}}" data-ng-click="showAddNewPlacePanel();" data-toggle="tooltip" data-placement="bottom" title="Add New Place"><span class="fa fa-plus" ></span></button>
 			  <button data-ng-if="currentUser.permissions.placeOwner" type="button" class="btn btn-primary" data-ng-click="showUpdatePlacePanel();" data-toggle="tooltip" data-placement="bottom" title="Modify Place Data" ><span class="fa fa-edit" ></span></button>
@@ -20,7 +20,9 @@
 	</div>
 	
 	<div class="clear" ></div>
-	<br />
+	<div class="clearfix" ></div>
+	<div style="clear:both;"></div>
+	<hr>	
 	
 <div class="row" data-ng-if="display == 'places'">
 	<div class="card col-sm-3" data-ng-repeat="place in places">
@@ -84,10 +86,6 @@
 		</div>
 	</div>
 	
-	<div class="clearfix" ></div>
-	<div style="clear:both;"></div>
-	<hr>
-	
 	<div class="panel panel-default" data-ng-if="display == 'savePlaceAreaPanel'">
 			<div class="panel-heading">
 		      <h4 class="panel-title">
@@ -98,7 +96,7 @@
 		    <div id="areaPanel" class="panel-collapse collapse in">
 			  	
 			  <div class="panel-body">
-			  	<form class="form-horizontal" role="form" method="post" >
+			  	<div class="form-horizontal">
 			  			  <div class="form-group">
 					   		<label for="name" class="col-lg-2 control-label">Type:</label>
 					   		<div class="col-lg-2">
@@ -127,6 +125,37 @@
 						    	<textarea class="form-control" data-ng-model="selectedPlaceArea.description" ></textarea>
 						    </div>
 					   	  </div>
+					   	  <br />
+					   	  <div class="form-group">
+					   	  	<div class="col-lg-10">
+							   	  <h6>All Devices at: {{selectedPlaceArea.title}}</h6>
+							   	  <ul class="list-group list-group-flush small-font" data-ng-repeat="board in selectedPlaceArea.boards">
+									<li class="list-group-item"
+										data-ng-repeat="device in board.devices">
+										<!-- <i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; -->
+										<a href="#" editable-select="device.type" e-ng-options="s.value as s.text for s in deviceTypes">
+											<i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp;								    
+										</a>
+										&nbsp;										 
+										<a href="#" editable-text="device.title" >{{ device.title || "device" }}</a>
+										<div class="pull-right" >
+											<a style="text-decoration: none;" href="javascript:void(0);"
+												data-ng-if="device.status == 'ON'" 
+											    data-ng-click="toggleDevice(board, device);"
+												data-toggle="tooltip" data-placement="top" title="Toggle Device">
+												<i class="fa fa-toggle-on device{{device.status}}"></i>
+											</a> &nbsp;	
+											<a style="text-decoration: none;" href="javascript:void(0);"
+												data-ng-if="device.status == 'OFF'"
+											    data-ng-click="toggleDevice(board, device);"
+												data-toggle="tooltip" data-placement="top" title="Toggle Device">
+												<i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"></i>
+											</a> &nbsp;							
+										</div>
+									</li>
+								</ul>
+							</div>
+					   	  </div>
 					   	  
 					   	  <div class="form-group"> 
 					   	  	<div class="col-lg-offset-2 col-lg-10">
@@ -135,11 +164,11 @@
 		         			  	<button type="submit" data-ng-click="showDashboard();" >cancel</button>
 							</div>
 	         			  </div>
-					</form>
-			  	
+			  		</div>
 			  </div>
 			</div>
 		</div>
+		
 	<div data-ng-if="display == 'groups'">
 	
 		<groups-directive widget-id="myPlaceGroups" selected-place="selectedPlace" current-user="currentUser" />
@@ -158,7 +187,7 @@
 		  	<span class="fa-stack">
 		  		<a href="javascript:void(0);" data-ng-click="showUpdatePlaceAreaPanel(placeArea);">
 		  			<i class="fa fa-circle fa-stack-2x icon-background"></i>
-		  			<i class="fa fa-edit fa-stack-1x icon-white" data-toggle="tooltip" data-placement="top" title="Settings"></i>
+		  			<i class="fa fa-edit fa-stack-1x icon-white" data-toggle="tooltip" data-placement="top" title="Modify"></i>
 		  		</a>
 		  	</span>
 		  	<span class="fa-stack"> <a href=""
@@ -252,23 +281,25 @@
 			   <div class="row appliances-tab tab-pane fade in active" id="appliances_{{placeArea.id}}">
 			   		<ul class="list-group list-group-flush small-font" data-ng-repeat="board in placeArea.boards">
 						<li class="list-group-item"
-							data-ng-repeat="device in board.devices"><span ><i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp; {{device.title}}</span>
+							data-ng-repeat="device in board.devices">
+							<span >
+								<i class="flaticon-{{device.type}} device{{device.status}}" ></i>&nbsp;
+								{{ device.title || "device" }}
+							</span>
+							
+							<span data-ng-if="device.updatedAt" am-time-ago="device.updatedAt" class="small-font"></span>
+							
 							<div class="pull-right">
-								<a style="text-decoration: none;" href="javascript:void(0);"
-									data-ng-click="showUpdateDevice(device);"
-									data-toggle="tooltip" data-placement="top" title="Update">
-									<span class="fa fa-edit"></span>
-								</a> &nbsp;
 								<a style="text-decoration: none;" href="javascript:void(0);"
 									data-ng-if="device.status == 'ON'" 
 								    data-ng-click="toggleDevice(board, device);"
-									data-toggle="tooltip" data-placement="top" title="Toggle Device">
+									data-toggle="tooltip" data-placement="left" title="Toggle Device">
 									<i class="fa fa-toggle-on device{{device.status}}"></i>
 								</a> &nbsp;	
 								<a style="text-decoration: none;" href="javascript:void(0);"
 									data-ng-if="device.status == 'OFF'"
 								    data-ng-click="toggleDevice(board, device);"
-									data-toggle="tooltip" data-placement="top" title="Toggle Device">
+									data-toggle="tooltip" data-placement="left" title="Toggle Device">
 									<i class="fa fa-toggle-on fa-rotate-180 device{{device.status}}"></i>
 								</a> &nbsp;							
 							</div>
@@ -296,7 +327,7 @@
 	
 	<div style="clear:both;"></div>
 	<div style="clearfix"></div>
-	<br /><br /><br /><br /><br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	
 
 </div>
