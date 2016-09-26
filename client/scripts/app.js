@@ -71,13 +71,24 @@ define([
         });
     });
     
-    granslive.run(['$rootScope','$location',function($rootScope, $location) {
+    granslive.run(['$rootScope','$location','LoopBackAuth', function($rootScope, $location, LoopBackAuth) {
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
             console.log('IN routeChangeStart >>>>>>> ');
              $rootScope.footerLinks = [];
+             var currentUserId = LoopBackAuth.currentUserId;
+             if (!LoopBackAuth.isLoggedIn() && !currentUserId) {
+               console.log("USER IS NOT LOGGEDIN: >>> ", currentUserId);
+               $location.path("/#!/home");
+               event.preventDefault();
+             }else{
+            	 console.log("USER IS LOGGEDIN: >>> ", currentUserId);
+            	 if(!$rootScope.currentUser){
+            		 $rootScope.currentUser = {permissions: {}};
+            	 }else{
+            		 console.log("$rootScope.currentUser: >>> ", $rootScope.currentUser);
+            	 }
+             }
         });
-        
-        $rootScope.currentUser = {permissions: {}};
         
         $rootScope.loadingScreen = $('<div style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background-color:gray;background-color:rgba(70,70,70,0.2);"><img style="position:absolute;top:50%;left:50%;" alt="" src="/assets/images/loading.gif" /></div>')
         .appendTo($('body')).hide();

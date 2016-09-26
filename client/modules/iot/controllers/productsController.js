@@ -85,7 +85,7 @@ define(function () {
     	}
     	
     	$scope.selectedBoard.owner.username = email;
-    	console.log('IN saveGroup: >>>>>', $scope.selectedGroup);
+    	console.log('IN saveBoard: >>>>>', $scope.selectedBoard);
     	$rootScope.loadingScreen.show();
     	if(!$scope.selectedBoard.uniqueIdentifier){
     		$scope.selectedBoard.uniqueIdentifier = $scope.generateUUID();

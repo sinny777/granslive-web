@@ -3,6 +3,7 @@ define(function () {
 
   function ctrl($rootScope, $scope, $cookies, $location, CONFIG, authService, mqttService){
 	  
+	  $rootScope.currentUser = {"permissions": {}};
 	  $rootScope.footerLinks = [];
 	  $rootScope.loginCredentials = {};
 	  
@@ -15,7 +16,6 @@ define(function () {
     };
 	  
     $rootScope.checkUser = function(callback){
-//    	$rootScope.initializeMQTT();
     	$rootScope.loadingScreen.show();
     	if(!$rootScope.currentUser || !$rootScope.currentUser.id){
     		authService.ensureCurrentUser(function(currentUser){
@@ -36,8 +36,8 @@ define(function () {
 
     $rootScope.login = function(){
     	authService.login($rootScope.loginCredentials, function(userObj){
-    		console.log('USER OBJ AFTER LOGIN: >>>>>> ', userObj);
     		$rootScope.currentUser = userObj;
+    		console.log('USER OBJ AFTER LOGIN: $rootScope.currentUser >>>>>> ', $rootScope.currentUser);
     	});
       };  
 	    
@@ -54,8 +54,25 @@ define(function () {
             });
         }, 1000);
         */
-    	
       };
+      
+      $rootScope.isAdmin = function(){
+    	  console.log("IN isAdmin: >>> ", $rootScope.currentUser);
+    	  
+    	  if($rootScope.currentUser.profile){
+    		  if($rootScope.currentUser.profile.email == 'contact@granslive.com'){
+    			  return true;
+    		  }else{
+    			  return false;
+    		  }
+    	  }
+    	  
+    	  if($rootScope.currentUser.email == 'contact@granslive.com'){
+    		  return true;
+    	  }else{
+    		  return false;
+    	  }
+      }
       
       /*
       $rootScope.mqttConnectSuccess = function(){

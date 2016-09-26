@@ -58,18 +58,23 @@ module.exports = function(MyUser) {
 	    console.log('\n\nIN MyUser.js, afterRemote login method, accessToken >>>>>>>', accessToken);
 	    var res = context.res;
 	    var req = context.req;
-	    if (accessToken != null) {
-	        if (accessToken.id != null) {
-	          res.cookie('access_token', accessToken.id, {
-	            signed: req.signedCookies ? true : false,
-	            maxAge: 1000 * accessToken.ttl
-	          });
-	          res.cookie('userId', accessToken.userId.toString(), {
-	            signed: req.signedCookies ? true : false,
-	            maxAge: 1000 * accessToken.ttl
-	          });
-	        }
-	      }
+	    try{
+	    	if (accessToken != null) {
+		        if (accessToken.id != null) {
+		          res.cookie('access_token', accessToken.id, {
+		            signed: req.signedCookies ? true : false,
+		            maxAge: 1000 * accessToken.ttl
+		          });
+		          res.cookie('userId', accessToken.userId.toString(), {
+		            signed: req.signedCookies ? true : false,
+		            maxAge: 1000 * accessToken.ttl
+		          });
+		        }
+		      }
+		    
+	    }catch(err){
+	    	console.log("ERROR IN afterRemote.login: >>> ", err);
+	    }
 	    
 	   return next();
 	  });

@@ -82,6 +82,24 @@ define(['angular'], function (angular) {
 	    } else {
 	      // Fetch the actual user data.
 	      console.log('Auth.currentUserId: >> ', Auth.currentUserId);
+	      MyUser.findById({id:Auth.currentUserId}).$promise.then(function(userObj){
+	  			console.log('LOGGED IN USER: >>>>>>>>>> ', userObj);
+	  			Auth.currentUser = userObj;
+	  			if(!userObj.profile){
+	  				Auth.getUserProfileData(userObj, callback);
+	  			}else{
+	  				if(callback){
+	  			    	  callback(Auth.currentUser);
+	  			      }
+	  			}	    			
+	  		}).catch(function(e) {
+	  			  console.log("ERROR: >>> ", e);
+	  			  if(callback){
+				    	  callback(Auth.currentUser);
+				      }
+	  		});
+	      
+	      /*
 	      MyUser.getCurrent(function(userData) {
 	        console.log("Current User Fetch Success: >>> ", userData);
 	        Auth.currentUser = userData;
@@ -93,7 +111,7 @@ define(['angular'], function (angular) {
 	        console.log("Current User Fetch Failed:", err);
 	        callback(null);
 	      });
-	      
+	      */
 	    }
 	  };
 	  
@@ -113,6 +131,16 @@ define(['angular'], function (angular) {
 					userObj.profile = userIdentityObj.profile._json;
 				}
 				Auth.currentUser = userObj;
+					MyUser.upsert(userObj,
+					  function(userObj) { 
+						console.log('USER UPDATED: >>>> ', userObj);
+			    		$rootScope.currentUser = userObj;
+			    		Auth.currentUser = userObj;
+					  },
+					  function(errorResponse) { 
+						  console.log("ERROR IN UPDATING USER: >>> ", errorResponse);
+					  });
+				
   				console.log('Auth.currentUser: >>> ', Auth.currentUser);
   				if(callback){
   			    	  callback(userObj);
@@ -133,22 +161,29 @@ define(['angular'], function (angular) {
 	   * @return {Boolean}
 	   */
 	  Auth.isLoggedIn = function() {
-	    if(Auth.currentUserId) {
-	      return true;
-	    }
-	    return false;
+		  return Auth.currentUserId && Auth.accessTokenId;
 	  };
 	  
 	  Auth.login = function(credentials, callback) {
 		  MyUser.login(credentials).$promise.then(function(userObj){
-			  userObj.provider = 'granslive';
-			  if(userObj.user){
-				  userObj.profile = userObj.user;
-				  delete userObj.user;
+			  console.log("In authService, AFTER LOGIN: >> ", userObj);
+			  if(!userObj.provider){
+				  userObj.provider = 'granslive';
+				  if(userObj.user && !userObj.profile){
+					  userObj.profile = userObj.user;
+					  delete userObj.user;
+					  Auth.currentUser = userObj;
+					  Auth.save();
+					  if(callback){
+						  callback(userObj);
+					  }
+				  }
 			  }
+			  
 			  if(callback){
 				  callback(userObj);
 			  }
+			  
 			  return userObj;
 		 });
 	  };

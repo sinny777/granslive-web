@@ -27,7 +27,8 @@ module.exports = function(app) {
         lastName: 'Admin',
         email: 'contact@granslive.com',
         username: 'granslive',
-        password: '1SatnamW'
+        password: '1SatnamW',
+        provider: 'granslive'
       }]
     }, {
       name: 'guest',
@@ -36,7 +37,8 @@ module.exports = function(app) {
         lastName: 'User',
         email: 'guest@granslive.com',
         username: 'guest',
-        password: 'guest'
+        password: 'guest',
+        provider: 'granslive'
       }]
     }];
 
