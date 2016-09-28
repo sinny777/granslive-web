@@ -6,16 +6,16 @@
     "validateUpsert": true
   },
   "properties": {
+    "areas": {
+      "type": "any",
+      "required": false
+    },
     "audit": {
       "type": "object",
       "required": false
     },
     "description": {
       "type": "string",
-      "required": false
-    },
-    "areas": {
-      "type": "any",
       "required": false
     },
     "lastExecutedTime": {
@@ -25,10 +25,6 @@
     "placeId": {
       "type": "string",
       "required": true
-    },
-    "repeat": {
-      "type": "boolean",
-      "required": false
     },
     "settings": {
       "type": "object",

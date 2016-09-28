@@ -203,8 +203,20 @@
 					    	<strong>Description: </strong>{{scene.description}}<br />
 					    	<strong>Execution Based On: </strong>{{scene.type}}<br />
 					    	<span data-ng-if="scene.type == 'TIME'"><strong>Execute At: </strong>{{scene.settings.startTime}}</span><br />
-					    	<strong>Repeat: </strong>{{scene.repeat}} 
-					    	<div data-ng-if="scene.repeat">(<span data-ng-if="scene.settings.Monday"> Monday | </span> <span data-ng-if="scene.settings.Tuesday">Tuesday | </span> <span data-ng-if="scene.settings.Wednesday">Wednesday | </span> <span data-ng-if="scene.settings.Thursday">Thursday | </span> <span data-ng-if="scene.settings.Friday">Friday | </span> <span data-ng-if="scene.settings.Saturday">Saturday | </span> <span data-ng-if="scene.settings.Sunday">Sunday </span> )</div> <br />
+					    	<div data-ng-if="scene.settings.repeat && scene.settings.repeat.length > 0" >
+					    		<strong>Repeat: </strong> 
+					    		<span data-ng-repeat="day in scene.settings.repeat">
+					    			<span data-ng-if="day == 0">Sunday | </span>
+					    			<span data-ng-if="day == 1">Monday | </span>
+					    			<span data-ng-if="day == 2">Tuesday | </span>
+					    			<span data-ng-if="day == 3">Wednesday | </span>
+					    			<span data-ng-if="day == 4">Thursday | </span>
+					    			<span data-ng-if="day == 5">Friday | </span>
+					    			<span data-ng-if="day == 6">Saturday </span>
+					    		</span>
+					    	
+					    	</div> <br />
+					    	
 					    </p>
 					    
 					    <h5>All Devices Status</h5>
