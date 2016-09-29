@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, Scene){
+  function ctrl($rootScope, $scope, Scene, mqttService){
 	  
 	  $scope.display = 'scenes';
 	  $scope.selectedScene = {};
@@ -157,6 +157,9 @@ define(function () {
 				$scope.selectedPlace.scenes = [];
 			}
 			$scope.selectedPlace.scenes.push(scene);
+			var topic = "iot-2/type/GransLiveGateway/id/"+$scope.selectedPlace.gatewayId+"/evt/gateway/fmt/json";
+			var msg = {"action": "update", "type": "Scene", "data": scene};
+	    	mqttService.publishToMqtt(topic, msg);
 		  },
 		  function(errorResponse) {
 			  $rootScope.loadingScreen.hide();
@@ -255,7 +258,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', 'Scene'];
+  ctrl.$inject = ['$rootScope', '$scope', 'Scene', 'mqttService'];
   return ctrl;
 
 });
