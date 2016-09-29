@@ -156,7 +156,19 @@ define(function () {
 			if(!$scope.selectedPlace.scenes){
 				$scope.selectedPlace.scenes = [];
 			}
-			$scope.selectedPlace.scenes.push(scene);
+			
+			var sceneFound = false;
+			for(var i = 0; i < $scope.selectedPlace.scenes.length; i++){
+				var existingScene = $scope.selectedPlace.scenes[i];
+				if(existingScene.id == scene.id){
+					existingScene = scene;
+					sceneFound = true;
+				}
+			}
+			if(!sceneFound){
+				$scope.selectedPlace.scenes.push(scene);
+			}
+			
 			var topic = "iot-2/type/GransLiveGateway/id/"+$scope.selectedPlace.gatewayId+"/evt/gateway/fmt/json";
 			var msg = {"action": "update", "type": "Scene", "data": scene};
 	    	mqttService.publishToMqtt(topic, msg);
