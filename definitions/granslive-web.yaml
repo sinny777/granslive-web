@@ -7165,6 +7165,9 @@ definitions:
       type:
         description: 'TIME, TEMP, HUM, WATERLEVEL'
         type: string
+      status:
+        description: ACTIVE | INACTIVE | RUNNING
+        type: string
       id:
         type: string
     required:

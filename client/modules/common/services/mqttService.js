@@ -7,16 +7,25 @@ define(['angular'], function (angular) {
 	var subscribeTopic = "";
 	var mqttClient;
 	var mqttOptions = {};
+	var mqttConnected = false;
+	var subscriptions = [];
 	
 	var mqttService = {};
 	
 		mqttService.connectMQTT = function(options){
+			
+			if(mqttConnected){
+				console.log("\n\n IN mqttService, MQTT Already Connected >>>>>>>>> \n\n");
+				return false;
+			}
+			
 			mqttOptions = options;
 			mqttClient = new Paho.MQTT.Client(options.hostname, 8883, options.clientId);
 			
 			mqttClient.onMessageArrived = options.onMqttMessageArrived;
 			mqttClient.onConnectionLost = function(e){
 				console.log("Connection Lost at " + Date.now() + " : " + e.errorCode + " : " + e.errorMessage);
+				mqttConnected = false;
 				this.connect(connectOptions);
 			}
 			
@@ -28,11 +37,13 @@ define(['angular'], function (angular) {
 
 			connectOptions.onSuccess = function() {
 				console.log("MQTT connected to host: "+mqttClient.host+" port : "+mqttClient.port+" at " + Date.now());
+				mqttConnected = true;
 				options.mqttConnectSuccess();
 			}
 
 			connectOptions.onFailure = function(e) {
 				console.log("MQTT connection failed at " + Date.now() + "\nerror: " + e.errorCode + " : " + e.errorMessage);
+				mqttConnected = false;
 			}
 
 			console.log("about to connect to " + mqttClient.host);
@@ -42,7 +53,10 @@ define(['angular'], function (angular) {
 	    
 	    mqttService.subscribe = function(subscribeTopic, subscribeOptions){
 	    	console.log("IN mqttService.subscribe " + subscribeTopic);
-	    	mqttClient.subscribe(subscribeTopic, subscribeOptions);
+	    	if(subscriptions.indexOf(subscribeTopic) != -1){
+	    		mqttClient.subscribe(subscribeTopic, subscribeOptions);
+		    	subscriptions.push(subscribeTopic);
+	    	}
 	    };
 	    
 	    mqttService.publishToMqtt = function(publishToTopic, msgToPublish){
