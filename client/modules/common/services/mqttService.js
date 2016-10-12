@@ -8,7 +8,6 @@ define(['angular'], function (angular) {
 	var mqttClient;
 	var mqttOptions = {};
 	var mqttConnected = false;
-	var subscriptions = [];
 	
 	var mqttService = {};
 	
@@ -52,11 +51,8 @@ define(['angular'], function (angular) {
 	    };
 	    
 	    mqttService.subscribe = function(subscribeTopic, subscribeOptions){
-	    	console.log("IN mqttService.subscribe " + subscribeTopic);
-	    	if(subscriptions.indexOf(subscribeTopic) != -1){
-	    		mqttClient.subscribe(subscribeTopic, subscribeOptions);
-		    	subscriptions.push(subscribeTopic);
-	    	}
+	    	mqttClient.subscribe(subscribeTopic, subscribeOptions);
+	    	console.log("IN mqttService.subscribed to topic: " + subscribeTopic);
 	    };
 	    
 	    mqttService.publishToMqtt = function(publishToTopic, msgToPublish){
@@ -74,10 +70,10 @@ define(['angular'], function (angular) {
 	              }
 	          }else{
 	              try{
-	                  console.log('Going to publish message: >>> ' +message);
 	                  mqttClient.send(message);
+	                  console.log('MQTT Published Message: >>> ' +message);
 	              }catch(err){
-	                  console.log('Error: >>> ', err);
+	                  console.log('Error in MQTT publish message: >>> ', err);
 	              }
 
 	          }

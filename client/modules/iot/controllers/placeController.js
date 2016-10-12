@@ -117,7 +117,7 @@ define(function () {
                 			  for(var k = 0; k < board.devices.length; k++){
                         		  var device = board.devices[k];
                         		  if(device.parentId == mqttMsg.d.boardId && device.deviceIndex == mqttMsg.d.deviceIndex){
-                        		        $scope.$apply(function() {
+                        			  console.log("Change in Device: ", device);
                         		           device.value = mqttMsg.d.deviceValue;
                              			   if(device.value == 0){
                              				   device.status = "OFF";
@@ -132,7 +132,8 @@ define(function () {
                              			   device.updatedAt = new Date();
                              			   
                              			   console.log("DEVICE UPDATED>> ", device);
-                        		        });
+                             			   $scope.$apply();
+                             			   $rootScope.$apply();
 //                        		      break;
                         		   }
                 			  }

@@ -194,7 +194,13 @@ var methods = {};
 	
 	methods.getLatestSensorDataBucket = function(){
 		var today = new Date();
-		var deviceDataBucket = "iotp_o6oosq_devicelogs_2016-0"+(today.getMonth() + 1);
+		
+		var month = today.getMonth() + 1;
+		if(month < 10){
+			month = "0"+month;
+		}
+		
+		var deviceDataBucket = "iotp_o6oosq_devicelogs_2016-"+month;
 		return deviceDataBucket;
 	};
 	
