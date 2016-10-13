@@ -51,7 +51,17 @@ define(['angular'], function (angular) {
 	    };
 	    
 	    mqttService.subscribe = function(subscribeTopic, subscribeOptions){
-	    	mqttClient.subscribe(subscribeTopic, subscribeOptions);
+	    	var unsubscribeOptions = {
+					onSuccess : function() {
+						console.log("First unsubscribed to " + subscribeTopic);
+						mqttClient.subscribe(subscribeTopic, subscribeOptions);
+					},
+					onFailure : function(){
+						console.log("Failed to unsubscribe to " + subscribeTopic);
+						mqttClient.subscribe(subscribeTopic, subscribeOptions);
+					}
+		    	};
+	    	mqttClient.unsubscribe(subscribeTopic, unsubscribeOptions);
 	    	console.log("IN mqttService.subscribed to topic: " + subscribeTopic);
 	    };
 	    

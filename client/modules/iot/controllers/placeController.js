@@ -90,7 +90,7 @@ define(function () {
 			    	console.log('SUBSCRIBE TO TOPIC: >>> ', subscribeTopic);
 			    	mqttService.subscribe(subscribeTopic, subscribeOptions);
 		   }catch(err){
-			   console.log('Error: >>> ', err);
+			   console.log('Error in MQTT Subscribing: >>> ', err);
 		   }
       };
 	  
