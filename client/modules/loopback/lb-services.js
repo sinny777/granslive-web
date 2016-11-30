@@ -15391,6 +15391,89 @@ module.factory(
     return R;
   }]);
 
+/**
+ * @ngdoc object
+ * @name lbServices.Conversation
+ * @header lbServices.Conversation
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Conversation` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Conversation",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Conversations/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Conversation#doconversation
+         * @methodOf lbServices.Conversation
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `conversation` – `{object=}` - 
+         */
+        "doconversation": {
+          url: urlBase + "/Conversations",
+          method: "POST"
+        },
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name lbServices.Conversation#modelName
+    * @propertyOf lbServices.Conversation
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Conversation`.
+    */
+    R.modelName = "Conversation";
+
+
+    return R;
+  }]);
+
 
 module
   .factory('LoopBackAuth', function() {

@@ -46,7 +46,8 @@
     "passport-twitter": "^1.0.2",
     "serve-favicon": "^2.0.1",
     "serve-static": "^1.10.2",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "watson-developer-cloud": "latest"
   },
   "devDependencies": {
     "jshint": "^2.5.6"

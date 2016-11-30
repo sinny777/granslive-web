@@ -84,5 +84,9 @@
   "Notification": {
     "dataSource": "notifications",
     "public": true
+  },
+  "Conversation": {
+    "dataSource": "db",
+    "public": true
   }
 }

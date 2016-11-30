@@ -17,7 +17,7 @@ module.exports = function(app) {
 	var deviceHandler = require('../../server/handlers/deviceHandler')(app);
 	var commonHandler = require('../../server/handlers/commonHandler')();
 
-//	initStartupLogic();
+	initStartupLogic();
 	
 //	saveAndExecuteScenes();
 	
@@ -116,6 +116,9 @@ module.exports = function(app) {
 							console
 									.log('<<<<<<< IBM IoT Cloud Connected Successfully >>>>>> \n\n');
 							subscribeToGateway();
+							
+							publishWaterTankData();
+							
 						});
 
 		appClient.on("deviceEvent", function(deviceType, deviceId, eventType,
@@ -130,6 +133,16 @@ module.exports = function(app) {
 
 	function subscribeToGateway() {
 		appClient.subscribeToDeviceEvents("GransLiveGateway", "+", "+", "json");
+	};
+	
+	function publishWaterTankData(){
+		setInterval(function(){
+			var timeNow = new Date();
+			var deviceWithData = {data: {type: "watertank", uniqueId: "WT-ABC123", gatewayId: appConfig.gatewayId, ts: timeNow, distance: "150"}};
+			var sensorData = {"d": deviceWithData.data};
+			appClient.publishDeviceEvent("GransLiveGateway", appConfig.gatewayId, "cloud", "json", sensorData);
+			console.log("Published simulated Watertank data: >>> ", sensorData);
+		}, 120000);
 	};
 
 	function handleDeviceEvent(deviceType, deviceId, eventType,
