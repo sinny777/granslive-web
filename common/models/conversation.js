@@ -20,7 +20,7 @@ module.exports = function(Conversation) {
 		});
 	*/
 	
-	var formidable = require('formidable');
+//	var formidable = require('formidable');
 
 	Conversation.remoteMethod('doconversation', {
 		    	accepts: [
