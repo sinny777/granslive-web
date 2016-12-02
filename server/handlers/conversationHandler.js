@@ -34,9 +34,6 @@ var methods = {};
 	
 	function handleConversationResponse(err, conversationResp, cb){
 		var response = {conversationResp: conversationResp};
-		if(conversationResp && conversationResp.output && conversationResp.output.text){
-			cb(err, response);
-		}
 		if(conversationResp.context){
 			var next_action = conversationResp.context.next_action;
 			if(next_action && next_action == "weather_service"){
@@ -56,8 +53,9 @@ var methods = {};
 					cb(err, response);
 				});
 			}
-			
-		}
+		}else if(conversationResp && conversationResp.output && conversationResp.output.text){
+				cb(err, response);
+			}
 	};
 	
 	function searchGoogle(response, cb) {
