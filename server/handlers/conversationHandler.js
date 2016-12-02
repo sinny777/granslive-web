@@ -22,7 +22,7 @@ var methods = {};
 			cb("INVALID PARMS FOR CONVERSATION ! ", null);
 		}
 		reqPayload.params.workspace_id = conversationConfig.workspace_id;
-		reqPayload.params.input = { "text": params.input };
+		reqPayload.params.input = { "text": reqPayload.params.input };
 		reqPayload.params.entities = [];
 		reqPayload.params.intents = [];
 		reqPayload.params.output = {};
