@@ -30,6 +30,7 @@
     "grunt-contrib-requirejs": "latest",
     "grunt-nodemon": "latest",
     "grunt-npm-install": "latest",
+    "google": "^2.1.0",
     "ibmiotf": "latest",
     "loopback": "^2.22.0",
     "loopback-boot": "^2.6.5",
