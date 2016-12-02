@@ -7274,7 +7274,13 @@ x-ibm-configuration:
     sb:
       properties:
         runtime-url: 'http://localhost:4001'
+        app-server: 'https://granslive-web.mybluemix.net'
   assembly:
     execute:
       - invoke:
-          target-url: $(runtime-url)$(request.path)$(request.search)
+          target-url: $(app-server)$(request.path)$(request.search)
+  properties:
+    app-server:
+      value: 'https://granslive-web.mybluemix.net'
+      description: ''
+      encoded: false

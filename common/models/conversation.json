@@ -18,12 +18,12 @@
   "validations": [],
   "relations": {},
   "acls": [
-		   {
-		    "principalType": "ROLE",
-		    "principalId": "$everyone",
-		    "permission": "ALLOW",
-		    "property": "doconversation"
-		   }
-          ],
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "doconversation"
+    }
+  ],
   "methods": {}
 }
