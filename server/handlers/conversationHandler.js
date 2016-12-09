@@ -37,6 +37,10 @@ var methods = {};
 		if(conversationResp.context){
 			var next_action = conversationResp.context.next_action;
 			var respSent = false;
+			if(!next_action){
+				cb(err, response);
+			}
+			
 			if(next_action && next_action == "weather_service"){
 				getWeather(response, function(err, response){
 					cb(err, response);
@@ -58,9 +62,11 @@ var methods = {};
 				});
 			}
 			
+			/*
 			if(!respSent){
 				cb(err, response);
 			}
+			*/
 			
 		}else if(conversationResp && conversationResp.output && conversationResp.output.text){
 				cb(err, response);
