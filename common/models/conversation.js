@@ -20,6 +20,7 @@ module.exports = function(Conversation) {
 		var conversationHandler = require('../../server/handlers/conversationHandler')(Conversation.app);
 		var reqPayload = req.body;
 		conversationHandler.callConversation(reqPayload, function(err, resp){
+			console.log("SENDING CONVERSATION RESPONSE: >>>> ", resp);
 			cb(err, resp);
 		});
 	  };

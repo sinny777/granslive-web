@@ -23,7 +23,30 @@ module.exports = function(app) {
 	
 //	testPushNotification();
 	
-	testNLCDateParser();
+//	testNLCDateParser();
+	
+//	testConversation();
+	
+	function testConversation(){
+		var Conversation = app.models.Conversation;
+		var conversationReq = {"body":{
+										"params": {"input": "Switch on the light"},
+										"context": {}
+									}
+							  };
+	  
+	  console.log("IN doConversation: >> ", JSON.stringify(conversationReq));
+	  Conversation.doconversation(conversationReq,
+					  function(err, resp) {
+		  				if(err){
+		  					console.log("ERROR IN doconversation: ", JSON.stringify(err));
+		  				}		  					
+						console.log("CONVERSATION RESP: >> ", JSON.stringify(resp));
+						if(resp && resp.conversationResp && resp.conversationResp.output){
+							
+						}
+					  });
+	};
 	
 	function testNLCDateParser(){
 		printResults(chrono.parse('Please do the installation next Friday at 3pm'));

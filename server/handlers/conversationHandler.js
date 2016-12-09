@@ -18,7 +18,7 @@ module.exports = function(app) {
 var methods = {};
   	
 	methods.callConversation = function(reqPayload, cb) {
-		if(!reqPayload.params || !reqPayload.params.input){
+		if(!reqPayload && !reqPayload.params || !reqPayload.params.input){
 			cb("INVALID PARMS FOR CONVERSATION ! ", null);
 		}
 		reqPayload.params.workspace_id = conversationConfig.workspace_id;
@@ -36,23 +36,32 @@ var methods = {};
 		var response = {conversationResp: conversationResp};
 		if(conversationResp.context){
 			var next_action = conversationResp.context.next_action;
+			var respSent = false;
 			if(next_action && next_action == "weather_service"){
 				getWeather(response, function(err, response){
 					cb(err, response);
+					respSent = true;
 				});
 			}
 			
 			if(next_action && next_action == "news_service"){
 				getNewsFeeds(response, function(err, response){
 					cb(err, response);
+					respSent = true;
 				});
 			}
 			
 			if(next_action && next_action == "google_search"){
 				searchGoogle(response, function(err, response){
 					cb(err, response);
+					respSent = true;
 				});
 			}
+			
+			if(!respSent){
+				cb(err, response);
+			}
+			
 		}else if(conversationResp && conversationResp.output && conversationResp.output.text){
 				cb(err, response);
 			}

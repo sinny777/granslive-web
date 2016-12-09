@@ -6861,12 +6861,7 @@ paths:
       tags:
         - Conversation
       operationId: Conversation.doconversation
-      parameters:
-        - name: body
-          required: false
-          in: body
-          schema:
-            type: object
+      parameters: []
       responses:
         '200':
           description: Request was successful
