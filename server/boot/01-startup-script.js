@@ -17,7 +17,7 @@ module.exports = function(app) {
 	var deviceHandler = require('../../server/handlers/deviceHandler')(app);
 	var commonHandler = require('../../server/handlers/commonHandler')();
 
-	initStartupLogic();
+//	initStartupLogic();
 	
 //	saveAndExecuteScenes();
 	
@@ -25,7 +25,7 @@ module.exports = function(app) {
 	
 //	testNLCDateParser();
 	
-//	testConversation();
+	testConversation();
 	
 	function testConversation(){
 		var Conversation = app.models.Conversation;
