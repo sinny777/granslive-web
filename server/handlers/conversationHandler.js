@@ -62,6 +62,11 @@ var methods = {};
 				});
 			}
 			
+			if(next_action && next_action == "date_time"){
+				cb(err, response);
+				respSent = true;
+			}
+			
 			/*
 			if(!respSent){
 				cb(err, response);
@@ -69,6 +74,8 @@ var methods = {};
 			*/
 			
 		}else if(conversationResp && conversationResp.output && conversationResp.output.text){
+				cb(err, response);
+			}else{
 				cb(err, response);
 			}
 	};
@@ -143,8 +150,7 @@ var methods = {};
 	            cb(ex, null);
 	        }
 	    });
-	}
-	
+	};
 	
     return methods;
     
