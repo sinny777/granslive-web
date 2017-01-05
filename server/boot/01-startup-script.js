@@ -25,7 +25,7 @@ module.exports = function(app) {
 	
 //	testNLCDateParser();
 	
-	testConversation();
+//	testConversation();
 	
 	function testConversation(){
 		var Conversation = app.models.Conversation;
