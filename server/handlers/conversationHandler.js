@@ -67,6 +67,13 @@ var methods = {};
 				respSent = true;
 			}
 			
+			if(next_action && next_action == "joke"){
+				getRandomJoke(response, function(err, response){
+					cb(err, response);
+					respSent = true;
+				});
+			}
+			
 			/*
 			if(!respSent){
 				cb(err, response);
@@ -78,6 +85,10 @@ var methods = {};
 			}else{
 				cb(err, response);
 			}
+	};
+	
+	function getRandomJoke(response, cb){
+		cb(null, response);
 	};
 	
 	function searchGoogle(response, cb) {

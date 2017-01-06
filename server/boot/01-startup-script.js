@@ -4,6 +4,7 @@ var log = require('debug')('boot:01-startup-script');
 
 var Client = require('ibmiotf');
 var chrono = require('chrono-node');
+var request = require('request');
 
 var appClient = {};
 
