@@ -34,6 +34,14 @@ var methods = {};
 	
 	function handleConversationResponse(err, conversationResp, cb){
 		var response = {conversationResp: conversationResp};
+		
+		if(conversationResp.intents && conversationResp.intents.length > 0 && conversationResp.intents[0] == 'appliance_action'){
+			handleApplianceAction(response, function(err, resp){
+				cb(err, resp);
+				respSent = true;
+			});
+		}
+		
 		if(conversationResp.context){
 			var next_action = conversationResp.context.next_action;
 			var respSent = false;
@@ -85,6 +93,14 @@ var methods = {};
 			}else{
 				cb(err, response);
 			}
+	};
+	
+	function handleApplianceAction(response, cb){
+		console.log("IN handleApplianceAction: >>> ", response);
+		if(conversationResp.context && conversationResp.context.gatewayId){
+			
+		}
+		cb(null, response);
 	};
 	
 	function getRandomJoke(response, cb){

@@ -99,6 +99,28 @@ var methods = {};
 		}
 	};
 	
+	methods.findPlacesForGatewayId = function(gatewayId, cb){
+		console.log('IN findPlaceAreasForGatewayId with gatewayId: ', gatewayId);
+		var findReq =  {where: {"gatewayId": gatewayId}};
+		if(!Place){
+			Place = app.models.Place;
+		}
+		Place.find(findReq, function(err, resp) { 
+			cb(err, resp);
+		});
+	};
+	
+	methods.findPlaceAreasForPlaceId = function(placeId, cb){
+		console.log('IN findPlaceAreasForPlaceId with placeId: ', placeId);
+		var findReq =  {where: {"placeId": placeId}};
+		if(!PlaceArea){
+			PlaceArea = app.models.PlaceArea;
+		}
+		PlaceArea.find(findReq, function(err, resp) { 
+			cb(err, resp);
+		});
+	};
+	
 	methods.findPlaceArea = function(placeAreaId, cb){
 		console.log('IN findPlaceArea with placeAreaId: ', placeAreaId);
 		if(!PlaceArea){

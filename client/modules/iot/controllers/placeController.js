@@ -16,7 +16,7 @@ define(function () {
 			  				clientId: "a:"+CONFIG.IOT_CONFIG.org+":" +Date.now(),
 			  				hostname: CONFIG.IOT_CONFIG.org+".messaging.internetofthings.ibmcloud.com"};
 	  
-	  $scope.placeAreaTypes = ['living-room', 'bed-room', 'bath-room', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
+	  $scope.placeAreaTypes = ['livingroom', 'bedroom', 'bathroom', 'kitchen', 'store', 'gallery', 'parking', 'balcony', 'other'];
 	  $scope.floors = ['Ground'];
 	  $scope.deviceTypes = [];
 	  

@@ -29,12 +29,16 @@ module.exports.get = function() {
 						"url": "https://gateway.watsonplatform.net/conversation/api",
 						"password": "Dd6zArf1tY05",
 						"username": "7374796d-9f99-4e50-92f4-b4c5f5ce7e59",
-						"version_date": "2016-07-11",
+						"version_date": "2016-09-20",
 						"version": "v1-experimental",
 						"silent": true
 					},
 					"workspace_id": "ccc639e8-9b25-4226-8611-1f4386000344"
-				}
+				},
+				"alchemy": {
+					  "url": "https://gateway-a.watsonplatform.net/calls",
+					  "apikey": "90847a470740824a0fe97f42681e7c98285b7962"
+					}
 			}
 		}
     	
