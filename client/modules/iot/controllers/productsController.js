@@ -1,12 +1,12 @@
 define(function () {
     'use strict';
 
-  function ctrl($rootScope, $scope, Board){
+  function ctrl($rootScope, $scope, Board, Device){
 	  
 	  $scope.display = 'boards';
 	  $scope.selectedBoard = {};
 	  $scope.boards = [];
-	  $scope.boardTypes = ["SWITCH_BOARD", "SENSOR_BOARD"];
+	  $scope.boardTypes = ["SWITCH_BOARD", "SENSOR_BOARD", "GransLiveGateway"];
 	  $scope.switches = {"digital": [1, 2, 3, 4, 5, 6, 7, 8, 9], "analog": [1, 2, 3, 4, 5, 6, 7, 8, 9]};
 	  $scope.selectedSwitchCounts = {digital: 0, analog: 0};
 	  
@@ -91,6 +91,12 @@ define(function () {
     
     $scope.saveBoard = function(){
     	console.log('$rootScope.currentUser: >> ', $rootScope.currentUser);
+    	
+    	if($scope.selectedBoard.type == 'GransLiveGateway'){
+    		$scope.saveGatewayDevice();
+    		return;
+    	}
+    	
     	var ownerId = $rootScope.currentUser.id;
     	if($rootScope.currentUser.userId){
     		ownerId = $rootScope.currentUser.userId;
@@ -134,6 +140,41 @@ define(function () {
 			  $scope.fetchAndShowBoards();
 		  });
 		  
+    };
+    
+    $scope.saveGatewayDevice = function(){
+    	console.log("IN saveGatewayDevice: >>> $scope.selectedBoard: ", $scope.selectedBoard);
+    	var deviceToSave = {
+    							deviceId: $scope.selectedBoard.uniqueIdentifier,
+    							typeId: $scope.selectedBoard.type,
+    							deviceInfo: {
+    								"serialNumber": $scope.selectedBoard.uniqueIdentifier,
+    							    "manufacturer": $scope.selectedBoard.manufacturer,
+    							    "model": $scope.selectedBoard.model,
+    							    "deviceClass": $scope.selectedBoard.deviceClass,
+    							    "description": $scope.selectedBoard.description,
+    							    "fwVersion": $scope.selectedBoard.fwVersion,
+    							    "hwVersion": $scope.selectedBoard.hwVersion,
+    							    "descriptiveLocation": $scope.selectedBoard.descriptiveLocation
+    							}
+    						};
+    	console.log("IN saveGatewayDevice: >>> deviceToSave: ", deviceToSave);
+    	if(!deviceToSave.deviceId){
+    		return;
+    	}
+    	
+    	$scope.selectedBoard = Device.upsert(deviceToSave,
+    			  function(updatedDevice) { 
+    	    		$rootScope.loadingScreen.hide();
+    				$scope.selectedBoard = updatedDevice;
+    				console.log('DEVICE SAVED: >>>> ', updatedDevice);
+    				$scope.fetchAndShowBoards();
+    			  },
+    			  function(errorResponse) {
+    				  $rootScope.loadingScreen.hide();
+    				  console.log(errorResponse);
+    				  $scope.fetchAndShowBoards();
+    			  });
     };
     
     $scope.generateUUID = function() {
@@ -209,7 +250,7 @@ define(function () {
     
   }
   
-  ctrl.$inject = ['$rootScope', '$scope', 'Board'];
+  ctrl.$inject = ['$rootScope', '$scope', 'Board', 'Device'];
   return ctrl;
 
 });

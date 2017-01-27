@@ -88,5 +88,9 @@
   "Conversation": {
     "dataSource": "db",
     "public": true
+  },
+  "Device": {
+    "dataSource": "devices",
+    "public": true
   }
 }

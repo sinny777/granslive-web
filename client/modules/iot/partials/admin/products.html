@@ -31,13 +31,7 @@
 
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" method="post">
-					<div class="form-group">
-						<label for="name" class="col-lg-2 control-label">Unique Identifier:</label>
-						<div class="col-lg-4">
-							<input type="text" class="form-control"
-								data-ng-model="selectedBoard.uniqueIdentifier">
-						</div>
-					</div>
+				
 					<div class="form-group">
 						<label for="name" class="col-lg-2 control-label">Type:</label>
 						<div class="col-lg-4">
@@ -45,6 +39,59 @@
 					    		<option data-ng-repeat="option in boardTypes" value="{{option}}">{{option}}</option>
 						    </select>
 								
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="name" class="col-lg-2 control-label">Unique Identifier:</label>
+						<div class="col-lg-4">
+							<input type="text" class="form-control"
+								data-ng-model="selectedBoard.uniqueIdentifier">
+						</div>
+					</div>
+					
+					<div data-ng-if="selectedBoard.type == 'GransLiveGateway'">
+						<div class="form-group" >
+							<label for="name" class="col-lg-2 control-label">Manufacturer:</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control"
+									data-ng-model="selectedBoard.manufacturer" placeholder="GransLive">
+							</div>
+						</div>
+						<div class="form-group" >
+							<label for="name" class="col-lg-2 control-label">Model:</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control"
+									data-ng-model="selectedBoard.model" placeholder="RPI-3">
+							</div>
+						</div>
+						<div class="form-group" >
+							<label for="name" class="col-lg-2 control-label">Class:</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control"
+									data-ng-model="selectedBoard.deviceClass" placeholder="Gateway">
+							</div>
+						</div>
+						<div class="form-group" >
+							<label for="name" class="col-lg-2 control-label">fwVersion:</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control"
+									data-ng-model="selectedBoard.fwVersion" placeholder="1-0-1">
+							</div>
+						</div>
+						<div class="form-group" >
+							<label for="name" class="col-lg-2 control-label">hwVersion:</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control"
+									data-ng-model="selectedBoard.hwVersion" placeholder="1-0-1">
+							</div>
+						</div>
+						<div class="form-group" >
+							<label for="name" class="col-lg-2 control-label">descriptiveLocation:</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control"
+									data-ng-model="selectedBoard.descriptiveLocation" >
+							</div>
 						</div>
 					</div>
 					<div class="form-group" data-ng-if="selectedBoard.type == 'SENSOR_BOARD'">
@@ -69,7 +116,6 @@
 						    </select>
 				   	  	</div>
 				   	</div>
-					
 					
 					<div class="form-group">
 						<label for="name" class="col-lg-2 control-label">Title:</label>
@@ -126,5 +172,10 @@
 		
 
 	</div>
+	
+	<div class="clearfix"></div>
+	<div style="clear: both;"></div>
+	
+	<br /><br />
 
 </div>

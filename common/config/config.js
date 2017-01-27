@@ -12,6 +12,13 @@ module.exports.get = function() {
 		      "type": "shared"
 		    },
 		    "SERVICES_CONFIG":{
+		    	"IOT_CONFIG":{
+		    		"org": "o6oosq",
+		    	     "id": "a-o6oosq-v9xbyockrk",
+		    	     "authkey": "a-o6oosq-ugylh9r4ug",
+		    	     "authtoken": "Tun&)vjKlf6sJ_9BdK",
+		    	     "type": "shared"
+		    	},
 				"cloudantNOSQLDB":{
 					 "username": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix",
 					  "password": "5bfe2ecae5c815202c4d78db2600812ef5099f337a6deb6dba96ce0b7a5b0e13",
@@ -38,7 +45,7 @@ module.exports.get = function() {
 				"alchemy": {
 					  "url": "https://gateway-a.watsonplatform.net/calls",
 					  "apikey": "90847a470740824a0fe97f42681e7c98285b7962"
-					}
+				}
 			}
 		}
     	

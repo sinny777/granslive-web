@@ -45,9 +45,7 @@ paths:
     put:
       tags:
         - userCredential
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: userCredential.upsert__put_userCredentials
       parameters:
         - name: data
@@ -66,9 +64,7 @@ paths:
     patch:
       tags:
         - userCredential
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: userCredential.upsert__patch_userCredentials
       parameters:
         - name: data
@@ -108,9 +104,7 @@ paths:
     post:
       tags:
         - userCredential
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: userCredential.replaceOrCreate
       parameters:
         - name: data
@@ -130,9 +124,7 @@ paths:
     post:
       tags:
         - userCredential
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: userCredential.upsertWithWhere
       parameters:
         - name: where
@@ -243,9 +235,7 @@ paths:
     put:
       tags:
         - userCredential
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'userCredential.prototype.updateAttributes__put_userCredentials_{id}'
       parameters:
         - name: data
@@ -270,9 +260,7 @@ paths:
     patch:
       tags:
         - userCredential
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'userCredential.prototype.updateAttributes__patch_userCredentials_{id}'
       parameters:
         - name: data
@@ -298,9 +286,7 @@ paths:
     post:
       tags:
         - userCredential
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: userCredential.replaceById
       parameters:
         - name: id
@@ -365,8 +351,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /userCredentials/count:
     get:
@@ -437,9 +428,7 @@ paths:
     put:
       tags:
         - userIdentity
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: userIdentity.upsert__put_userIdentities
       parameters:
         - name: data
@@ -458,9 +447,7 @@ paths:
     patch:
       tags:
         - userIdentity
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: userIdentity.upsert__patch_userIdentities
       parameters:
         - name: data
@@ -500,9 +487,7 @@ paths:
     post:
       tags:
         - userIdentity
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: userIdentity.replaceOrCreate
       parameters:
         - name: data
@@ -522,9 +507,7 @@ paths:
     post:
       tags:
         - userIdentity
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: userIdentity.upsertWithWhere
       parameters:
         - name: where
@@ -635,9 +618,7 @@ paths:
     put:
       tags:
         - userIdentity
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'userIdentity.prototype.updateAttributes__put_userIdentities_{id}'
       parameters:
         - name: data
@@ -662,9 +643,7 @@ paths:
     patch:
       tags:
         - userIdentity
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'userIdentity.prototype.updateAttributes__patch_userIdentities_{id}'
       parameters:
         - name: data
@@ -690,9 +669,7 @@ paths:
     post:
       tags:
         - userIdentity
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: userIdentity.replaceById
       parameters:
         - name: id
@@ -757,8 +734,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /userIdentities/count:
     get:
@@ -829,9 +811,7 @@ paths:
     put:
       tags:
         - AccessToken
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: AccessToken.upsert__put_AccessTokens
       parameters:
         - name: data
@@ -850,9 +830,7 @@ paths:
     patch:
       tags:
         - AccessToken
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: AccessToken.upsert__patch_AccessTokens
       parameters:
         - name: data
@@ -892,9 +870,7 @@ paths:
     post:
       tags:
         - AccessToken
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: AccessToken.replaceOrCreate
       parameters:
         - name: data
@@ -914,9 +890,7 @@ paths:
     post:
       tags:
         - AccessToken
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: AccessToken.upsertWithWhere
       parameters:
         - name: where
@@ -1027,9 +1001,7 @@ paths:
     put:
       tags:
         - AccessToken
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'AccessToken.prototype.updateAttributes__put_AccessTokens_{id}'
       parameters:
         - name: data
@@ -1054,9 +1026,7 @@ paths:
     patch:
       tags:
         - AccessToken
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'AccessToken.prototype.updateAttributes__patch_AccessTokens_{id}'
       parameters:
         - name: data
@@ -1082,9 +1052,7 @@ paths:
     post:
       tags:
         - AccessToken
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: AccessToken.replaceById
       parameters:
         - name: id
@@ -1149,8 +1117,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /AccessTokens/count:
     get:
@@ -1198,9 +1171,7 @@ paths:
     put:
       tags:
         - ACL
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: ACL.upsert__put_ACLs
       parameters:
         - name: data
@@ -1219,9 +1190,7 @@ paths:
     patch:
       tags:
         - ACL
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: ACL.upsert__patch_ACLs
       parameters:
         - name: data
@@ -1261,9 +1230,7 @@ paths:
     post:
       tags:
         - ACL
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: ACL.replaceOrCreate
       parameters:
         - name: data
@@ -1283,9 +1250,7 @@ paths:
     post:
       tags:
         - ACL
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: ACL.upsertWithWhere
       parameters:
         - name: where
@@ -1396,9 +1361,7 @@ paths:
     put:
       tags:
         - ACL
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'ACL.prototype.updateAttributes__put_ACLs_{id}'
       parameters:
         - name: data
@@ -1423,9 +1386,7 @@ paths:
     patch:
       tags:
         - ACL
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'ACL.prototype.updateAttributes__patch_ACLs_{id}'
       parameters:
         - name: data
@@ -1451,9 +1412,7 @@ paths:
     post:
       tags:
         - ACL
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: ACL.replaceById
       parameters:
         - name: id
@@ -1518,8 +1477,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /ACLs/count:
     get:
@@ -1590,9 +1554,7 @@ paths:
     put:
       tags:
         - RoleMapping
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: RoleMapping.upsert__put_RoleMappings
       parameters:
         - name: data
@@ -1611,9 +1573,7 @@ paths:
     patch:
       tags:
         - RoleMapping
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: RoleMapping.upsert__patch_RoleMappings
       parameters:
         - name: data
@@ -1653,9 +1613,7 @@ paths:
     post:
       tags:
         - RoleMapping
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: RoleMapping.replaceOrCreate
       parameters:
         - name: data
@@ -1675,9 +1633,7 @@ paths:
     post:
       tags:
         - RoleMapping
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: RoleMapping.upsertWithWhere
       parameters:
         - name: where
@@ -1788,9 +1744,7 @@ paths:
     put:
       tags:
         - RoleMapping
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'RoleMapping.prototype.updateAttributes__put_RoleMappings_{id}'
       parameters:
         - name: data
@@ -1815,9 +1769,7 @@ paths:
     patch:
       tags:
         - RoleMapping
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'RoleMapping.prototype.updateAttributes__patch_RoleMappings_{id}'
       parameters:
         - name: data
@@ -1843,9 +1795,7 @@ paths:
     post:
       tags:
         - RoleMapping
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: RoleMapping.replaceById
       parameters:
         - name: id
@@ -1910,8 +1860,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /RoleMappings/count:
     get:
@@ -2129,9 +2084,7 @@ paths:
     put:
       tags:
         - Role
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Role.upsert__put_Roles
       parameters:
         - name: data
@@ -2150,9 +2103,7 @@ paths:
     patch:
       tags:
         - Role
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Role.upsert__patch_Roles
       parameters:
         - name: data
@@ -2192,9 +2143,7 @@ paths:
     post:
       tags:
         - Role
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: Role.replaceOrCreate
       parameters:
         - name: data
@@ -2214,9 +2163,7 @@ paths:
     post:
       tags:
         - Role
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: Role.upsertWithWhere
       parameters:
         - name: where
@@ -2327,9 +2274,7 @@ paths:
     put:
       tags:
         - Role
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Role.prototype.updateAttributes__put_Roles_{id}'
       parameters:
         - name: data
@@ -2354,9 +2299,7 @@ paths:
     patch:
       tags:
         - Role
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Role.prototype.updateAttributes__patch_Roles_{id}'
       parameters:
         - name: data
@@ -2382,9 +2325,7 @@ paths:
     post:
       tags:
         - Role
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: Role.replaceById
       parameters:
         - name: id
@@ -2449,8 +2390,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /Roles/count:
     get:
@@ -3169,9 +3115,7 @@ paths:
     put:
       tags:
         - MyUser
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: MyUser.upsert__put_MyUsers
       parameters:
         - name: data
@@ -3190,9 +3134,7 @@ paths:
     patch:
       tags:
         - MyUser
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: MyUser.upsert__patch_MyUsers
       parameters:
         - name: data
@@ -3232,9 +3174,7 @@ paths:
     post:
       tags:
         - MyUser
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: MyUser.replaceOrCreate
       parameters:
         - name: data
@@ -3254,9 +3194,7 @@ paths:
     post:
       tags:
         - MyUser
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: MyUser.upsertWithWhere
       parameters:
         - name: where
@@ -3367,9 +3305,7 @@ paths:
     put:
       tags:
         - MyUser
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'MyUser.prototype.updateAttributes__put_MyUsers_{id}'
       parameters:
         - name: data
@@ -3394,9 +3330,7 @@ paths:
     patch:
       tags:
         - MyUser
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'MyUser.prototype.updateAttributes__patch_MyUsers_{id}'
       parameters:
         - name: data
@@ -3422,9 +3356,7 @@ paths:
     post:
       tags:
         - MyUser
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: MyUser.replaceById
       parameters:
         - name: id
@@ -3489,8 +3421,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /MyUsers/count:
     get:
@@ -3529,9 +3466,7 @@ paths:
             type: object
         - name: include
           in: query
-          description: >-
-            Related objects to include in the response. See the description of
-            return value for more details.
+          description: Related objects to include in the response. See the description of return value for more details.
           required: false
           type: string
           format: JSON
@@ -3540,13 +3475,22 @@ paths:
           description: Request was successful
           schema:
             description: >+
-              The response body contains properties of the AccessToken created
-              on login.
+              The response body contains properties of the AccessToken created on
+              login.
 
-              Depending on the value of `include` parameter, the body may
-              contain additional properties:
+              Depending on the value of `include` parameter, the body may contain
+              additional properties:
 
-                - `user` - `U+007BUserU+007D` - Data of the currently logged in user. (`include=user`)
+
+
+
+
+
+
+                - `user` - `U+007BUserU+007D` - Data of the currently logged in
+
+              user. (`include=user`)
+
 
             type: object
       deprecated: false
@@ -3831,9 +3775,7 @@ paths:
     put:
       tags:
         - Place
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Place.upsert__put_Places
       parameters:
         - name: data
@@ -3852,9 +3794,7 @@ paths:
     patch:
       tags:
         - Place
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Place.upsert__patch_Places
       parameters:
         - name: data
@@ -3894,9 +3834,7 @@ paths:
     post:
       tags:
         - Place
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: Place.replaceOrCreate
       parameters:
         - name: data
@@ -3916,9 +3854,7 @@ paths:
     post:
       tags:
         - Place
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: Place.upsertWithWhere
       parameters:
         - name: where
@@ -4029,9 +3965,7 @@ paths:
     put:
       tags:
         - Place
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Place.prototype.updateAttributes__put_Places_{id}'
       parameters:
         - name: data
@@ -4056,9 +3990,7 @@ paths:
     patch:
       tags:
         - Place
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Place.prototype.updateAttributes__patch_Places_{id}'
       parameters:
         - name: data
@@ -4084,9 +4016,7 @@ paths:
     post:
       tags:
         - Place
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: Place.replaceById
       parameters:
         - name: id
@@ -4151,8 +4081,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /Places/count:
     get:
@@ -4215,9 +4150,7 @@ paths:
     put:
       tags:
         - PlaceArea
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: PlaceArea.upsert__put_PlaceAreas
       parameters:
         - name: data
@@ -4236,9 +4169,7 @@ paths:
     patch:
       tags:
         - PlaceArea
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: PlaceArea.upsert__patch_PlaceAreas
       parameters:
         - name: data
@@ -4278,9 +4209,7 @@ paths:
     post:
       tags:
         - PlaceArea
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: PlaceArea.replaceOrCreate
       parameters:
         - name: data
@@ -4300,9 +4229,7 @@ paths:
     post:
       tags:
         - PlaceArea
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: PlaceArea.upsertWithWhere
       parameters:
         - name: where
@@ -4413,9 +4340,7 @@ paths:
     put:
       tags:
         - PlaceArea
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'PlaceArea.prototype.updateAttributes__put_PlaceAreas_{id}'
       parameters:
         - name: data
@@ -4440,9 +4365,7 @@ paths:
     patch:
       tags:
         - PlaceArea
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'PlaceArea.prototype.updateAttributes__patch_PlaceAreas_{id}'
       parameters:
         - name: data
@@ -4468,9 +4391,7 @@ paths:
     post:
       tags:
         - PlaceArea
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: PlaceArea.replaceById
       parameters:
         - name: id
@@ -4535,8 +4456,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /PlaceAreas/count:
     get:
@@ -4599,9 +4525,7 @@ paths:
     put:
       tags:
         - Board
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Board.upsert__put_Boards
       parameters:
         - name: data
@@ -4620,9 +4544,7 @@ paths:
     patch:
       tags:
         - Board
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Board.upsert__patch_Boards
       parameters:
         - name: data
@@ -4662,9 +4584,7 @@ paths:
     post:
       tags:
         - Board
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: Board.replaceOrCreate
       parameters:
         - name: data
@@ -4684,9 +4604,7 @@ paths:
     post:
       tags:
         - Board
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: Board.upsertWithWhere
       parameters:
         - name: where
@@ -4797,9 +4715,7 @@ paths:
     put:
       tags:
         - Board
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Board.prototype.updateAttributes__put_Boards_{id}'
       parameters:
         - name: data
@@ -4824,9 +4740,7 @@ paths:
     patch:
       tags:
         - Board
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Board.prototype.updateAttributes__patch_Boards_{id}'
       parameters:
         - name: data
@@ -4852,9 +4766,7 @@ paths:
     post:
       tags:
         - Board
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: Board.replaceById
       parameters:
         - name: id
@@ -4919,8 +4831,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /Boards/count:
     get:
@@ -5034,9 +4951,7 @@ paths:
     put:
       tags:
         - Group
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Group.upsert__put_Groups
       parameters:
         - name: data
@@ -5055,9 +4970,7 @@ paths:
     patch:
       tags:
         - Group
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Group.upsert__patch_Groups
       parameters:
         - name: data
@@ -5097,9 +5010,7 @@ paths:
     post:
       tags:
         - Group
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: Group.replaceOrCreate
       parameters:
         - name: data
@@ -5119,9 +5030,7 @@ paths:
     post:
       tags:
         - Group
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: Group.upsertWithWhere
       parameters:
         - name: where
@@ -5232,9 +5141,7 @@ paths:
     put:
       tags:
         - Group
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Group.prototype.updateAttributes__put_Groups_{id}'
       parameters:
         - name: data
@@ -5259,9 +5166,7 @@ paths:
     patch:
       tags:
         - Group
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Group.prototype.updateAttributes__patch_Groups_{id}'
       parameters:
         - name: data
@@ -5287,9 +5192,7 @@ paths:
     post:
       tags:
         - Group
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: Group.replaceById
       parameters:
         - name: id
@@ -5354,8 +5257,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /Groups/count:
     get:
@@ -5403,9 +5311,7 @@ paths:
     put:
       tags:
         - Configuration
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Configuration.upsert__put_Configurations
       parameters:
         - name: data
@@ -5424,9 +5330,7 @@ paths:
     patch:
       tags:
         - Configuration
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Configuration.upsert__patch_Configurations
       parameters:
         - name: data
@@ -5466,9 +5370,7 @@ paths:
     post:
       tags:
         - Configuration
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: Configuration.replaceOrCreate
       parameters:
         - name: data
@@ -5488,9 +5390,7 @@ paths:
     post:
       tags:
         - Configuration
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: Configuration.upsertWithWhere
       parameters:
         - name: where
@@ -5601,9 +5501,7 @@ paths:
     put:
       tags:
         - Configuration
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Configuration.prototype.updateAttributes__put_Configurations_{id}'
       parameters:
         - name: data
@@ -5628,9 +5526,7 @@ paths:
     patch:
       tags:
         - Configuration
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Configuration.prototype.updateAttributes__patch_Configurations_{id}'
       parameters:
         - name: data
@@ -5656,9 +5552,7 @@ paths:
     post:
       tags:
         - Configuration
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: Configuration.replaceById
       parameters:
         - name: id
@@ -5723,8 +5617,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /Configurations/count:
     get:
@@ -5772,9 +5671,7 @@ paths:
     put:
       tags:
         - Scene
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Scene.upsert__put_Scenes
       parameters:
         - name: data
@@ -5793,9 +5690,7 @@ paths:
     patch:
       tags:
         - Scene
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Scene.upsert__patch_Scenes
       parameters:
         - name: data
@@ -5835,9 +5730,7 @@ paths:
     post:
       tags:
         - Scene
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: Scene.replaceOrCreate
       parameters:
         - name: data
@@ -5857,9 +5750,7 @@ paths:
     post:
       tags:
         - Scene
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: Scene.upsertWithWhere
       parameters:
         - name: where
@@ -5970,9 +5861,7 @@ paths:
     put:
       tags:
         - Scene
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Scene.prototype.updateAttributes__put_Scenes_{id}'
       parameters:
         - name: data
@@ -5997,9 +5886,7 @@ paths:
     patch:
       tags:
         - Scene
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Scene.prototype.updateAttributes__patch_Scenes_{id}'
       parameters:
         - name: data
@@ -6025,9 +5912,7 @@ paths:
     post:
       tags:
         - Scene
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: Scene.replaceById
       parameters:
         - name: id
@@ -6092,8 +5977,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /Scenes/count:
     get:
@@ -6141,9 +6031,7 @@ paths:
     put:
       tags:
         - UserSetting
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: UserSetting.upsert__put_UserSettings
       parameters:
         - name: data
@@ -6162,9 +6050,7 @@ paths:
     patch:
       tags:
         - UserSetting
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: UserSetting.upsert__patch_UserSettings
       parameters:
         - name: data
@@ -6204,9 +6090,7 @@ paths:
     post:
       tags:
         - UserSetting
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: UserSetting.replaceOrCreate
       parameters:
         - name: data
@@ -6226,9 +6110,7 @@ paths:
     post:
       tags:
         - UserSetting
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: UserSetting.upsertWithWhere
       parameters:
         - name: where
@@ -6339,9 +6221,7 @@ paths:
     put:
       tags:
         - UserSetting
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'UserSetting.prototype.updateAttributes__put_UserSettings_{id}'
       parameters:
         - name: data
@@ -6366,9 +6246,7 @@ paths:
     patch:
       tags:
         - UserSetting
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'UserSetting.prototype.updateAttributes__patch_UserSettings_{id}'
       parameters:
         - name: data
@@ -6394,9 +6272,7 @@ paths:
     post:
       tags:
         - UserSetting
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: UserSetting.replaceById
       parameters:
         - name: id
@@ -6461,8 +6337,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /UserSettings/count:
     get:
@@ -6510,9 +6391,7 @@ paths:
     put:
       tags:
         - Notification
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Notification.upsert__put_Notifications
       parameters:
         - name: data
@@ -6531,9 +6410,7 @@ paths:
     patch:
       tags:
         - Notification
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: Notification.upsert__patch_Notifications
       parameters:
         - name: data
@@ -6573,9 +6450,7 @@ paths:
     post:
       tags:
         - Notification
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: Notification.replaceOrCreate
       parameters:
         - name: data
@@ -6595,9 +6470,7 @@ paths:
     post:
       tags:
         - Notification
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: Notification.upsertWithWhere
       parameters:
         - name: where
@@ -6708,9 +6581,7 @@ paths:
     put:
       tags:
         - Notification
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Notification.prototype.updateAttributes__put_Notifications_{id}'
       parameters:
         - name: data
@@ -6735,9 +6606,7 @@ paths:
     patch:
       tags:
         - Notification
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: 'Notification.prototype.updateAttributes__patch_Notifications_{id}'
       parameters:
         - name: data
@@ -6763,9 +6632,7 @@ paths:
     post:
       tags:
         - Notification
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: Notification.replaceById
       parameters:
         - name: id
@@ -6830,8 +6697,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            description: The number of instances updated
+            description: Information related to the outcome of the operation
             type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
       deprecated: false
   /Notifications/count:
     get:
@@ -6870,6 +6742,366 @@ paths:
             properties:
               conversation:
                 type: object
+      deprecated: false
+  /Devices:
+    post:
+      tags:
+        - Device
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Device.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    put:
+      tags:
+        - Device
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: Device.upsert__put_Devices
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    patch:
+      tags:
+        - Device
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: Device.upsert__patch_Devices
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    get:
+      tags:
+        - Device
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Device.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Device'
+      deprecated: false
+  /Devices/replaceOrCreate:
+    post:
+      tags:
+        - Device
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: Device.replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+  /Devices/upsertWithWhere:
+    post:
+      tags:
+        - Device
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: Device.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+  '/Devices/{id}/exists':
+    get:
+      tags:
+        - Device
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Device.exists__get_Devices_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/Devices/{id}':
+    head:
+      tags:
+        - Device
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Device.exists__head_Devices_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - Device
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: Device.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    delete:
+      tags:
+        - Device
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: Device.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Device
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: 'Device.prototype.updateAttributes__put_Devices_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Device'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+    patch:
+      tags:
+        - Device
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: 'Device.prototype.updateAttributes__patch_Devices_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Device'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+  '/Devices/{id}/replace':
+    post:
+      tags:
+        - Device
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: Device.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+  /Devices/findOne:
+    get:
+      tags:
+        - Device
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Device.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Device'
+      deprecated: false
+  /Devices/update:
+    post:
+      tags:
+        - Device
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: Device.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Device'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /Devices/count:
+    get:
+      tags:
+        - Device
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Device.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
       deprecated: false
 definitions:
   x-any:
@@ -7181,7 +7413,7 @@ definitions:
         description: 'TIME, TEMP, HUM, WATERLEVEL'
         type: string
       status:
-        description: ACTIVE | INACTIVE | RUNNING
+        description: 'ACTIVE | INACTIVE | RUNNING'
         type: string
       id:
         type: string
@@ -7230,6 +7462,31 @@ definitions:
         type: string
       id:
         type: string
+    additionalProperties: false
+  Device:
+    properties:
+      deviceId:
+        description: Unique Identification for IoT platform
+        type: string
+      deviceInfo:
+        type: object
+      location:
+        type: object
+      metadata:
+        type: object
+      registration:
+        type: object
+      status:
+        type: object
+      clientId:
+        type: string
+      typeId:
+        type: string
+      id:
+        type: string
+    required:
+      - deviceId
+      - typeId
     additionalProperties: false
 basePath: /api
 swagger: '2.0'
