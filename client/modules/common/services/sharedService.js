@@ -22,7 +22,7 @@ define(['angular'], function (angular) {
 					'text' : null
 				},
 	  			'contact': {
-	  				'email': 'sinny777@gmail.com',
+	  				'email': 'contact.hukam@gmail.com',
 	  				'phone': '+91 9643989377',
 	  				'addressLine1': '#198, Swami Enclave',
 	  				'addressLine2': 'Dhakoli, Zirakpur',
