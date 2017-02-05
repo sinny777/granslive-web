@@ -12,7 +12,7 @@
     "angular-bootstrap": "latest",
     "angular-filesystem": "latest",
     "angular-cookies": "latest",
-    "jquery": "latest",
+    "jquery": "jQuery#1.7.2",
     "bootstrap": "latest",
     "cryptojslib": "latest",
     "querystring": "latest",
@@ -20,10 +20,11 @@
     "debug": "latest",
     "paho-mqtt": "latest",
     "angular-xeditable": "latest",
-    "angular-moment": "1.0.0-beta.6"
+    "angular-moment": "1.0.0-beta.6",
+    "jquery-3.1.1.min": "https://code.jquery.com/jquery-3.1.1.min.js"
   },
   "resolutions": {
-	    "angular": "~1.6.x"
+    "angular": "~1.6.x"
   },
   "private": true,
   "ignore": [

@@ -2,8 +2,8 @@
 define(function (require) {
     'use strict';
     
-    var io =  require('/../utils/socket.io');
-    var microphone =  require('/../utils/speechRecognizer');
+    var io =  require('/../js/utils/socket.io');
+    var microphone =  require('/../js/utils/speechRecognizer');
 
   var factory = function ($http, $q, CONFIG) {
 	  

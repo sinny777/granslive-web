@@ -17,6 +17,7 @@ define(['require','angular','app', 'routes'], function (reqiure, angular, app, r
             try {
             	 angular.bootstrap(document, [app.name]);
             } catch (e) {
+            	console.log(e);
                 console.error(e.stack || e.message || e);
             }
         });

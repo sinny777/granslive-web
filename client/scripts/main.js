@@ -2,25 +2,36 @@
 console.log('\n\n<<<<<<<<< INSIDE main.js >>>>>>>>>');
 
 require.config({
-	waitSeconds: 200,
+//	waitSeconds: 200,
+//	baseUrl: 'scripts/',
     paths :{
-    	'jquery' : 'vendor/jquery/dist/jquery.min',
-        'angular' :'vendor/angular/angular.min',
-        'angularRoute' : 'vendor/angular-route/angular-route.min',
-        'angularResource' : 'vendor/angular-resource/angular-resource.min',
-        'angularLocalStorage' : 'vendor/angular-local-storage/dist/angular-local-storage.min',
-        'angularAnimate' : 'vendor/angular-animate/angular-animate.min',
-        'angularFilesystem': 'vendor/angular-filesystem/src/filesystem',
-        'angularToastr': 'vendor/angular-toastr/dist/angular-toastr.tpls.min',
-        'angularCookies' : 'vendor/angular-cookies/angular-cookies.min',
-        'xeditable' : 'vendor/angular-xeditable/dist/js/xeditable.min',
-        'angularMoment' : 'vendor/angular-moment/angular-moment.min',
-        'bootstrap' : 'vendor/bootstrap/dist/js/bootstrap.min',
-        'ui.bootstrap':'vendor/angular-bootstrap/ui-bootstrap.min',
-        'cryptojslib' : 'vendor/cryptojslib/rollups/pbkdf2',
-        'querystring': 'vendor/querystring/querystring.min',
-        'text': 'vendor/text',
-        'mqtt':'vendor/paho-mqtt/src/mqttws31'
+    	'jquery' : 'js/utils/jquery/jquery_v3.1.1',
+        'angular' :'js/vendor/angular/angular.min',
+        'angularRoute' : 'js/vendor/angular-route/angular-route.min',
+        'angularResource' : 'js/vendor/angular-resource/angular-resource.min',
+        'angularLocalStorage' : 'js/vendor/angular-local-storage/dist/angular-local-storage.min',
+        'angularAnimate' : 'js/vendor/angular-animate/angular-animate.min',
+        'angularFilesystem': 'js/vendor/angular-filesystem/src/filesystem',
+        'angularToastr': 'js/vendor/angular-toastr/dist/angular-toastr.tpls.min',
+        'angularCookies' : 'js/vendor/angular-cookies/angular-cookies.min',
+        'xeditable' : 'js/vendor/angular-xeditable/dist/js/xeditable.min',
+        'angularMoment' : 'js/vendor/angular-moment/angular-moment.min',
+        'cryptojslib' : 'js/vendor/cryptojslib/rollups/pbkdf2',
+        'querystring': 'js/vendor/querystring/querystring.min',
+        'mqtt':'js/vendor/paho-mqtt/src/mqttws31',
+        'text': 'js/vendor/text',
+        'greensock':'js/utils/jquery/greensock',
+        'plugins':'js/utils/jquery/pluginsNew',
+        'themepunchPlugin':'js/utils/jquery/jquery.themepunch.plugins',
+        'themepunchRevolution':'js/utils/jquery/jquery.themepunch.revolution',
+        'layersliderTransitions':'js/utils/jquery/layerslider.transitions',
+        'jqueryLayerslider':'js/utils/jquery/jquery.layerslider',
+        'base64':'js/utils/base64',
+        'sprintf':'js/utils/sprintf-0.6',
+        'lscache':'js/utils/lscache',
+        'spin':'js/utils/spin',
+        'googleChart':'js/utils/angular/charts/ng-google-chart',
+        'custom':'js/utils/customNew'
     },
     shim: {
         'angular': {
@@ -65,24 +76,57 @@ require.config({
         'jquery':{
         	 exports : 'jquery'
         },
-        'bootstrap' : {
-        	deps: ['jquery'],
-        	exports: 'bootstrap'
+        'greensock':{
+        	exports : 'greensock'
         },
-        'ui.bootstrap': {
-            deps: ['angular','bootstrap'],
-            exports: 'ui.bootstrap'
-        }
+        'plugins':{
+        	deps: ['jquery'],
+        	exports : 'plugins'
+        },
+        'themepunchPlugin':{
+        	deps: ['jquery','plugins'],
+          	 exports : 'themepunchPlugin'
+        },
+        'themepunchRevolution':{
+        	deps: ['jquery','plugins'],
+           	exports : 'themepunchRevolution'
+        },
+        'layersliderTransitions':{
+        	deps: ['jquery','plugins'],
+          	exports : 'layersliderTransitions'
+        },
+        'jqueryLayerslider':{
+        	deps: ['jquery','plugins'],
+           	exports : 'jqueryLayerslider'
+        },
+        'base64':{
+          	 exports : 'base64'
+        },
+        'sprintf':{
+         	 exports : 'sprintf'
+        },
+        'lscache':{
+         	 exports : 'lscache'
+        },
+        'spin':{
+         	 exports : 'spin'
+        },
+        'googleChart':{
+        	 deps: ['angular'],
+        	 exports : 'googleChart'
+        },
+        'custom':{
+        	deps: ['jquery'],
+        	exports : 'custom'
+       }        
     },
     priority:
     	[
-         'jquery',
+           'jquery',
 	       'angular',
 	       'cryptojslib',
 	       'querystring',
-	       'mqtt',
-	       'bootstrap',
-	       'ui.bootstrap'
+	       'mqtt'
 	   ],
    deps: [
           'initialize'
