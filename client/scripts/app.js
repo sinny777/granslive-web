@@ -22,7 +22,6 @@ define([
     'sprintf',
     'lscache',
     'spin',
-    'googleChart',
     'custom',
 	'../scripts/config',
 	'../modules/loopback/lb-services',

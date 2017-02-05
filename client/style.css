@@ -6510,6 +6510,21 @@ a.twitter-follow-me:hover,
 
 .fa-li { top: 0 !important; }
 
+/* ------------  CUSTOM CSS ------------- */
+
+.navbar-search .search-query {
+    margin-bottom: 0;
+    padding: 4px 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+
 #top-menus {
     position: relative;
     float: right;
@@ -6532,10 +6547,15 @@ a.twitter-follow-me:hover,
 }
 
 #top-menus .top-menu-em {
-	margin-top: 15px;
+	margin-top: 5px;
 }
 
 #top-menus ul.dropdown-menu li {
     float: left;
     margin-left: 0px;
 }
+
+#loginModal .modal-dialog{
+	width: 450px;
+}
+

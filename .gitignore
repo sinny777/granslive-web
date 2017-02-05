@@ -11,11 +11,13 @@
 *.tgz
 *.xml
 .DS_Store
+**/*.DS_Store
+*/.DS_Store
 .idea
 .project
 .strong-pm
 coverage
 node_modules
 npm-debug.log
-client/scripts/vendor
+client/scripts/js/vendor
 lib

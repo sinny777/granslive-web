@@ -5,7 +5,7 @@ require.config({
 //	waitSeconds: 200,
 //	baseUrl: 'scripts/',
     paths :{
-    	'jquery' : 'js/utils/jquery/jquery_v3.1.1',
+    	'jquery' : 'js/vendor/jquery-3.1.1.min/index',
         'angular' :'js/vendor/angular/angular.min',
         'angularRoute' : 'js/vendor/angular-route/angular-route.min',
         'angularResource' : 'js/vendor/angular-resource/angular-resource.min',
@@ -21,7 +21,7 @@ require.config({
         'mqtt':'js/vendor/paho-mqtt/src/mqttws31',
         'text': 'js/vendor/text',
         'greensock':'js/utils/jquery/greensock',
-        'plugins':'js/utils/jquery/pluginsNew',
+        'plugins':'js/utils/jquery/plugins',
         'themepunchPlugin':'js/utils/jquery/jquery.themepunch.plugins',
         'themepunchRevolution':'js/utils/jquery/jquery.themepunch.revolution',
         'layersliderTransitions':'js/utils/jquery/layerslider.transitions',
@@ -30,8 +30,7 @@ require.config({
         'sprintf':'js/utils/sprintf-0.6',
         'lscache':'js/utils/lscache',
         'spin':'js/utils/spin',
-        'googleChart':'js/utils/angular/charts/ng-google-chart',
-        'custom':'js/utils/customNew'
+        'custom':'js/utils/custom'
     },
     shim: {
         'angular': {
@@ -110,10 +109,6 @@ require.config({
         },
         'spin':{
          	 exports : 'spin'
-        },
-        'googleChart':{
-        	 deps: ['angular'],
-        	 exports : 'googleChart'
         },
         'custom':{
         	deps: ['jquery'],
