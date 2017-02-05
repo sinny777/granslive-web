@@ -7,8 +7,9 @@ define(['angular'], function (angular) {
 	  var service = {};
 
 	  service.basicContent = {
-			  'pageTitle':'Hukam - Business Solutions',
-				'pageDescription':'Hukam for Webcasting Live Events with the availability of many live services to the online viewers and Internet of Things with Home Automation that includes Smart Meters and Smart WiFi Switches',
+			    'siteName':'Hukam',
+			  	'pageTitle':'Hukam - Business Solutions',
+				'pageDescription':'For Webcasting Live Events with the availability of many live services to the online viewers and Internet of Things with Home Automation that includes Smart Meters and Smart WiFi Switches',
 				'topHeader' : 'modules/common/partials/common/topHeader.htm',
 				'stickyMenu' : 'modules/common/partials/common/stickyMenu.htm',
 				'topBar' : 'modules/common/partials/common/topBar.htm',
@@ -19,7 +20,14 @@ define(['angular'], function (angular) {
 				'message' : {
 					'msgClass' : '',
 					'text' : null
-				}
+				},
+	  			'contact': {
+	  				'email': 'sinny777@gmail.com',
+	  				'phone': '+91 9643989377',
+	  				'addressLine1': '#198, Swami Enclave',
+	  				'addressLine2': 'Dhakoli, Zirakpur',
+	  				'state': 'PUNJAB'
+	  			}
 			};
 			
 			service.config = {directFromYoutube: true};

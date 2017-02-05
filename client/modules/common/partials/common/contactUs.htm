@@ -34,7 +34,7 @@
                               
                           <div id="contact-form-result"></div>
                       
-                      	  <form class="nobottommargin" name="contactform" data-ng-controller="accountController">
+                      	  <form class="nobottommargin" name="contactform" >
                               
                               <div class="col_one_third nobottommargin">
                                   <label for="template-contactform-name">Name <small>*</small></label>
@@ -100,11 +100,11 @@
 					<div class="product-feature">
 						<span class="fa fa-map-marker"></span>
 						<h3>Our Headquarters</h3>
-						<p itemprop="name">GransLive</p>
+						<p itemprop="name">{{pageContent.siteName}}</p>
 						<p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-							<span itemprop="streetAddress">5 Ranjit Nagar, Near Bus Stand</span>
-					    	<span itemprop="addressLocality">Ladowali Road, Jalandhar</span>,
-					    	<span itemprop="addressRegion">PUNJAB</span>
+							<span itemprop="streetAddress">{{pageContent.contact.addressLine1}}</span>
+					    	<span itemprop="addressLocality">{{pageContent.contact.addressLine2}}</span>,
+					    	<span itemprop="addressRegion">{{pageContent.contact.state}}</span>
 						 </p>
 					</div>
 
@@ -112,8 +112,7 @@
 						<span class="fa fa-phone"></span>
 						<h3>Call Us On</h3>
 						<p itemprop="telephone">
-							+91 9643 9893 77 <br />
-							+91 814 609 4888 <br />
+							{{pageContent.contact.phone}} <br />
 						</p>
 					</div>
 
@@ -121,7 +120,7 @@
 						<span class="fa fa-envelope"></span>
 						<h3>Email Addresses</h3>
 						<p>
-							<a href="mailto:contact@granslive.com"><i class="fa fa-envelope-alt"></i><span itemprop="email">contact(at)granslive.com</span></a><br />
+							<a href="mailto:{{pageContent.contact.email}}"><i class="fa fa-envelope-alt"></i><span itemprop="email">{{pageContent.contact.email}}</span></a><br />
 						</p>
 					</div>
 
